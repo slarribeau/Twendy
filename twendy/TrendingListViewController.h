@@ -7,15 +7,23 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "OAuthConsumer.h"
 
 @protocol TrendingListViewControllerDelegate
 -(NSArray*)getTrendArray;
 -(NSArray*)getUrlArray;
+-(OAToken*)getAccessToken;
+-(OAConsumer*) getConsumer;
+
 
 @end
 
 @interface TrendingListViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, weak) id <TrendingListViewControllerDelegate> delegate;
 @property (weak, nonatomic) IBOutlet UITableView *tblPeople;
+-(IBAction)foo:(id)sender;
 
 @end
+
+
+

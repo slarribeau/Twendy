@@ -99,6 +99,41 @@ NSString *callback = @"http://nowandzen.com/callback";
 #endif
 
 
+-(IBAction)foo:(id)sender
+{
+  if (accessToken) {
+    // NSURL* userdatarequestu = [NSURL URLWithString:@"https://api.twitter.com/1.1/account/verify_credentials.json"];
+    
+    NSURL* userdatarequestu = [NSURL URLWithString:@"https://api.twitter.com/1.1/trends/place.json?id=2488042"];
+    
+    //2488042 = 'San Jose CA USA'
+    //2487956 = 'San Francisco CA USA'
+    //http://woeid.rosselliot.co.nz/lookup/san%20francisco
+    
+    
+    OAMutableURLRequest* requestTokenRequest;
+    requestTokenRequest = [[OAMutableURLRequest alloc]
+                           initWithURL:userdatarequestu
+                           
+                           consumer:consumer
+                           
+                           token:accessToken
+                           
+                           realm:nil
+                           
+                           signatureProvider:nil];
+    
+    [requestTokenRequest setHTTPMethod:@"GET"];
+    
+    OADataFetcher* dataFetcher = [[OADataFetcher alloc] init];
+    
+    [dataFetcher fetchDataWithRequest:requestTokenRequest
+                             delegate:self
+                    didFinishSelector:@selector(didReceiveuserdata:data:)
+                      didFailSelector:@selector(didFailOAuth:error:)];    } else {
+      NSLog(@"ERROR!!!");
+    }
+}
 
 - (void)didReceiveAccessToken:(OAServiceTicket*)ticket data:(NSData*)data {
   
@@ -144,7 +179,7 @@ NSString *callback = @"http://nowandzen.com/callback";
                              delegate:self
                     didFinishSelector:@selector(didReceiveuserdata:data:)
                       didFailSelector:@selector(didFailOAuth:error:)];    } else {
-      // ERROR!
+      NSLog(@"ERROR!!");
     }
   
   
@@ -261,6 +296,14 @@ NSString *callback = @"http://nowandzen.com/callback";
 
 -(NSArray*)getUrlArray{
   return trendUrlArray;
+}
+
+-(OAToken*)getAccessToken{
+  return accessToken;
+}
+
+-(OAConsumer*) getConsumer {
+  return consumer;
 }
 
 
