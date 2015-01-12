@@ -43,9 +43,9 @@
   // Reload the table view.
   [self.tblPeople reloadData];
 
-
-  //[NSTimer scheduledTimerWithTimeInterval:60.0 target:self
-                 //                    selector:@selector(bar) userInfo:nil repeats:YES];
+  [self notify];
+  [NSTimer scheduledTimerWithTimeInterval:60.0 target:self
+                                  selector:@selector(getTrendDataAndNotify) userInfo:nil repeats:YES];
   
 
   
@@ -83,7 +83,7 @@
   
   cell.textLabel.text = self.arrPeopleInfo[indexPath.row];
   
-  cell.detailTextLabel.text = @"bar";
+  cell.detailTextLabel.text = @"text";
   return cell;
 }
 
@@ -98,7 +98,7 @@
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
  TrendViewController *trendViewController = [segue destinationViewController];
-  [trendViewController foo:self.trendUrlInfo[self.recordIDToEdit]];
+  trendViewController.trendUrl = self.trendUrlInfo[self.recordIDToEdit];
 }
 
 -(IBAction)getRateLimit:(id)sender {
@@ -132,12 +132,43 @@
     }
 }
 
--(IBAction)foo:(id)sender {
-  [self bar];
+-(IBAction)getTrendDataButton:(id)sender {
+  [self getTrendData];
 }
 
+-(void)getTrendDataAndNotify
+{
+  //[self getTrendData];
+  [self notify];
+}
 
--(void)bar {
+-(NSString *)buildTrendMsg
+{
+  NSString *retString = @"";
+  
+  for (NSString *trend in self.arrPeopleInfo) {
+    NSInteger i= 0;
+    retString = [NSString stringWithFormat:@"%@%@%s", retString, trend,  (i++ % 3) ? "\n":"  "];
+
+  }
+  return retString;
+}
+-(void)notify
+{
+  UILocalNotification* local = [[UILocalNotification alloc]init];
+  if (local) {
+    local.fireDate = [NSDate dateWithTimeIntervalSinceNow:1];
+    local.alertBody = @"Hey\n this\nis\n my\n first\n local\n notification\n!!!\n";
+    local.alertBody = [self buildTrendMsg];
+
+    
+    //local.alertLaunchImage = @"sachin.png";
+    //local.soundName = @"sachin.mp3";
+    //local.timeZone = [NSTimeZone defaultTimeZone];
+    [[UIApplication sharedApplication] scheduleLocalNotification:local];
+  }
+}
+-(void)getTrendData {
    OAConsumer* consumer = [self.delegate getConsumer];
    OAToken* accessToken = [self.delegate getAccessToken];
 

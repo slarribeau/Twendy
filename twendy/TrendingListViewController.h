@@ -21,7 +21,7 @@
 @interface TrendingListViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, weak) id <TrendingListViewControllerDelegate> delegate;
 @property (weak, nonatomic) IBOutlet UITableView *tblPeople;
--(IBAction)foo:(id)sender;
+-(IBAction)getTrendDataButton:(id)sender;
 -(IBAction)getRateLimit:(id)sender;
 
 @end

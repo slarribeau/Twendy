@@ -13,19 +13,31 @@
 @end
 
 @implementation AppDelegate
+#define IOS_VERSION [[[[[UIDevice currentDevice] systemVersion] componentsSeparatedByString:@"."] firstObject] intValue]
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-#if 0
-  self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-  
-  ViewController *controller = [[ViewController alloc]initWithNibName:@"MainViewController" bundle:nil];
-  
-  self.navigation = [[UINavigationController alloc]initWithRootViewController:controller];
-  self.window.rootViewController = self.navigation;
-  self.window.backgroundColor = [UIColor whiteColor];
-  [self.window makeKeyAndVisible];
-#endif
+
+  if (IOS_VERSION >= 8) {
+    [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
+    
+    
+    [[UIApplication sharedApplication] registerForRemoteNotifications];
+  }
+
   return YES;
+}
+
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
+{
+  UIApplicationState state = [application applicationState];
+  if (state == UIApplicationStateActive) {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Reminder"
+                                                    message:notification.alertBody
+                                                   delegate:self cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
+    [alert show];
+  }
+  
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
