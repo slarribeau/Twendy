@@ -15,7 +15,7 @@
 
 //}
 @property (retain, nonatomic) NSString *trendUrl;
-//@property (nonatomic, weak) IBOutlet UIWebView *webview;
+@property (nonatomic, weak) IBOutlet UIWebView *webview;
 -(void)foo: (NSString*)bar;
 
 @end
