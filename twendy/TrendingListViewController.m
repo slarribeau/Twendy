@@ -44,7 +44,10 @@
   [self.tblPeople reloadData];
 
 
+  [NSTimer scheduledTimerWithTimeInterval:60.0 target:self
+                                     selector:@selector(bar) userInfo:nil repeats:YES];
   
+
   
 
 }
@@ -107,6 +110,11 @@
 
 
 -(IBAction)foo:(id)sender {
+  [self bar];
+}
+
+
+-(void)bar {
    OAConsumer* consumer = [self.delegate getConsumer];
    OAToken* accessToken = [self.delegate getAccessToken];
 

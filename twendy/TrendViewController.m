@@ -18,6 +18,7 @@
     [super viewDidLoad];
   NSLog(@"Here is me URL %@", self.trendUrl);
   [self.webview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.trendUrl]]];
+  
 }
 
 - (void)didReceiveMemoryWarning {
