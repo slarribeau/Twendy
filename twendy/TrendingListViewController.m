@@ -44,8 +44,8 @@
   [self.tblPeople reloadData];
 
 
-  [NSTimer scheduledTimerWithTimeInterval:60.0 target:self
-                                     selector:@selector(bar) userInfo:nil repeats:YES];
+  //[NSTimer scheduledTimerWithTimeInterval:60.0 target:self
+                 //                    selector:@selector(bar) userInfo:nil repeats:YES];
   
 
   
@@ -80,13 +80,6 @@
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
   UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"idCellRecord" forIndexPath:indexPath];
-
-  //[tableView dequeueReusableCellWithIdentifier:@"UITableViewCell"
-                               //   forIndexPath:indexPath];
-  
-  
-  //CREATE TABLE serverdb(serverdbID integer primary key, baseUrl text, parameters text, nickname text,  active integer);
-  
   
   cell.textLabel.text = self.arrPeopleInfo[indexPath.row];
   
@@ -108,6 +101,36 @@
   [trendViewController foo:self.trendUrlInfo[self.recordIDToEdit]];
 }
 
+-(IBAction)getRateLimit:(id)sender {
+  OAConsumer* consumer = [self.delegate getConsumer];
+  OAToken* accessToken = [self.delegate getAccessToken];
+  
+  if (accessToken) {
+    NSURL* userdatarequestu = [NSURL URLWithString:@"https://api.twitter.com/1.1/application/rate_limit_status.json"];
+    
+    OAMutableURLRequest* requestTokenRequest;
+    requestTokenRequest = [[OAMutableURLRequest alloc]
+                           initWithURL:userdatarequestu
+                           
+                           consumer:consumer
+                           
+                           token:accessToken
+                           
+                           realm:nil
+                           
+                           signatureProvider:nil];
+    
+    [requestTokenRequest setHTTPMethod:@"GET"];
+    
+    OADataFetcher* dataFetcher = [[OADataFetcher alloc] init];
+    
+    [dataFetcher fetchDataWithRequest:requestTokenRequest
+                             delegate:self
+                    didFinishSelector:@selector(didReceiveRateLimit:data:)
+                      didFailSelector:@selector(didFailOAuth:error:)];    } else {
+      NSLog(@"ERROR!!");
+    }
+}
 
 -(IBAction)foo:(id)sender {
   [self bar];
@@ -156,10 +179,24 @@
 }
 
 
+- (void)didReceiveRateLimit:(OAServiceTicket*)ticket data:(NSData*)data {
+  NSString* httpBody = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+  
+  NSLog(@"++++++++++++++++++++++++++++");
+  NSLog(@"++++++++++++++++++++++++++++");
+  NSLog(@"++++++++++++++++++++++++++++");
+  
+  NSLog(@"didReceive %@", httpBody);
+}
+
 - (void)didReceiveuserdata:(OAServiceTicket*)ticket data:(NSData*)data {
   NSString* httpBody = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
   
-  NSLog(@"didReceie %@", httpBody);
+  NSLog(@"++++++++++++++++++++++++++++");
+  NSLog(@"++++++++++++++++++++++++++++");
+  NSLog(@"++++++++++++++++++++++++++++");
+
+  NSLog(@"didReceive %@", httpBody);
   
   NSArray *twitterTrends   = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers       error:nil];
   NSArray *trends  = [[twitterTrends objectAtIndex:0] objectForKey:@"trends"];
