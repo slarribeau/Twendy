@@ -100,9 +100,9 @@
 }
 
 
-//-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
- // TrendViewController *trendViewController = [segue destinationViewController];
- // [trendViewController foo:self.trendUrlInfo[self.recordIDToEdit]];
-//}
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+ TrendViewController *trendViewController = [segue destinationViewController];
+  [trendViewController foo:self.trendUrlInfo[self.recordIDToEdit]];
+}
 
 @end

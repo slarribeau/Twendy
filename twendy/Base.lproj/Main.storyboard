@@ -129,9 +129,6 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eqE-jV-syx" id="0du-fe-WTa">
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="3yu-43-obO" kind="push" identifier="idSegueTrend" id="p5D-5w-Tvg"/>
-                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -141,6 +138,7 @@
                     <navigationItem key="navigationItem" id="TFD-zh-PMq"/>
                     <connections>
                         <outlet property="tblPeople" destination="c7n-fL-aiT" id="KDE-33-RNj"/>
+                        <segue destination="3yu-43-obO" kind="show" identifier="idSegueTrend" id="Ui5-aP-aiA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fhq-53-tIw" userLabel="First Responder" sceneMemberID="firstResponder"/>
