@@ -150,7 +150,7 @@
         <!--Trend Feed-->
         <scene sceneID="yAj-Jj-mLc">
             <objects>
-                <viewController title="Trend Feed" id="3yu-43-obO" sceneMemberID="viewController">
+                <viewController title="Trend Feed" id="3yu-43-obO" customClass="TrendViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="uX7-P0-LOx"/>
                         <viewControllerLayoutGuide type="bottom" id="Yzq-Kd-9nH"/>

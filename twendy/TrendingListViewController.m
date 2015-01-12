@@ -12,7 +12,7 @@
 @interface TrendingListViewController ()
 @property (nonatomic, strong) NSArray *arrPeopleInfo;
 @property (nonatomic, strong) NSArray *trendUrlInfo;
-@property (nonatomic) int recordIDToEdit;
+@property (nonatomic) NSInteger recordIDToEdit;
 
 @end
 
@@ -100,9 +100,9 @@
 }
 
 
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-  TrendViewController *trendViewController = [segue destinationViewController];
-  //[trendViewController foo:self.trendUrlInfo[self.recordIDToEdit]];
-}
+//-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+ // TrendViewController *trendViewController = [segue destinationViewController];
+ // [trendViewController foo:self.trendUrlInfo[self.recordIDToEdit]];
+//}
 
 @end
