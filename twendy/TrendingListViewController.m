@@ -43,8 +43,7 @@
   // Reload the table view.
   [self.tblPeople reloadData];
 
-  [self notify];
-  [NSTimer scheduledTimerWithTimeInterval:60.0 target:self
+  [NSTimer scheduledTimerWithTimeInterval:(60.0 * 60.0)target:self
                                   selector:@selector(getTrendDataAndNotify) userInfo:nil repeats:YES];
   
 
@@ -139,7 +138,7 @@
 -(void)getTrendDataAndNotify
 {
   //[self getTrendData];
-  [self notify];
+  [self summaryNotification];
 }
 
 -(NSString *)buildTrendMsg
@@ -153,7 +152,7 @@
   }
   return retString;
 }
--(void)notify
+-(void)summaryNotification
 {
   UILocalNotification* local = [[UILocalNotification alloc]init];
   if (local) {
