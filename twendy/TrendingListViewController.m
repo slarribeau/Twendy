@@ -18,6 +18,11 @@
 
 @implementation TrendingListViewController
 static NSString * const kLocationHome = @"2488042";
+static NSString * const kLocationSF = @"2487956";
+static NSString * const kLocationWorld = @"1";
+static NSString * const kLocationNY = @"2459115";
+static NSString * const kLocationLA = @"2442047";
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -142,6 +147,30 @@ static NSString * const kLocationHome = @"2488042";
 {
   [self getTrendDelta:kLocationHome];
 }
+
+
+-(IBAction)getHomeTrendDataButton:(id)sender{
+  [self getTrendData:kLocationHome];
+}
+
+-(IBAction)getSFTrendDataButton:(id)sender{
+    [self getTrendData:kLocationSF];
+  }
+
+-(IBAction)getWorldTrendDataButton:(id)sender{
+      [self getTrendData:kLocationWorld];
+    }
+
+-(IBAction)getNYTrendDataButton:(id)sender{
+        [self getTrendData:kLocationNY];
+      }
+
+
+-(IBAction)getLATrendDataButton:(id)sender{
+  [self getTrendData:kLocationLA];
+}
+
+
 
 -(void)getTrendDataAndNotify
 {

@@ -22,6 +22,11 @@
 @property (nonatomic, weak) id <TrendingListViewControllerDelegate> delegate;
 @property (weak, nonatomic) IBOutlet UITableView *tblPeople;
 -(IBAction)getTrendDataButton:(id)sender;
+-(IBAction)getHomeTrendDataButton:(id)sender;
+-(IBAction)getSFTrendDataButton:(id)sender;
+-(IBAction)getWorldTrendDataButton:(id)sender;
+-(IBAction)getNYTrendDataButton:(id)sender;
+
 -(IBAction)getRateLimit:(id)sender;
 
 @end

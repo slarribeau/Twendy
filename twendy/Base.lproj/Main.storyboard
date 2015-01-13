@@ -109,10 +109,11 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rmD-Yc-mGS">
                                 <rect key="frame" x="16" y="72" width="72" height="30"/>
-                                <state key="normal" title="OtherCity">
+                                <state key="normal" title="home">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
+                                    <action selector="getHomeTrendDataButton:" destination="rs3-nG-qjp" eventType="touchUpInside" id="E9r-0M-Srh"/>
                                     <action selector="getTrendDataButton:" destination="rs3-nG-qjp" eventType="touchUpInside" id="edg-X6-r56"/>
                                 </connections>
                             </button>
@@ -130,12 +131,40 @@
                                 </prototypes>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fua-1I-9Wn">
-                                <rect key="frame" x="234" y="72" width="81" height="30"/>
-                                <state key="normal" title="RateLimit">
+                                <rect key="frame" x="64" y="72" width="81" height="30"/>
+                                <state key="normal" title="SF">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="getRateLimit:" destination="rs3-nG-qjp" eventType="touchUpInside" id="Lsc-kO-NHK"/>
+                                    <action selector="getSFTrendDataButton:" destination="rs3-nG-qjp" eventType="touchUpInside" id="yRE-eJ-bAd"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tf6-5h-qNU">
+                                <rect key="frame" x="131" y="72" width="46" height="30"/>
+                                <state key="normal" title="NY">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="getNYTrendDataButton:" destination="rs3-nG-qjp" eventType="touchUpInside" id="Bbd-WV-omU"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OGO-ld-9vi">
+                                <rect key="frame" x="185" y="72" width="46" height="30"/>
+                                <state key="normal" title="World">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="getWorldTrendDataButton:" destination="rs3-nG-qjp" eventType="touchUpInside" id="XXj-HV-y3j"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Je2-Es-VlB">
+                                <rect key="frame" x="282" y="72" width="46" height="30"/>
+                                <state key="normal" title="LA">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="getLATrendDataButton:" destination="rs3-nG-qjp" eventType="touchUpInside" id="Lni-if-fKa"/>
                                 </connections>
                             </button>
                         </subviews>
