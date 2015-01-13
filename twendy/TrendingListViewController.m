@@ -17,6 +17,7 @@
 @end
 
 @implementation TrendingListViewController
+static NSString * const kLocationHome = @"2488042";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -134,17 +135,17 @@
 }
 
 -(IBAction)getTrendDataButton:(id)sender {
-  [self getTrendData];
+  [self getTrendData:kLocationHome];
 }
 
 -(void)getTrendDeltaAndNotify
 {
-  [self getTrendDelta];
+  [self getTrendDelta:kLocationHome];
 }
 
 -(void)getTrendDataAndNotify
 {
-  [self getTrendData];
+  [self getTrendData:kLocationHome];
   [self summaryNotification];
 }
 
@@ -174,14 +175,12 @@
     [[UIApplication sharedApplication] scheduleLocalNotification:local];
   }
 }
--(void)getTrendData {
-   OAConsumer* consumer = [self.delegate getConsumer];
-   OAToken* accessToken = [self.delegate getAccessToken];
-
+-(void)getTrendData:(NSString*)location {
+  OAConsumer* consumer = [self.delegate getConsumer];
+  OAToken* accessToken = [self.delegate getAccessToken];
+  
   if (accessToken) {
-    // NSURL* userdatarequestu = [NSURL URLWithString:@"https://api.twitter.com/1.1/account/verify_credentials.json"];
-    
-    NSURL* userdatarequestu = [NSURL URLWithString:@"https://api.twitter.com/1.1/trends/place.json?id=2488042"];
+    NSURL* userdatarequestu = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.twitter.com/1.1/trends/place.json?id=%@", location]];
     
     //2488042 = 'San Jose CA USA'
     //2487956 = 'San Francisco CA USA'
@@ -215,15 +214,14 @@
   
 }
 
--(void)getTrendDelta {
+-(void)getTrendDelta:(NSString*)location {
   OAConsumer* consumer = [self.delegate getConsumer];
   OAToken* accessToken = [self.delegate getAccessToken];
   
   if (accessToken) {
-    // NSURL* userdatarequestu = [NSURL URLWithString:@"https://api.twitter.com/1.1/account/verify_credentials.json"];
-    
-    NSURL* userdatarequestu = [NSURL URLWithString:@"https://api.twitter.com/1.1/trends/place.json?id=2488042"];
-    
+    NSURL* userdatarequestu = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.twitter.com/1.1/trends/place.json?id=%@", location]];
+                               
+                               
     //2488042 = 'San Jose CA USA'
     //2487956 = 'San Francisco CA USA'
     //http://woeid.rosselliot.co.nz/lookup/san%20francisco
