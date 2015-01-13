@@ -43,10 +43,12 @@
   // Reload the table view.
   [self.tblPeople reloadData];
 
-  [NSTimer scheduledTimerWithTimeInterval:(60.0 * 60.0)target:self
+  [NSTimer scheduledTimerWithTimeInterval:(60.0 * 59.0)target:self
                                   selector:@selector(getTrendDataAndNotify) userInfo:nil repeats:YES];
   
 
+  [NSTimer scheduledTimerWithTimeInterval:(60.0 * 15.0)target:self
+                                 selector:@selector(getTrendDeltaAndNotify) userInfo:nil repeats:YES];
   
 
 }
@@ -135,9 +137,14 @@
   [self getTrendData];
 }
 
+-(void)getTrendDeltaAndNotify
+{
+  [self getTrendDelta];
+}
+
 -(void)getTrendDataAndNotify
 {
-  //[self getTrendData];
+  [self getTrendData];
   [self summaryNotification];
 }
 
@@ -208,6 +215,48 @@
   
 }
 
+-(void)getTrendDelta {
+  OAConsumer* consumer = [self.delegate getConsumer];
+  OAToken* accessToken = [self.delegate getAccessToken];
+  
+  if (accessToken) {
+    // NSURL* userdatarequestu = [NSURL URLWithString:@"https://api.twitter.com/1.1/account/verify_credentials.json"];
+    
+    NSURL* userdatarequestu = [NSURL URLWithString:@"https://api.twitter.com/1.1/trends/place.json?id=2488042"];
+    
+    //2488042 = 'San Jose CA USA'
+    //2487956 = 'San Francisco CA USA'
+    //http://woeid.rosselliot.co.nz/lookup/san%20francisco
+    
+    
+    OAMutableURLRequest* requestTokenRequest;
+    requestTokenRequest = [[OAMutableURLRequest alloc]
+                           initWithURL:userdatarequestu
+                           
+                           consumer:consumer
+                           
+                           token:accessToken
+                           
+                           realm:nil
+                           
+                           signatureProvider:nil];
+    
+    [requestTokenRequest setHTTPMethod:@"GET"];
+    
+    OADataFetcher* dataFetcher = [[OADataFetcher alloc] init];
+    
+    [dataFetcher fetchDataWithRequest:requestTokenRequest
+                             delegate:self
+                    didFinishSelector:@selector(didReceiveuserdelta:data:)
+                      didFailSelector:@selector(didFailOAuth:error:)];    } else {
+      NSLog(@"ERROR!!");
+    }
+  
+  
+  
+}
+
+
 
 - (void)didReceiveRateLimit:(OAServiceTicket*)ticket data:(NSData*)data {
   NSString* httpBody = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -276,6 +325,46 @@
   // Reload the table view.
   [self.tblPeople reloadData];
 
+}
+
+- (void)didReceiveuserdelta:(OAServiceTicket*)ticket data:(NSData*)data {
+  NSString* httpBody = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+  
+  NSLog(@"++++++++++++++++++++++++++++");
+  NSLog(@"++++++++++++++++++++++++++++");
+  NSLog(@"++++++++++++++++++++++++++++");
+  
+  NSLog(@"didReceive %@", httpBody);
+  
+  NSArray *twitterTrends   = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers       error:nil];
+  NSArray *trends  = [[twitterTrends objectAtIndex:0] objectForKey:@"trends"];
+  
+  NSMutableArray *trendNameArray = [[NSMutableArray alloc] init];
+  
+  for (NSDictionary *trend in trends) {
+    NSString *names = [trend objectForKey:@"name"];
+    [trendNameArray addObject:names];
+  }
+  NSLog(@"Before me an trendNameArray:%lu", (unsigned long)trendNameArray.count);
+  
+  
+  [trendNameArray removeObjectsInArray: self.arrPeopleInfo];
+  NSLog(@"After me an trendNameArray:%lu", (unsigned long)trendNameArray.count);
+
+  
+  NSString *retString = @"";
+  
+  for (NSString *trend in trendNameArray) {
+    retString = [NSString stringWithFormat:@"%@++%@%s", retString, trend, "\n"];
+  }
+  UILocalNotification* local = [[UILocalNotification alloc]init];
+  if (local) {
+    local.fireDate = [NSDate dateWithTimeIntervalSinceNow:1];
+    local.alertBody = @"Hey\n this\nis\n my\n first\n local\n notification\n!!!\n";
+    local.alertBody = retString;
+    
+    [[UIApplication sharedApplication] scheduleLocalNotification:local];
+  }
 }
 
 @end
