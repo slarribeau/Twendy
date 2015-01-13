@@ -81,6 +81,8 @@ static int const kButtonWidth = 100;
   [self addScrollButton:x name:@"New York" action:@selector(getNYTrendDataButton:)];
   x++;
   [self addScrollButton:x name:@"World" action:@selector(getWorldTrendDataButton:)];
+  x++;
+  [self addScrollButton:x name:@"Add" action:@selector(getRegions:)];
 
 
   x++; //Need an extra increment so that we can scroll to end of last button
@@ -167,6 +169,38 @@ static int const kButtonWidth = 100;
       NSLog(@"ERROR!!");
     }
 }
+
+-(IBAction)getRegions:(id)sender {
+  OAConsumer* consumer = [self.delegate getConsumer];
+  OAToken* accessToken = [self.delegate getAccessToken];
+  
+  if (accessToken) {
+    NSURL* userdatarequestu = [NSURL URLWithString:@"https://api.twitter.com/1.1/trends/available.json"];
+    
+    OAMutableURLRequest* requestTokenRequest;
+    requestTokenRequest = [[OAMutableURLRequest alloc]
+                           initWithURL:userdatarequestu
+                           
+                           consumer:consumer
+                           
+                           token:accessToken
+                           
+                           realm:nil
+                           
+                           signatureProvider:nil];
+    
+    [requestTokenRequest setHTTPMethod:@"GET"];
+    
+    OADataFetcher* dataFetcher = [[OADataFetcher alloc] init];
+    
+    [dataFetcher fetchDataWithRequest:requestTokenRequest
+                             delegate:self
+                    didFinishSelector:@selector(didReceiveRegion:data:)
+                      didFailSelector:@selector(didFailOAuth:error:)];    } else {
+      NSLog(@"ERROR!!");
+    }
+}
+
 
 -(IBAction)getTrendDataButton:(id)sender {
   [self getTrendData:kLocationHome];
@@ -310,6 +344,38 @@ static int const kButtonWidth = 100;
   
   
   
+}
+- (void)didReceiveRegion:(OAServiceTicket*)ticket data:(NSData*)data {
+  NSString* httpBody = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+  
+  NSLog(@"++++++++++++++++++++++++++++");
+  NSLog(@"++++++++++++++++++++++++++++");
+  NSLog(@"++++++++++++++++++++++++++++");
+  
+  NSLog(@"didReceive Region%@", httpBody);
+  
+  NSArray *twitterRegions = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers       error:nil];
+
+  
+  NSMutableArray *woeidArray = [[NSMutableArray alloc] init];
+  NSMutableArray *nameArray = [[NSMutableArray alloc] init];
+  NSMutableArray *countryArray = [[NSMutableArray alloc] init];
+
+  
+  for (NSDictionary *region in twitterRegions) {
+    
+    NSString *names = [region objectForKey:@"name"];
+    
+    NSString *woeid = [region objectForKey:@"woeid"];
+    NSString *country = [region objectForKey:@"country"];
+
+    
+    [nameArray addObject:names];
+    [woeidArray addObject:woeid];
+    [countryArray addObject:country];
+
+  }
+  NSLog(@"done");
 }
 
 
