@@ -21,7 +21,7 @@
 @interface TrendingListViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, weak) id <TrendingListViewControllerDelegate> delegate;
 @property (weak, nonatomic) IBOutlet UITableView *tblPeople;
-@property (weak, nonatomic) IBOutlet UIScrollView *scrollMenu;
+@property (strong, nonatomic) IBOutlet UIScrollView *scrollMenu;
 
 -(IBAction)getTrendDataButton:(id)sender;
 -(IBAction)getHomeTrendDataButton:(id)sender;

@@ -82,22 +82,22 @@ static NSString * const kLocationLA = @"2442047";
 #endif
 #if 1
   //http://stackoverflow.com/questions/18069007/how-to-make-horizontal-scrolling-menu-in-ios
-  UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 200)];
+  //self.scrollMenu = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 200)];
 
   int x = 0;
   for (int i = 0; i < 8; i++) {
     UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(x, 0, 100, 100)];
     [button setTitle:[NSString stringWithFormat:@"Button %d", i] forState:UIControlStateNormal];
     
-    [scrollView addSubview:button];
+    [self.scrollMenu addSubview:button];
     
     x += button.frame.size.width;
   }
   
-  scrollView.contentSize = CGSizeMake(x, scrollView.frame.size.height);
-  scrollView.backgroundColor = [UIColor redColor];
+  self.scrollMenu.contentSize = CGSizeMake(x, self.scrollMenu.frame.size.height);
+  self.scrollMenu.backgroundColor = [UIColor redColor];
   
-  [self.view addSubview:scrollView];
+  //[self.view addSubview:scrollView];
 #endif
   
 }
