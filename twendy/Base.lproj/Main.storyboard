@@ -178,11 +178,31 @@
                         <outlet property="scrollMenu" destination="pEy-wM-SsP" id="hds-3m-KVL"/>
                         <outlet property="tblPeople" destination="c7n-fL-aiT" id="KDE-33-RNj"/>
                         <segue destination="3yu-43-obO" kind="show" identifier="idSegueTrend" id="Ui5-aP-aiA"/>
+                        <segue destination="ttg-oR-YZr" kind="show" identifier="idSegueRegion" id="LKy-iq-isO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fhq-53-tIw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1424" y="-63"/>
+        </scene>
+        <!--Region Controller-->
+        <scene sceneID="m5V-0Z-quT">
+            <objects>
+                <viewController title="Region Controller" id="ttg-oR-YZr" customClass="RegionViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="na8-AK-i2g"/>
+                        <viewControllerLayoutGuide type="bottom" id="11H-tt-iqo"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="U1M-v0-1g3">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Title" id="BxW-7u-LLc"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LUk-Bt-kOy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2128" y="-870"/>
         </scene>
         <!--Trend Feed-->
         <scene sceneID="yAj-Jj-mLc">

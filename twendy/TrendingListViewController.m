@@ -33,6 +33,7 @@ static int const kButtonWidth = 100;
   self.tblPeople.delegate = self;
   self.tblPeople.dataSource = self;
 
+  self.recordIDToEdit = -1;
   // Get the results.
   if (self.arrPeopleInfo != nil) {
     self.arrPeopleInfo = nil;
@@ -131,12 +132,19 @@ static int const kButtonWidth = 100;
   
   // Perform the segue.
   [self performSegueWithIdentifier:@"idSegueTrend" sender:self];
+  
+  self.recordIDToEdit = -1; //why? TODO
+
 }
 
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
- TrendViewController *trendViewController = [segue destinationViewController];
-  trendViewController.trendUrl = self.trendUrlInfo[self.recordIDToEdit];
+  
+  if (self.recordIDToEdit > 0) {
+    TrendViewController *trendViewController = [segue destinationViewController];
+    trendViewController.trendUrl = self.trendUrlInfo[self.recordIDToEdit];
+    self.recordIDToEdit = -1;
+  }
 }
 
 -(IBAction)getRateLimit:(id)sender {
@@ -171,6 +179,9 @@ static int const kButtonWidth = 100;
 }
 
 -(IBAction)getRegions:(id)sender {
+  [self performSegueWithIdentifier:@"idSegueRegion" sender:self];
+  return;
+  
   OAConsumer* consumer = [self.delegate getConsumer];
   OAToken* accessToken = [self.delegate getAccessToken];
   
