@@ -58,6 +58,8 @@
   cell.detailTextLabel.text = @"text";
   if (region.selected == YES) {
     cell.accessoryType = UITableViewCellAccessoryCheckmark;
+  } else {
+    cell.accessoryType = UITableViewCellAccessoryNone;
   }
   return cell;
 }
@@ -67,12 +69,17 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{  
+{
   UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-  cell.accessoryType = UITableViewCellAccessoryCheckmark;
-
   Region *region = self.regionArray[indexPath.row];
-  region.selected = YES;
-}
 
+  
+  if (cell.accessoryType == UITableViewCellAccessoryCheckmark) {
+    cell.accessoryType = UITableViewCellAccessoryNone;
+    region.selected = NO;
+  } else {
+    cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    region.selected = YES;
+  }
+}
 @end
