@@ -8,6 +8,8 @@
 
 #import "TrendingListViewController.h"
 #import "TrendViewController.h"
+#import "RegionViewController.h"
+#import "Region.h"
 
 @interface TrendingListViewController ()
 @property (nonatomic, strong) NSArray *arrPeopleInfo;
@@ -106,7 +108,6 @@ static int const kButtonWidth = 100;
 }
 */
 
-
 - (NSInteger)tableView:(UITableView *)tableView
  numberOfRowsInSection:(NSInteger)section
 {
@@ -144,6 +145,9 @@ static int const kButtonWidth = 100;
     TrendViewController *trendViewController = [segue destinationViewController];
     trendViewController.trendUrl = self.trendUrlInfo[self.recordIDToEdit];
     self.recordIDToEdit = -1;
+  } else {
+    RegionViewController *regionViewController = [segue destinationViewController];
+    regionViewController.delegate = self;
   }
 }
 
@@ -179,8 +183,6 @@ static int const kButtonWidth = 100;
 }
 
 -(IBAction)getRegions:(id)sender {
-  [self performSegueWithIdentifier:@"idSegueRegion" sender:self];
-  return;
   
   OAConsumer* consumer = [self.delegate getConsumer];
   OAToken* accessToken = [self.delegate getAccessToken];
@@ -368,25 +370,23 @@ static int const kButtonWidth = 100;
   NSArray *twitterRegions = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers       error:nil];
 
   
-  NSMutableArray *woeidArray = [[NSMutableArray alloc] init];
-  NSMutableArray *nameArray = [[NSMutableArray alloc] init];
-  NSMutableArray *countryArray = [[NSMutableArray alloc] init];
-
+  self.regionArray = [[NSMutableArray alloc] init];
   
   for (NSDictionary *region in twitterRegions) {
+    Region *regionObj = [Region alloc];
     
-    NSString *names = [region objectForKey:@"name"];
-    
-    NSString *woeid = [region objectForKey:@"woeid"];
-    NSString *country = [region objectForKey:@"country"];
+    regionObj.city = [region objectForKey:@"name"];
 
+    regionObj.woeid = [NSString stringWithFormat:@"%d",[[region objectForKey:@"woeid"] intValue]];
+    regionObj.country = [region objectForKey:@"country"];
     
-    [nameArray addObject:names];
-    [woeidArray addObject:woeid];
-    [countryArray addObject:country];
-
+    [self.regionArray addObject:regionObj];
   }
   NSLog(@"done");
+  
+  [self performSegueWithIdentifier:@"idSegueRegion" sender:self];
+                      return;
+
 }
 
 
@@ -498,6 +498,10 @@ static int const kButtonWidth = 100;
     
     [[UIApplication sharedApplication] scheduleLocalNotification:local];
   }
+}
+
+-(NSArray*)getRegionArray{
+  return self.regionArray;
 }
 
 @end

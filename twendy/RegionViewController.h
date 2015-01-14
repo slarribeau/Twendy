@@ -7,7 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "OAuthConsumer.h"
+
+
+@protocol RegionViewControllerDelegate
+-(NSMutableArray*)getRegionArray;
+@end
+
 
 @interface RegionViewController : UIViewController
+@property (nonatomic, weak) id <RegionViewControllerDelegate> delegate;
+@property (nonatomic, strong) NSMutableArray *regionArray;
 
 @end

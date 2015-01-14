@@ -36,6 +36,7 @@ NSString *callback = @"http://nowandzen.com/callback";
 {
   [super viewDidLoad];
   consumer = [[OAConsumer alloc] initWithKey:client_id secret:secret realm:nil];
+
   NSURL* requestTokenUrl = [NSURL URLWithString:@"https://api.twitter.com/oauth/request_token"];
   OAMutableURLRequest* requestTokenRequest = [[OAMutableURLRequest alloc] initWithURL:requestTokenUrl
                                                                              consumer:consumer
@@ -139,7 +140,6 @@ NSString *callback = @"http://nowandzen.com/callback";
   
   NSString* httpBody = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
   accessToken = [[OAToken alloc] initWithHTTPResponseBody:httpBody];
-  
   // WebServiceSocket *connection = [[WebServiceSocket alloc] init];
   //  connection.delegate = self;
   

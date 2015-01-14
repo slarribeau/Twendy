@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "OAuthConsumer.h"
+#import "RegionViewController.h"
 
 @protocol TrendingListViewControllerDelegate
 -(NSArray*)getTrendArray;
@@ -18,10 +19,11 @@
 
 @end
 
-@interface TrendingListViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+@interface TrendingListViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, RegionViewControllerDelegate>
 @property (nonatomic, weak) id <TrendingListViewControllerDelegate> delegate;
-@property (weak, nonatomic) IBOutlet UITableView *tblPeople;
+@property (weak, nonatomic) IBOutlet UITableView *tblPeople; //FIX ME rename
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollMenu;
+@property (nonatomic, strong) NSMutableArray *regionArray;
 
 -(IBAction)getTrendDataButton:(id)sender;
 -(IBAction)getHomeTrendDataButton:(id)sender;

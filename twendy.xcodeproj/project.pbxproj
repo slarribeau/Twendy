@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D660ED2E1A6704C9003A3A95 /* Region.m in Sources */ = {isa = PBXBuildFile; fileRef = D660ED2D1A6704C9003A3A95 /* Region.m */; };
 		D6C4B3211A606247006F40DF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D6C4B3201A606247006F40DF /* main.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		D6C4B3241A606247006F40DF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D6C4B3231A606247006F40DF /* AppDelegate.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		D6C4B3271A606247006F40DF /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6C4B3261A606247006F40DF /* ViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -55,6 +56,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D660ED2C1A6704C9003A3A95 /* Region.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Region.h; sourceTree = "<group>"; };
+		D660ED2D1A6704C9003A3A95 /* Region.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Region.m; sourceTree = "<group>"; };
 		D6C4B31B1A606247006F40DF /* twendy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = twendy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6C4B31F1A606247006F40DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D6C4B3201A606247006F40DF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -171,6 +174,8 @@
 				D6C4B3221A606247006F40DF /* AppDelegate.h */,
 				D6C4B3231A606247006F40DF /* AppDelegate.m */,
 				D6C4B3281A606247006F40DF /* Main.storyboard */,
+				D660ED2C1A6704C9003A3A95 /* Region.h */,
+				D660ED2D1A6704C9003A3A95 /* Region.m */,
 				D6C4B39A1A65BC97006F40DF /* RegionViewController.h */,
 				D6C4B39B1A65BC97006F40DF /* RegionViewController.m */,
 				D6C4B3941A609D7B006F40DF /* TrendingListViewController.h */,
@@ -423,6 +428,7 @@
 				D6C4B3961A609D7B006F40DF /* TrendingListViewController.m in Sources */,
 				D6C4B37B1A606A32006F40DF /* NSMutableURLRequest+Parameters.m in Sources */,
 				D6C4B3211A606247006F40DF /* main.m in Sources */,
+				D660ED2E1A6704C9003A3A95 /* Region.m in Sources */,
 				D6C4B37D1A606A32006F40DF /* NSURL+Base.m in Sources */,
 				D6C4B3871A606A32006F40DF /* OAPlaintextSignatureProvider.m in Sources */,
 			);
