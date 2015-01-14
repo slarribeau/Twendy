@@ -15,7 +15,8 @@
 @end
 
 
-@interface RegionViewController : UIViewController
+@interface RegionViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+@property (weak, nonatomic) IBOutlet UITableView *tblRegion;
 @property (nonatomic, weak) id <RegionViewControllerDelegate> delegate;
 @property (nonatomic, strong) NSMutableArray *regionArray;
 

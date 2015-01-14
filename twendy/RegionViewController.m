@@ -6,7 +6,9 @@
 //  Copyright (c) 2015 Larribeau. All rights reserved.
 //
 
+
 #import "RegionViewController.h"
+#import "Region.h"
 
 @interface RegionViewController ()
 
@@ -34,5 +36,27 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+- (NSInteger)tableView:(UITableView *)tableView
+ numberOfRowsInSection:(NSInteger)section
+{
+  return self.regionArray.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView
+         cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"idRegionCellRecord" forIndexPath:indexPath];
+  
+  Region *region = self.regionArray[indexPath.row];
+  cell.textLabel.text = [NSString stringWithFormat:@"%@: %@", region.country, region.city];
+  
+  cell.detailTextLabel.text = @"text";
+  return cell;
+}
+
+-(void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath{
+  NSLog(@"Hullo?");
+}
 
 @end
