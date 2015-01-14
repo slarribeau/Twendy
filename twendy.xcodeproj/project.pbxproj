@@ -41,6 +41,7 @@
 		D6C4B3931A606A32006F40DF /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = D6C4B37A1A606A32006F40DF /* SBJsonWriter.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		D6C4B3961A609D7B006F40DF /* TrendingListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6C4B3951A609D7B006F40DF /* TrendingListViewController.m */; };
 		D6C4B3991A60C004006F40DF /* TrendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6C4B3981A60C004006F40DF /* TrendViewController.m */; };
+		D6C4B39C1A65BC97006F40DF /* RegionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6C4B39B1A65BC97006F40DF /* RegionViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -122,6 +123,8 @@
 		D6C4B3951A609D7B006F40DF /* TrendingListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrendingListViewController.m; sourceTree = "<group>"; };
 		D6C4B3971A60C004006F40DF /* TrendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrendViewController.h; sourceTree = "<group>"; };
 		D6C4B3981A60C004006F40DF /* TrendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrendViewController.m; sourceTree = "<group>"; };
+		D6C4B39A1A65BC97006F40DF /* RegionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegionViewController.h; sourceTree = "<group>"; };
+		D6C4B39B1A65BC97006F40DF /* RegionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegionViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,6 +171,8 @@
 				D6C4B3221A606247006F40DF /* AppDelegate.h */,
 				D6C4B3231A606247006F40DF /* AppDelegate.m */,
 				D6C4B3281A606247006F40DF /* Main.storyboard */,
+				D6C4B39A1A65BC97006F40DF /* RegionViewController.h */,
+				D6C4B39B1A65BC97006F40DF /* RegionViewController.m */,
 				D6C4B3941A609D7B006F40DF /* TrendingListViewController.h */,
 				D6C4B3951A609D7B006F40DF /* TrendingListViewController.m */,
 				D6C4B3971A60C004006F40DF /* TrendViewController.h */,
@@ -404,6 +409,7 @@
 				D6C4B38D1A606A32006F40DF /* OATokenManager.m in Sources */,
 				D6C4B3831A606A32006F40DF /* OAConsumer.m in Sources */,
 				D6C4B3901A606A32006F40DF /* NSString+SBJSON.m in Sources */,
+				D6C4B39C1A65BC97006F40DF /* RegionViewController.m in Sources */,
 				D6C4B3801A606A32006F40DF /* sha1.c in Sources */,
 				D6C4B3891A606A32006F40DF /* OARequestParameter.m in Sources */,
 				D6C4B3821A606A32006F40DF /* OACall.m in Sources */,
@@ -613,6 +619,7 @@
 				D6C4B3401A606248006F40DF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D6C4B3411A606248006F40DF /* Build configuration list for PBXNativeTarget "twendyTests" */ = {
 			isa = XCConfigurationList;
@@ -621,6 +628,7 @@
 				D6C4B3431A606248006F40DF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
