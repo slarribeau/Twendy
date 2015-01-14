@@ -18,6 +18,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+  
+  self.tblRegion.delegate = self;
+  self.tblRegion.dataSource = self;
+
   self.regionArray = [self.delegate getRegionArray];
 
 }
@@ -52,11 +56,23 @@
   cell.textLabel.text = [NSString stringWithFormat:@"%@: %@", region.country, region.city];
   
   cell.detailTextLabel.text = @"text";
+  if (region.selected == YES) {
+    cell.accessoryType = UITableViewCellAccessoryCheckmark;
+  }
   return cell;
 }
 
 -(void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath{
   NSLog(@"Hullo?");
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{  
+  UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+  cell.accessoryType = UITableViewCellAccessoryCheckmark;
+
+  Region *region = self.regionArray[indexPath.row];
+  region.selected = YES;
 }
 
 @end

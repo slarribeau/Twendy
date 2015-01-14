@@ -61,6 +61,9 @@ static int const kButtonWidth = 100;
   [NSTimer scheduledTimerWithTimeInterval:(60.0 * 15.0)target:self
                                  selector:@selector(getTrendDeltaAndNotify) userInfo:nil repeats:YES];
   [self createScrollMenu];
+  
+  self.regionArray = [[NSMutableArray alloc] init];
+
 
 }
 
@@ -184,6 +187,11 @@ static int const kButtonWidth = 100;
 
 -(IBAction)getRegions:(id)sender {
   
+  
+  if (self.regionArray.count > 0) {
+    //Only fetch the region data once
+    [self performSegueWithIdentifier:@"idSegueRegion" sender:self];
+  } else {
   OAConsumer* consumer = [self.delegate getConsumer];
   OAToken* accessToken = [self.delegate getAccessToken];
   
@@ -212,6 +220,7 @@ static int const kButtonWidth = 100;
                       didFailSelector:@selector(didFailOAuth:error:)];    } else {
       NSLog(@"ERROR!!");
     }
+  }
 }
 
 
@@ -370,7 +379,6 @@ static int const kButtonWidth = 100;
   NSArray *twitterRegions = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers       error:nil];
 
   
-  self.regionArray = [[NSMutableArray alloc] init];
   
   for (NSDictionary *region in twitterRegions) {
     Region *regionObj = [Region alloc];
