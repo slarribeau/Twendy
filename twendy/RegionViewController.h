@@ -12,6 +12,7 @@
 
 @protocol RegionViewControllerDelegate
 -(NSMutableArray*)getRegionArray;
+-(void)menuHasChanged;
 @end
 
 

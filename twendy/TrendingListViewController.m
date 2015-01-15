@@ -60,12 +60,13 @@ static int const kButtonWidth = 100;
 
   [NSTimer scheduledTimerWithTimeInterval:(60.0 * 15.0)target:self
                                  selector:@selector(getTrendDeltaAndNotify) userInfo:nil repeats:YES];
-  [self createScrollMenu];
+  [self createScrollMenu2];
   
   self.regionArray = [[NSMutableArray alloc] init];
 
 
 }
+
 
 -(void)addScrollButton:(int)offset name:(NSString *)name action:(SEL)action
 {
@@ -91,6 +92,34 @@ static int const kButtonWidth = 100;
   [self addScrollButton:x name:@"Add" action:@selector(getRegions:)];
 
 
+  x++; //Need an extra increment so that we can scroll to end of last button
+  self.scrollMenu.contentSize = CGSizeMake(kButtonWidth*x, self.scrollMenu.frame.size.height);
+  self.scrollMenu.backgroundColor = [UIColor redColor];
+}
+
+- (void)createScrollMenu2 //TODO -> Leaky!
+{
+  //Clean up in case this is being called after first time
+  for (UIView *view in [self.scrollMenu subviews])
+  {
+    [view removeFromSuperview];
+  }
+
+  int x = 0;
+  [self addScrollButton:x name:@"home" action:@selector(getHomeTrendDataButton:)];
+  x++;
+  
+  for (Region *region in self.regionArray) {
+    if (region.selected == YES) {
+      [self addScrollButton:x name:region.city action:@selector(getGenericTrendDataButton:)];
+      x++;
+    }
+  }
+  [self addScrollButton:x name:@"World" action:@selector(getWorldTrendDataButton:)];
+  x++;
+  [self addScrollButton:x name:@"Add" action:@selector(getRegions:)];
+  
+  
   x++; //Need an extra increment so that we can scroll to end of last button
   self.scrollMenu.contentSize = CGSizeMake(kButtonWidth*x, self.scrollMenu.frame.size.height);
   self.scrollMenu.backgroundColor = [UIColor redColor];
@@ -191,6 +220,7 @@ static int const kButtonWidth = 100;
   if (self.regionArray.count > 0) {
     //Only fetch the region data once
     [self performSegueWithIdentifier:@"idSegueRegion" sender:self];
+    NSLog(@"We are back");
   } else {
   OAConsumer* consumer = [self.delegate getConsumer];
   OAToken* accessToken = [self.delegate getAccessToken];
@@ -223,6 +253,16 @@ static int const kButtonWidth = 100;
   }
 }
 
+
+-(IBAction)getGenericTrendDataButton:(id)sender {
+  NSString *title = [(UIButton *)sender currentTitle];
+  for (Region *region in self.regionArray) {
+    if ([region.city isEqualToString:title]) {
+      [self getTrendData:region.woeid];
+      break;
+    }
+  }
+}
 
 -(IBAction)getTrendDataButton:(id)sender {
   [self getTrendData:kLocationHome];
@@ -393,7 +433,7 @@ static int const kButtonWidth = 100;
   NSLog(@"done");
   
   [self performSegueWithIdentifier:@"idSegueRegion" sender:self];
-                      return;
+  NSLog(@"We are back II");
 
 }
 
@@ -510,6 +550,10 @@ static int const kButtonWidth = 100;
 
 -(NSArray*)getRegionArray{
   return self.regionArray;
+}
+
+-(void)menuHasChanged {
+  [self createScrollMenu2];
 }
 
 @end

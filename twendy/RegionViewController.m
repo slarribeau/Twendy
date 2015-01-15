@@ -81,5 +81,6 @@
     cell.accessoryType = UITableViewCellAccessoryCheckmark;
     region.selected = YES;
   }
+  [self.delegate menuHasChanged];
 }
 @end
