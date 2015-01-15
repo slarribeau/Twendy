@@ -15,10 +15,10 @@
 @property (nonatomic, strong) NSArray *arrPeopleInfo;
 @property (nonatomic, strong) NSArray *trendUrlInfo;
 @property (nonatomic) NSInteger recordIDToEdit;
-
 @end
 
 @implementation TrendingListViewController
+
 static NSString * const kLocationHome = @"2488042";
 static NSString * const kLocationSF = @"2487956";
 static NSString * const kLocationWorld = @"1";
@@ -26,45 +26,23 @@ static NSString * const kLocationNY = @"2459115";
 static NSString * const kLocationLA = @"2442047";
 static int const kButtonWidth = 100;
 
-
-
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
   
   self.tblPeople.delegate = self;
   self.tblPeople.dataSource = self;
 
   self.recordIDToEdit = -1;
-  // Get the results.
-  if (self.arrPeopleInfo != nil) {
-    self.arrPeopleInfo = nil;
-  }
-  
   self.arrPeopleInfo = [self.delegate getTrendArray];
-  
-  // Get the results.
-  if (self.trendUrlInfo != nil) {
-    self.trendUrlInfo = nil;
-  }
-  
   self.trendUrlInfo = [self.delegate getUrlArray];
-
+  self.regionArray = [[NSMutableArray alloc] init];
 
   // Reload the table view.
   [self.tblPeople reloadData];
 
-  [NSTimer scheduledTimerWithTimeInterval:(60.0 * 59.0)target:self
-                                  selector:@selector(getTrendDataAndNotify) userInfo:nil repeats:YES];
+  [self createScrollMenu];
   
-
-  [NSTimer scheduledTimerWithTimeInterval:(60.0 * 15.0)target:self
-                                 selector:@selector(getTrendDeltaAndNotify) userInfo:nil repeats:YES];
-  [self createScrollMenu2];
-  
-  self.regionArray = [[NSMutableArray alloc] init];
 }
-
 
 -(void)addScrollButton:(int)offset name:(NSString *)name action:(SEL)action
 {
@@ -77,7 +55,7 @@ static int const kButtonWidth = 100;
   [self.scrollMenu addSubview:button];
 }
 
-- (void)createScrollMenu2 //TODO -> Leaky!
+- (void)createScrollMenu //TODO -> Leaky!
 {
   //Clean up in case this is being called after first time
   for (UIView *view in [self.scrollMenu subviews])
@@ -105,52 +83,6 @@ static int const kButtonWidth = 100;
   self.scrollMenu.backgroundColor = [UIColor redColor];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
-- (NSInteger)tableView:(UITableView *)tableView
- numberOfRowsInSection:(NSInteger)section
-{
-  NSLog(@"array=%@ count=%lu", self.arrPeopleInfo, (unsigned long)self.arrPeopleInfo.count);
- // return 10;
-  return self.arrPeopleInfo.count;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView
-         cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"idCellRecord" forIndexPath:indexPath];
-  
-  cell.textLabel.text = self.arrPeopleInfo[indexPath.row];
-  
-  cell.detailTextLabel.text = @"text";
-  return cell;
-}
-
--(void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath{
-  // Get the record ID of the selected name and set it to the recordIDToEdit property.
-  self.recordIDToEdit = indexPath.row;
-  
-  // Perform the segue.
-  [self performSegueWithIdentifier:@"idSegueTrend" sender:self];
-  
-  self.recordIDToEdit = -1; //why? TODO
-
-}
-
-
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
   
   if (self.recordIDToEdit > 0) {
@@ -161,6 +93,124 @@ static int const kButtonWidth = 100;
     RegionViewController *regionViewController = [segue destinationViewController];
     regionViewController.delegate = self;
   }
+}
+
+#pragma mark - RegionViewControllerDelegate
+-(NSArray*)getRegionArray{
+  return self.regionArray;
+}
+
+-(void)menuHasChanged {
+  [self createScrollMenu];
+}
+
+#pragma mark - UITableView Delegates
+- (NSInteger)tableView:(UITableView *)tableView
+ numberOfRowsInSection:(NSInteger)section
+{
+  return self.arrPeopleInfo.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView
+         cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"idCellRecord" forIndexPath:indexPath];
+  
+  cell.textLabel.text = self.arrPeopleInfo[indexPath.row];
+  //cell.detailTextLabel.text = @"text";
+  return cell;
+}
+
+-(void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath{
+  // Get the record ID of the selected name and set it to the recordIDToEdit property.
+  self.recordIDToEdit = indexPath.row;
+  
+  // Perform the segue.
+  [self performSegueWithIdentifier:@"idSegueTrend" sender:self];
+  
+  self.recordIDToEdit = -1; //This will be checked later in prepareSeque method
+}
+
+#pragma mark - request data from twitter api
+-(IBAction)getGenericTrendDataButton:(id)sender {
+  NSString *title = [(UIButton *)sender currentTitle];
+  
+  for (Region *region in self.regionArray) {
+    if ([region.city isEqualToString:title]) {
+      [self getTrendData:region.woeid];
+      break;
+    }
+  }
+}
+
+-(IBAction)getTrendDataButton:(id)sender {
+  [self getTrendData:kLocationHome];
+}
+
+
+-(IBAction)getHomeTrendDataButton:(id)sender{
+  for (id object in [self.scrollMenu subviews])  {
+    if ([object isMemberOfClass:[UIButton class]]) {
+      UIButton *button = (UIButton*)object;
+      
+      [button setTitle:[NSString stringWithFormat:@"%@%@", @"*", [button currentTitle]] forState:UIControlStateNormal];
+    }
+  }
+  [self getTrendData:kLocationHome];
+}
+
+-(IBAction)getSFTrendDataButton:(id)sender{
+  [self getTrendData:kLocationSF];
+}
+
+-(IBAction)getWorldTrendDataButton:(id)sender{
+  [self getTrendData:kLocationWorld];
+}
+
+-(IBAction)getNYTrendDataButton:(id)sender{
+  [self getTrendData:kLocationNY];
+}
+
+
+-(IBAction)getLATrendDataButton:(id)sender{
+  [self getTrendData:kLocationLA];
+}
+
+
+-(void)getTrendData:(NSString*)location {
+  OAConsumer* consumer = [self.delegate getConsumer];
+  OAToken* accessToken = [self.delegate getAccessToken];
+  
+  if (accessToken) {
+    NSURL* userdatarequestu = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.twitter.com/1.1/trends/place.json?id=%@", location]];
+    
+    //2488042 = 'San Jose CA USA'
+    //2487956 = 'San Francisco CA USA'
+    //http://woeid.rosselliot.co.nz/lookup/san%20francisco
+    
+    
+    OAMutableURLRequest* requestTokenRequest;
+    requestTokenRequest = [[OAMutableURLRequest alloc]
+                           initWithURL:userdatarequestu
+                           
+                           consumer:consumer
+                           
+                           token:accessToken
+                           
+                           realm:nil
+                           
+                           signatureProvider:nil];
+    
+    [requestTokenRequest setHTTPMethod:@"GET"];
+    
+    OADataFetcher* dataFetcher = [[OADataFetcher alloc] init];
+    
+    [dataFetcher fetchDataWithRequest:requestTokenRequest
+                             delegate:self
+                    didFinishSelector:@selector(didReceiveuserdata:data:)
+                      didFailSelector:@selector(didFailOAuth:error:)];    } else {
+      NSLog(@"ERROR!!");
+    }
 }
 
 -(IBAction)getRateLimit:(id)sender {
@@ -202,271 +252,77 @@ static int const kButtonWidth = 100;
     [self performSegueWithIdentifier:@"idSegueRegion" sender:self];
     NSLog(@"We are back");
   } else {
-  OAConsumer* consumer = [self.delegate getConsumer];
-  OAToken* accessToken = [self.delegate getAccessToken];
-  
-  if (accessToken) {
-    NSURL* userdatarequestu = [NSURL URLWithString:@"https://api.twitter.com/1.1/trends/available.json"];
+    OAConsumer* consumer = [self.delegate getConsumer];
+    OAToken* accessToken = [self.delegate getAccessToken];
     
-    OAMutableURLRequest* requestTokenRequest;
-    requestTokenRequest = [[OAMutableURLRequest alloc]
-                           initWithURL:userdatarequestu
-                           
-                           consumer:consumer
-                           
-                           token:accessToken
-                           
-                           realm:nil
-                           
-                           signatureProvider:nil];
-    
-    [requestTokenRequest setHTTPMethod:@"GET"];
-    
-    OADataFetcher* dataFetcher = [[OADataFetcher alloc] init];
-    
-    [dataFetcher fetchDataWithRequest:requestTokenRequest
-                             delegate:self
-                    didFinishSelector:@selector(didReceiveRegion:data:)
-                      didFailSelector:@selector(didFailOAuth:error:)];    } else {
-      NSLog(@"ERROR!!");
-    }
-  }
-}
-
-
--(IBAction)getGenericTrendDataButton:(id)sender {
-  NSString *title = [(UIButton *)sender currentTitle];
-  
-  for (Region *region in self.regionArray) {
-    if ([region.city isEqualToString:title]) {
-      [self getTrendData:region.woeid];
-      break;
-    }
-  }
-}
-
--(IBAction)getTrendDataButton:(id)sender {
-  [self getTrendData:kLocationHome];
-}
-
--(void)getTrendDeltaAndNotify
-{
-  [self getTrendDelta:kLocationHome];
-}
-
-
--(IBAction)getHomeTrendDataButton:(id)sender{
-  for (id object in [self.scrollMenu subviews])  {
-    if ([object isMemberOfClass:[UIButton class]]) {
-      UIButton *button = (UIButton*)object;
+    if (accessToken) {
+      NSURL* userdatarequestu = [NSURL URLWithString:@"https://api.twitter.com/1.1/trends/available.json"];
       
-      [button setTitle:[NSString stringWithFormat:@"%@%@", @"*", [button currentTitle]] forState:UIControlStateNormal];
-    }
-  }
-  [self getTrendData:kLocationHome];
-}
-
--(IBAction)getSFTrendDataButton:(id)sender{
-    [self getTrendData:kLocationSF];
-  }
-
--(IBAction)getWorldTrendDataButton:(id)sender{
-      [self getTrendData:kLocationWorld];
-    }
-
--(IBAction)getNYTrendDataButton:(id)sender{
-        [self getTrendData:kLocationNY];
+      OAMutableURLRequest* requestTokenRequest;
+      requestTokenRequest = [[OAMutableURLRequest alloc]
+                             initWithURL:userdatarequestu
+                             
+                             consumer:consumer
+                             
+                             token:accessToken
+                             
+                             realm:nil
+                             
+                             signatureProvider:nil];
+      
+      [requestTokenRequest setHTTPMethod:@"GET"];
+      
+      OADataFetcher* dataFetcher = [[OADataFetcher alloc] init];
+      
+      [dataFetcher fetchDataWithRequest:requestTokenRequest
+                               delegate:self
+                      didFinishSelector:@selector(didReceiveRegion:data:)
+                        didFailSelector:@selector(didFailOAuth:error:)];    } else {
+        NSLog(@"ERROR!!");
       }
-
-
--(IBAction)getLATrendDataButton:(id)sender{
-  [self getTrendData:kLocationLA];
-}
-
-
-
--(void)getTrendDataAndNotify
-{
-  [self getTrendData:kLocationHome];
-  [self summaryNotification];
-}
-
--(NSString *)buildTrendMsg
-{
-  NSString *retString = @"";
-  
-  for (NSString *trend in self.arrPeopleInfo) {
-    NSInteger i= 0;
-    retString = [NSString stringWithFormat:@"%@%@%s", retString, trend,  (i++ % 3) ? "\n":"  "];
-
-  }
-  return retString;
-}
--(void)summaryNotification
-{
-  UILocalNotification* local = [[UILocalNotification alloc]init];
-  if (local) {
-    local.fireDate = [NSDate dateWithTimeIntervalSinceNow:1];
-    local.alertBody = @"Hey\n this\nis\n my\n first\n local\n notification\n!!!\n";
-    local.alertBody = [self buildTrendMsg];
-
-    
-    //local.alertLaunchImage = @"sachin.png";
-    //local.soundName = @"sachin.mp3";
-    //local.timeZone = [NSTimeZone defaultTimeZone];
-    [[UIApplication sharedApplication] scheduleLocalNotification:local];
   }
 }
--(void)getTrendData:(NSString*)location {
-  OAConsumer* consumer = [self.delegate getConsumer];
-  OAToken* accessToken = [self.delegate getAccessToken];
-  
-  if (accessToken) {
-    NSURL* userdatarequestu = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.twitter.com/1.1/trends/place.json?id=%@", location]];
-    
-    //2488042 = 'San Jose CA USA'
-    //2487956 = 'San Francisco CA USA'
-    //http://woeid.rosselliot.co.nz/lookup/san%20francisco
-    
-    
-    OAMutableURLRequest* requestTokenRequest;
-    requestTokenRequest = [[OAMutableURLRequest alloc]
-                           initWithURL:userdatarequestu
-                           
-                           consumer:consumer
-                           
-                           token:accessToken
-                           
-                           realm:nil
-                           
-                           signatureProvider:nil];
-    
-    [requestTokenRequest setHTTPMethod:@"GET"];
-    
-    OADataFetcher* dataFetcher = [[OADataFetcher alloc] init];
-    
-    [dataFetcher fetchDataWithRequest:requestTokenRequest
-                             delegate:self
-                    didFinishSelector:@selector(didReceiveuserdata:data:)
-                      didFailSelector:@selector(didFailOAuth:error:)];    } else {
-      NSLog(@"ERROR!!");
-    }
-  
-  
-  
-}
 
--(void)getTrendDelta:(NSString*)location {
-  OAConsumer* consumer = [self.delegate getConsumer];
-  OAToken* accessToken = [self.delegate getAccessToken];
-  
-  if (accessToken) {
-    NSURL* userdatarequestu = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.twitter.com/1.1/trends/place.json?id=%@", location]];
-                               
-                               
-    //2488042 = 'San Jose CA USA'
-    //2487956 = 'San Francisco CA USA'
-    //http://woeid.rosselliot.co.nz/lookup/san%20francisco
-    
-    
-    OAMutableURLRequest* requestTokenRequest;
-    requestTokenRequest = [[OAMutableURLRequest alloc]
-                           initWithURL:userdatarequestu
-                           
-                           consumer:consumer
-                           
-                           token:accessToken
-                           
-                           realm:nil
-                           
-                           signatureProvider:nil];
-    
-    [requestTokenRequest setHTTPMethod:@"GET"];
-    
-    OADataFetcher* dataFetcher = [[OADataFetcher alloc] init];
-    
-    [dataFetcher fetchDataWithRequest:requestTokenRequest
-                             delegate:self
-                    didFinishSelector:@selector(didReceiveuserdelta:data:)
-                      didFailSelector:@selector(didFailOAuth:error:)];    } else {
-      NSLog(@"ERROR!!");
-    }
-  
-  
-  
-}
+#pragma mark - handle data returned from twitter api
 - (void)didReceiveRegion:(OAServiceTicket*)ticket data:(NSData*)data {
   NSString* httpBody = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-  
   NSLog(@"++++++++++++++++++++++++++++");
-  NSLog(@"++++++++++++++++++++++++++++");
-  NSLog(@"++++++++++++++++++++++++++++");
-  
   NSLog(@"didReceive Region%@", httpBody);
   
   NSArray *twitterRegions = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers       error:nil];
-
-  
   
   for (NSDictionary *region in twitterRegions) {
     Region *regionObj = [Region alloc];
     
     regionObj.city = [region objectForKey:@"name"];
-
+    
     regionObj.woeid = [NSString stringWithFormat:@"%d",[[region objectForKey:@"woeid"] intValue]];
     regionObj.country = [region objectForKey:@"country"];
     
     [self.regionArray addObject:regionObj];
   }
-  NSLog(@"done");
-  
   [self performSegueWithIdentifier:@"idSegueRegion" sender:self];
-  NSLog(@"We are back II");
-
 }
-
-
 
 - (void)didReceiveRateLimit:(OAServiceTicket*)ticket data:(NSData*)data {
   NSString* httpBody = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-  
   NSLog(@"++++++++++++++++++++++++++++");
-  NSLog(@"++++++++++++++++++++++++++++");
-  NSLog(@"++++++++++++++++++++++++++++");
-  
   NSLog(@"didReceive %@", httpBody);
 }
 
 - (void)didReceiveuserdata:(OAServiceTicket*)ticket data:(NSData*)data {
   NSString* httpBody = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-  
-  NSLog(@"++++++++++++++++++++++++++++");
-  NSLog(@"++++++++++++++++++++++++++++");
-  NSLog(@"++++++++++++++++++++++++++++");
-
   NSLog(@"didReceive %@", httpBody);
   
   NSArray *twitterTrends   = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers       error:nil];
   NSArray *trends  = [[twitterTrends objectAtIndex:0] objectForKey:@"trends"];
   
-  // Get the results.
-  if (self.arrPeopleInfo != nil) {
-    self.arrPeopleInfo = nil;
-  }
-  
-  
-  // Get the results.
-  if (self.trendUrlInfo != nil) {
-    self.trendUrlInfo = nil;
-  }
-  
   self.arrPeopleInfo = [self.delegate getTrendArray];
   self.trendUrlInfo = [self.delegate getUrlArray];
   // Reload the table view.
-  [self.tblPeople reloadData];
+  //[self.tblPeople reloadData];
   
-
-
+  //FIX ME - this should be a single array of objects, not two arrays
   NSMutableArray *trendNameArray = [[NSMutableArray alloc] init];
   NSMutableArray *trendUrlArray = [[NSMutableArray alloc] init];
   
@@ -477,14 +333,8 @@ static int const kButtonWidth = 100;
     NSString *names = [trend objectForKey:@"name"];
     
     NSString *urls = [trend objectForKey:@"url"];
-    
-    //NSString *label = [title objectForKey:@"label"];
-    //PlaceDataObject *place = [PlaceDataObject alloc] initWithJSONData:eachPlace];
-    
     [trendNameArray addObject:names];
     [trendUrlArray addObject:urls];
-    
-    
   }
   NSLog(@"Built me an trendNameArray:%lu", (unsigned long)trendNameArray.count);
   
@@ -493,55 +343,7 @@ static int const kButtonWidth = 100;
   self.trendUrlInfo = trendUrlArray;
   // Reload the table view.
   [self.tblPeople reloadData];
-
-}
-
-- (void)didReceiveuserdelta:(OAServiceTicket*)ticket data:(NSData*)data {
-  NSString* httpBody = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
   
-  NSLog(@"++++++++++++++++++++++++++++");
-  NSLog(@"++++++++++++++++++++++++++++");
-  NSLog(@"++++++++++++++++++++++++++++");
-  
-  NSLog(@"didReceive %@", httpBody);
-  
-  NSArray *twitterTrends   = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers       error:nil];
-  NSArray *trends  = [[twitterTrends objectAtIndex:0] objectForKey:@"trends"];
-  
-  NSMutableArray *trendNameArray = [[NSMutableArray alloc] init];
-  
-  for (NSDictionary *trend in trends) {
-    NSString *names = [trend objectForKey:@"name"];
-    [trendNameArray addObject:names];
-  }
-  NSLog(@"Before me an trendNameArray:%lu", (unsigned long)trendNameArray.count);
-  
-  
-  [trendNameArray removeObjectsInArray: self.arrPeopleInfo];
-  NSLog(@"After me an trendNameArray:%lu", (unsigned long)trendNameArray.count);
-
-  
-  NSString *retString = @"";
-  
-  for (NSString *trend in trendNameArray) {
-    retString = [NSString stringWithFormat:@"%@++%@%s", retString, trend, "\n"];
-  }
-  UILocalNotification* local = [[UILocalNotification alloc]init];
-  if (local) {
-    local.fireDate = [NSDate dateWithTimeIntervalSinceNow:1];
-    local.alertBody = @"Hey\n this\nis\n my\n first\n local\n notification\n!!!\n";
-    local.alertBody = retString;
-    
-    [[UIApplication sharedApplication] scheduleLocalNotification:local];
-  }
-}
-
--(NSArray*)getRegionArray{
-  return self.regionArray;
-}
-
--(void)menuHasChanged {
-  [self createScrollMenu2];
 }
 
 @end
