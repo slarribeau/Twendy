@@ -20,10 +20,8 @@
 @implementation TrendingListViewController
 
 static NSString * const kLocationHome = @"2488042";
-static NSString * const kLocationSF = @"2487956";
 static NSString * const kLocationWorld = @"1";
-static NSString * const kLocationNY = @"2459115";
-static NSString * const kLocationLA = @"2442047";
+static NSString * const kMenuSelectionMark = @"*";
 static int const kButtonWidth = 100;
 
 - (void)viewDidLoad {
@@ -93,12 +91,40 @@ static int const kButtonWidth = 100;
 }
 
 #pragma - mark button management
+-(BOOL)doesString:(NSString *)string containCharacter:(char)character
+{
+  if ([string rangeOfString:[NSString stringWithFormat:@"%c",character]].location != NSNotFound)
+  {
+    return YES;
+  }
+  return NO;
+}
+
+-(void)setMenuSelection:(UIButton*)button
+{
+  [button setTitle:[NSString stringWithFormat:@"%@%@", kMenuSelectionMark, [button currentTitle]] forState:UIControlStateNormal];
+
+}
+
+-(void)removeMenuSelection
+{
+  for (id object in [self.scrollMenu subviews])  {
+    if ([object isMemberOfClass:[UIButton class]]) {
+      UIButton *button = (UIButton*)object;
+      NSString *title = [button currentTitle];
+      
+      if ([title hasPrefix:kMenuSelectionMark] && [title length] > 1) {
+        [button setTitle:[title substringFromIndex:1] forState:UIControlStateNormal];
+        break;
+      }
+    }
+  }
+}
 -(void)addScrollButton:(int)offset name:(NSString *)name action:(SEL)action
 {
   int x = kButtonWidth * offset;
   UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(x, 0, kButtonWidth, 100)];
   [button setTitle:name forState:UIControlStateNormal];
-  [button setTitle:[name uppercaseString] forState:UIControlStateHighlighted];
   
   [button addTarget:self action:action forControlEvents:UIControlEventTouchDown];
   [self.scrollMenu addSubview:button];
@@ -113,7 +139,9 @@ static int const kButtonWidth = 100;
   }
   
   int x = 0;
-  [self addScrollButton:x name:@"Home" action:@selector(getHomeTrendDataButton:)];
+  
+  [self addScrollButton:x name:[NSString stringWithFormat:@"%@%@",kMenuSelectionMark,@"Home" ] action:@selector(getHomeTrendDataButton:)];
+
   x++;
   
   for (Region *region in self.regionArray) {
@@ -136,6 +164,8 @@ static int const kButtonWidth = 100;
 #pragma mark - request data from twitter api
 -(IBAction)getGenericTrendDataButton:(id)sender {
   NSString *title = [(UIButton *)sender currentTitle];
+  [self removeMenuSelection];
+  [self setMenuSelection:(UIButton*)sender];
   
   for (Region *region in self.regionArray) {
     if ([region.city isEqualToString:title]) {
@@ -146,21 +176,22 @@ static int const kButtonWidth = 100;
 }
 
 -(IBAction)getHomeTrendDataButton:(id)sender{
-  for (id object in [self.scrollMenu subviews])  {
-    if ([object isMemberOfClass:[UIButton class]]) {
-      UIButton *button = (UIButton*)object;
-      
-      [button setTitle:[NSString stringWithFormat:@"%@%@", @"*", [button currentTitle]] forState:UIControlStateNormal];
-    }
-  }
+  [self removeMenuSelection];
+  [self setMenuSelection:(UIButton*)sender];
   [self getTrendData:kLocationHome];
 }
 
 -(IBAction)getWorldTrendDataButton:(id)sender{
+  [self removeMenuSelection];
+  [self setMenuSelection:(UIButton*)sender];
   [self getTrendData:kLocationWorld];
 }
 
 -(void)getTrendData:(NSString*)location {
+  
+  
+  return;
+  
   OAConsumer* consumer = [self.delegate getConsumer];
   OAToken* accessToken = [self.delegate getAccessToken];
   
@@ -233,7 +264,6 @@ static int const kButtonWidth = 100;
   if (self.regionArray.count > 0) {
     //Only fetch the region data once
     [self performSegueWithIdentifier:@"idSegueRegion" sender:self];
-    NSLog(@"We are back");
   } else {
     OAConsumer* consumer = [self.delegate getConsumer];
     OAToken* accessToken = [self.delegate getAccessToken];

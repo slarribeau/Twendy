@@ -3,6 +3,7 @@ iOS App for monitoring Twitter Trends
 
 TODO: short term
 show current 
+sort country regions.
 home should be your nearest geo location.
 persistify selections
 cleaner gui
