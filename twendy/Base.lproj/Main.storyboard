@@ -41,17 +41,19 @@
                                     <outlet property="delegate" destination="vXZ-lx-hvc" id="xJ1-bd-fDI"/>
                                 </connections>
                             </webView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qca-nM-83n">
-                                <rect key="frame" x="35" y="309" width="46" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qca-nM-83n">
+                                <rect key="frame" x="35" y="309" width="55" height="34"/>
                                 <state key="normal" title="Button">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <state key="selected" title="Selected" image="button" backgroundImage="sea-background"/>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YBq-lM-day">
-                                <rect key="frame" x="338" y="270" width="46" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YBq-lM-day">
+                                <rect key="frame" x="35" y="266" width="55" height="34"/>
                                 <state key="normal" title="Button">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <state key="highlighted" title="Highlighted" image="button" backgroundImage="sea-background"/>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -62,7 +64,7 @@
                     </toolbarItems>
                     <navigationItem key="navigationItem" id="MTf-2C-vcG">
                         <barButtonItem key="leftBarButtonItem" title="Item" id="dno-wS-CiI"/>
-                        <barButtonItem key="rightBarButtonItem" title="Next?" id="ap2-BK-wpd">
+                        <barButtonItem key="rightBarButtonItem" title="Item" style="plain" id="ap2-BK-wpd">
                             <connections>
                                 <segue destination="Oeb-mm-FOe" kind="presentation" identifier="idSegueTrendingList" id="CHz-aF-JJj"/>
                             </connections>
@@ -108,16 +110,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rmD-Yc-mGS">
-                                <rect key="frame" x="16" y="72" width="72" height="30"/>
-                                <state key="normal" title="home">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="getHomeTrendDataButton:" destination="rs3-nG-qjp" eventType="touchUpInside" id="E9r-0M-Srh"/>
-                                    <action selector="getTrendDataButton:" destination="rs3-nG-qjp" eventType="touchUpInside" id="edg-X6-r56"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fua-1I-9Wn">
                                 <rect key="frame" x="64" y="72" width="81" height="30"/>
                                 <state key="normal" title="SF">
@@ -171,6 +163,16 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rmD-Yc-mGS">
+                                <rect key="frame" x="318" y="129" width="72" height="30"/>
+                                <state key="normal" title="home">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="getHomeTrendDataButton:" destination="rs3-nG-qjp" eventType="touchUpInside" id="E9r-0M-Srh"/>
+                                    <action selector="getTrendDataButton:" destination="rs3-nG-qjp" eventType="touchUpInside" id="edg-X6-r56"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -315,4 +317,8 @@
             <point key="canvasLocation" x="2067" y="-56"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="button" width="61" height="28"/>
+        <image name="sea-background" width="57" height="51"/>
+    </resources>
 </document>

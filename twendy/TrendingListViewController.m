@@ -63,8 +63,6 @@ static int const kButtonWidth = 100;
   [self createScrollMenu2];
   
   self.regionArray = [[NSMutableArray alloc] init];
-
-
 }
 
 
@@ -73,28 +71,10 @@ static int const kButtonWidth = 100;
   int x = kButtonWidth * offset;
   UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(x, 0, kButtonWidth, 100)];
   [button setTitle:name forState:UIControlStateNormal];
+  [button setTitle:[name uppercaseString] forState:UIControlStateHighlighted];
+
   [button addTarget:self action:action forControlEvents:UIControlEventTouchDown];
   [self.scrollMenu addSubview:button];
-}
-- (void)createScrollMenu
-{
-  int x = 0;
-  [self addScrollButton:x name:@"home" action:@selector(getHomeTrendDataButton:)];
-  x++;
-  [self addScrollButton:x name:@"San Francisco" action:@selector(getSFTrendDataButton:)];
-  x++;
-  [self addScrollButton:x name:@"LA" action:@selector(getLATrendDataButton:)];
-  x++;
-  [self addScrollButton:x name:@"New York" action:@selector(getNYTrendDataButton:)];
-  x++;
-  [self addScrollButton:x name:@"World" action:@selector(getWorldTrendDataButton:)];
-  x++;
-  [self addScrollButton:x name:@"Add" action:@selector(getRegions:)];
-
-
-  x++; //Need an extra increment so that we can scroll to end of last button
-  self.scrollMenu.contentSize = CGSizeMake(kButtonWidth*x, self.scrollMenu.frame.size.height);
-  self.scrollMenu.backgroundColor = [UIColor redColor];
 }
 
 - (void)createScrollMenu2 //TODO -> Leaky!
@@ -106,7 +86,7 @@ static int const kButtonWidth = 100;
   }
 
   int x = 0;
-  [self addScrollButton:x name:@"home" action:@selector(getHomeTrendDataButton:)];
+  [self addScrollButton:x name:@"Home" action:@selector(getHomeTrendDataButton:)];
   x++;
   
   for (Region *region in self.regionArray) {
@@ -256,6 +236,7 @@ static int const kButtonWidth = 100;
 
 -(IBAction)getGenericTrendDataButton:(id)sender {
   NSString *title = [(UIButton *)sender currentTitle];
+  
   for (Region *region in self.regionArray) {
     if ([region.city isEqualToString:title]) {
       [self getTrendData:region.woeid];
@@ -275,6 +256,13 @@ static int const kButtonWidth = 100;
 
 
 -(IBAction)getHomeTrendDataButton:(id)sender{
+  for (id object in [self.scrollMenu subviews])  {
+    if ([object isMemberOfClass:[UIButton class]]) {
+      UIButton *button = (UIButton*)object;
+      
+      [button setTitle:[NSString stringWithFormat:@"%@%@", @"*", [button currentTitle]] forState:UIControlStateNormal];
+    }
+  }
   [self getTrendData:kLocationHome];
 }
 

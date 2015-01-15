@@ -26,11 +26,6 @@
     // Dispose of any resources that can be recreated.
 }
 
--(void)foo: (NSString*)bar
-{
-  self.trendUrl = bar;
-}
-
 /*
 #pragma mark - Navigation
 
