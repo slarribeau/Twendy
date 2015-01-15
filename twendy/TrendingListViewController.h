@@ -25,12 +25,8 @@
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollMenu;
 @property (nonatomic, strong) NSMutableArray *regionArray;
 
--(IBAction)getTrendDataButton:(id)sender;
 -(IBAction)getHomeTrendDataButton:(id)sender;
--(IBAction)getSFTrendDataButton:(id)sender;
 -(IBAction)getWorldTrendDataButton:(id)sender;
--(IBAction)getNYTrendDataButton:(id)sender;
-
 -(IBAction)getRateLimit:(id)sender;
 
 @end

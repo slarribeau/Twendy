@@ -44,45 +44,6 @@ static int const kButtonWidth = 100;
   
 }
 
--(void)addScrollButton:(int)offset name:(NSString *)name action:(SEL)action
-{
-  int x = kButtonWidth * offset;
-  UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(x, 0, kButtonWidth, 100)];
-  [button setTitle:name forState:UIControlStateNormal];
-  [button setTitle:[name uppercaseString] forState:UIControlStateHighlighted];
-
-  [button addTarget:self action:action forControlEvents:UIControlEventTouchDown];
-  [self.scrollMenu addSubview:button];
-}
-
-- (void)createScrollMenu //TODO -> Leaky!
-{
-  //Clean up in case this is being called after first time
-  for (UIView *view in [self.scrollMenu subviews])
-  {
-    [view removeFromSuperview];
-  }
-
-  int x = 0;
-  [self addScrollButton:x name:@"Home" action:@selector(getHomeTrendDataButton:)];
-  x++;
-  
-  for (Region *region in self.regionArray) {
-    if (region.selected == YES) {
-      [self addScrollButton:x name:region.city action:@selector(getGenericTrendDataButton:)];
-      x++;
-    }
-  }
-  [self addScrollButton:x name:@"World" action:@selector(getWorldTrendDataButton:)];
-  x++;
-  [self addScrollButton:x name:@"Add" action:@selector(getRegions:)];
-  
-  
-  x++; //Need an extra increment so that we can scroll to end of last button
-  self.scrollMenu.contentSize = CGSizeMake(kButtonWidth*x, self.scrollMenu.frame.size.height);
-  self.scrollMenu.backgroundColor = [UIColor redColor];
-}
-
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
   
   if (self.recordIDToEdit > 0) {
@@ -131,6 +92,47 @@ static int const kButtonWidth = 100;
   self.recordIDToEdit = -1; //This will be checked later in prepareSeque method
 }
 
+#pragma - mark button management
+-(void)addScrollButton:(int)offset name:(NSString *)name action:(SEL)action
+{
+  int x = kButtonWidth * offset;
+  UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(x, 0, kButtonWidth, 100)];
+  [button setTitle:name forState:UIControlStateNormal];
+  [button setTitle:[name uppercaseString] forState:UIControlStateHighlighted];
+  
+  [button addTarget:self action:action forControlEvents:UIControlEventTouchDown];
+  [self.scrollMenu addSubview:button];
+}
+
+- (void)createScrollMenu //TODO -> Leaky!
+{
+  //Clean up in case this is being called after first time
+  for (UIView *view in [self.scrollMenu subviews])
+  {
+    [view removeFromSuperview];
+  }
+  
+  int x = 0;
+  [self addScrollButton:x name:@"Home" action:@selector(getHomeTrendDataButton:)];
+  x++;
+  
+  for (Region *region in self.regionArray) {
+    if (region.selected == YES) {
+      [self addScrollButton:x name:region.city action:@selector(getGenericTrendDataButton:)];
+      x++;
+    }
+  }
+  [self addScrollButton:x name:@"World" action:@selector(getWorldTrendDataButton:)];
+  x++;
+  [self addScrollButton:x name:@"Add" action:@selector(getRegionsDataButton:)];
+  
+  
+  x++; //Need an extra increment so that we can scroll to end of last button
+  self.scrollMenu.contentSize = CGSizeMake(kButtonWidth*x, self.scrollMenu.frame.size.height);
+  self.scrollMenu.backgroundColor = [UIColor redColor];
+}
+
+
 #pragma mark - request data from twitter api
 -(IBAction)getGenericTrendDataButton:(id)sender {
   NSString *title = [(UIButton *)sender currentTitle];
@@ -143,11 +145,6 @@ static int const kButtonWidth = 100;
   }
 }
 
--(IBAction)getTrendDataButton:(id)sender {
-  [self getTrendData:kLocationHome];
-}
-
-
 -(IBAction)getHomeTrendDataButton:(id)sender{
   for (id object in [self.scrollMenu subviews])  {
     if ([object isMemberOfClass:[UIButton class]]) {
@@ -159,23 +156,9 @@ static int const kButtonWidth = 100;
   [self getTrendData:kLocationHome];
 }
 
--(IBAction)getSFTrendDataButton:(id)sender{
-  [self getTrendData:kLocationSF];
-}
-
 -(IBAction)getWorldTrendDataButton:(id)sender{
   [self getTrendData:kLocationWorld];
 }
-
--(IBAction)getNYTrendDataButton:(id)sender{
-  [self getTrendData:kLocationNY];
-}
-
-
--(IBAction)getLATrendDataButton:(id)sender{
-  [self getTrendData:kLocationLA];
-}
-
 
 -(void)getTrendData:(NSString*)location {
   OAConsumer* consumer = [self.delegate getConsumer];
@@ -244,7 +227,7 @@ static int const kButtonWidth = 100;
     }
 }
 
--(IBAction)getRegions:(id)sender {
+-(IBAction)getRegionsDataButton:(id)sender {
   
   
   if (self.regionArray.count > 0) {
