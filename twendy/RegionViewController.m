@@ -56,11 +56,15 @@
   cell.textLabel.text = [NSString stringWithFormat:@"%@: %@", region.country, region.city];
   
   cell.detailTextLabel.text = @"text";
+  
+
   if (region.selected == YES) {
     cell.accessoryType = UITableViewCellAccessoryCheckmark;
   } else {
     cell.accessoryType = UITableViewCellAccessoryNone;
   }
+  
+
   return cell;
 }
 
@@ -73,14 +77,36 @@
   UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
   Region *region = self.regionArray[indexPath.row];
 
+  NSMutableArray* configRegionArray = [[NSMutableArray alloc]init];
   
+  id tmp = [[[NSUserDefaults standardUserDefaults] valueForKey:@"configRegion"] mutableCopy];
+ 
+  if (tmp == nil) {
+    configRegionArray = [[NSMutableArray alloc]init];
+  }else {
+     configRegionArray = tmp;
+  }
+  
+  NSLog(@"configRegionArray before %@",configRegionArray);
+
   if (cell.accessoryType == UITableViewCellAccessoryCheckmark) {
     cell.accessoryType = UITableViewCellAccessoryNone;
     region.selected = NO;
+    for (int i=configRegionArray.count-1; i>-1; i--) {
+      if ([region.city isEqualToString:configRegionArray[i]]) {
+         [configRegionArray removeObjectAtIndex:i];
+      }
+    }
+
   } else {
     cell.accessoryType = UITableViewCellAccessoryCheckmark;
     region.selected = YES;
+    [configRegionArray addObject:region.city];
+
   }
+  [[NSUserDefaults standardUserDefaults] setValue:configRegionArray forKey:@"configRegion"];
+  NSLog(@"configRegionArray after %@",configRegionArray);
+
   [self.delegate menuHasChanged];
 }
 @end
