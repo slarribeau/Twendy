@@ -12,9 +12,7 @@
 
 NSString *client_id = @"2sVEcZDhudTeScaMShpd3w";
 NSString *secret = @"CVqonV4B8wDxSnwzzXCC2uhak8H22R1gXhbsCSF1400"; //codegerms
-
 NSString *callback = @"http://nowandzen.com/callback";
-
 
 @interface ViewController ()
 
@@ -113,9 +111,18 @@ NSString *callback = @"http://nowandzen.com/callback";
   //codegerms.com
   
   if (accessToken) {
+    
+    NSInteger selectedConfigRegionWoeid = [[[NSUserDefaults standardUserDefaults] objectForKey:@"selectedConfigRegion"] intValue];
+
     // NSURL* userdatarequestu = [NSURL URLWithString:@"https://api.twitter.com/1.1/account/verify_credentials.json"];
     
-    NSURL* userdatarequestu = [NSURL URLWithString:@"https://api.twitter.com/1.1/trends/place.json?id=2487956"];
+    NSURL* userdatarequestu;
+    if (selectedConfigRegionWoeid == 0) {
+      userdatarequestu = [NSURL URLWithString:@"https://api.twitter.com/1.1/trends/place.json?id=2487956"];
+    } else {
+      userdatarequestu = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.twitter.com/1.1/trends/place.json?id=%@", [NSString stringWithFormat:@"%d",selectedConfigRegionWoeid]]];
+
+      }
     
     //2488042 = 'San Jose CA USA'
     //2487956 = 'San Francisco CA USA'
