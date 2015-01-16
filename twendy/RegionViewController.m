@@ -77,10 +77,9 @@
   UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
   Region *region = self.regionArray[indexPath.row];
 
-  NSMutableArray* configRegionArray = [[NSMutableArray alloc]init];
   
   id tmp = [[[NSUserDefaults standardUserDefaults] valueForKey:@"configRegion"] mutableCopy];
- 
+  NSMutableArray* configRegionArray;
   if (tmp == nil) {
     configRegionArray = [[NSMutableArray alloc]init];
   }else {

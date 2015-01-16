@@ -162,12 +162,33 @@ static int const kButtonWidth = 100;
 
   x++;
   
+#if 0
   for (Region *region in self.regionArray) {
     if (region.selected == YES) {
       [self addScrollButton:x name:[NSString stringWithFormat:@"%@%@",kMenuUnSelectionMark,region.city] action:@selector(getGenericTrendDataButton:)];
       x++;
     }
   }
+#endif
+  
+  id tmp = [[[NSUserDefaults standardUserDefaults] valueForKey:@"configRegion"] mutableCopy];
+  NSMutableArray* configRegionArray;
+  if (tmp == nil) {
+    configRegionArray = [[NSMutableArray alloc]init];
+  }else {
+    configRegionArray = tmp;
+    
+    for (NSString *region in configRegionArray) {
+        [self addScrollButton:x name:[NSString stringWithFormat:@"%@%@",kMenuUnSelectionMark,region] action:@selector(getGenericTrendDataButton:)];
+        x++;
+      }
+  }
+
+
+  
+  
+  
+  
   [self addScrollButton:x name:[NSString stringWithFormat:@"%@%@",kMenuUnSelectionMark, @"World"] action:@selector(getWorldTrendDataButton:)];
   x++;
   [self addScrollButton:x name:[NSString stringWithFormat:@"%@%@",kMenuUnSelectionMark, @"Add"] action:@selector(getRegionsDataButton:)];
