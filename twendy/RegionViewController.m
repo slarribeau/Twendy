@@ -78,7 +78,7 @@
   UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
   Region *region = self.regionArray[indexPath.row];
   NSLog(@"region = %d", region.woeid);
-  id tmp = [[[NSUserDefaults standardUserDefaults] valueForKey:@"configRegion"] mutableCopy];
+  id tmp = [[[NSUserDefaults standardUserDefaults] objectForKey:@"configRegion"] mutableCopy];
 
   NSMutableDictionary* configRegionDict;
   if (tmp == nil) {

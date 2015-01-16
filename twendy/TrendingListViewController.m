@@ -105,7 +105,7 @@ static int const kButtonWidth = 100;
 {
 #if 0
 
-  NSString * selectedConfigRegionString = [[NSUserDefaults standardUserDefaults] valueForKey:@"selectedConfigRegion"];
+  NSString * selectedConfigRegionString = [[NSUserDefaults standardUserDefaults] objectForKey:@"selectedConfigRegion"];
 
   NSLog(@"configRegionDict before %@",configRegionDict);
   
@@ -185,7 +185,7 @@ static int const kButtonWidth = 100;
 
   x++;
   
-  id tmp = [[[NSUserDefaults standardUserDefaults] valueForKey:@"configRegion"] mutableCopy];
+  id tmp = [[[NSUserDefaults standardUserDefaults] objectForKey:@"configRegion"] mutableCopy];
   NSMutableDictionary* configRegionDict;
   if (tmp == nil) {
     configRegionDict = [[NSMutableDictionary alloc]init];
@@ -208,7 +208,7 @@ static int const kButtonWidth = 100;
   self.scrollMenu.backgroundColor = [UIColor redColor];
   
 #if 0
-  NSString * selectedConfigRegionString = [[NSUserDefaults standardUserDefaults] valueForKey:@"selectedConfigRegion"];
+  NSString * selectedConfigRegionString = [[NSUserDefaults standardUserDefaults] objectForKey:@"selectedConfigRegion"];
 
   for (id object in [self.scrollMenu subviews])  {
     if ([object isMemberOfClass:[UIButton class]]) {
@@ -359,7 +359,7 @@ static int const kButtonWidth = 100;
   NSLog(@"++++++++++++++++++++++++++++");
   NSLog(@"didReceive Region%@", httpBody);
   
-  id tmp = [[[NSUserDefaults standardUserDefaults] valueForKey:@"configRegion"] mutableCopy];
+  id tmp = [[[NSUserDefaults standardUserDefaults] objectForKey:@"configRegion"] mutableCopy];
   NSMutableDictionary* configRegionDict;
   if (tmp == nil) {
     configRegionDict = [[NSMutableDictionary alloc]init];
@@ -376,7 +376,7 @@ static int const kButtonWidth = 100;
     regionObj.country = [region objectForKey:@"country"];
     regionObj.woeid = [[region objectForKey:@"woeid"] intValue];
 
-    NSInteger woeid = (NSInteger)[configRegionDict objectForKey:regionObj.city];
+    NSInteger woeid = [[configRegionDict objectForKey:regionObj.city] intValue];
 
     if (woeid == regionObj.woeid) {
       regionObj.selected = YES;
