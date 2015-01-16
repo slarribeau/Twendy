@@ -101,6 +101,29 @@ static int const kButtonWidth = 100;
   return NO;
 }
 
+-(void)saveMenuSelection:(UIButton *)button
+{
+#if 0
+
+  NSString * selectedConfigRegionString = [[NSUserDefaults standardUserDefaults] valueForKey:@"selectedConfigRegion"];
+
+  NSLog(@"configRegionDict before %@",configRegionDict);
+  
+  if (cell.accessoryType == UITableViewCellAccessoryCheckmark) {
+    cell.accessoryType = UITableViewCellAccessoryNone;
+    region.selected = NO;
+    [configRegionDict removeObjectForKey:region.city];
+  } else {
+    cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    region.selected = YES;
+    [configRegionDict setObject:region.woeid forKey:region.city];
+  }
+  [[NSUserDefaults standardUserDefaults] setValue:configRegionDict forKey:@"selectedConfigRegion"];
+  [[NSUserDefaults standardUserDefaults] synchronize];
+#endif
+
+}
+
 -(void)setMenuSelection:(UIButton*)button
 {
   //[button setTitle:[NSString stringWithFormat:@"%@%@", kMenuSelectionMark, [button currentTitle]] forState:UIControlStateNormal];
@@ -171,8 +194,11 @@ static int const kButtonWidth = 100;
     
     for(id key in configRegionDict) {
       id value = [configRegionDict objectForKey:key];
-      NSString *woeidString = (NSString *)value;
-      NSInteger woedInt = [woeidString intValue];
+      
+           NSString *woeidString = (NSString *)value;
+            NSInteger woedInt = [woeidString intValue];
+     // +      NSInteger woedInt = (NSInteger *)value;
+
       [self addScrollButton:x name:[NSString stringWithFormat:@"%@%@",kMenuUnSelectionMark,key] action:@selector(getGenericTrendDataButton:) tag:woedInt];
       x++;
     }
