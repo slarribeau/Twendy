@@ -101,27 +101,18 @@ static int const kButtonWidth = 100;
   return NO;
 }
 
--(void)saveMenuSelection:(UIButton *)button
+-(void)saveMenuSelection:(NSInteger)woeid
 {
-#if 0
+  NSInteger  selectedConfigRegionWoeid = [[[NSUserDefaults standardUserDefaults] objectForKey:@"selectedConfigRegion"] intValue];
 
-  NSString * selectedConfigRegionString = [[NSUserDefaults standardUserDefaults] objectForKey:@"selectedConfigRegion"];
-
-  NSLog(@"configRegionDict before %@",configRegionDict);
+  NSLog(@"selectedConfigRegion before %ld",(long)selectedConfigRegionWoeid);
   
-  if (cell.accessoryType == UITableViewCellAccessoryCheckmark) {
-    cell.accessoryType = UITableViewCellAccessoryNone;
-    region.selected = NO;
-    [configRegionDict removeObjectForKey:region.city];
-  } else {
-    cell.accessoryType = UITableViewCellAccessoryCheckmark;
-    region.selected = YES;
-    [configRegionDict setObject:[NSNumber numberWithInteger:region.woeid] forKey:region.city];
-  }
-  [[NSUserDefaults standardUserDefaults] setValue:configRegionDict forKey:@"selectedConfigRegion"];
+  [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInteger:woeid] forKey:@"selectedConfigRegion"];
   [[NSUserDefaults standardUserDefaults] synchronize];
-#endif
-
+  
+  selectedConfigRegionWoeid = [[[NSUserDefaults standardUserDefaults] objectForKey:@"selectedConfigRegion"] intValue];
+  
+  NSLog(@"selectedConfigRegion after %ld",(long)selectedConfigRegionWoeid);
 }
 
 -(void)setMenuSelection:(UIButton*)button
@@ -207,22 +198,54 @@ static int const kButtonWidth = 100;
   self.scrollMenu.contentSize = CGSizeMake(kButtonWidth*x, self.scrollMenu.frame.size.height);
   self.scrollMenu.backgroundColor = [UIColor redColor];
   
-#if 0
-  NSString * selectedConfigRegionString = [[NSUserDefaults standardUserDefaults] objectForKey:@"selectedConfigRegion"];
+  
+  
+  NSInteger  selectedConfigRegionWoeid = [[[NSUserDefaults standardUserDefaults] objectForKey:@"selectedConfigRegion"] intValue];
+  
+  NSLog(@"selectedConfigRegion before %ld",(long)selectedConfigRegionWoeid);
+  
+  [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInteger:woeid] forKey:@"selectedConfigRegion"];
+  [[NSUserDefaults standardUserDefaults] synchronize];
+  
+  selectedConfigRegionWoeid = [[[NSUserDefaults standardUserDefaults] objectForKey:@"selectedConfigRegion"] intValue];
+  
+  NSLog(@"selectedConfigRegion after %ld",(long)selectedConfigRegionWoeid);
 
-  for (id object in [self.scrollMenu subviews])  {
-    if ([object isMemberOfClass:[UIButton class]]) {
-      UIButton *button = (UIButton*)object;
-      NSString *title = [button currentTitle];
-      if ([title isEqualToString:@"Home"]) {
-        if (selectedConfigRegionString == nil) {
-          [self setMenuSelection:button];
-          break;
-        }
-      } else {
-        if ([title isEqualToString:selectedConfigRegionString]) {
-          [self setMenuSelection:button];
-          break;
+  
+  
+  
+  
+  
+  
+  
+#if 1
+  NSString * _selectedConfigRegionString = [[NSUserDefaults standardUserDefaults] objectForKey:@"selectedConfigRegion"];
+
+  NSInteger  selectedConfigRegionWoeid = [[[NSUserDefaults standardUserDefaults] objectForKey:@"selectedConfigRegion"] intValue];
+
+  //If selectedConfigRegionWoeid is set to zero, either user selected home or he has
+  //selected nothing, in either case, set HOME as 'selected'
+  if (selectedConfigRegionWoeid == 0) {
+    for (id object in [self.scrollMenu subviews])  {
+       if ([object isMemberOfClass:[UIButton class]]) {
+           UIButton *button = (UIButton*)object;
+           if (button.tag == 0) { //Home Button
+             [self setMenuSelection:button];
+             [self saveMenuSelection:0];
+             break;
+           }
+         }
+       }
+    } else {
+      //Find the button that matches selectedConfigRegionWoeid and 'select' it
+      for (id object in [self.scrollMenu subviews])  {
+        if ([object isMemberOfClass:[UIButton class]]) {
+          UIButton *button = (UIButton*)object;
+          if (button.tag == selectedConfigRegionWoeid) {
+            [self setMenuSelection:button];
+            [self saveMenuSelection:button.tag];
+            break;
+          }
         }
       }
     }
@@ -236,12 +259,15 @@ static int const kButtonWidth = 100;
   UIButton *button = (UIButton*)sender;
   [self removeMenuSelection];
   [self setMenuSelection:button];
+  [self saveMenuSelection:button.tag];
   [self getTrendData:button.tag];
 }
 
 -(IBAction)getHomeTrendDataButton:(id)sender{
+  UIButton *button = (UIButton*)sender;
   [self removeMenuSelection];
-  [self setMenuSelection:(UIButton*)sender];
+  [self setMenuSelection:button];
+  [self saveMenuSelection:button.tag];
   [self getTrendData:kLocationHome];
 }
 

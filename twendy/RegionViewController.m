@@ -98,7 +98,7 @@
     region.selected = YES;
     [configRegionDict setObject:[NSNumber numberWithInteger:region.woeid] forKey:region.city];
   }
-  [[NSUserDefaults standardUserDefaults] setValue:configRegionDict forKey:@"configRegion"];
+  [[NSUserDefaults standardUserDefaults] setObject:configRegionDict forKey:@"configRegion"];
   [[NSUserDefaults standardUserDefaults] synchronize];
 
   NSLog(@"configRegionDict after %@",configRegionDict);
