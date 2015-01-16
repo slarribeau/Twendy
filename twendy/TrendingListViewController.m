@@ -313,6 +313,14 @@ static int const kButtonWidth = 100;
   NSLog(@"++++++++++++++++++++++++++++");
   NSLog(@"didReceive Region%@", httpBody);
   
+  id tmp = [[[NSUserDefaults standardUserDefaults] valueForKey:@"configRegion"] mutableCopy];
+  NSMutableDictionary* configRegionDict;
+  if (tmp == nil) {
+    configRegionDict = [[NSMutableDictionary alloc]init];
+  }else {
+    configRegionDict = tmp;
+  }
+
   NSArray *twitterRegions = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers       error:nil];
   
   for (NSDictionary *region in twitterRegions) {
@@ -323,6 +331,13 @@ static int const kButtonWidth = 100;
     regionObj.woeid = [NSString stringWithFormat:@"%d",[[region objectForKey:@"woeid"] intValue]];
     regionObj.country = [region objectForKey:@"country"];
     
+    id value = [configRegionDict objectForKey:regionObj.city];
+    NSString *userDefaultWoeid = (NSString *)value;
+    
+    if ([userDefaultWoeid isEqualToString:regionObj.woeid]) {
+      regionObj.selected = YES;
+    }
+
     [self.regionArray addObject:regionObj];
   }
   [self performSegueWithIdentifier:@"idSegueRegion" sender:self];
