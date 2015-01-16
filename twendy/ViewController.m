@@ -10,10 +10,8 @@
 
 #import "ViewController.h"
 
-//NSString *client_id = @"2sVEcZDhudTeScaMShpd3w";
-//NSString *secret = @"CVqonV4B8wDxSnwzzXCC2uhak8H22R1gXhbsCSF1400"; //codegerms
-NSString *client_id = @"3gVLXgS5yRw9L1LwuO49mT2UN";
-NSString *secret = @"cEsD1MLgWwgnkddxjyN41DkYiaaGS8Dt6jITfeb8UrW4L85MfU"; //Scott
+NSString *client_id = @"2sVEcZDhudTeScaMShpd3w";
+NSString *secret = @"CVqonV4B8wDxSnwzzXCC2uhak8H22R1gXhbsCSF1400"; //codegerms
 
 NSString *callback = @"http://nowandzen.com/callback";
 

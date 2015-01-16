@@ -120,16 +120,20 @@ static int const kButtonWidth = 100;
   for (id object in [self.scrollMenu subviews])  {
     if ([object isMemberOfClass:[UIButton class]]) {
       UIButton *button = (UIButton*)object;
+      NSString *title = [button currentTitle];
       
-      NSLog(@"Before remove: [%@]", [button currentTitle]);
+      if ([title hasPrefix:kMenuSelectionMark] && [title length] > 1) {
 
-      [button setTitle: [[button currentTitle] stringByReplacingCharactersInRange:NSMakeRange(0, 1) withString:kMenuUnSelectionMark] forState:UIControlStateNormal];
-
-     NSLog(@"after remove: [%@]", [button currentTitle]);
       
-     // if ([title hasPrefix:kMenuSelectionMark] && [title length] > 1) {
-     //   [button setTitle:[title substringFromIndex:1] forState:UIControlStateNormal];
+         NSLog(@"Before remove: [%@]", [button currentTitle]);
+
+        [button setTitle: [title stringByReplacingCharactersInRange:NSMakeRange(0, 1) withString:kMenuUnSelectionMark] forState:UIControlStateNormal];
+
+        NSLog(@"after remove: [%@]", [button currentTitle]);
+      
+
         break;
+      }
     }
   }
 }
@@ -160,7 +164,7 @@ static int const kButtonWidth = 100;
   
   for (Region *region in self.regionArray) {
     if (region.selected == YES) {
-      [self addScrollButton:x name:region.city action:@selector(getGenericTrendDataButton:)];
+      [self addScrollButton:x name:[NSString stringWithFormat:@"%@%@",kMenuUnSelectionMark,region.city] action:@selector(getGenericTrendDataButton:)];
       x++;
     }
   }
@@ -178,6 +182,9 @@ static int const kButtonWidth = 100;
 #pragma mark - request data from twitter api
 -(IBAction)getGenericTrendDataButton:(id)sender {
   NSString *title = [(UIButton *)sender currentTitle];
+  //Strip first character (used for selection)
+  title = [title substringFromIndex:1];
+  NSLog(@"COmparing %@", title);
   [self removeMenuSelection];
   [self setMenuSelection:(UIButton*)sender];
   
