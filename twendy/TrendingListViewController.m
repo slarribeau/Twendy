@@ -184,6 +184,28 @@ static int const kButtonWidth = 100;
   x++; //Need an extra increment so that we can scroll to end of last button
   self.scrollMenu.contentSize = CGSizeMake(kButtonWidth*x, self.scrollMenu.frame.size.height);
   self.scrollMenu.backgroundColor = [UIColor redColor];
+  
+#if 0
+  NSString * selectedConfigRegionString = [[NSUserDefaults standardUserDefaults] valueForKey:@"selectedConfigRegion"];
+
+  for (id object in [self.scrollMenu subviews])  {
+    if ([object isMemberOfClass:[UIButton class]]) {
+      UIButton *button = (UIButton*)object;
+      NSString *title = [button currentTitle];
+      if ([title isEqualToString:@"Home"]) {
+        if (selectedConfigRegionString == nil) {
+          [self setMenuSelection:button];
+          break;
+        }
+      } else {
+        if ([title isEqualToString:selectedConfigRegionString]) {
+          [self setMenuSelection:button];
+          break;
+        }
+      }
+    }
+  }
+#endif
 }
 
 
