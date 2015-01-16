@@ -1,6 +1,9 @@
 # twendy
 iOS App for monitoring Twitter Trends
 
+BUGS:
+Can you stack region strings?
+
 TODO: short term
 show current 
 sort country regions.
@@ -10,7 +13,7 @@ cleaner gui
 store test run
 redesign with better data encapsulation
 handle case where you no longer follow a region that was previously selected
-
+entertain folks when network is slow and startup takes a long time!!!
 what if rate limit is exceeded?
 
 MED:

@@ -11,7 +11,7 @@
 @interface Region : NSObject 
 @property (nonatomic, strong) NSString *city;
 @property (nonatomic, strong) NSString *country;
-@property (nonatomic, strong) NSString *woeid;
+@property (nonatomic, assign) NSInteger woeid;
 @property (nonatomic, assign) BOOL selected;
 
 @end

@@ -55,7 +55,8 @@
   Region *region = self.regionArray[indexPath.row];
   cell.textLabel.text = [NSString stringWithFormat:@"%@: %@", region.country, region.city];
   
-  cell.detailTextLabel.text = @"text";
+  NSLog(@"table view region = %d", region.woeid);
+  cell.detailTextLabel.text = [NSString stringWithFormat:@"%d", region.woeid];
   
 
   if (region.selected == YES) {
@@ -76,7 +77,7 @@
 {
   UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
   Region *region = self.regionArray[indexPath.row];
-
+  NSLog(@"region = %d", region.woeid);
   id tmp = [[[NSUserDefaults standardUserDefaults] valueForKey:@"configRegion"] mutableCopy];
 
   NSMutableDictionary* configRegionDict;
@@ -95,7 +96,7 @@
   } else {
     cell.accessoryType = UITableViewCellAccessoryCheckmark;
     region.selected = YES;
-    [configRegionDict setObject:region.woeid forKey:region.city];
+    [configRegionDict setObject:[NSNumber numberWithInteger:region.woeid] forKey:region.city];
   }
   [[NSUserDefaults standardUserDefaults] setValue:configRegionDict forKey:@"configRegion"];
   [[NSUserDefaults standardUserDefaults] synchronize];

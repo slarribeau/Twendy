@@ -19,7 +19,7 @@
 
 @implementation TrendingListViewController
 
-static NSString * const kLocationHome = @"2488042";
+static NSInteger  const kLocationHome = 2488042;
 static NSString * const kMenuSelectionMark = @"*";
 static NSString * const kMenuUnSelectionMark = @" ";
 
@@ -116,7 +116,7 @@ static int const kButtonWidth = 100;
   } else {
     cell.accessoryType = UITableViewCellAccessoryCheckmark;
     region.selected = YES;
-    [configRegionDict setObject:region.woeid forKey:region.city];
+    [configRegionDict setObject:[NSNumber numberWithInteger:region.woeid] forKey:region.city];
   }
   [[NSUserDefaults standardUserDefaults] setValue:configRegionDict forKey:@"selectedConfigRegion"];
   [[NSUserDefaults standardUserDefaults] synchronize];
@@ -181,7 +181,7 @@ static int const kButtonWidth = 100;
   
   int x = 0;
   
-  [self addScrollButton:x name:[NSString stringWithFormat:@"%@%@",kMenuSelectionMark,@"Home" ] action:@selector(getHomeTrendDataButton:) tag:0];
+  [self addScrollButton:x name:[NSString stringWithFormat:@"%@%@",kMenuSelectionMark,@"Home" ] action:@selector(getHomeTrendDataButton:) tag:-1];
 
   x++;
   
@@ -193,11 +193,7 @@ static int const kButtonWidth = 100;
     configRegionDict = tmp;
     
     for(id key in configRegionDict) {
-      id value = [configRegionDict objectForKey:key];
-      
-           NSString *woeidString = (NSString *)value;
-            NSInteger woedInt = [woeidString intValue];
-     // +      NSInteger woedInt = (NSInteger *)value;
+      NSInteger woedInt = [[configRegionDict objectForKey:key] intValue];
 
       [self addScrollButton:x name:[NSString stringWithFormat:@"%@%@",kMenuUnSelectionMark,key] action:@selector(getGenericTrendDataButton:) tag:woedInt];
       x++;
@@ -240,7 +236,7 @@ static int const kButtonWidth = 100;
   UIButton *button = (UIButton*)sender;
   [self removeMenuSelection];
   [self setMenuSelection:button];
-  [self getTrendData:[NSString stringWithFormat:@"%d", button.tag]];
+  [self getTrendData:button.tag];
 }
 
 -(IBAction)getHomeTrendDataButton:(id)sender{
@@ -250,12 +246,14 @@ static int const kButtonWidth = 100;
 }
 
 
--(void)getTrendData:(NSString*)location {
+-(void)getTrendData:(NSInteger)location {
   OAConsumer* consumer = [self.delegate getConsumer];
   OAToken* accessToken = [self.delegate getAccessToken];
   
+  NSString *debug = [NSString stringWithFormat:@"https://api.twitter.com/1.1/trends/place.json?id=%@", [NSString stringWithFormat:@"%d",location]];
+  
   if (accessToken) {
-    NSURL* userdatarequestu = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.twitter.com/1.1/trends/place.json?id=%@", location]];
+    NSURL* userdatarequestu = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.twitter.com/1.1/trends/place.json?id=%@", [NSString stringWithFormat:@"%d",location]]];
     
     //2488042 = 'San Jose CA USA'
     //2487956 = 'San Francisco CA USA'
@@ -375,14 +373,12 @@ static int const kButtonWidth = 100;
     Region *regionObj = [Region alloc];
     
     regionObj.city = [region objectForKey:@"name"];
-    
-    regionObj.woeid = [NSString stringWithFormat:@"%d",[[region objectForKey:@"woeid"] intValue]];
     regionObj.country = [region objectForKey:@"country"];
-    
-    id value = [configRegionDict objectForKey:regionObj.city];
-    NSString *userDefaultWoeid = (NSString *)value;
-    
-    if ([userDefaultWoeid isEqualToString:regionObj.woeid]) {
+    regionObj.woeid = [[region objectForKey:@"woeid"] intValue];
+
+    NSInteger woeid = (NSInteger)[configRegionDict objectForKey:regionObj.city];
+
+    if (woeid == regionObj.woeid) {
       regionObj.selected = YES;
     }
 
@@ -394,12 +390,12 @@ static int const kButtonWidth = 100;
 - (void)didReceiveRateLimit:(OAServiceTicket*)ticket data:(NSData*)data {
   NSString* httpBody = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
   NSLog(@"++++++++++++++++++++++++++++");
-  NSLog(@"didReceive %@", httpBody);
+  NSLog(@"didReceive rate limit %@", httpBody);
 }
 
 - (void)didReceiveuserdata:(OAServiceTicket*)ticket data:(NSData*)data {
   NSString* httpBody = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-  NSLog(@"didReceive %@", httpBody);
+  NSLog(@"didReceive user data %@", httpBody);
   
   NSArray *twitterTrends   = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers       error:nil];
   NSArray *trends  = [[twitterTrends objectAtIndex:0] objectForKey:@"trends"];
