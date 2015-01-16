@@ -22,6 +22,8 @@
 static NSString * const kLocationHome = @"2488042";
 static NSString * const kLocationWorld = @"1";
 static NSString * const kMenuSelectionMark = @"*";
+static NSString * const kMenuUnSelectionMark = @" ";
+
 static int const kButtonWidth = 100;
 
 - (void)viewDidLoad {
@@ -102,7 +104,14 @@ static int const kButtonWidth = 100;
 
 -(void)setMenuSelection:(UIButton*)button
 {
-  [button setTitle:[NSString stringWithFormat:@"%@%@", kMenuSelectionMark, [button currentTitle]] forState:UIControlStateNormal];
+  //[button setTitle:[NSString stringWithFormat:@"%@%@", kMenuSelectionMark, [button currentTitle]] forState:UIControlStateNormal];
+  NSLog(@"Before set: [%@]", [button currentTitle]);
+
+  [button setTitle: [[button currentTitle] stringByReplacingCharactersInRange:NSMakeRange(0, 1) withString:kMenuSelectionMark] forState:UIControlStateNormal];
+
+  NSLog(@"After set: [%@]", [button currentTitle]);
+
+  //[button setTitle:[NSString stringWithFormat:@"%@%@", kMenuSelectionMark, [button currentTitle]] forState:UIControlStateNormal];
 
 }
 
@@ -111,15 +120,20 @@ static int const kButtonWidth = 100;
   for (id object in [self.scrollMenu subviews])  {
     if ([object isMemberOfClass:[UIButton class]]) {
       UIButton *button = (UIButton*)object;
-      NSString *title = [button currentTitle];
       
-      if ([title hasPrefix:kMenuSelectionMark] && [title length] > 1) {
-        [button setTitle:[title substringFromIndex:1] forState:UIControlStateNormal];
+      NSLog(@"Before remove: [%@]", [button currentTitle]);
+
+      [button setTitle: [[button currentTitle] stringByReplacingCharactersInRange:NSMakeRange(0, 1) withString:kMenuUnSelectionMark] forState:UIControlStateNormal];
+
+     NSLog(@"after remove: [%@]", [button currentTitle]);
+      
+     // if ([title hasPrefix:kMenuSelectionMark] && [title length] > 1) {
+     //   [button setTitle:[title substringFromIndex:1] forState:UIControlStateNormal];
         break;
-      }
     }
   }
 }
+
 -(void)addScrollButton:(int)offset name:(NSString *)name action:(SEL)action
 {
   int x = kButtonWidth * offset;
@@ -150,9 +164,9 @@ static int const kButtonWidth = 100;
       x++;
     }
   }
-  [self addScrollButton:x name:@"World" action:@selector(getWorldTrendDataButton:)];
+  [self addScrollButton:x name:[NSString stringWithFormat:@"%@%@",kMenuUnSelectionMark, @"World"] action:@selector(getWorldTrendDataButton:)];
   x++;
-  [self addScrollButton:x name:@"Add" action:@selector(getRegionsDataButton:)];
+  [self addScrollButton:x name:[NSString stringWithFormat:@"%@%@",kMenuUnSelectionMark, @"Add"] action:@selector(getRegionsDataButton:)];
   
   
   x++; //Need an extra increment so that we can scroll to end of last button
