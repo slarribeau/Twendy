@@ -117,15 +117,12 @@ static int const kButtonWidth = 100;
 
 -(void)setMenuSelection:(UIButton*)button
 {
-  //[button setTitle:[NSString stringWithFormat:@"%@%@", kMenuSelectionMark, [button currentTitle]] forState:UIControlStateNormal];
   NSLog(@"Before set: [%@]", [button currentTitle]);
 
   [button setTitle: [[button currentTitle] stringByReplacingCharactersInRange:NSMakeRange(0, 1) withString:kMenuSelectionMark] forState:UIControlStateNormal];
 
   NSLog(@"After set: [%@]", [button currentTitle]);
-
-  //[button setTitle:[NSString stringWithFormat:@"%@%@", kMenuSelectionMark, [button currentTitle]] forState:UIControlStateNormal];
-
+  [self saveMenuSelection:button.tag];
 }
 
 -(void)removeMenuSelection
@@ -172,7 +169,7 @@ static int const kButtonWidth = 100;
   
   int x = 0;
   
-  [self addScrollButton:x name:[NSString stringWithFormat:@"%@%@",kMenuSelectionMark,@"Home" ] action:@selector(getHomeTrendDataButton:) tag:-1];
+  [self addScrollButton:x name:[NSString stringWithFormat:@"%@%@",kMenuUnSelectionMark,@"Home" ] action:@selector(getHomeTrendDataButton:) tag:0]; //Tag for home is zero.
 
   x++;
   
@@ -198,59 +195,21 @@ static int const kButtonWidth = 100;
   self.scrollMenu.contentSize = CGSizeMake(kButtonWidth*x, self.scrollMenu.frame.size.height);
   self.scrollMenu.backgroundColor = [UIColor redColor];
   
-  
-  
-  NSInteger  selectedConfigRegionWoeid = [[[NSUserDefaults standardUserDefaults] objectForKey:@"selectedConfigRegion"] intValue];
-  
-  NSLog(@"selectedConfigRegion before %ld",(long)selectedConfigRegionWoeid);
-  
-  [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInteger:woeid] forKey:@"selectedConfigRegion"];
-  [[NSUserDefaults standardUserDefaults] synchronize];
-  
-  selectedConfigRegionWoeid = [[[NSUserDefaults standardUserDefaults] objectForKey:@"selectedConfigRegion"] intValue];
-  
-  NSLog(@"selectedConfigRegion after %ld",(long)selectedConfigRegionWoeid);
-
-  
-  
-  
-  
-  
-  
-  
-#if 1
-  NSString * _selectedConfigRegionString = [[NSUserDefaults standardUserDefaults] objectForKey:@"selectedConfigRegion"];
-
-  NSInteger  selectedConfigRegionWoeid = [[[NSUserDefaults standardUserDefaults] objectForKey:@"selectedConfigRegion"] intValue];
+  NSInteger selectedConfigRegionWoeid = [[[NSUserDefaults standardUserDefaults] objectForKey:@"selectedConfigRegion"] intValue];
 
   //If selectedConfigRegionWoeid is set to zero, either user selected home or he has
   //selected nothing, in either case, set HOME as 'selected'
-  if (selectedConfigRegionWoeid == 0) {
-    for (id object in [self.scrollMenu subviews])  {
-       if ([object isMemberOfClass:[UIButton class]]) {
-           UIButton *button = (UIButton*)object;
-           if (button.tag == 0) { //Home Button
-             [self setMenuSelection:button];
-             [self saveMenuSelection:0];
-             break;
-           }
-         }
-       }
-    } else {
-      //Find the button that matches selectedConfigRegionWoeid and 'select' it
-      for (id object in [self.scrollMenu subviews])  {
-        if ([object isMemberOfClass:[UIButton class]]) {
-          UIButton *button = (UIButton*)object;
-          if (button.tag == selectedConfigRegionWoeid) {
-            [self setMenuSelection:button];
-            [self saveMenuSelection:button.tag];
-            break;
-          }
-        }
+  //Find the button that matches selectedConfigRegionWoeid and 'select' it
+  for (id object in [self.scrollMenu subviews])  {
+    if ([object isMemberOfClass:[UIButton class]]) {
+      UIButton *button = (UIButton*)object;
+      if (button.tag == selectedConfigRegionWoeid) {
+        [self setMenuSelection:button];
+        //[self saveMenuSelection:button.tag];
+        break;
       }
     }
   }
-#endif
 }
 
 
@@ -259,7 +218,7 @@ static int const kButtonWidth = 100;
   UIButton *button = (UIButton*)sender;
   [self removeMenuSelection];
   [self setMenuSelection:button];
-  [self saveMenuSelection:button.tag];
+  //[self saveMenuSelection:button.tag];
   [self getTrendData:button.tag];
 }
 
@@ -267,7 +226,7 @@ static int const kButtonWidth = 100;
   UIButton *button = (UIButton*)sender;
   [self removeMenuSelection];
   [self setMenuSelection:button];
-  [self saveMenuSelection:button.tag];
+  //[self saveMenuSelection:button.tag];
   [self getTrendData:kLocationHome];
 }
 
