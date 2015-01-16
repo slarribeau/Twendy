@@ -188,7 +188,7 @@ static int const kButtonWidth = 100;
     }
   }
 
-  [self addScrollButton:x name:[NSString stringWithFormat:@"%@%@",kMenuUnSelectionMark, @"Add"] action:@selector(getRegionsDataButton:) tag:0];
+  [self addScrollButton:x name:[NSString stringWithFormat:@"%@%@",kMenuUnSelectionMark, @"Add"] action:@selector(getRegionsDataButton:) tag:-1]; 
   
   
   x++; //Need an extra increment so that we can scroll to end of last button
@@ -200,15 +200,24 @@ static int const kButtonWidth = 100;
   //If selectedConfigRegionWoeid is set to zero, either user selected home or he has
   //selected nothing, in either case, set HOME as 'selected'
   //Find the button that matches selectedConfigRegionWoeid and 'select' it
+  BOOL foundMatch = NO;
+  UIButton *homeButton;
   for (id object in [self.scrollMenu subviews])  {
     if ([object isMemberOfClass:[UIButton class]]) {
       UIButton *button = (UIButton*)object;
+      if (button.tag == 0) {
+        homeButton = button;
+      }
       if (button.tag == selectedConfigRegionWoeid) {
         [self setMenuSelection:button];
-        //[self saveMenuSelection:button.tag];
+        foundMatch = YES;
         break;
       }
     }
+  }
+  if (foundMatch == NO) {
+    //region in menu may have been unselected, set region to home
+    [self getHomeTrendDataButton:homeButton];
   }
 }
 
@@ -218,7 +227,6 @@ static int const kButtonWidth = 100;
   UIButton *button = (UIButton*)sender;
   [self removeMenuSelection];
   [self setMenuSelection:button];
-  //[self saveMenuSelection:button.tag];
   [self getTrendData:button.tag];
 }
 
@@ -226,7 +234,6 @@ static int const kButtonWidth = 100;
   UIButton *button = (UIButton*)sender;
   [self removeMenuSelection];
   [self setMenuSelection:button];
-  //[self saveMenuSelection:button.tag];
   [self getTrendData:kLocationHome];
 }
 
