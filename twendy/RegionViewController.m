@@ -77,34 +77,30 @@
   UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
   Region *region = self.regionArray[indexPath.row];
 
-  
   id tmp = [[[NSUserDefaults standardUserDefaults] valueForKey:@"configRegion"] mutableCopy];
-  NSMutableArray* configRegionArray;
+
+  NSMutableDictionary* configRegionDict;
   if (tmp == nil) {
-    configRegionArray = [[NSMutableArray alloc]init];
+    configRegionDict = [[NSMutableDictionary alloc]init];
   }else {
-     configRegionArray = tmp;
+     configRegionDict = tmp;
   }
-  
-  NSLog(@"configRegionArray before %@",configRegionArray);
+
+  NSLog(@"configRegionDict before %@",configRegionDict);
 
   if (cell.accessoryType == UITableViewCellAccessoryCheckmark) {
     cell.accessoryType = UITableViewCellAccessoryNone;
     region.selected = NO;
-    for (int i=configRegionArray.count-1; i>-1; i--) {
-      if ([region.city isEqualToString:configRegionArray[i]]) {
-         [configRegionArray removeObjectAtIndex:i];
-      }
-    }
-
+    [configRegionDict removeObjectForKey:region.city];
   } else {
     cell.accessoryType = UITableViewCellAccessoryCheckmark;
     region.selected = YES;
-    [configRegionArray addObject:region.city];
-
+    [configRegionDict setObject:region.woeid forKey:region.city];
   }
-  [[NSUserDefaults standardUserDefaults] setValue:configRegionArray forKey:@"configRegion"];
-  NSLog(@"configRegionArray after %@",configRegionArray);
+  [[NSUserDefaults standardUserDefaults] setValue:configRegionDict forKey:@"configRegion"];
+  [[NSUserDefaults standardUserDefaults] synchronize];
+
+  NSLog(@"configRegionDict after %@",configRegionDict);
 
   [self.delegate menuHasChanged];
 }

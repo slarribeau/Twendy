@@ -20,7 +20,6 @@
 @implementation TrendingListViewController
 
 static NSString * const kLocationHome = @"2488042";
-static NSString * const kLocationWorld = @"1";
 static NSString * const kMenuSelectionMark = @"*";
 static NSString * const kMenuUnSelectionMark = @" ";
 
@@ -138,7 +137,7 @@ static int const kButtonWidth = 100;
   }
 }
 
--(void)addScrollButton:(int)offset name:(NSString *)name action:(SEL)action
+-(void)addScrollButton:(int)offset name:(NSString *)name action:(SEL)action tag:(NSInteger)tag
 {
   int x = kButtonWidth * offset;
   UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(x, 0, kButtonWidth, 100)];
@@ -146,6 +145,7 @@ static int const kButtonWidth = 100;
   
   [button addTarget:self action:action forControlEvents:UIControlEventTouchDown];
   [self.scrollMenu addSubview:button];
+  button.tag = tag;
 }
 
 - (void)createScrollMenu //TODO -> Leaky!
@@ -158,40 +158,27 @@ static int const kButtonWidth = 100;
   
   int x = 0;
   
-  [self addScrollButton:x name:[NSString stringWithFormat:@"%@%@",kMenuSelectionMark,@"Home" ] action:@selector(getHomeTrendDataButton:)];
+  [self addScrollButton:x name:[NSString stringWithFormat:@"%@%@",kMenuSelectionMark,@"Home" ] action:@selector(getHomeTrendDataButton:) tag:0];
 
   x++;
   
-#if 0
-  for (Region *region in self.regionArray) {
-    if (region.selected == YES) {
-      [self addScrollButton:x name:[NSString stringWithFormat:@"%@%@",kMenuUnSelectionMark,region.city] action:@selector(getGenericTrendDataButton:)];
+  id tmp = [[[NSUserDefaults standardUserDefaults] valueForKey:@"configRegion"] mutableCopy];
+  NSMutableDictionary* configRegionDict;
+  if (tmp == nil) {
+    configRegionDict = [[NSMutableDictionary alloc]init];
+  }else {
+    configRegionDict = tmp;
+    
+    for(id key in configRegionDict) {
+      id value = [configRegionDict objectForKey:key];
+      NSString *woeidString = (NSString *)value;
+      NSInteger woedInt = [woeidString intValue];
+      [self addScrollButton:x name:[NSString stringWithFormat:@"%@%@",kMenuUnSelectionMark,key] action:@selector(getGenericTrendDataButton:) tag:woedInt];
       x++;
     }
   }
-#endif
-  
-  id tmp = [[[NSUserDefaults standardUserDefaults] valueForKey:@"configRegion"] mutableCopy];
-  NSMutableArray* configRegionArray;
-  if (tmp == nil) {
-    configRegionArray = [[NSMutableArray alloc]init];
-  }else {
-    configRegionArray = tmp;
-    
-    for (NSString *region in configRegionArray) {
-        [self addScrollButton:x name:[NSString stringWithFormat:@"%@%@",kMenuUnSelectionMark,region] action:@selector(getGenericTrendDataButton:)];
-        x++;
-      }
-  }
 
-
-  
-  
-  
-  
-  [self addScrollButton:x name:[NSString stringWithFormat:@"%@%@",kMenuUnSelectionMark, @"World"] action:@selector(getWorldTrendDataButton:)];
-  x++;
-  [self addScrollButton:x name:[NSString stringWithFormat:@"%@%@",kMenuUnSelectionMark, @"Add"] action:@selector(getRegionsDataButton:)];
+  [self addScrollButton:x name:[NSString stringWithFormat:@"%@%@",kMenuUnSelectionMark, @"Add"] action:@selector(getRegionsDataButton:) tag:0];
   
   
   x++; //Need an extra increment so that we can scroll to end of last button
@@ -202,19 +189,10 @@ static int const kButtonWidth = 100;
 
 #pragma mark - request data from twitter api
 -(IBAction)getGenericTrendDataButton:(id)sender {
-  NSString *title = [(UIButton *)sender currentTitle];
-  //Strip first character (used for selection)
-  title = [title substringFromIndex:1];
-  NSLog(@"COmparing %@", title);
+  UIButton *button = (UIButton*)sender;
   [self removeMenuSelection];
-  [self setMenuSelection:(UIButton*)sender];
-  
-  for (Region *region in self.regionArray) {
-    if ([region.city isEqualToString:title]) {
-      [self getTrendData:region.woeid];
-      break;
-    }
-  }
+  [self setMenuSelection:button];
+  [self getTrendData:[NSString stringWithFormat:@"%d", button.tag]];
 }
 
 -(IBAction)getHomeTrendDataButton:(id)sender{
@@ -223,17 +201,8 @@ static int const kButtonWidth = 100;
   [self getTrendData:kLocationHome];
 }
 
--(IBAction)getWorldTrendDataButton:(id)sender{
-  [self removeMenuSelection];
-  [self setMenuSelection:(UIButton*)sender];
-  [self getTrendData:kLocationWorld];
-}
 
 -(void)getTrendData:(NSString*)location {
-  
-  
-  return;
-  
   OAConsumer* consumer = [self.delegate getConsumer];
   OAToken* accessToken = [self.delegate getAccessToken];
   
