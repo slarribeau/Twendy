@@ -11,10 +11,13 @@
 #import "RegionViewController.h"
 #import "Region.h"
 
+
 @interface TrendingListViewController ()
 @property (nonatomic, strong) NSArray *arrPeopleInfo;
 @property (nonatomic, strong) NSArray *trendUrlInfo;
 @property (nonatomic) NSInteger recordIDToEdit;
+@property (nonatomic, strong) CLLocationManager *locationManager;
+
 @end
 
 @implementation TrendingListViewController
@@ -188,7 +191,7 @@ static int const kButtonWidth = 100;
     }
   }
 
-  [self addScrollButton:x name:[NSString stringWithFormat:@"%@%@",kMenuUnSelectionMark, @"Add"] action:@selector(getRegionsDataButton:) tag:-1]; 
+  [self addScrollButton:x name:[NSString stringWithFormat:@"%@%@",kMenuUnSelectionMark, @"Add"] action:@selector(getRegionsDataButton:) tag:-1];
   
   
   x++; //Need an extra increment so that we can scroll to end of last button
@@ -345,6 +348,64 @@ static int const kButtonWidth = 100;
   }
 }
 
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
+{
+  NSLog(@"%@", [locations lastObject]);
+  CLLocation *foo = [locations lastObject];
+  NSLog(@"lat = %f", foo.coordinate.latitude);
+  NSLog(@"long = %f", foo.coordinate.longitude);
+
+}
+
+-(IBAction)getClosestRegionDataButton:(id)sender {
+  
+  CLLocationManager *locationManager;
+  // ** Don't forget to add NSLocationWhenInUseUsageDescription in MyApp-Info.plist and give it a string
+  
+  self.locationManager = [[CLLocationManager alloc] init];
+  self.locationManager.delegate = self;
+  // Check for iOS 8. Without this guard the code will crash with "unknown selector" on iOS 7.
+  if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
+    [self.locationManager requestWhenInUseAuthorization];
+  }
+  [self.locationManager startUpdatingLocation];
+
+
+  float latitude = locationManager.location.coordinate.latitude;
+  float longitude = locationManager.location.coordinate.longitude;
+  NSLog(@"long %f lat %f", longitude, latitude);
+
+    OAConsumer* consumer = [self.delegate getConsumer];
+    OAToken* accessToken = [self.delegate getAccessToken];
+    
+    if (accessToken) {
+      NSURL* userdatarequestu = [NSURL URLWithString:@"https://api.twitter.com/1.1/trends/closest.json"];
+      
+      OAMutableURLRequest* requestTokenRequest;
+      requestTokenRequest = [[OAMutableURLRequest alloc]
+                             initWithURL:userdatarequestu
+                             
+                             consumer:consumer
+                             
+                             token:accessToken
+                             
+                             realm:nil
+                             
+                             signatureProvider:nil];
+      
+      [requestTokenRequest setHTTPMethod:@"GET"];
+      
+      OADataFetcher* dataFetcher = [[OADataFetcher alloc] init];
+      
+      [dataFetcher fetchDataWithRequest:requestTokenRequest
+                               delegate:self
+                      didFinishSelector:@selector(didReceiveClosestRegion:data:)
+                        didFailSelector:@selector(didFailOAuth:error:)];    } else {
+        NSLog(@"ERROR!!");
+      }
+}
+
+
 #pragma mark - handle data returned from twitter api
 - (void)didReceiveRegion:(OAServiceTicket*)ticket data:(NSData*)data {
   NSString* httpBody = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -383,6 +444,12 @@ static int const kButtonWidth = 100;
   NSString* httpBody = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
   NSLog(@"++++++++++++++++++++++++++++");
   NSLog(@"didReceive rate limit %@", httpBody);
+}
+
+- (void)didReceiveClosestRegion:(OAServiceTicket*)ticket data:(NSData*)data {
+  NSString* httpBody = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+  NSLog(@"++++++++++++++++++++++++++++");
+  NSLog(@"didReceiveClosestRegion %@", httpBody);
 }
 
 - (void)didReceiveuserdata:(OAServiceTicket*)ticket data:(NSData*)data {

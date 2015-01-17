@@ -163,20 +163,21 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rmD-Yc-mGS">
-                                <rect key="frame" x="318" y="129" width="72" height="30"/>
-                                <state key="normal" title="home">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="getHomeTrendDataButton:" destination="rs3-nG-qjp" eventType="touchUpInside" id="E9r-0M-Srh"/>
-                                    <action selector="getTrendDataButton:" destination="rs3-nG-qjp" eventType="touchUpInside" id="edg-X6-r56"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="TFD-zh-PMq"/>
+                    <navigationItem key="navigationItem" id="TFD-zh-PMq">
+                        <barButtonItem key="leftBarButtonItem" title="Get Closest" id="611-zP-EEw">
+                            <connections>
+                                <action selector="getClosestRegionDataButton:" destination="rs3-nG-qjp" id="5mu-06-nSM"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Get Rate Limit" id="lmB-mu-g1h">
+                            <connections>
+                                <action selector="getRateLimit:" destination="rs3-nG-qjp" id="ma7-Xo-F34"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="scrollMenu" destination="pEy-wM-SsP" id="hds-3m-KVL"/>
                         <outlet property="tblPeople" destination="c7n-fL-aiT" id="KDE-33-RNj"/>

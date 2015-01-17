@@ -5,8 +5,6 @@ BUGS:
 Can you stack region strings?
 
 TODO: short term
-show current 
-sort country regions.
 home should be your nearest geo location.
 persistify selections
 cleaner gui
@@ -33,3 +31,7 @@ advertising
 prevent user from having to login over and over
 twitter logout
 
+
+DONE:
+show current 
+sort country regions.

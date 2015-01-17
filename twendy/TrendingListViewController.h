@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "OAuthConsumer.h"
 #import "RegionViewController.h"
+#import <CoreLocation/CoreLocation.h>
+@import CoreLocation;
 
 @protocol TrendingListViewControllerDelegate
 -(NSArray*)getTrendArray;
@@ -19,7 +21,7 @@
 
 @end
 
-@interface TrendingListViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, RegionViewControllerDelegate>
+@interface TrendingListViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, RegionViewControllerDelegate, CLLocationManagerDelegate>
 @property (nonatomic, weak) id <TrendingListViewControllerDelegate> delegate;
 @property (weak, nonatomic) IBOutlet UITableView *tblPeople; //FIX ME rename
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollMenu;
