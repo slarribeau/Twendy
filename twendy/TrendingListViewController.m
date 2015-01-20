@@ -13,10 +13,13 @@
 
 
 @interface TrendingListViewController ()
+//This is an extension not a category.
 @property (nonatomic, strong) NSArray *arrPeopleInfo;
 @property (nonatomic, strong) NSArray *trendUrlInfo;
 @property (nonatomic) NSInteger recordIDToEdit;
 @property (nonatomic, strong) CLLocationManager *locationManager;
+@property (nonatomic, assign) float longtitude;
+@property (nonatomic, assign) float lattitude;
 
 @end
 
@@ -28,9 +31,12 @@ static NSString * const kMenuUnSelectionMark = @" ";
 
 static int const kButtonWidth = 100;
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
   
+  self.longtitude = 0;
+  self.lattitude = 0;
   self.tblPeople.delegate = self;
   self.tblPeople.dataSource = self;
 
@@ -56,6 +62,35 @@ static int const kButtonWidth = 100;
     RegionViewController *regionViewController = [segue destinationViewController];
     regionViewController.delegate = self;
   }
+}
+
+-(float)getCurrentLongitude
+{
+  if (self.longtitude == 0) {
+    return -122.0419; //Default to cupertiono, CA, USA
+
+  } else {
+    return self.longtitude;
+  }
+}
+-(float)getCurrentLatitude
+{
+  if (self.lattitude == 0) {
+    return 37.3175; //Default to cupertiono, CA, USA
+  } else {
+    return self.lattitude;
+  }
+}
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
+{
+  NSLog(@"%@", [locations lastObject]);
+  CLLocation *myLocation = [locations lastObject];
+  NSLog(@"lat = %f", myLocation.coordinate.latitude);
+  NSLog(@"long = %f", myLocation.coordinate.longitude);
+  
+  self.longtitude = myLocation.coordinate.longitude;
+  self.lattitude = myLocation.coordinate.latitude;
 }
 
 #pragma mark - RegionViewControllerDelegate
@@ -348,18 +383,9 @@ static int const kButtonWidth = 100;
   }
 }
 
-- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
-{
-  NSLog(@"%@", [locations lastObject]);
-  CLLocation *foo = [locations lastObject];
-  NSLog(@"lat = %f", foo.coordinate.latitude);
-  NSLog(@"long = %f", foo.coordinate.longitude);
-
-}
 
 -(IBAction)getClosestRegionDataButton:(id)sender {
   
-  CLLocationManager *locationManager;
   // ** Don't forget to add NSLocationWhenInUseUsageDescription in MyApp-Info.plist and give it a string
   
   self.locationManager = [[CLLocationManager alloc] init];
@@ -371,15 +397,15 @@ static int const kButtonWidth = 100;
   [self.locationManager startUpdatingLocation];
 
 
-  float latitude = locationManager.location.coordinate.latitude;
-  float longitude = locationManager.location.coordinate.longitude;
+  float latitude = self.locationManager.location.coordinate.latitude;
+  float longitude = self.locationManager.location.coordinate.longitude;
   NSLog(@"long %f lat %f", longitude, latitude);
 
     OAConsumer* consumer = [self.delegate getConsumer];
     OAToken* accessToken = [self.delegate getAccessToken];
     
     if (accessToken) {
-      NSURL* userdatarequestu = [NSURL URLWithString:@"https://api.twitter.com/1.1/trends/closest.json"];
+      NSURL* userdatarequestu = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.twitter.com/1.1/trends/closest.json?lat=%f&long=%f", [self getCurrentLatitude], [self getCurrentLongitude]]];
       
       OAMutableURLRequest* requestTokenRequest;
       requestTokenRequest = [[OAMutableURLRequest alloc]
