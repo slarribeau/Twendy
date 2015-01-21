@@ -10,7 +10,7 @@
 		D660ED2E1A6704C9003A3A95 /* Region.m in Sources */ = {isa = PBXBuildFile; fileRef = D660ED2D1A6704C9003A3A95 /* Region.m */; };
 		D6C4B3211A606247006F40DF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D6C4B3201A606247006F40DF /* main.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		D6C4B3241A606247006F40DF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D6C4B3231A606247006F40DF /* AppDelegate.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		D6C4B3271A606247006F40DF /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6C4B3261A606247006F40DF /* ViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		D6C4B3271A606247006F40DF /* AuthenticationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6C4B3261A606247006F40DF /* AuthenticationViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		D6C4B32A1A606247006F40DF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D6C4B3281A606247006F40DF /* Main.storyboard */; };
 		D6C4B32C1A606247006F40DF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D6C4B32B1A606247006F40DF /* Images.xcassets */; };
 		D6C4B32F1A606247006F40DF /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = D6C4B32D1A606247006F40DF /* LaunchScreen.xib */; };
@@ -63,8 +63,8 @@
 		D6C4B3201A606247006F40DF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D6C4B3221A606247006F40DF /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		D6C4B3231A606247006F40DF /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		D6C4B3251A606247006F40DF /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		D6C4B3261A606247006F40DF /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		D6C4B3251A606247006F40DF /* AuthenticationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AuthenticationViewController.h; sourceTree = "<group>"; };
+		D6C4B3261A606247006F40DF /* AuthenticationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AuthenticationViewController.m; sourceTree = "<group>"; };
 		D6C4B3291A606247006F40DF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D6C4B32B1A606247006F40DF /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		D6C4B32E1A606247006F40DF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -182,8 +182,8 @@
 				D6C4B3951A609D7B006F40DF /* TrendingListViewController.m */,
 				D6C4B3971A60C004006F40DF /* TrendViewController.h */,
 				D6C4B3981A60C004006F40DF /* TrendViewController.m */,
-				D6C4B3251A606247006F40DF /* ViewController.h */,
-				D6C4B3261A606247006F40DF /* ViewController.m */,
+				D6C4B3251A606247006F40DF /* AuthenticationViewController.h */,
+				D6C4B3261A606247006F40DF /* AuthenticationViewController.m */,
 				D6C4B32B1A606247006F40DF /* Images.xcassets */,
 				D6C4B32D1A606247006F40DF /* LaunchScreen.xib */,
 				D6C4B31E1A606247006F40DF /* Supporting Files */,
@@ -419,7 +419,7 @@
 				D6C4B3891A606A32006F40DF /* OARequestParameter.m in Sources */,
 				D6C4B3821A606A32006F40DF /* OACall.m in Sources */,
 				D6C4B3811A606A32006F40DF /* OAAttachment.m in Sources */,
-				D6C4B3271A606247006F40DF /* ViewController.m in Sources */,
+				D6C4B3271A606247006F40DF /* AuthenticationViewController.m in Sources */,
 				D6C4B38A1A606A32006F40DF /* OAServiceTicket.m in Sources */,
 				D6C4B3861A606A32006F40DF /* OAMutableURLRequest.m in Sources */,
 				D6C4B3841A606A32006F40DF /* OADataFetcher.m in Sources */,

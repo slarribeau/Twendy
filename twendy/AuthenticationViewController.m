@@ -8,17 +8,17 @@
 //http://codegerms.com/get-user-info-data-twitter-api-example-ios-objective-c/
 //
 
-#import "ViewController.h"
+#import "AuthenticationViewController.h"
 
 NSString *client_id = @"2sVEcZDhudTeScaMShpd3w";
 NSString *secret = @"CVqonV4B8wDxSnwzzXCC2uhak8H22R1gXhbsCSF1400"; //codegerms
 NSString *callback = @"http://nowandzen.com/callback";
 
-@interface ViewController ()
+@interface AuthenticationViewController ()
 
 @end
 
-@implementation ViewController
+@implementation AuthenticationViewController
 @synthesize webview, accessToken, trendNameArray;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil

@@ -14,7 +14,7 @@
 #import "OAuthConsumer.h"
 #import "TrendingListViewController.h"
 
-@interface ViewController : UIViewController<UIWebViewDelegate, TrendingListViewControllerDelegate>
+@interface AuthenticationViewController : UIViewController<UIWebViewDelegate, TrendingListViewControllerDelegate>
 {
   IBOutlet UIWebView *webview;
   OAConsumer* consumer;

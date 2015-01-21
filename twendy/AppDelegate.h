@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ViewController.h"
+#import "AuthenticationViewController.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
