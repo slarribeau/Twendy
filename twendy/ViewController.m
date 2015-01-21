@@ -6,13 +6,13 @@
 //  Copyright (c) 2015 Larribeau. All rights reserved.
 //
 
-#import "TrendingListViewController.h"
+#import "ViewController.h"
 #import "TrendViewController.h"
 #import "RegionViewController.h"
 #import "Region.h"
 
 
-@interface TrendingListViewController ()
+@interface ViewController ()
 //This is an extension not a category.
 @property (nonatomic, strong) NSArray *arrPeopleInfo;
 @property (nonatomic, strong) NSArray *trendUrlInfo;
@@ -23,7 +23,7 @@
 
 @end
 
-@implementation TrendingListViewController
+@implementation ViewController
 
 static NSInteger  const kLocationHome = 2488042;
 static NSString * const kMenuSelectionMark = @"*";
@@ -31,6 +31,10 @@ static NSString * const kMenuUnSelectionMark = @" ";
 
 static int const kButtonWidth = 100;
 
+
+-(IBAction)login:(id)sender {
+  [self performSegueWithIdentifier:@"idSegueAuth" sender:self];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -80,8 +84,8 @@ static int const kButtonWidth = 100;
     trendViewController.trendUrl = self.trendUrlInfo[self.recordIDToEdit];
     self.recordIDToEdit = -1;
   } else {
-    RegionViewController *regionViewController = [segue destinationViewController];
-    regionViewController.delegate = self;
+    //RegionViewController *regionViewController = [segue destinationViewController];
+    //regionViewController.delegate = self;
   }
 }
 

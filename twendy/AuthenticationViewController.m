@@ -209,7 +209,7 @@ NSString *callback = @"http://nowandzen.com/callback";
   UINavigationController *nc =
   (UINavigationController *)segue.destinationViewController;
 
-  TrendingListViewController *trendingListViewController = (TrendingListViewController*)[nc topViewController];
+  ViewController *trendingListViewController = (ViewController*)[nc topViewController];
   trendingListViewController.delegate = self;
 }
 

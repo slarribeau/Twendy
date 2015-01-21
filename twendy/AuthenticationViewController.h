@@ -12,7 +12,7 @@
 
 #import <UIKit/UIKit.h>
 #import "OAuthConsumer.h"
-#import "TrendingListViewController.h"
+#import "ViewController.h"
 
 @interface AuthenticationViewController : UIViewController<UIWebViewDelegate, TrendingListViewControllerDelegate>
 {
