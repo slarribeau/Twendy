@@ -19,7 +19,7 @@ NSString *callback = @"http://nowandzen.com/callback";
 @end
 
 @implementation ViewController
-@synthesize webview, isLogin,accessToken, trendNameArray;
+@synthesize webview, accessToken, trendNameArray;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -45,10 +45,12 @@ NSString *callback = @"http://nowandzen.com/callback";
   [requestTokenRequest setHTTPMethod:@"POST"];
   [requestTokenRequest setParameters:[NSArray arrayWithObject:callbackParam]];
   OADataFetcher* dataFetcher = [[OADataFetcher alloc] init];
+  
+  NSLog(@" OAMutableURLRequest %@", requestTokenRequest);
   [dataFetcher fetchDataWithRequest:requestTokenRequest
                            delegate:self
                   didFinishSelector:@selector(didReceiveRequestToken:data:)
-                    didFailSelector:@selector(didFailOAuth:error:)];
+                    didFailSelector:@selector(didNotReceiveRequestToken:error:)];
 }
 
 - (void)didReceiveMemoryWarning
@@ -74,60 +76,24 @@ NSString *callback = @"http://nowandzen.com/callback";
   [webview loadRequest:authorizeRequest];
 }
 
-#if 0
-- (void)didReceiveAccessToken:(OAServiceTicket*)ticket data:(NSData*)data {
-  NSString* httpBody = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-  accessToken = [[OAToken alloc] initWithHTTPResponseBody:httpBody];
-  // WebServiceSocket *connection = [[WebServiceSocket alloc] init];
-  //  connection.delegate = self;
-  NSString *pdata = [NSString stringWithFormat:@"type=2&token=%@&secret=%@&login=%@", accessToken.key, accessToken.secret, self.isLogin];
-  // [connection fetch:1 withPostdata:pdata withGetData:@"" isSilent:NO];
-  NSLog(@"%@",accessToken.secret);
-  
-  
-  UIAlertView *alertView = [[UIAlertView alloc]
-                            initWithTitle:@"Twitter Access Tooken"
-                            message:pdata
-                            delegate:nil
-                            cancelButtonTitle:@"OK"
-                            otherButtonTitles:nil];
-  [alertView show];
-  
-  
-}
-#endif
-
 - (void)didReceiveAccessToken:(OAServiceTicket*)ticket data:(NSData*)data {
   
   NSString* httpBody = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
   accessToken = [[OAToken alloc] initWithHTTPResponseBody:httpBody];
-  // WebServiceSocket *connection = [[WebServiceSocket alloc] init];
-  //  connection.delegate = self;
   
-  NSString *pdata = [NSString stringWithFormat:@"type=2&token=%@&secret=%@&login=%@", accessToken.key, accessToken.secret, self.isLogin];
-  // [connection fetch:1 withPostdata:pdata withGetData:@"" isSilent:NO];
-  NSLog(@"%@",accessToken.secret);
+  if (accessToken == nil) {
+    NSLog(@"Unexpected result received from twitter: Missing access token.");
+  } else {
   
-  //codegerms.com
-  
-  if (accessToken) {
-    
     NSInteger selectedConfigRegionWoeid = [[[NSUserDefaults standardUserDefaults] objectForKey:@"selectedConfigRegion"] intValue];
 
-    // NSURL* userdatarequestu = [NSURL URLWithString:@"https://api.twitter.com/1.1/account/verify_credentials.json"];
-    
     NSURL* userdatarequestu;
     if (selectedConfigRegionWoeid == 0) {
       userdatarequestu = [NSURL URLWithString:@"https://api.twitter.com/1.1/trends/place.json?id=2487956"];
     } else {
       userdatarequestu = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.twitter.com/1.1/trends/place.json?id=%@", [NSString stringWithFormat:@"%d",selectedConfigRegionWoeid]]];
 
-      }
-    
-    //2488042 = 'San Jose CA USA'
-    //2487956 = 'San Francisco CA USA'
-    //http://woeid.rosselliot.co.nz/lookup/san%20francisco
-    
+    }
     
     OAMutableURLRequest* requestTokenRequest;
     requestTokenRequest = [[OAMutableURLRequest alloc]
@@ -147,17 +113,13 @@ NSString *callback = @"http://nowandzen.com/callback";
     
     [dataFetcher fetchDataWithRequest:requestTokenRequest
                              delegate:self
-                    didFinishSelector:@selector(didReceiveuserdata:data:)
-                      didFailSelector:@selector(didFailOAuth:error:)];    } else {
-      NSLog(@"ERROR!!");
-    }
-  
-  
-  
+                    didFinishSelector:@selector(didReceiveUserData:data:)
+                      didFailSelector:@selector(didNotReceiveUserData:error:)];
+  }
 }
 
 
-- (void)didReceiveuserdata:(OAServiceTicket*)ticket data:(NSData*)data {
+- (void)didReceiveUserData:(OAServiceTicket*)ticket data:(NSData*)data {
   NSString* httpBody = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
   
   NSLog(@"didReceie %@", httpBody); //TODO - this may contan an error if rate limit exceeded
@@ -191,21 +153,23 @@ NSString *callback = @"http://nowandzen.com/callback";
 
 }
 
-- (void)didFailOAuth:(OAServiceTicket*)ticket error:(NSError*)error {
-  NSLog(@"Failed OAUTH");}
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+- (void)didNotReceiveAccessToken:(OAServiceTicket*)ticket error:(NSError*)error {
+  NSLog(@"Failed OAUTH %@", error);
+}
+- (void)didNotReceiveRequestToken:(OAServiceTicket*)ticket error:(NSError*)error {
+  NSLog(@"Failed OAUTH %@", error);
+}
+- (void)didNotReceiveUserData:(OAServiceTicket*)ticket error:(NSError*)error {
+  NSLog(@"Failed OAUTH %@", error);
+}
+
 #pragma mark UIWebViewDelegate
 
 - (BOOL)webView:(UIWebView*)webView shouldStartLoadWithRequest:(NSURLRequest*)request navigationType:(UIWebViewNavigationType)navigationType {
-  //  [indicator startAnimating];
   NSString *temp = [NSString stringWithFormat:@"shouldStartLoad %@",request];
-  //  BOOL result = [[temp lowercaseString] hasPrefix:@"http://codegerms.com/callback"];
-  // if (result) {
-  NSRange textRange = [[temp lowercaseString] rangeOfString:[/*@"http://codegerms.com/callback"*/ callback lowercaseString]];
+  NSRange textRange = [[temp lowercaseString] rangeOfString:[callback lowercaseString]];
   
   if(textRange.location != NSNotFound){
-    
-    
     // Extract oauth_verifier from URL query
     NSString* verifier = nil;
     NSArray* urlParams = [[[request URL] query] componentsSeparatedByString:@"&"];
@@ -218,7 +182,9 @@ NSString *callback = @"http://nowandzen.com/callback";
       }
     }
     
-    if (verifier) {
+    if (verifier == nil) {
+      NSLog(@"Unexpected result received from twitter: Missing oauth_verifier.");
+    } else {
       NSURL* accessTokenUrl = [NSURL URLWithString:@"https://api.twitter.com/oauth/access_token"];
       OAMutableURLRequest* accessTokenRequest = [[OAMutableURLRequest alloc] initWithURL:accessTokenUrl consumer:consumer token:requestToken realm:nil signatureProvider:nil];
       OARequestParameter* verifierParam = [[OARequestParameter alloc] initWithName:@"oauth_verifier" value:verifier];
@@ -228,9 +194,7 @@ NSString *callback = @"http://nowandzen.com/callback";
       [dataFetcher fetchDataWithRequest:accessTokenRequest
                                delegate:self
                       didFinishSelector:@selector(didReceiveAccessToken:data:)
-                        didFailSelector:@selector(didFailOAuth:error:)];
-    } else {
-      // ERROR!
+                        didFailSelector:@selector(didNotReceiveAccessToken:error:)];
     }
     
     [webView removeFromSuperview];
