@@ -133,34 +133,26 @@ NSString *callback = @"http://nowandzen.com/callback";
 
   
   for (NSDictionary *trend in trends) {
-    NSLog(@"trend = %@", trend);
-    
     NSString *names = [trend objectForKey:@"name"];
-    
     NSString *urls = [trend objectForKey:@"url"];
-    
-    //NSString *label = [title objectForKey:@"label"];
-    //PlaceDataObject *place = [PlaceDataObject alloc] initWithJSONData:eachPlace];
     
     [trendNameArray addObject:names];
     [trendUrlArray addObject:urls];
 
     
   }
-  NSLog(@"Built me an trendNameArray:%lu", (unsigned long)trendNameArray.count);
-  
   [self performSegueWithIdentifier:@"idSegueTrendingList" sender:self];
 
 }
 
 - (void)didNotReceiveAccessToken:(OAServiceTicket*)ticket error:(NSError*)error {
-  NSLog(@"Failed OAUTH %@", error);
+  NSLog(@"Failed Access Token Fetch %@", error);
 }
 - (void)didNotReceiveRequestToken:(OAServiceTicket*)ticket error:(NSError*)error {
-  NSLog(@"Failed OAUTH %@", error);
+  NSLog(@"Failed Request Token Fetch %@", error);
 }
 - (void)didNotReceiveUserData:(OAServiceTicket*)ticket error:(NSError*)error {
-  NSLog(@"Failed OAUTH %@", error);
+  NSLog(@"Failed User Data Fetch %@", error);
 }
 
 #pragma mark UIWebViewDelegate
@@ -201,7 +193,6 @@ NSString *callback = @"http://nowandzen.com/callback";
     
     return NO;
   }
-  
   return YES;
 }
 
@@ -210,9 +201,7 @@ NSString *callback = @"http://nowandzen.com/callback";
   NSLog(@"Error! %@", webView.request.URL.absoluteString);
 }
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
-  // [indicator stopAnimating];
   NSLog(@"DidFinishLoad %@", webView.request.URL.absoluteString);
-  
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
