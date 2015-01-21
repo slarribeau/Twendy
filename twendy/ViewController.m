@@ -166,7 +166,7 @@ NSString *callback = @"http://nowandzen.com/callback";
   NSArray *trends  = [[twitterTrends objectAtIndex:0] objectForKey:@"trends"];
   
   
-  trendNameArray = [[NSMutableArray alloc] init];
+  trendNameArray = [[NSMutableArray alloc] init]; //TODO? Why not self.trendNameArray of _trendNameArray?
   trendUrlArray = [[NSMutableArray alloc] init];
 
   

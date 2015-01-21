@@ -6,11 +6,9 @@ Can you stack region strings?
 
 TODO: short term
 home should be your nearest geo location.
-persistify selections
-cleaner gui
 store test run
+cleaner gui
 redesign with better data encapsulation
-handle case where you no longer follow a region that was previously selected
 entertain folks when network is slow and startup takes a long time!!!
 what if rate limit is exceeded?
 
@@ -35,3 +33,5 @@ twitter logout
 DONE:
 show current 
 sort country regions.
+persistify selections
+handle case where you no longer follow a region that was previously selected

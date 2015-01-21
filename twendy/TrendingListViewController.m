@@ -35,8 +35,7 @@ static int const kButtonWidth = 100;
 - (void)viewDidLoad {
     [super viewDidLoad];
   
-  self.longtitude = 0;
-  self.lattitude = 0;
+  [self initGeo];
   self.tblPeople.delegate = self;
   self.tblPeople.dataSource = self;
 
@@ -52,6 +51,28 @@ static int const kButtonWidth = 100;
   
 }
 
+-(void)initGeo
+{
+  
+  self.longtitude = 0;
+  self.lattitude = 0;
+
+  // ** Don't forget to add NSLocationWhenInUseUsageDescription in MyApp-Info.plist and give it a string
+  
+  self.locationManager = [[CLLocationManager alloc] init];
+  self.locationManager.delegate = self;
+  // Check for iOS 8. Without this guard the code will crash with "unknown selector" on iOS 7.
+  if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
+    [self.locationManager requestWhenInUseAuthorization];
+  }
+  [self.locationManager startUpdatingLocation];
+  
+  
+  float latitude = self.locationManager.location.coordinate.latitude;
+  float longitude = self.locationManager.location.coordinate.longitude;
+  NSLog(@"long %f lat %f", longitude, latitude);
+
+}
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
   
   if (self.recordIDToEdit > 0) {
@@ -386,20 +407,6 @@ static int const kButtonWidth = 100;
 
 -(IBAction)getClosestRegionDataButton:(id)sender {
   
-  // ** Don't forget to add NSLocationWhenInUseUsageDescription in MyApp-Info.plist and give it a string
-  
-  self.locationManager = [[CLLocationManager alloc] init];
-  self.locationManager.delegate = self;
-  // Check for iOS 8. Without this guard the code will crash with "unknown selector" on iOS 7.
-  if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
-    [self.locationManager requestWhenInUseAuthorization];
-  }
-  [self.locationManager startUpdatingLocation];
-
-
-  float latitude = self.locationManager.location.coordinate.latitude;
-  float longitude = self.locationManager.location.coordinate.longitude;
-  NSLog(@"long %f lat %f", longitude, latitude);
 
     OAConsumer* consumer = [self.delegate getConsumer];
     OAToken* accessToken = [self.delegate getAccessToken];

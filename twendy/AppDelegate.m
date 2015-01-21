@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "Accounts/Accounts.h"
 
 @interface AppDelegate ()
 
@@ -24,6 +25,69 @@
     [[UIApplication sharedApplication] registerForRemoteNotifications];
   }
 
+#if 0
+  ACAccountStore *account = [[ACAccountStore alloc] init];
+  NSArray *debug = [account accounts];
+  ACAccountType *accountType = [account accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
+  //NSString *message = _textView.text;
+  //hear before posting u can allow user to select the account
+  NSArray *arrayOfAccons = [account accountsWithAccountType:accountType];
+  for(ACAccount *acc in arrayOfAccons)
+  {
+    NSLog(@"%@",acc.username); //in this u can get all accounts user names provide some UI for user to select,such as UITableview
+  }
+#endif
+#if 1
+  // Create an account store object.
+  ACAccountStore *accountStore = [[ACAccountStore alloc] init];
+  
+  // Create an account type that ensures Twitter accounts are retrieved.
+  ACAccountType *accountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
+  
+  // Request access from the user to use their Twitter accounts.
+  [accountStore requestAccessToAccountsWithType:accountType withCompletionHandler:^(BOOL granted, NSError *error) {
+    if(granted) {
+      NSLog(@"Granted!");
+      // Get the list of Twitter accounts.
+      NSArray *accountsArray = [accountStore accountsWithAccountType:accountType];
+      
+      NSLog(@"accounts = %@", accountsArray);
+      //if ([accountsArray count] > 0) {
+        // Grab the initial Twitter account to tweet from.
+        ACAccount *twitterAccount = [accountsArray objectAtIndex:0];
+        //TWRequest *postRequest = nil;
+        
+        //postRequest = [[TWRequest alloc] initWithURL:[NSURL URLWithString:@"http://api.twitter.com/1/statuses/update.json"] parameters:[NSDictionary dictionaryWithObject:[self stringToPost] forKey:@"status"] requestMethod:TWRequestMethodPOST];
+        
+        
+        
+        // Set the account used to post the tweet.
+       // [postRequest setAccount:twitterAccount];
+        
+        //dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void) {
+        //  [postRequest performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
+        //    dispatch_async(dispatch_get_main_queue(), ^(void) {
+          //    if ([urlResponse statusCode] == 200) {
+            //    Alert(0, nil, @"Tweet Successful", @"Ok", nil);
+             // }else {
+                
+                //Alert(0, nil, @"Tweet failed", @"Ok", nil);
+              //}
+          //  });
+         // }];
+        //});
+        
+      }
+      else
+      {
+        NSLog(@"Denied!");
+
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"prefs:root=TWITTER"]];
+      }
+    }
+  //}
+   ];
+#endif
   return YES;
 }
 
