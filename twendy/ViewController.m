@@ -48,7 +48,14 @@ static int const kButtonWidth = 100;
   
   if (self.arrPeopleInfo.count == 0) {
     [self getTrendData:kLocationHome];
+  } else {
+    // Reload the table view.
+    [self.tblPeople reloadData];
+    
+    [self createScrollMenu];
   }
+  
+  
 }
 -(IBAction)login:(id)sender {
   [self performSegueWithIdentifier:@"idSegueAuth" sender:self];
@@ -62,21 +69,17 @@ static int const kButtonWidth = 100;
   self.tblPeople.dataSource = self;
 
   self.recordIDToEdit = -1;
-  self.arrPeopleInfo = [self.delegate getTrendArray];
-  self.trendUrlInfo = [self.delegate getUrlArray];
-  self.regionArray = [[NSMutableArray alloc] init];
 
-  // Reload the table view.
-  [self.tblPeople reloadData];
-
-  [self createScrollMenu];
   
   if ([AuthenticationModel isLoggedIn] == NO) {
     [self login:nil];
+  } else {
+    // Reload the table view.
+    [self.tblPeople reloadData];
+    
+    [self createScrollMenu];
   }
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(menuHasChanged:) name:@"MenuHasChanged" object:nil];
-
-  
 }
 
 - (void)dealloc
@@ -113,9 +116,6 @@ static int const kButtonWidth = 100;
     TrendViewController *trendViewController = [segue destinationViewController];
     trendViewController.trendUrl = self.trendUrlInfo[self.recordIDToEdit];
     self.recordIDToEdit = -1;
-  } else {
-    //RegionViewController *regionViewController = [segue destinationViewController];
-    //regionViewController.delegate = self;
   }
 }
 
@@ -146,11 +146,6 @@ static int const kButtonWidth = 100;
   
   self.longtitude = myLocation.coordinate.longitude;
   self.lattitude = myLocation.coordinate.latitude;
-}
-
-#pragma mark - RegionViewControllerDelegate
--(NSArray*)getRegionArray{
-  return self.regionArray;
 }
 
 -(void)menuHasChanged:(NSNotification*)obj {
@@ -281,7 +276,7 @@ static int const kButtonWidth = 100;
     }
   }
 
-  [self addScrollButton:x name:[NSString stringWithFormat:@"%@%@",kMenuUnSelectionMark, @"Add"] action:@selector(getRegionsDataButton:) tag:-1];
+  [self addScrollButton:x name:[NSString stringWithFormat:@"%@%@",kMenuUnSelectionMark, @"Add"] action:@selector(getRegions) tag:-1];
   
   
   x++; //Need an extra increment so that we can scroll to end of last button
@@ -347,12 +342,14 @@ static int const kButtonWidth = 100;
   [TwitterFetch fetch:self url:url didFinishSelector:@selector(didReceiveRateLimit:data:) didFailSelector:@selector(didFailOauth:error:)];
 }
 
--(IBAction)getRegionsDataButton:(id)sender {
+-(void)getRegions
+{
   [self performSegueWithIdentifier:@"idSegueRegion" sender:self];
 }
 
 
--(IBAction)getClosestRegionDataButton:(id)sender {
+-(void)getClosestRegionDataButton
+{
   NSString *url = [NSString stringWithFormat:@"https://api.twitter.com/1.1/trends/closest.json?lat=%f&long=%f", [self getCurrentLatitude], [self getCurrentLongitude]];
 
   [TwitterFetch fetch:self url:url didFinishSelector:@selector(didReceiveClosestRegion:data:) didFailSelector:@selector(didFailOauth:error:)];
@@ -438,7 +435,7 @@ static int const kButtonWidth = 100;
   self.trendUrlInfo = trendUrlArray;
   // Reload the table view.
   [self.tblPeople reloadData];
-  
+  [self createScrollMenu];
 }
 
 @end
