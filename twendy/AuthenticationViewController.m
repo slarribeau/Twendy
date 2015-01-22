@@ -11,10 +11,9 @@
 //
 
 #import "AuthenticationViewController.h"
+#import "AuthenticationModel.h"
 
-NSString *client_id = @"2sVEcZDhudTeScaMShpd3w";
-NSString *secret = @"CVqonV4B8wDxSnwzzXCC2uhak8H22R1gXhbsCSF1400"; //codegerms
-NSString *callback = @"http://nowandzen.com/callback";
+
 
 @interface AuthenticationViewController ()
 
@@ -47,20 +46,13 @@ NSString *callback = @"http://nowandzen.com/callback";
   [super viewDidLoad];
   
 
-  
-
-  
-  
-  
-  consumer = [[OAConsumer alloc] initWithKey:client_id secret:secret realm:nil];
-
   NSURL* requestTokenUrl = [NSURL URLWithString:@"https://api.twitter.com/oauth/request_token"];
   OAMutableURLRequest* requestTokenRequest = [[OAMutableURLRequest alloc] initWithURL:requestTokenUrl
-                                                                             consumer:consumer
+                                                                             consumer:[AuthenticationModel getConsumer]
                                                                                 token:nil
                                                                                 realm:nil
                                                                     signatureProvider:nil];
-  OARequestParameter* callbackParam = [[OARequestParameter alloc] initWithName:@"oauth_callback" value:callback];
+  OARequestParameter* callbackParam = [[OARequestParameter alloc] initWithName:@"oauth_callback" value:[AuthenticationModel getCallback]];
   [requestTokenRequest setHTTPMethod:@"POST"];
   [requestTokenRequest setParameters:[NSArray arrayWithObject:callbackParam]];
   OADataFetcher* dataFetcher = [[OADataFetcher alloc] init];
@@ -103,9 +95,8 @@ NSString *callback = @"http://nowandzen.com/callback";
   if (accessToken == nil) {
     NSLog(@"Unexpected result received from twitter: Missing access token.");
   } else {
-  
-    
-    
+    [AuthenticationModel setAccessToken:accessToken];
+    [AuthenticationModel setIsLoggedIn:YES];
     [self.navigationController popViewControllerAnimated:YES];
 
     return;
@@ -127,7 +118,7 @@ NSString *callback = @"http://nowandzen.com/callback";
     requestTokenRequest = [[OAMutableURLRequest alloc]
                            initWithURL:userdatarequestu
                            
-                           consumer:consumer
+                           consumer:[AuthenticationModel getConsumer]
                            
                            token:accessToken
                            
@@ -187,7 +178,7 @@ NSString *callback = @"http://nowandzen.com/callback";
 
 - (BOOL)webView:(UIWebView*)webView shouldStartLoadWithRequest:(NSURLRequest*)request navigationType:(UIWebViewNavigationType)navigationType {
   NSString *temp = [NSString stringWithFormat:@"shouldStartLoad %@",request];
-  NSRange textRange = [[temp lowercaseString] rangeOfString:[callback lowercaseString]];
+  NSRange textRange = [[temp lowercaseString] rangeOfString:[[AuthenticationModel getCallback] lowercaseString]];
   
   if(textRange.location != NSNotFound){
     // Extract oauth_verifier from URL query
@@ -206,7 +197,7 @@ NSString *callback = @"http://nowandzen.com/callback";
       NSLog(@"Unexpected result received from twitter: Missing oauth_verifier.");
     } else {
       NSURL* accessTokenUrl = [NSURL URLWithString:@"https://api.twitter.com/oauth/access_token"];
-      OAMutableURLRequest* accessTokenRequest = [[OAMutableURLRequest alloc] initWithURL:accessTokenUrl consumer:consumer token:requestToken realm:nil signatureProvider:nil];
+      OAMutableURLRequest* accessTokenRequest = [[OAMutableURLRequest alloc] initWithURL:accessTokenUrl consumer:[AuthenticationModel getConsumer] token:requestToken realm:nil signatureProvider:nil];
       OARequestParameter* verifierParam = [[OARequestParameter alloc] initWithName:@"oauth_verifier" value:verifier];
       [accessTokenRequest setHTTPMethod:@"POST"];
       [accessTokenRequest setParameters:[NSArray arrayWithObject:verifierParam]];
@@ -251,10 +242,6 @@ NSString *callback = @"http://nowandzen.com/callback";
 
 -(OAToken*)getAccessToken{
   return accessToken;
-}
-
--(OAConsumer*) getConsumer {
-  return consumer;
 }
 
 

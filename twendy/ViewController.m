@@ -10,6 +10,7 @@
 #import "TrendViewController.h"
 #import "RegionViewController.h"
 #import "Region.h"
+#import "AuthenticationModel.h"
 
 
 @interface ViewController ()
@@ -60,6 +61,10 @@ static int const kButtonWidth = 100;
   [self.tblPeople reloadData];
 
   [self createScrollMenu];
+  
+  if ([AuthenticationModel isLoggedIn] == NO) {
+    [self login:nil];
+  }
   
 }
 
@@ -310,8 +315,8 @@ static int const kButtonWidth = 100;
 
 
 -(void)getTrendData:(NSInteger)location {
-  OAConsumer* consumer = [self.delegate getConsumer];
-  OAToken* accessToken = [self.delegate getAccessToken];
+  OAConsumer* consumer = [AuthenticationModel getConsumer];
+  OAToken* accessToken = [AuthenticationModel getAccessToken];
   
   NSString *debug = [NSString stringWithFormat:@"https://api.twitter.com/1.1/trends/place.json?id=%@", [NSString stringWithFormat:@"%d",location]];
   
@@ -348,8 +353,8 @@ static int const kButtonWidth = 100;
 }
 
 -(IBAction)getRateLimit:(id)sender {
-  OAConsumer* consumer = [self.delegate getConsumer];
-  OAToken* accessToken = [self.delegate getAccessToken];
+  OAConsumer* consumer = [AuthenticationModel getConsumer];
+  OAToken* accessToken = [AuthenticationModel getAccessToken];
   
   if (accessToken) {
     NSURL* userdatarequestu = [NSURL URLWithString:@"https://api.twitter.com/1.1/application/rate_limit_status.json"];
@@ -385,8 +390,8 @@ static int const kButtonWidth = 100;
     //Only fetch the region data once
     [self performSegueWithIdentifier:@"idSegueRegion" sender:self];
   } else {
-    OAConsumer* consumer = [self.delegate getConsumer];
-    OAToken* accessToken = [self.delegate getAccessToken];
+    OAConsumer* consumer = [AuthenticationModel getConsumer];
+    OAToken* accessToken = [AuthenticationModel getAccessToken];
     
     if (accessToken) {
       NSURL* userdatarequestu = [NSURL URLWithString:@"https://api.twitter.com/1.1/trends/available.json"];
@@ -420,8 +425,8 @@ static int const kButtonWidth = 100;
 -(IBAction)getClosestRegionDataButton:(id)sender {
   
 
-    OAConsumer* consumer = [self.delegate getConsumer];
-    OAToken* accessToken = [self.delegate getAccessToken];
+    OAConsumer* consumer = [AuthenticationModel getConsumer];
+    OAToken* accessToken = [AuthenticationModel getAccessToken];
     
     if (accessToken) {
       NSURL* userdatarequestu = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.twitter.com/1.1/trends/closest.json?lat=%f&long=%f", [self getCurrentLatitude], [self getCurrentLongitude]]];

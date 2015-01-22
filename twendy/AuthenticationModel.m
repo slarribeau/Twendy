@@ -9,17 +9,28 @@
 #import "AuthenticationModel.h"
 
 @implementation AuthenticationModel
-static BOOL isLoggedInBOOL;
+
+static const NSString *client_id = @"2sVEcZDhudTeScaMShpd3w";
+static const NSString *secret = @"CVqonV4B8wDxSnwzzXCC2uhak8H22R1gXhbsCSF1400"; //codegerms
+static const NSString *callback = @"http://nowandzen.com/callback";
+
+static BOOL isLoggedInBOOL = NO;
+static BOOL initialized = NO;
+static OAToken* accessToken = nil;
+static OAConsumer* consumer = nil;
 
 +(void)initialize
 {
-  static BOOL initialized = NO;
   if(!initialized)
   {
     initialized = YES;
-    isLoggedInBOOL = NO;
+    //isLoggedInBOOL = NO;
+    consumer = [[OAConsumer alloc] initWithKey:client_id secret:secret realm:nil];
   }
 }
+
+
+
 
 +(BOOL) isLoggedIn
 {
@@ -29,6 +40,26 @@ static BOOL isLoggedInBOOL;
 +(void) setIsLoggedIn:(BOOL)status
 {
    isLoggedInBOOL = status;
+}
+
++(OAToken*) getAccessToken
+{
+  return accessToken;
+}
+
++(void) setAccessToken:(OAToken*)token
+{
+  accessToken = token;
+}
+
++(OAConsumer *) getConsumer
+{
+  return consumer;
+}
+
++(NSString *) getCallback
+{
+  return callback;
 }
 
 @end

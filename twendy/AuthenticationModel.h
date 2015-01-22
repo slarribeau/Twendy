@@ -7,8 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "OAuthConsumer.h"
 
 @interface AuthenticationModel : NSObject
 +(BOOL) isLoggedIn;
 +(void) setIsLoggedIn:(BOOL)status;
++(OAToken*) getAccessToken;
++(void) setAccessToken:(OAToken*)token;
++(OAConsumer *) getConsumer;
++(NSString *) getCallback;
+
 @end

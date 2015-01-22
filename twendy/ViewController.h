@@ -16,7 +16,6 @@
 -(NSArray*)getTrendArray;
 -(NSArray*)getUrlArray;
 -(OAToken*)getAccessToken;
--(OAConsumer*) getConsumer;
 
 
 @end
