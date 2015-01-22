@@ -46,10 +46,7 @@
                         <barButtonItem title="Item" id="5qO-uc-UAf"/>
                         <barButtonItem title="Item" id="PJj-6V-5EU"/>
                     </toolbarItems>
-                    <navigationItem key="navigationItem" id="MTf-2C-vcG">
-                        <barButtonItem key="leftBarButtonItem" title="Item" id="dno-wS-CiI"/>
-                        <barButtonItem key="rightBarButtonItem" title="Item" style="plain" id="ap2-BK-wpd"/>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="MTf-2C-vcG"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="400" height="600"/>

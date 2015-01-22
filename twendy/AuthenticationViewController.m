@@ -33,6 +33,18 @@ NSString *callback = @"http://nowandzen.com/callback";
 - (void)viewDidLoad
 {
   [super viewDidLoad];
+  
+  [self.navigationController popViewControllerAnimated:YES];
+
+  
+  return;
+  
+  
+  //[self performSegueWithIdentifier:@"idSegueAuth" sender:self];
+
+  
+  
+  
   consumer = [[OAConsumer alloc] initWithKey:client_id secret:secret realm:nil];
 
   NSURL* requestTokenUrl = [NSURL URLWithString:@"https://api.twitter.com/oauth/request_token"];

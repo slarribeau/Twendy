@@ -30,4 +30,9 @@
 @property (nonatomic, retain) NSString *isLogin;
 @property (nonatomic, strong) NSMutableArray *trendNameArray;
 @property (nonatomic, strong) NSMutableArray *trendUrlArray;
+
+-(void)login;
+-(void)logout;
+
+
 @end
