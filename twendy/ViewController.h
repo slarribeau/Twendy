@@ -12,6 +12,7 @@
 #import <CoreLocation/CoreLocation.h>
 @import CoreLocation;
 
+
 @protocol TrendingListViewControllerDelegate
 -(NSArray*)getTrendArray;
 -(NSArray*)getUrlArray;

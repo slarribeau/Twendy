@@ -10,6 +10,7 @@
 #import "Accounts/Accounts.h"
 #import "AuthenticationModel.h"
 #import "RegionModel.h"
+#import "LocationModel.h"
 
 @interface AppDelegate ()
 
@@ -22,6 +23,8 @@
 
   [[AuthenticationModel alloc] init];
   [[RegionModel alloc] init];
+  [[LocationModel alloc] init];
+
   
   if (IOS_VERSION >= 8) {
     [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];

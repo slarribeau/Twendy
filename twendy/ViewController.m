@@ -13,6 +13,7 @@
 #import "Trend.h"
 #import "AuthenticationModel.h"
 #import "TwitterFetch.h"
+#import "LocationModel.h"
 
 
 @interface ViewController ()
@@ -28,7 +29,7 @@
 
 @implementation ViewController
 
-static NSInteger  const kLocationHome = 2488042;
+//static NSInteger  const kLocationHome = 2488042;
 static NSString * const kMenuSelectionMark = @"*";
 static NSString * const kMenuUnSelectionMark = @" ";
 
@@ -47,11 +48,11 @@ static int const kButtonWidth = 100;
   }
   
   if (self.trendDB.count == 0) {
-    [self getTrendData:kLocationHome];
+    
+    [self getClosestRegionTrendData];
   } else {
     // Reload the table view.
     [self.tblPeople reloadData];
-    
     [self createScrollMenu];
   }
   
@@ -90,7 +91,7 @@ static int const kButtonWidth = 100;
 
 -(void)initGeo
 {
-  
+  return;
   self.longtitude = 0;
   self.lattitude = 0;
 
@@ -123,6 +124,7 @@ static int const kButtonWidth = 100;
 
 -(float)getCurrentLongitude
 {
+  NSLog(@"getCurrentLongitude == XXX %f", self.longtitude);
   if (self.longtitude == 0) {
     return -122.0419; //Default to cupertiono, CA, USA
 
@@ -325,7 +327,8 @@ static int const kButtonWidth = 100;
   UIButton *button = (UIButton*)sender;
   [self removeMenuSelection];
   [self setMenuSelection:button];
-  [self getTrendData:kLocationHome];
+  //[self getTrendData:kLocationHome];
+  [self getClosestRegionTrendData];
 }
 
 - (void)didFailOauth:(OAServiceTicket*)ticket error:(NSError*)error {
@@ -351,11 +354,11 @@ static int const kButtonWidth = 100;
 }
 
 
--(void)getClosestRegionDataButton
+-(void)getClosestRegionTrendData
 {
   NSString *url = [NSString stringWithFormat:@"https://api.twitter.com/1.1/trends/closest.json?lat=%f&long=%f", [self getCurrentLatitude], [self getCurrentLongitude]];
 
-  [TwitterFetch fetch:self url:url didFinishSelector:@selector(didReceiveClosestRegion:data:) didFailSelector:@selector(didFailOauth:error:)];
+  [TwitterFetch fetch:self url:url didFinishSelector:@selector(didReceiveuserdata:data:) didFailSelector:@selector(didFailOauth:error:)];
 }
 
 
