@@ -43,7 +43,7 @@
     NSLog(@"%@",acc.username); //in this u can get all accounts user names provide some UI for user to select,such as UITableview
   }
 #endif
-#if 1
+#if 0
   // Create an account store object.
   ACAccountStore *accountStore = [[ACAccountStore alloc] init];
   
@@ -61,6 +61,7 @@
       if ([accountsArray count] > 0) {
         // Grab the initial Twitter account to tweet from.
         ACAccount *twitterAccount = [accountsArray objectAtIndex:0];
+        NSLog(@"TwitterAccount = %@", twitterAccount);
         //TWRequest *postRequest = nil;
         
         //postRequest = [[TWRequest alloc] initWithURL:[NSURL URLWithString:@"http://api.twitter.com/1/statuses/update.json"] parameters:[NSDictionary dictionaryWithObject:[self stringToPost] forKey:@"status"] requestMethod:TWRequestMethodPOST];

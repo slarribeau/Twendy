@@ -27,7 +27,6 @@
 @property (nonatomic, strong) NSMutableArray *regionArray;
 
 -(IBAction)getHomeTrendDataButton:(id)sender;
--(IBAction)getWorldTrendDataButton:(id)sender;
 -(IBAction)getRateLimit:(id)sender;
 
 @end

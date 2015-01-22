@@ -16,11 +16,14 @@
 
 
 @interface AuthenticationViewController ()
+@property (nonatomic, strong) IBOutlet UIWebView *webview; //FIX ME weak?
+@property (nonatomic, strong) NSMutableArray *trendNameArray;
+@property (nonatomic, strong) NSMutableArray *trendUrlArray;
 
 @end
 
 @implementation AuthenticationViewController
-@synthesize webview, accessToken, trendNameArray;
+//@synthesize webview, accessToken, trendNameArray;
 
 
 -(void) viewWillAppear: (BOOL) animated {
@@ -72,8 +75,8 @@
 
 - (void)didReceiveRequestToken:(OAServiceTicket*)ticket data:(NSData*)data {
   NSString* httpBody = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-  requestToken = [[OAToken alloc] initWithHTTPResponseBody:httpBody];
-  
+  OAToken *requestToken = [[OAToken alloc] initWithHTTPResponseBody:httpBody];
+  [AuthenticationModel setRequestToken:requestToken];
   NSURL* authorizeUrl = [NSURL URLWithString:@"https://api.twitter.com/oauth/authorize"];
   OAMutableURLRequest* authorizeRequest = [[OAMutableURLRequest alloc] initWithURL:authorizeUrl
                                                                           consumer:nil
@@ -84,13 +87,13 @@
   OARequestParameter* oauthTokenParam = [[OARequestParameter alloc] initWithName:@"oauth_token" value:oauthToken];
   [authorizeRequest setParameters:[NSArray arrayWithObject:oauthTokenParam]];
   
-  [webview loadRequest:authorizeRequest];
+  [self.webview loadRequest:authorizeRequest];
 }
 
 - (void)didReceiveAccessToken:(OAServiceTicket*)ticket data:(NSData*)data {
   
   NSString* httpBody = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-  accessToken = [[OAToken alloc] initWithHTTPResponseBody:httpBody];
+  OAToken *accessToken = [[OAToken alloc] initWithHTTPResponseBody:httpBody];
   
   if (accessToken == nil) {
     NSLog(@"Unexpected result received from twitter: Missing access token.");
@@ -100,70 +103,7 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:@"LoginSucceed" object:nil];
 
     [self.navigationController popViewControllerAnimated:YES];
-
-    return;
-    
-    
-    
-    
-    NSInteger selectedConfigRegionWoeid = [[[NSUserDefaults standardUserDefaults] objectForKey:@"selectedConfigRegion"] intValue];
-
-    NSURL* userdatarequestu;
-    if (selectedConfigRegionWoeid == 0) {
-      userdatarequestu = [NSURL URLWithString:@"https://api.twitter.com/1.1/trends/place.json?id=2487956"];
-    } else {
-      userdatarequestu = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.twitter.com/1.1/trends/place.json?id=%@", [NSString stringWithFormat:@"%d",selectedConfigRegionWoeid]]];
-
-    }
-    
-    OAMutableURLRequest* requestTokenRequest;
-    requestTokenRequest = [[OAMutableURLRequest alloc]
-                           initWithURL:userdatarequestu
-                           
-                           consumer:[AuthenticationModel getConsumer]
-                           
-                           token:accessToken
-                           
-                           realm:nil
-                           
-                           signatureProvider:nil];
-    
-    [requestTokenRequest setHTTPMethod:@"GET"];
-    
-    OADataFetcher* dataFetcher = [[OADataFetcher alloc] init];
-    
-    [dataFetcher fetchDataWithRequest:requestTokenRequest
-                             delegate:self
-                    didFinishSelector:@selector(didReceiveUserData:data:)
-                      didFailSelector:@selector(didNotReceiveUserData:error:)];
   }
-}
-
-
-- (void)didReceiveUserData:(OAServiceTicket*)ticket data:(NSData*)data {
-  NSString* httpBody = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-  
-  NSLog(@"didReceie %@", httpBody); //TODO - this may contan an error if rate limit exceeded
-  
-  NSArray *twitterTrends   = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers       error:nil];
-  NSArray *trends  = [[twitterTrends objectAtIndex:0] objectForKey:@"trends"];
-  
-  
-  trendNameArray = [[NSMutableArray alloc] init]; //TODO? Why not self.trendNameArray of _trendNameArray?
-  trendUrlArray = [[NSMutableArray alloc] init];
-
-  
-  for (NSDictionary *trend in trends) {
-    NSString *names = [trend objectForKey:@"name"];
-    NSString *urls = [trend objectForKey:@"url"];
-    
-    [trendNameArray addObject:names];
-    [trendUrlArray addObject:urls];
-
-    
-  }
-  [self performSegueWithIdentifier:@"idSegueTrendingList" sender:self];
-
 }
 
 - (void)didNotReceiveAccessToken:(OAServiceTicket*)ticket error:(NSError*)error {
@@ -199,7 +139,7 @@
       NSLog(@"Unexpected result received from twitter: Missing oauth_verifier.");
     } else {
       NSURL* accessTokenUrl = [NSURL URLWithString:@"https://api.twitter.com/oauth/access_token"];
-      OAMutableURLRequest* accessTokenRequest = [[OAMutableURLRequest alloc] initWithURL:accessTokenUrl consumer:[AuthenticationModel getConsumer] token:requestToken realm:nil signatureProvider:nil];
+      OAMutableURLRequest* accessTokenRequest = [[OAMutableURLRequest alloc] initWithURL:accessTokenUrl consumer:[AuthenticationModel getConsumer] token:[AuthenticationModel getRequestToken] realm:nil signatureProvider:nil];
       OARequestParameter* verifierParam = [[OARequestParameter alloc] initWithName:@"oauth_verifier" value:verifier];
       [accessTokenRequest setHTTPMethod:@"POST"];
       [accessTokenRequest setParameters:[NSArray arrayWithObject:verifierParam]];
@@ -210,7 +150,7 @@
                         didFailSelector:@selector(didNotReceiveAccessToken:error:)];
     }
     
-    [webView removeFromSuperview];
+    [self.webview removeFromSuperview];
     
     return NO;
   }
@@ -225,26 +165,7 @@
   NSLog(@"DidFinishLoad %@", webView.request.URL.absoluteString);
 }
 
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-  
-  UINavigationController *nc =
-  (UINavigationController *)segue.destinationViewController;
 
-  ViewController *trendingListViewController = (ViewController*)[nc topViewController];
-  trendingListViewController.delegate = self;
-}
-
--(NSArray*)getTrendArray{
-  return trendNameArray;
-}
-
--(NSArray*)getUrlArray{
-  return trendUrlArray;
-}
-
--(OAToken*)getAccessToken{
-  return accessToken;
-}
 
 
 @end

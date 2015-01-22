@@ -17,6 +17,7 @@ static const NSString *callback = @"http://nowandzen.com/callback";
 static BOOL isLoggedInBOOL = NO;
 static BOOL initialized = NO;
 static OAToken* accessToken = nil;
+static OAToken* requestToken = nil;
 static OAConsumer* consumer = nil;
 
 +(void)initialize
@@ -52,12 +53,22 @@ static OAConsumer* consumer = nil;
   accessToken = token;
 }
 
++(OAToken*) getRequestToken
+{
+  return requestToken;
+}
+
++(void) setRequestToken:(OAToken*)token
+{
+  requestToken = token;
+}
+
 +(OAConsumer *) getConsumer
 {
   return consumer;
 }
 
-+(NSString *) getCallback
++(const NSString *) getCallback
 {
   return callback;
 }

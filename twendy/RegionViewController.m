@@ -40,8 +40,8 @@
   Region *region = [RegionModel get:indexPath.row];
   cell.textLabel.text = [NSString stringWithFormat:@"%@: %@", region.country, region.city];
   
-  NSLog(@"table view region = %d", region.woeid);
-  cell.detailTextLabel.text = [NSString stringWithFormat:@"%d", region.woeid];
+  NSLog(@"table view region = %ld", (long)region.woeid);
+  cell.detailTextLabel.text = [NSString stringWithFormat:@"%ld", (long)region.woeid];
   
 
   if (region.selected == YES) {
@@ -63,7 +63,7 @@
   UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
   Region *region = [RegionModel get:indexPath.row];
 
-  NSLog(@"region = %d", region.woeid);
+  NSLog(@"region = %ld", (long)region.woeid);
   id tmp = [[[NSUserDefaults standardUserDefaults] objectForKey:@"configRegion"] mutableCopy];
 
   NSMutableDictionary* configRegionDict;

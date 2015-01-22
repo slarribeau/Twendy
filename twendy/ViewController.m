@@ -11,6 +11,7 @@
 #import "RegionViewController.h"
 #import "Region.h"
 #import "AuthenticationModel.h"
+#import "TwitterFetch.h"
 
 
 @interface ViewController ()
@@ -329,74 +330,21 @@ static int const kButtonWidth = 100;
   [self getTrendData:kLocationHome];
 }
 
+- (void)didFailOauth:(OAServiceTicket*)ticket error:(NSError*)error {
+  NSLog(@"OauthFail %@", error);
+}
+
 
 -(void)getTrendData:(NSInteger)location {
-  OAConsumer* consumer = [AuthenticationModel getConsumer];
-  OAToken* accessToken = [AuthenticationModel getAccessToken];
+  NSString *url = [NSString stringWithFormat:@"https://api.twitter.com/1.1/trends/place.json?id=%@", [NSString stringWithFormat:@"%ld",(long)location]];
   
-  NSString *debug = [NSString stringWithFormat:@"https://api.twitter.com/1.1/trends/place.json?id=%@", [NSString stringWithFormat:@"%d",location]];
-  
-  if (accessToken) {
-    NSURL* userdatarequestu = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.twitter.com/1.1/trends/place.json?id=%@", [NSString stringWithFormat:@"%d",location]]];
-    
-    //2488042 = 'San Jose CA USA'
-    //2487956 = 'San Francisco CA USA'
-    //http://woeid.rosselliot.co.nz/lookup/san%20francisco
-    
-    
-    OAMutableURLRequest* requestTokenRequest;
-    requestTokenRequest = [[OAMutableURLRequest alloc]
-                           initWithURL:userdatarequestu
-                           
-                           consumer:consumer
-                           
-                           token:accessToken
-                           
-                           realm:nil
-                           
-                           signatureProvider:nil];
-    
-    [requestTokenRequest setHTTPMethod:@"GET"];
-    
-    OADataFetcher* dataFetcher = [[OADataFetcher alloc] init];
-    
-    [dataFetcher fetchDataWithRequest:requestTokenRequest
-                             delegate:self
-                    didFinishSelector:@selector(didReceiveuserdata:data:)
-                      didFailSelector:@selector(didFailOAuth:error:)];    } else {
-      NSLog(@"ERROR!!");
-    }
+  [TwitterFetch fetch:self url:url didFinishSelector:@selector(didReceiveuserdata:data:) didFailSelector:@selector(didFailOauth:error:)];
 }
 
 -(IBAction)getRateLimit:(id)sender {
-  OAConsumer* consumer = [AuthenticationModel getConsumer];
-  OAToken* accessToken = [AuthenticationModel getAccessToken];
+  NSString *url = @"https://api.twitter.com/1.1/application/rate_limit_status.json";
   
-  if (accessToken) {
-    NSURL* userdatarequestu = [NSURL URLWithString:@"https://api.twitter.com/1.1/application/rate_limit_status.json"];
-    
-    OAMutableURLRequest* requestTokenRequest;
-    requestTokenRequest = [[OAMutableURLRequest alloc]
-                           initWithURL:userdatarequestu
-                           
-                           consumer:consumer
-                           
-                           token:accessToken
-                           
-                           realm:nil
-                           
-                           signatureProvider:nil];
-    
-    [requestTokenRequest setHTTPMethod:@"GET"];
-    
-    OADataFetcher* dataFetcher = [[OADataFetcher alloc] init];
-    
-    [dataFetcher fetchDataWithRequest:requestTokenRequest
-                             delegate:self
-                    didFinishSelector:@selector(didReceiveRateLimit:data:)
-                      didFailSelector:@selector(didFailOAuth:error:)];    } else {
-      NSLog(@"ERROR!!");
-    }
+  [TwitterFetch fetch:self url:url didFinishSelector:@selector(didReceiveRateLimit:data:) didFailSelector:@selector(didFailOauth:error:)];
 }
 
 -(IBAction)getRegionsDataButton:(id)sender {
@@ -405,36 +353,9 @@ static int const kButtonWidth = 100;
 
 
 -(IBAction)getClosestRegionDataButton:(id)sender {
-  
+  NSString *url = [NSString stringWithFormat:@"https://api.twitter.com/1.1/trends/closest.json?lat=%f&long=%f", [self getCurrentLatitude], [self getCurrentLongitude]];
 
-    OAConsumer* consumer = [AuthenticationModel getConsumer];
-    OAToken* accessToken = [AuthenticationModel getAccessToken];
-    
-    if (accessToken) {
-      NSURL* userdatarequestu = [NSURL URLWithString:[NSString stringWithFormat:@"https://api.twitter.com/1.1/trends/closest.json?lat=%f&long=%f", [self getCurrentLatitude], [self getCurrentLongitude]]];
-      
-      OAMutableURLRequest* requestTokenRequest;
-      requestTokenRequest = [[OAMutableURLRequest alloc]
-                             initWithURL:userdatarequestu
-                             
-                             consumer:consumer
-                             
-                             token:accessToken
-                             
-                             realm:nil
-                             
-                             signatureProvider:nil];
-      
-      [requestTokenRequest setHTTPMethod:@"GET"];
-      
-      OADataFetcher* dataFetcher = [[OADataFetcher alloc] init];
-      
-      [dataFetcher fetchDataWithRequest:requestTokenRequest
-                               delegate:self
-                      didFinishSelector:@selector(didReceiveClosestRegion:data:)
-                        didFailSelector:@selector(didFailOAuth:error:)];    } else {
-        NSLog(@"ERROR!!");
-      }
+  [TwitterFetch fetch:self url:url didFinishSelector:@selector(didReceiveClosestRegion:data:) didFailSelector:@selector(didFailOauth:error:)];
 }
 
 

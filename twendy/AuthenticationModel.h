@@ -13,6 +13,8 @@
 +(BOOL) isLoggedIn;
 +(void) setIsLoggedIn:(BOOL)status;
 +(OAToken*) getAccessToken;
++(void) setRequestToken:(OAToken*)token;
++(OAToken*) getRequestToken;
 +(void) setAccessToken:(OAToken*)token;
 +(OAConsumer *) getConsumer;
 +(NSString *) getCallback;
