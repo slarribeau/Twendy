@@ -21,6 +21,7 @@
 @property (nonatomic, strong) CLLocationManager *locationManager;
 @property (nonatomic, assign) float longtitude;
 @property (nonatomic, assign) float lattitude;
+@property (nonatomic, weak) IBOutlet UIBarButtonItem *loginButton;
 
 @end
 
@@ -38,9 +39,12 @@ static int const kButtonWidth = 100;
 
 
 -(void) viewWillAppear: (BOOL) animated {
-  //[self.tableView reloadData];
+  if ([AuthenticationModel isLoggedIn] == YES) {
+    [self.loginButton setTitle:@"Logout"];
+  } else {
+    [self.loginButton setTitle:@"Login"];
+  }
 }
-
 -(IBAction)login:(id)sender {
   [self performSegueWithIdentifier:@"idSegueAuth" sender:self];
 }

@@ -156,6 +156,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="loginButton" destination="611-zP-EEw" id="QGB-W6-oLR"/>
                         <outlet property="scrollMenu" destination="pEy-wM-SsP" id="hds-3m-KVL"/>
                         <outlet property="tblPeople" destination="c7n-fL-aiT" id="KDE-33-RNj"/>
                         <segue destination="3yu-43-obO" kind="show" identifier="idSegueTrend" id="Ui5-aP-aiA"/>
