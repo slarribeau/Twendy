@@ -44,6 +44,10 @@ static int const kButtonWidth = 100;
   } else {
     [self.loginButton setTitle:@"Login"];
   }
+  
+  if (self.arrPeopleInfo.count == 0) {
+    [self getTrendData:kLocationHome];
+  }
 }
 -(IBAction)login:(id)sender {
   [self performSegueWithIdentifier:@"idSegueAuth" sender:self];
