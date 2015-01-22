@@ -41,7 +41,7 @@
 - (void)didReceiveRegion:(OAServiceTicket*)ticket data:(NSData*)data {
   NSString* httpBody = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
   NSLog(@"++++++++++++++++++++++++++++");
-  NSLog(@"didReceive Region%@", httpBody);
+  NSLog(@"NEW didReceive Region%@", httpBody);
   id tmp = [[[NSUserDefaults standardUserDefaults] objectForKey:@"configRegion"] mutableCopy];
   NSMutableDictionary* configRegionDict;
   if (tmp == nil) {

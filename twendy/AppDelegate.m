@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "Accounts/Accounts.h"
 #import "AuthenticationModel.h"
+#import "RegionModel.h"
 
 @interface AppDelegate ()
 
@@ -20,6 +21,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
   [[AuthenticationModel alloc] init];
+  [[RegionModel alloc] init];
+  
   if (IOS_VERSION >= 8) {
     [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
     
@@ -55,7 +58,7 @@
       NSArray *accountsArray = [accountStore accountsWithAccountType:accountType];
       
       NSLog(@"accounts = %@", accountsArray);
-      //if ([accountsArray count] > 0) {
+      if ([accountsArray count] > 0) {
         // Grab the initial Twitter account to tweet from.
         ACAccount *twitterAccount = [accountsArray objectAtIndex:0];
         //TWRequest *postRequest = nil;
@@ -88,7 +91,7 @@
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"prefs:root=TWITTER"]];
       }
     }
-  //}
+  }
    ];
 #endif
   return YES;

@@ -392,41 +392,7 @@ static int const kButtonWidth = 100;
 }
 
 -(IBAction)getRegionsDataButton:(id)sender {
-  
-  
-  if (self.regionArray.count > 0) {
-    //Only fetch the region data once
-    [self performSegueWithIdentifier:@"idSegueRegion" sender:self];
-  } else {
-    OAConsumer* consumer = [AuthenticationModel getConsumer];
-    OAToken* accessToken = [AuthenticationModel getAccessToken];
-    
-    if (accessToken) {
-      NSURL* userdatarequestu = [NSURL URLWithString:@"https://api.twitter.com/1.1/trends/available.json"];
-      
-      OAMutableURLRequest* requestTokenRequest;
-      requestTokenRequest = [[OAMutableURLRequest alloc]
-                             initWithURL:userdatarequestu
-                             
-                             consumer:consumer
-                             
-                             token:accessToken
-                             
-                             realm:nil
-                             
-                             signatureProvider:nil];
-      
-      [requestTokenRequest setHTTPMethod:@"GET"];
-      
-      OADataFetcher* dataFetcher = [[OADataFetcher alloc] init];
-      
-      [dataFetcher fetchDataWithRequest:requestTokenRequest
-                               delegate:self
-                      didFinishSelector:@selector(didReceiveRegion:data:)
-                        didFailSelector:@selector(didFailOAuth:error:)];    } else {
-        NSLog(@"ERROR!!");
-      }
-  }
+  [self performSegueWithIdentifier:@"idSegueRegion" sender:self];
 }
 
 
@@ -468,7 +434,7 @@ static int const kButtonWidth = 100;
 - (void)didReceiveRegion:(OAServiceTicket*)ticket data:(NSData*)data {
   NSString* httpBody = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
   NSLog(@"++++++++++++++++++++++++++++");
-  NSLog(@"didReceive Region%@", httpBody);
+  NSLog(@"OLD didReceive Region%@", httpBody);
   
   id tmp = [[[NSUserDefaults standardUserDefaults] objectForKey:@"configRegion"] mutableCopy];
   NSMutableDictionary* configRegionDict;

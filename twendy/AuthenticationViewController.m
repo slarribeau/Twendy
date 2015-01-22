@@ -97,6 +97,8 @@
   } else {
     [AuthenticationModel setAccessToken:accessToken];
     [AuthenticationModel setIsLoggedIn:YES];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"LoginSucceed" object:nil];
+
     [self.navigationController popViewControllerAnimated:YES];
 
     return;
