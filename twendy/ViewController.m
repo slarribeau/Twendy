@@ -31,6 +31,14 @@ static NSString * const kMenuUnSelectionMark = @" ";
 
 static int const kButtonWidth = 100;
 
+-(void) viewDidAppear: (BOOL) animated {
+  //[self.tableView reloadData];
+}
+
+
+-(void) viewWillAppear: (BOOL) animated {
+  //[self.tableView reloadData];
+}
 
 -(IBAction)login:(id)sender {
   [self performSegueWithIdentifier:@"idSegueAuth" sender:self];

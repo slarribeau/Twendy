@@ -1,9 +1,11 @@
 //
-//  ViewController.m
-//  TechnoGerms.com
+//  AuthenticationViewController.h
+//  twendy
 //
-//  Created by Ammad iOS on 06/12/2013.
-//  Copyright (c) 2013 Techno. All rights reserved.
+//  Created by Scott Larribeau
+//  See below for Attribution to technogerms.com for OAUTH code.
+//    Created by Ammad iOS on 06/12/2013.
+//    Copyright (c) 2013 Techno. All rights reserved.
 //
 //http://codegerms.com/get-user-info-data-twitter-api-example-ios-objective-c/
 //
@@ -21,6 +23,16 @@ NSString *callback = @"http://nowandzen.com/callback";
 @implementation AuthenticationViewController
 @synthesize webview, accessToken, trendNameArray;
 
+
+-(void) viewWillAppear: (BOOL) animated {
+  //[self.tableView reloadData];
+}
+
+
+-(void) viewDidAppear: (BOOL) animated {
+  //[self.tableView reloadData];
+}
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
   self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -34,13 +46,8 @@ NSString *callback = @"http://nowandzen.com/callback";
 {
   [super viewDidLoad];
   
-  [self.navigationController popViewControllerAnimated:YES];
 
   
-  return;
-  
-  
-  //[self performSegueWithIdentifier:@"idSegueAuth" sender:self];
 
   
   
@@ -97,6 +104,15 @@ NSString *callback = @"http://nowandzen.com/callback";
     NSLog(@"Unexpected result received from twitter: Missing access token.");
   } else {
   
+    
+    
+    [self.navigationController popViewControllerAnimated:YES];
+
+    return;
+    
+    
+    
+    
     NSInteger selectedConfigRegionWoeid = [[[NSUserDefaults standardUserDefaults] objectForKey:@"selectedConfigRegion"] intValue];
 
     NSURL* userdatarequestu;

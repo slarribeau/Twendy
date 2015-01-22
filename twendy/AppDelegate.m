@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "Accounts/Accounts.h"
+#import "AuthenticationModel.h"
 
 @interface AppDelegate ()
 
@@ -18,6 +19,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
+  [[AuthenticationModel alloc] init];
   if (IOS_VERSION >= 8) {
     [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
     
@@ -25,6 +27,7 @@
     [[UIApplication sharedApplication] registerForRemoteNotifications];
   }
 
+  
 #if 0
   ACAccountStore *account = [[ACAccountStore alloc] init];
   NSArray *debug = [account accounts];
