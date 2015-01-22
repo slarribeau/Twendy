@@ -7,7 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Region.h"
+
 
 @interface RegionModel : NSObject
--(void)reload:(NSNotification *)obj;
++(NSInteger)count;
++(Region*)get:(NSUInteger)index;
 @end

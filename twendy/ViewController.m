@@ -73,8 +73,16 @@ static int const kButtonWidth = 100;
   if ([AuthenticationModel isLoggedIn] == NO) {
     [self login:nil];
   }
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(menuHasChanged:) name:@"MenuHasChanged" object:nil];
+
   
 }
+
+- (void)dealloc
+{
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 
 -(void)initGeo
 {
@@ -144,8 +152,8 @@ static int const kButtonWidth = 100;
   return self.regionArray;
 }
 
--(void)menuHasChanged {
-  [self createScrollMenu];
+-(void)menuHasChanged:(NSNotification*)obj {
+  [self createScrollMenu]; //Notification
 }
 
 #pragma mark - UITableView Delegates

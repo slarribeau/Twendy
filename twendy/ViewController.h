@@ -20,7 +20,7 @@
 
 @end
 
-@interface ViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, RegionViewControllerDelegate, CLLocationManagerDelegate>
+@interface ViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate>
 @property (nonatomic, weak) id <TrendingListViewControllerDelegate> delegate;
 @property (weak, nonatomic) IBOutlet UITableView *tblPeople; //FIX ME rename
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollMenu;
