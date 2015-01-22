@@ -109,7 +109,7 @@ static int const kButtonWidth = 100;
 }
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
   
-  if (self.recordIDToEdit > 0) {
+  if (self.recordIDToEdit >= 0) {
     TrendViewController *trendViewController = [segue destinationViewController];
     trendViewController.trendUrl = self.trendUrlInfo[self.recordIDToEdit];
     self.recordIDToEdit = -1;

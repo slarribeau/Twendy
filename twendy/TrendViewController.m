@@ -9,7 +9,7 @@
 #import "TrendViewController.h"
 
 @interface TrendViewController ()
-
+@property (nonatomic, weak) IBOutlet UIWebView *webview;
 @end
 
 @implementation TrendViewController
