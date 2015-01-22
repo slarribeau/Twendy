@@ -9,6 +9,7 @@
 
 #import "RegionViewController.h"
 #import "Region.h"
+#import "TwitterFetch.h"
 
 @interface RegionViewController ()
 
@@ -22,7 +23,51 @@
   self.tblRegion.delegate = self;
   self.tblRegion.dataSource = self;
 
-  self.regionArray = [self.delegate getRegionArray];
+  //self.regionArray = [self.delegate getRegionArray];
+  
+  if (self.regionArray.count > 0) {
+    //Only fetch the region data once
+    [self.tblRegion reloadData];
+  } else {
+    [TwitterFetch fetch:self url:@"https://api.twitter.com/1.1/trends/available.json" didFinishSelector:@selector(didReceiveRegion:data:) didFailSelector:@selector(didNotReceiveUserData:error:)];
+  }
+}
+//+ (void) fetch:(id)delegate url:(NSString *)url didFinishSelector:(SEL)finishSelector didFailSelector:(SEL)failSelector;
+
+- (void)didNotReceiveUserData:(OAServiceTicket*)ticket error:(NSError*)error {
+  NSLog(@"Failed User Data Fetch %@", error);
+}
+
+- (void)didReceiveRegion:(OAServiceTicket*)ticket data:(NSData*)data {
+  NSString* httpBody = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+  NSLog(@"++++++++++++++++++++++++++++");
+  NSLog(@"didReceive Region%@", httpBody);
+  id tmp = [[[NSUserDefaults standardUserDefaults] objectForKey:@"configRegion"] mutableCopy];
+  NSMutableDictionary* configRegionDict;
+  if (tmp == nil) {
+    configRegionDict = [[NSMutableDictionary alloc]init];
+  }else {
+    configRegionDict = tmp;
+  }
+  
+  NSArray *twitterRegions = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers       error:nil];
+  
+  for (NSDictionary *region in twitterRegions) {
+    Region *regionObj = [Region alloc];
+    
+    regionObj.city = [region objectForKey:@"name"];
+    regionObj.country = [region objectForKey:@"country"];
+    regionObj.woeid = [[region objectForKey:@"woeid"] intValue];
+    
+    NSInteger woeid = [[configRegionDict objectForKey:regionObj.city] intValue];
+    
+    if (woeid == regionObj.woeid) {
+      regionObj.selected = YES;
+    }
+    
+    [self.regionArray addObject:regionObj];
+  }
+  [self.tblRegion reloadData];
 
 }
 
