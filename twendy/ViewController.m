@@ -10,14 +10,14 @@
 #import "TrendViewController.h"
 #import "RegionViewController.h"
 #import "Region.h"
+#import "Trend.h"
 #import "AuthenticationModel.h"
 #import "TwitterFetch.h"
 
 
 @interface ViewController ()
 //This is an extension not a category.
-@property (nonatomic, strong) NSArray *arrPeopleInfo;
-@property (nonatomic, strong) NSArray *trendUrlInfo;
+@property (nonatomic, strong) NSMutableArray *trendDB;
 @property (nonatomic) NSInteger recordIDToEdit;
 @property (nonatomic, strong) CLLocationManager *locationManager;
 @property (nonatomic, assign) float longtitude;
@@ -46,7 +46,7 @@ static int const kButtonWidth = 100;
     [self.loginButton setTitle:@"Login"];
   }
   
-  if (self.arrPeopleInfo.count == 0) {
+  if (self.trendDB.count == 0) {
     [self getTrendData:kLocationHome];
   } else {
     // Reload the table view.
@@ -114,7 +114,9 @@ static int const kButtonWidth = 100;
   
   if (self.recordIDToEdit >= 0) {
     TrendViewController *trendViewController = [segue destinationViewController];
-    trendViewController.trendUrl = self.trendUrlInfo[self.recordIDToEdit];
+    Trend *trendObj = self.trendDB[self.recordIDToEdit];
+
+    trendViewController.trendUrl = trendObj.url;
     self.recordIDToEdit = -1;
   }
 }
@@ -156,7 +158,7 @@ static int const kButtonWidth = 100;
 - (NSInteger)tableView:(UITableView *)tableView
  numberOfRowsInSection:(NSInteger)section
 {
-  return self.arrPeopleInfo.count;
+  return self.trendDB.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
@@ -164,7 +166,8 @@ static int const kButtonWidth = 100;
 {
   UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"idCellRecord" forIndexPath:indexPath];
   
-  cell.textLabel.text = self.arrPeopleInfo[indexPath.row];
+  Trend *trendObj = self.trendDB[indexPath.row];
+  cell.textLabel.text = trendObj.name;
   //cell.detailTextLabel.text = @"text";
   return cell;
 }
@@ -407,32 +410,17 @@ static int const kButtonWidth = 100;
   NSLog(@"didReceive user data %@", httpBody);
   
   NSArray *twitterTrends   = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers       error:nil];
-  NSArray *trends  = [[twitterTrends objectAtIndex:0] objectForKey:@"trends"];
+  NSArray *trendArray  = [[twitterTrends objectAtIndex:0] objectForKey:@"trends"];
   
-  self.arrPeopleInfo = [self.delegate getTrendArray];
-  self.trendUrlInfo = [self.delegate getUrlArray];
-  // Reload the table view.
-  //[self.tblPeople reloadData];
+  self.trendDB = [[NSMutableArray alloc] init];
   
-  //FIX ME - this should be a single array of objects, not two arrays
-  NSMutableArray *trendNameArray = [[NSMutableArray alloc] init];
-  NSMutableArray *trendUrlArray = [[NSMutableArray alloc] init];
-  
-  
-  for (NSDictionary *trend in trends) {
-    NSLog(@"trend = %@", trend);
-    
-    NSString *names = [trend objectForKey:@"name"];
-    
-    NSString *urls = [trend objectForKey:@"url"];
-    [trendNameArray addObject:names];
-    [trendUrlArray addObject:urls];
+  for (NSDictionary *trend in trendArray) {
+    Trend *trendObj = [Trend alloc];
+    trendObj.name = [trend objectForKey:@"name"];
+    trendObj.url = [trend objectForKey:@"url"];
+    [self.trendDB addObject:trendObj];
   }
-  NSLog(@"Built me an trendNameArray:%lu", (unsigned long)trendNameArray.count);
   
-  
-  self.arrPeopleInfo = trendNameArray;
-  self.trendUrlInfo = trendUrlArray;
   // Reload the table view.
   [self.tblPeople reloadData];
   [self createScrollMenu];

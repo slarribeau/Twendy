@@ -11,6 +11,7 @@
 		D6698A4A1A707FAA00CBD338 /* AuthenticationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D6698A491A707FAA00CBD338 /* AuthenticationModel.m */; };
 		D6698A4D1A70ACC600CBD338 /* TwitterFetch.m in Sources */ = {isa = PBXBuildFile; fileRef = D6698A4C1A70ACC600CBD338 /* TwitterFetch.m */; };
 		D6698A501A715DE600CBD338 /* RegionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D6698A4F1A715DE500CBD338 /* RegionModel.m */; };
+		D6698A531A719BBA00CBD338 /* Trend.m in Sources */ = {isa = PBXBuildFile; fileRef = D6698A521A719BBA00CBD338 /* Trend.m */; };
 		D6C4B3211A606247006F40DF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D6C4B3201A606247006F40DF /* main.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		D6C4B3241A606247006F40DF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D6C4B3231A606247006F40DF /* AppDelegate.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		D6C4B3271A606247006F40DF /* AuthenticationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6C4B3261A606247006F40DF /* AuthenticationViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -67,6 +68,8 @@
 		D6698A4C1A70ACC600CBD338 /* TwitterFetch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterFetch.m; sourceTree = "<group>"; };
 		D6698A4E1A715DE500CBD338 /* RegionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegionModel.h; sourceTree = "<group>"; };
 		D6698A4F1A715DE500CBD338 /* RegionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegionModel.m; sourceTree = "<group>"; };
+		D6698A511A719BBA00CBD338 /* Trend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Trend.h; sourceTree = "<group>"; };
+		D6698A521A719BBA00CBD338 /* Trend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Trend.m; sourceTree = "<group>"; };
 		D6C4B31B1A606247006F40DF /* twendy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = twendy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6C4B31F1A606247006F40DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D6C4B3201A606247006F40DF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -193,6 +196,8 @@
 				D6698A4F1A715DE500CBD338 /* RegionModel.m */,
 				D6C4B39A1A65BC97006F40DF /* RegionViewController.h */,
 				D6C4B39B1A65BC97006F40DF /* RegionViewController.m */,
+				D6698A511A719BBA00CBD338 /* Trend.h */,
+				D6698A521A719BBA00CBD338 /* Trend.m */,
 				D6C4B3971A60C004006F40DF /* TrendViewController.h */,
 				D6C4B3981A60C004006F40DF /* TrendViewController.m */,
 				D6698A4B1A70ACC600CBD338 /* TwitterFetch.h */,
@@ -435,6 +440,7 @@
 				D6C4B3801A606A32006F40DF /* sha1.c in Sources */,
 				D6C4B3891A606A32006F40DF /* OARequestParameter.m in Sources */,
 				D6C4B3821A606A32006F40DF /* OACall.m in Sources */,
+				D6698A531A719BBA00CBD338 /* Trend.m in Sources */,
 				D6C4B3811A606A32006F40DF /* OAAttachment.m in Sources */,
 				D6C4B3271A606247006F40DF /* AuthenticationViewController.m in Sources */,
 				D6C4B38A1A606A32006F40DF /* OAServiceTicket.m in Sources */,
