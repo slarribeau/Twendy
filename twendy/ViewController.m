@@ -14,6 +14,7 @@
 #import "AuthenticationModel.h"
 #import "TwitterFetch.h"
 #import "LocationModel.h"
+#import "Notifications.h"
 
 
 @interface ViewController ()
@@ -48,7 +49,7 @@ static int const kButtonWidth = 100;
     
     [self createScrollMenu];
   }
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(menuHasChanged:) name:@"MenuHasChanged" object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(menuHasChanged:) name:MenuHasChanged object:nil];
 }
 
 - (void)dealloc
@@ -276,7 +277,15 @@ static int const kButtonWidth = 100;
   NSLog(@"OauthFail %@", error);
 }
 
+-(void)notifyUser
+{
+  UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Reminder"
+                                                  message:@"You need to login before using this app."
+                                                 delegate:self cancelButtonTitle:@"OK"
+                                        otherButtonTitles:nil];
+  [alert show];
 
+}
 -(void)getTrendData:(NSInteger)location {
   
   if (location == 0) { //There are some race conditions where we don't yet have home woeid at start
@@ -284,12 +293,7 @@ static int const kButtonWidth = 100;
   }
   
   if ([AuthenticationModel isLoggedIn] == NO) {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Reminder"
-                                                    message:@"You need to login before using this app."
-                                                   delegate:self cancelButtonTitle:@"OK"
-                                          otherButtonTitles:nil];
-    [alert show];
-
+    [self notifyUser];
     return;
   }
   

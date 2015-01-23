@@ -14,6 +14,7 @@
 #import "AuthenticationModel.h"
 #import "TwitterFetch.h"
 #import "LocationModel.h"
+#import "Notifications.h"
 
 @interface AuthenticationViewController ()
 @property (nonatomic, strong) IBOutlet UIWebView *webview; //FIX ME weak?
@@ -83,7 +84,7 @@
   } else {
     [AuthenticationModel setAccessToken:accessToken];
     [AuthenticationModel setIsLoggedIn:YES];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"LoginSucceed" object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:LoginSucceed object:nil];
 
     //We are logged in, but retrieve closest region before popping back to previous screen.
     [self getClosestRegion];

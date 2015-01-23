@@ -73,6 +73,7 @@
 		D6698A521A719BBA00CBD338 /* Trend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Trend.m; sourceTree = "<group>"; };
 		D6698A541A71A43700CBD338 /* LocationModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationModel.h; sourceTree = "<group>"; };
 		D6698A551A71A43700CBD338 /* LocationModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationModel.m; sourceTree = "<group>"; };
+		D6698A571A72EB0500CBD338 /* Notifications.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Notifications.h; sourceTree = "<group>"; };
 		D6C4B31B1A606247006F40DF /* twendy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = twendy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6C4B31F1A606247006F40DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D6C4B3201A606247006F40DF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -207,6 +208,7 @@
 				D6698A4C1A70ACC600CBD338 /* TwitterFetch.m */,
 				D6C4B3941A609D7B006F40DF /* ViewController.h */,
 				D6C4B3951A609D7B006F40DF /* ViewController.m */,
+				D6698A571A72EB0500CBD338 /* Notifications.h */,
 				D6698A541A71A43700CBD338 /* LocationModel.h */,
 				D6698A551A71A43700CBD338 /* LocationModel.m */,
 				D6C4B32B1A606247006F40DF /* Images.xcassets */,

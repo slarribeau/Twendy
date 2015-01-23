@@ -9,6 +9,7 @@
 #import "RegionModel.h"
 #import "TwitterFetch.h"
 #import "OAuthConsumer.h"
+#import "Notifications.h"
 
 
 @implementation RegionModel
@@ -26,7 +27,7 @@ static NSMutableArray* regionDB;
 
 -(id)init
 {
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reload:) name:@"LoginSucceed" object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reload:) name:LoginSucceed object:nil];
   return self;
 }
 

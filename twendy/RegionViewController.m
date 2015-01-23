@@ -10,6 +10,7 @@
 #import "RegionViewController.h"
 #import "RegionModel.h"
 #import "TwitterFetch.h"
+#import "Notifications.h"
 
 @interface RegionViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *tblRegion;
@@ -89,7 +90,7 @@
 
   NSLog(@"configRegionDict after %@",configRegionDict);
 
-  [[NSNotificationCenter defaultCenter] postNotificationName:@"MenuHasChanged" object:nil];
+  [[NSNotificationCenter defaultCenter] postNotificationName:MenuHasChanged object:nil];
 
 }
 @end
