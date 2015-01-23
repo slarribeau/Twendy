@@ -302,20 +302,13 @@ static int const kButtonWidth = 100;
 
 #pragma mark - handle data returned from twitter api
 - (void)didReceiveRateLimit:(OAServiceTicket*)ticket data:(NSData*)data {
-  NSString* httpBody = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-  NSLog(@"++++++++++++++++++++++++++++");
-  NSLog(@"didReceive rate limit %@", httpBody);
-}
-
-- (void)didReceiveClosestRegion:(OAServiceTicket*)ticket data:(NSData*)data {
-  NSString* httpBody = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-  NSLog(@"++++++++++++++++++++++++++++");
-  NSLog(@"didReceiveClosestRegion %@", httpBody);
+  //NSString* httpBody = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+  //NSLog(@"didReceive rate limit %@", httpBody);
 }
 
 - (void)didReceiveuserdata:(OAServiceTicket*)ticket data:(NSData*)data {
-  NSString* httpBody = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-  NSLog(@"didReceive user data %@", httpBody);
+  //NSString* httpBody = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+  //NSLog(@"didReceive user data %@", httpBody);
   
   NSArray *twitterTrends   = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers       error:nil];
   NSArray *trendArray  = [[twitterTrends objectAtIndex:0] objectForKey:@"trends"];

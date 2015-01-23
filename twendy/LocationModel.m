@@ -13,8 +13,6 @@
 
 
 @interface LocationModel ()
-@property (nonatomic, assign) float longtitude;
-@property (nonatomic, assign) float lattitude;
 @property (nonatomic, strong) CLLocationManager *locationManager;
 @end
 
@@ -51,8 +49,8 @@ static float lattitude = 0;
 
 +(float)getCurrentLongitude
 {
-  NSLog(@"getCurrentLongitude == XXX %f", longtitude);
   if (longtitude == 0) {
+    assert(0);
     return -122.0419; //Default to cupertiono, CA, USA
     
   } else {
@@ -62,6 +60,7 @@ static float lattitude = 0;
 +(float)getCurrentLatitude
 {
   if (lattitude == 0) {
+    assert(0);
     return 37.3175; //Default to cupertiono, CA, USA
   } else {
     return lattitude;
@@ -70,13 +69,10 @@ static float lattitude = 0;
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
 {
-  NSLog(@"%@", [locations lastObject]);
+  //NSLog(@"locationManager CALLBACK %@", [locations lastObject]);
   CLLocation *myLocation = [locations lastObject];
-  NSLog(@"lat = %f", myLocation.coordinate.latitude);
-  NSLog(@"long = %f", myLocation.coordinate.longitude);
-  
-  self.longtitude = myLocation.coordinate.longitude;
-  self.lattitude = myLocation.coordinate.latitude;
+  longtitude = myLocation.coordinate.longitude;
+  lattitude = myLocation.coordinate.latitude;
 }
 
 

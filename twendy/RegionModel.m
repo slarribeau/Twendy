@@ -63,9 +63,8 @@ static NSMutableArray* regionDB;
 }
 
 - (void)didReceiveRegion:(OAServiceTicket*)ticket data:(NSData*)data {
-  NSString* httpBody = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-  NSLog(@"++++++++++++++++++++++++++++");
-  NSLog(@"NEW NEW didReceive Region%@", httpBody);
+  //NSString* httpBody = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+  //NSLog(@"didReceiveRegion%@", httpBody);
   id tmp = [[[NSUserDefaults standardUserDefaults] objectForKey:@"configRegion"] mutableCopy];
   NSMutableDictionary* configRegionDict;
   if (tmp == nil) {
