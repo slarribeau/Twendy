@@ -15,6 +15,8 @@
 #import "TwitterFetch.h"
 #import "LocationModel.h"
 #import "Notifications.h"
+#import "RegionModel.h"
+
 
 
 @interface ViewController ()
@@ -50,6 +52,9 @@ static int const kButtonWidth = 100;
     [self createScrollMenu];
   }
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(menuHasChanged:) name:MenuHasChanged object:nil];
+  
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLoggedOut:) name:LogoutSucceed object:nil];
+
 }
 
 - (void)dealloc
@@ -95,8 +100,15 @@ static int const kButtonWidth = 100;
   }
 }
 
+-(void)userLoggedOut:(NSNotification*)obj {
+  [RegionModel reset];
+  self.trendDB = [[NSMutableArray alloc] init];
+  [self.tblPeople reloadData];
+  [self clearScrollMenu];
+}
+
 -(void)menuHasChanged:(NSNotification*)obj {
-  [self createScrollMenu]; //Notification
+  [self createScrollMenu];
 }
 
 #pragma mark - UITableView Delegates
@@ -195,14 +207,17 @@ static int const kButtonWidth = 100;
   button.tag = tag;
 }
 
-- (void)createScrollMenu //TODO -> Leaky!
+-(void)clearScrollMenu
 {
-  //Clean up in case this is being called after first time
   for (UIView *view in [self.scrollMenu subviews])
   {
     [view removeFromSuperview];
   }
-  
+}
+- (void)createScrollMenu //TODO -> Leaky!
+{
+  //Clean up in case this is being called after first time
+  [self clearScrollMenu];
   int x = 0;
   
   [self addScrollButton:x name:[NSString stringWithFormat:@"%@%@",kMenuUnSelectionMark,@"Home" ] action:@selector(getHomeTrendDataButton:) tag:0]; //Tag for home is zero.

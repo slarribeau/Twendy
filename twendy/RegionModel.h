@@ -13,4 +13,6 @@
 @interface RegionModel : NSObject
 +(NSInteger)count;
 +(Region*)get:(NSUInteger)index;
++(void)reset;
+
 @end

@@ -50,6 +50,11 @@ static NSMutableArray* regionDB;
     return regionDB[index];
   }
 }
++(void)reset
+{
+  //Clear out DB
+  regionDB = [[NSMutableArray alloc] init ];
+}
 
 -(void)reload:(NSNotification *)notification
 {

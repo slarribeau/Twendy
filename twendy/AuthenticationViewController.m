@@ -28,6 +28,7 @@
   if ([AuthenticationModel isLoggedIn]) {
     [AuthenticationModel setIsLoggedIn:NO];
     [self deleteCookies];
+    [[NSNotificationCenter defaultCenter] postNotificationName:LogoutSucceed object:nil];
   }
   
   NSURL* requestTokenUrl = [NSURL URLWithString:@"https://api.twitter.com/oauth/request_token"];

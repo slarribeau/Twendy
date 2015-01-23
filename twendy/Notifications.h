@@ -10,4 +10,5 @@
 #define twendy_Notifications_h
 #define MenuHasChanged @"MenuHasChanged"
 #define LoginSucceed @"LoginSucceed"
+#define LogoutSucceed @"LogoutSucceed"
 #endif
