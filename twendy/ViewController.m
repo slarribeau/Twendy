@@ -20,16 +20,12 @@
 //This is an extension not a category.
 @property (nonatomic, strong) NSMutableArray *trendDB;
 @property (nonatomic) NSInteger recordIDToEdit;
-@property (nonatomic, strong) CLLocationManager *locationManager;
-@property (nonatomic, assign) float longtitude;
-@property (nonatomic, assign) float lattitude;
 @property (nonatomic, weak) IBOutlet UIBarButtonItem *loginButton;
 
 @end
 
 @implementation ViewController
 
-//static NSInteger  const kLocationHome = 2488042;
 static NSString * const kMenuSelectionMark = @"*";
 static NSString * const kMenuUnSelectionMark = @" ";
 
@@ -64,7 +60,6 @@ static int const kButtonWidth = 100;
 - (void)viewDidLoad {
     [super viewDidLoad];
   
-  [self initGeo];
   self.tblPeople.delegate = self;
   self.tblPeople.dataSource = self;
 
@@ -88,28 +83,6 @@ static int const kButtonWidth = 100;
 }
 
 
--(void)initGeo
-{
-  return;
-  self.longtitude = 0;
-  self.lattitude = 0;
-
-  // ** Don't forget to add NSLocationWhenInUseUsageDescription in MyApp-Info.plist and give it a string
-  
-  self.locationManager = [[CLLocationManager alloc] init];
-  self.locationManager.delegate = self;
-  // Check for iOS 8. Without this guard the code will crash with "unknown selector" on iOS 7.
-  if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
-    [self.locationManager requestWhenInUseAuthorization];
-  }
-  [self.locationManager startUpdatingLocation];
-  
-  
-  float latitude = self.locationManager.location.coordinate.latitude;
-  float longitude = self.locationManager.location.coordinate.longitude;
-  NSLog(@"long %f lat %f", longitude, latitude);
-
-}
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
   
   if (self.recordIDToEdit >= 0) {
@@ -119,36 +92,6 @@ static int const kButtonWidth = 100;
     trendViewController.trendUrl = trendObj.url;
     self.recordIDToEdit = -1;
   }
-}
-
--(float)getCurrentLongitude
-{
-  NSLog(@"getCurrentLongitude == XXX %f", self.longtitude);
-  if (self.longtitude == 0) {
-    return -122.0419; //Default to cupertiono, CA, USA
-
-  } else {
-    return self.longtitude;
-  }
-}
--(float)getCurrentLatitude
-{
-  if (self.lattitude == 0) {
-    return 37.3175; //Default to cupertiono, CA, USA
-  } else {
-    return self.lattitude;
-  }
-}
-
-- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
-{
-  NSLog(@"%@", [locations lastObject]);
-  CLLocation *myLocation = [locations lastObject];
-  NSLog(@"lat = %f", myLocation.coordinate.latitude);
-  NSLog(@"long = %f", myLocation.coordinate.longitude);
-  
-  self.longtitude = myLocation.coordinate.longitude;
-  self.lattitude = myLocation.coordinate.latitude;
 }
 
 -(void)menuHasChanged:(NSNotification*)obj {
@@ -326,11 +269,7 @@ static int const kButtonWidth = 100;
   UIButton *button = (UIButton*)sender;
   [self removeMenuSelection];
   [self setMenuSelection:button];
-  //[self getTrendData:kLocationHome];
-  //[self getClosestRegionTrendData];
-  NSInteger woeid = [LocationModel getWoeid];
-  assert(woeid);
-  [self getTrendData:woeid];
+  [self getTrendData:[LocationModel getWoeid]];
 }
 
 - (void)didFailOauth:(OAServiceTicket*)ticket error:(NSError*)error {
@@ -362,39 +301,6 @@ static int const kButtonWidth = 100;
 
 
 #pragma mark - handle data returned from twitter api
-- (void)didReceiveRegion:(OAServiceTicket*)ticket data:(NSData*)data {
-  NSString* httpBody = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-  NSLog(@"++++++++++++++++++++++++++++");
-  NSLog(@"OLD didReceive Region%@", httpBody);
-  
-  id tmp = [[[NSUserDefaults standardUserDefaults] objectForKey:@"configRegion"] mutableCopy];
-  NSMutableDictionary* configRegionDict;
-  if (tmp == nil) {
-    configRegionDict = [[NSMutableDictionary alloc]init];
-  }else {
-    configRegionDict = tmp;
-  }
-
-  NSArray *twitterRegions = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers       error:nil];
-  
-  for (NSDictionary *region in twitterRegions) {
-    Region *regionObj = [Region alloc];
-    
-    regionObj.city = [region objectForKey:@"name"];
-    regionObj.country = [region objectForKey:@"country"];
-    regionObj.woeid = [[region objectForKey:@"woeid"] intValue];
-
-    NSInteger woeid = [[configRegionDict objectForKey:regionObj.city] intValue];
-
-    if (woeid == regionObj.woeid) {
-      regionObj.selected = YES;
-    }
-
-    [self.regionArray addObject:regionObj];
-  }
-  [self performSegueWithIdentifier:@"idSegueRegion" sender:self];
-}
-
 - (void)didReceiveRateLimit:(OAServiceTicket*)ticket data:(NSData*)data {
   NSString* httpBody = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
   NSLog(@"++++++++++++++++++++++++++++");

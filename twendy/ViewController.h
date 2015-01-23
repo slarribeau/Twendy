@@ -9,10 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "OAuthConsumer.h"
 #import "RegionViewController.h"
-#import <CoreLocation/CoreLocation.h>
-@import CoreLocation;
 
-
+#if 0
 @protocol TrendingListViewControllerDelegate
 -(NSArray*)getTrendArray;
 -(NSArray*)getUrlArray;
@@ -20,15 +18,16 @@
 
 
 @end
+#endif
 
-@interface ViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate>
-@property (nonatomic, weak) id <TrendingListViewControllerDelegate> delegate;
+@interface ViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+//@property (nonatomic, weak) id <TrendingListViewControllerDelegate> delegate;
 @property (weak, nonatomic) IBOutlet UITableView *tblPeople; //FIX ME rename
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollMenu;
-@property (nonatomic, strong) NSMutableArray *regionArray;
+//@property (nonatomic, strong) NSMutableArray *regionArray;
 
--(IBAction)getHomeTrendDataButton:(id)sender;
--(IBAction)getRateLimit:(id)sender;
+//-(IBAction)getHomeTrendDataButton:(id)sender;
+//-(IBAction)getRateLimit:(id)sender;
 
 @end
 
