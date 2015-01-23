@@ -21,10 +21,13 @@
 @end
 
 @implementation AuthenticationViewController
+
+
 - (void)viewDidLoad
 {
   [super viewDidLoad];
-  
+  [self setupBackButton];
+
   if ([AuthenticationModel isLoggedIn]) {
     [AuthenticationModel setIsLoggedIn:NO];
     [self deleteCookies];
@@ -138,6 +141,17 @@
   [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
+-(void)setupBackButton
+{
+  UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action:@selector(popViewController)];
+  
+  self.navigationItem.leftBarButtonItem = backButton;
+}
+
+-(void)popViewController
+{
+  [self.navigationController popViewControllerAnimated:YES];
+}
 
 #pragma mark UIWebViewDelegate
 
