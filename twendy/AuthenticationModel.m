@@ -40,7 +40,11 @@ static OAConsumer* consumer = nil;
 
 +(void) setIsLoggedIn:(BOOL)status
 {
-   isLoggedInBOOL = status;
+  isLoggedInBOOL = status;
+  if (status == NO) {
+    accessToken = nil;
+    requestToken = nil;
+  }
 }
 
 +(OAToken*) getAccessToken

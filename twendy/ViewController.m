@@ -31,6 +31,31 @@ static NSString * const kMenuUnSelectionMark = @" ";
 
 static int const kButtonWidth = 100;
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+  
+  self.tblPeople.delegate = self;
+  self.tblPeople.dataSource = self;
+
+  self.recordIDToEdit = -1;
+
+  
+  if ([AuthenticationModel isLoggedIn] == NO) {
+    [self login:nil];
+  } else {
+    // Reload the table view.
+    [self.tblPeople reloadData];
+    
+    [self createScrollMenu];
+  }
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(menuHasChanged:) name:@"MenuHasChanged" object:nil];
+}
+
+- (void)dealloc
+{
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 -(void) viewDidAppear: (BOOL) animated {
   //[self.tableView reloadData];
 }
@@ -55,31 +80,6 @@ static int const kButtonWidth = 100;
 }
 -(IBAction)login:(id)sender {
   [self performSegueWithIdentifier:@"idSegueAuth" sender:self];
-}
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-  
-  self.tblPeople.delegate = self;
-  self.tblPeople.dataSource = self;
-
-  self.recordIDToEdit = -1;
-
-  
-  if ([AuthenticationModel isLoggedIn] == NO) {
-    [self login:nil];
-  } else {
-    // Reload the table view.
-    [self.tblPeople reloadData];
-    
-    [self createScrollMenu];
-  }
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(menuHasChanged:) name:@"MenuHasChanged" object:nil];
-}
-
-- (void)dealloc
-{
-  [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 

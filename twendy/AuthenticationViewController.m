@@ -15,42 +15,20 @@
 #import "TwitterFetch.h"
 #import "LocationModel.h"
 
-
-
 @interface AuthenticationViewController ()
 @property (nonatomic, strong) IBOutlet UIWebView *webview; //FIX ME weak?
-@property (nonatomic, strong) NSMutableArray *trendNameArray;
-@property (nonatomic, strong) NSMutableArray *trendUrlArray;
-
 @end
 
 @implementation AuthenticationViewController
-//@synthesize webview, accessToken, trendNameArray;
-
-
--(void) viewWillAppear: (BOOL) animated {
-  //[self.tableView reloadData];
-}
-
-
--(void) viewDidAppear: (BOOL) animated {
-  //[self.tableView reloadData];
-}
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-  self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-  if (self) {
-    // Custom initialization
-  }
-  return self;
-}
-
 - (void)viewDidLoad
 {
   [super viewDidLoad];
   
-
+  if ([AuthenticationModel isLoggedIn]) {
+    [AuthenticationModel setIsLoggedIn:NO];
+    [self deleteCookies];
+  }
+  
   NSURL* requestTokenUrl = [NSURL URLWithString:@"https://api.twitter.com/oauth/request_token"];
   OAMutableURLRequest* requestTokenRequest = [[OAMutableURLRequest alloc] initWithURL:requestTokenUrl
                                                                              consumer:[AuthenticationModel getConsumer]
@@ -62,17 +40,18 @@
   [requestTokenRequest setParameters:[NSArray arrayWithObject:callbackParam]];
   OADataFetcher* dataFetcher = [[OADataFetcher alloc] init];
   
-  NSLog(@" OAMutableURLRequest %@", requestTokenRequest);
   [dataFetcher fetchDataWithRequest:requestTokenRequest
                            delegate:self
                   didFinishSelector:@selector(didReceiveRequestToken:data:)
                     didFailSelector:@selector(didNotReceiveRequestToken:error:)];
 }
 
-- (void)didReceiveMemoryWarning
-{
-  [super didReceiveMemoryWarning];
-  // Dispose of any resources that can be recreated.
+-(void) viewWillAppear: (BOOL) animated {
+  //[self.tableView reloadData];
+}
+
+-(void) viewDidAppear: (BOOL) animated {
+  //[self.tableView reloadData];
 }
 
 - (void)didReceiveRequestToken:(OAServiceTicket*)ticket data:(NSData*)data {
@@ -106,20 +85,18 @@
     [AuthenticationModel setIsLoggedIn:YES];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"LoginSucceed" object:nil];
 
-    [self foo];
+    //We are logged in, but retrieve closest region before popping back to previous screen.
+    [self getClosestRegion];
   }
 }
 
--(void)foo
+-(void)getClosestRegion
 {
   NSString *url = [NSString stringWithFormat:@"https://api.twitter.com/1.1/trends/closest.json?lat=%f&long=%f", [LocationModel getCurrentLatitude], [LocationModel getCurrentLongitude]];
   
   [TwitterFetch fetch:self url:url didFinishSelector:@selector(didReceiveClosestRegion:data:) didFailSelector:@selector(didFailOauth:error:)];
 }
 
-- (void)didFailOauth:(OAServiceTicket*)ticket error:(NSError*)error {
-  NSLog(@"OauthFail %@", error);
-}
 
 - (void)didReceiveClosestRegion:(OAServiceTicket*)ticket data:(NSData*)data {
   NSString* httpBody = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -146,6 +123,19 @@
 - (void)didNotReceiveUserData:(OAServiceTicket*)ticket error:(NSError*)error {
   NSLog(@"Failed User Data Fetch %@", error);
 }
+- (void)didFailOauth:(OAServiceTicket*)ticket error:(NSError*)error {
+  NSLog(@"OauthFail %@", error);
+}
+
+-(void)deleteCookies
+{
+  NSHTTPCookieStorage *storage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+  for (NSHTTPCookie *cookie in [storage cookies]) {
+    [storage deleteCookie:cookie];
+  }
+  [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
 
 #pragma mark UIWebViewDelegate
 
@@ -195,8 +185,49 @@
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
   NSLog(@"DidFinishLoad %@", webView.request.URL.absoluteString);
 }
+#pragma mark unused
 
 
+-(void)authenticate
+{
+  //This seems broken, it says that your app doesn't have access to reaccess twitter
+  OAToken *requestToken = [AuthenticationModel getRequestToken];
+  NSURL* authenticateUrl = [NSURL URLWithString:@"https://api.twitter.com/oauth/authenticate"];
+  OAMutableURLRequest* requestAuthenticateRequest = [[OAMutableURLRequest alloc] initWithURL:authenticateUrl
+                                                                                    consumer:nil                                                                                    token:nil
+                                                                                       realm:nil
+                                                                           signatureProvider:nil];
+  
+  NSString* oauthToken = requestToken.key;
+  OARequestParameter* oauthTokenParam = [[OARequestParameter alloc] initWithName:@"oauth_token" value:oauthToken];
+  OARequestParameter* oauthTokenParam2 = [[OARequestParameter alloc] initWithName:@"force_login" value:@"true"];
+  OARequestParameter* oauthTokenParam3 = [[OARequestParameter alloc] initWithName:@"screen_name" value:@"slarribeau"];
+  
+  [requestAuthenticateRequest setParameters:[NSArray arrayWithObjects:oauthTokenParam,oauthTokenParam2, oauthTokenParam3,nil]];
+  
+  [self.webview loadRequest:requestAuthenticateRequest];
+}
+
+- (void)didNotReceiveAuthenticate:(OAServiceTicket*)ticket error:(NSError*)error {
+  NSLog(@"Failed Request Token Fetch %@", error);
+}
+- (void)didReceiveAuthenticate:(OAServiceTicket*)ticket data:(NSData*)data {
+  NSString* httpBody = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+  NSLog(@"httpBody = %@", httpBody);
+  //OAToken *requestToken = [[OAToken alloc] initWithHTTPResponseBody:httpBody];
+  assert(0);
+}
+
+#if 0
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+  self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+  if (self) {
+    // Custom initialization
+  }
+  return self;
+}
+#endif
 
 
 @end
