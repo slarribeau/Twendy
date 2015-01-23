@@ -281,11 +281,22 @@ static int const kButtonWidth = 100;
   
   if (location == 0) { //There are some race conditions where we don't yet have home woeid at start
     return;
-  } else {
+  }
+  
+  if ([AuthenticationModel isLoggedIn] == NO) {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Reminder"
+                                                    message:@"You need to login before using this app."
+                                                   delegate:self cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
+    [alert show];
+
+    return;
+  }
+  
   NSString *url = [NSString stringWithFormat:@"https://api.twitter.com/1.1/trends/place.json?id=%@", [NSString stringWithFormat:@"%ld",(long)location]];
   
   [TwitterFetch fetch:self url:url didFinishSelector:@selector(didReceiveuserdata:data:) didFailSelector:@selector(didFailOauth:error:)];
-  }
+  
 }
 
 -(IBAction)getRateLimit:(id)sender {
