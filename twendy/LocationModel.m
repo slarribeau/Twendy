@@ -20,16 +20,20 @@
 
 @implementation LocationModel
 static NSInteger woeid = 0;
+static float longtitude = 0;
+static float lattitude = 0;
 +(NSInteger)getWoeid
 {
   return woeid;
 }
 
++(void)setWoeid:(NSInteger)woeidIn
+{
+  woeid = woeidIn;
+}
+
 -(id)init
 {
-    self.longtitude = 0;
-    self.lattitude = 0;
-    
     // ** Don't forget to add NSLocationWhenInUseUsageDescription in MyApp-Info.plist and give it a string
     
     self.locationManager = [[CLLocationManager alloc] init];
@@ -41,57 +45,26 @@ static NSInteger woeid = 0;
     [self.locationManager startUpdatingLocation];
     
     
-    float latitude = self.locationManager.location.coordinate.latitude;
-    float longitude = self.locationManager.location.coordinate.longitude;
-    NSLog(@"long %f lat %f", longitude, latitude);
-    
-
-
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fetchClosestRegion:) name:@"LoginSucceed" object:nil];
-  return self;
+    return self;
 }
 
--(void)fetchClosestRegion:(NSNotification *)notification
+
++(float)getCurrentLongitude
 {
-    NSString *url = [NSString stringWithFormat:@"https://api.twitter.com/1.1/trends/closest.json?lat=%f&long=%f", [self getCurrentLatitude], [self getCurrentLongitude]];
-    
-    [TwitterFetch fetch:self url:url didFinishSelector:@selector(didReceiveClosestRegion:data:) didFailSelector:@selector(didFailOauth:error:)];
-  
-}
-- (void)didFailOauth:(OAServiceTicket*)ticket error:(NSError*)error {
-  NSLog(@"OauthFail %@", error);
-}
-
-- (void)didReceiveClosestRegion:(OAServiceTicket*)ticket data:(NSData*)data {
-  NSString* httpBody = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-  NSLog(@"++++++++++++++++++++++++++++");
-  NSLog(@"didReceiveClosestRegion %@", httpBody);
-  
-  NSArray *twitterTrends   = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers       error:nil];
-  
-  for (NSDictionary *trend in twitterTrends) { //FIX ME
-    NSLog(@"%@", trend);
-    NSLog(@"promise %@", [trend objectForKey:@"woeid"]);
-    woeid = [[trend objectForKey:@"woeid"] integerValue];
-  }
-}
-
--(float)getCurrentLongitude
-{
-  NSLog(@"getCurrentLongitude == XXX %f", self.longtitude);
-  if (self.longtitude == 0) {
+  NSLog(@"getCurrentLongitude == XXX %f", longtitude);
+  if (longtitude == 0) {
     return -122.0419; //Default to cupertiono, CA, USA
     
   } else {
-    return self.longtitude;
+    return longtitude;
   }
 }
--(float)getCurrentLatitude
++(float)getCurrentLatitude
 {
-  if (self.lattitude == 0) {
+  if (lattitude == 0) {
     return 37.3175; //Default to cupertiono, CA, USA
   } else {
-    return self.lattitude;
+    return lattitude;
   }
 }
 

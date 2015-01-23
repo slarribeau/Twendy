@@ -48,9 +48,7 @@ static int const kButtonWidth = 100;
   }
   
   if (self.trendDB.count == 0) {
-    NSInteger woeid = [LocationModel getWoeid];
-    assert(woeid);
-    [self getTrendData:woeid];
+    [self getTrendData:[LocationModel getWoeid]];
   } else {
     // Reload the table view.
     [self.tblPeople reloadData];
@@ -341,9 +339,14 @@ static int const kButtonWidth = 100;
 
 
 -(void)getTrendData:(NSInteger)location {
+  
+  if (location == 0) { //There are some race conditions where we don't yet have home woeid at start
+    return;
+  } else {
   NSString *url = [NSString stringWithFormat:@"https://api.twitter.com/1.1/trends/place.json?id=%@", [NSString stringWithFormat:@"%ld",(long)location]];
   
   [TwitterFetch fetch:self url:url didFinishSelector:@selector(didReceiveuserdata:data:) didFailSelector:@selector(didFailOauth:error:)];
+  }
 }
 
 -(IBAction)getRateLimit:(id)sender {

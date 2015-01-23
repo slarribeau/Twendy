@@ -12,6 +12,8 @@
 
 #import "AuthenticationViewController.h"
 #import "AuthenticationModel.h"
+#import "TwitterFetch.h"
+#import "LocationModel.h"
 
 
 
@@ -102,9 +104,37 @@
     [AuthenticationModel setIsLoggedIn:YES];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"LoginSucceed" object:nil];
 
-    [self.navigationController popViewControllerAnimated:YES];
+    [self foo];
   }
 }
+
+-(void)foo
+{
+  NSString *url = [NSString stringWithFormat:@"https://api.twitter.com/1.1/trends/closest.json?lat=%f&long=%f", [LocationModel getCurrentLatitude], [LocationModel getCurrentLongitude]];
+  
+  [TwitterFetch fetch:self url:url didFinishSelector:@selector(didReceiveClosestRegion:data:) didFailSelector:@selector(didFailOauth:error:)];
+}
+
+- (void)didFailOauth:(OAServiceTicket*)ticket error:(NSError*)error {
+  NSLog(@"OauthFail %@", error);
+}
+
+- (void)didReceiveClosestRegion:(OAServiceTicket*)ticket data:(NSData*)data {
+  NSString* httpBody = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+  NSLog(@"++++++++++++++++++++++++++++");
+  NSLog(@"didReceiveClosestRegion %@", httpBody);
+  
+  NSArray *twitterTrends   = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers       error:nil];
+  
+  for (NSDictionary *trend in twitterTrends) { //FIX ME
+    NSLog(@"%@", trend);
+    NSLog(@"promise %@", [trend objectForKey:@"woeid"]);
+    [LocationModel setWoeid:[[trend objectForKey:@"woeid"] integerValue]];
+  }
+  [self.navigationController popViewControllerAnimated:YES];
+
+}
+
 
 - (void)didNotReceiveAccessToken:(OAServiceTicket*)ticket error:(NSError*)error {
   NSLog(@"Failed Access Token Fetch %@", error);

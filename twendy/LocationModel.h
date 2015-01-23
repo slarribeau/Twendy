@@ -13,4 +13,8 @@
 
 @interface LocationModel : NSObject <CLLocationManagerDelegate>
 +(NSInteger)getWoeid;
++(void)setWoeid:(NSInteger)woeid;
++(float)getCurrentLongitude;
++(float)getCurrentLatitude;
+
 @end
