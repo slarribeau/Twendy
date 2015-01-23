@@ -87,7 +87,9 @@
                                                                  signatureProvider:nil];
   NSString* oauthToken = requestToken.key;
   OARequestParameter* oauthTokenParam = [[OARequestParameter alloc] initWithName:@"oauth_token" value:oauthToken];
-  [authorizeRequest setParameters:[NSArray arrayWithObject:oauthTokenParam]];
+  OARequestParameter* oauthTokenParam2 = [[OARequestParameter alloc] initWithName:@"screen_name" value:@"slarribeau"];
+
+  [authorizeRequest setParameters:[NSArray arrayWithObjects:oauthTokenParam, oauthTokenParam2, nil]];
   
   [self.webview loadRequest:authorizeRequest];
 }
@@ -121,7 +123,6 @@
 
 - (void)didReceiveClosestRegion:(OAServiceTicket*)ticket data:(NSData*)data {
   NSString* httpBody = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-  NSLog(@"++++++++++++++++++++++++++++");
   NSLog(@"didReceiveClosestRegion %@", httpBody);
   
   NSArray *twitterTrends   = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers       error:nil];
