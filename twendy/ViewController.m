@@ -48,8 +48,9 @@ static int const kButtonWidth = 100;
   }
   
   if (self.trendDB.count == 0) {
-    
-    [self getClosestRegionTrendData];
+    NSInteger woeid = [LocationModel getWoeid];
+    assert(woeid);
+    [self getTrendData:woeid];
   } else {
     // Reload the table view.
     [self.tblPeople reloadData];
@@ -328,7 +329,10 @@ static int const kButtonWidth = 100;
   [self removeMenuSelection];
   [self setMenuSelection:button];
   //[self getTrendData:kLocationHome];
-  [self getClosestRegionTrendData];
+  //[self getClosestRegionTrendData];
+  NSInteger woeid = [LocationModel getWoeid];
+  assert(woeid);
+  [self getTrendData:woeid];
 }
 
 - (void)didFailOauth:(OAServiceTicket*)ticket error:(NSError*)error {
@@ -351,14 +355,6 @@ static int const kButtonWidth = 100;
 -(void)getRegions
 {
   [self performSegueWithIdentifier:@"idSegueRegion" sender:self];
-}
-
-
--(void)getClosestRegionTrendData
-{
-  NSString *url = [NSString stringWithFormat:@"https://api.twitter.com/1.1/trends/closest.json?lat=%f&long=%f", [self getCurrentLatitude], [self getCurrentLongitude]];
-
-  [TwitterFetch fetch:self url:url didFinishSelector:@selector(didReceiveuserdata:data:) didFailSelector:@selector(didFailOauth:error:)];
 }
 
 
