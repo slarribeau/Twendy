@@ -197,6 +197,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Select Region" id="11N-a1-D2g"/>
+                    <connections>
+                        <segue destination="ePS-tb-ROo" kind="showDetail" identifier="foo" id="dAl-HL-Rqv"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dgf-8S-d0R" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -225,7 +228,7 @@
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     <connections>
                         <segue destination="XVa-rb-eE4" kind="relationship" relationship="masterViewController" id="sdf-9c-XEj"/>
-                        <segue destination="zz8-53-p5h" kind="relationship" relationship="detailViewController" id="1Ov-xJ-Rce"/>
+                        <segue destination="ePS-tb-ROo" kind="relationship" relationship="detailViewController" id="TkM-ae-vIE"/>
                     </connections>
                 </splitViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NHz-FF-ekH" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -346,6 +349,6 @@
         <image name="sea-background" width="57" height="51"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="1Ov-xJ-Rce"/>
+        <segue reference="TkM-ae-vIE"/>
     </inferredMetricsTieBreakers>
 </document>

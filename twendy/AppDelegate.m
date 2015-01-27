@@ -37,26 +37,15 @@
 
   
   //Figure out that we're on an iPad.
-  //if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+  if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
     //Grab a reference to the UISplitViewController
     UISplitViewController *splitViewController = (UISplitViewController *)self.window.rootViewController;
- // [splitViewController preferredDisplayMode:UISplitViewControllerDisplayModeAllVisible];
-  
- // UIStoryboard *aStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
- // LeftViewController *leftViewController = [aStoryboard instantiateViewControllerWithIdentifier:@"MasterNC"];
-
-//  RightViewController *rightViewController = [aStoryboard instantiateViewControllerWithIdentifier:@"RightViewController"];
-
-  
-//  splitViewController.delegate = rightViewController;
-//  splitViewController.viewControllers = @[leftViewController]; //Boom!
-//  splitViewController.viewControllers = @[leftViewController, rightViewController];
 
   NSLog(@"SVC controllers = %@", splitViewController.viewControllers);
 
     //Grab a reference to the RightViewController and set it as the SVC's delegate.
-    //RightViewController *rightViewController = [splitViewController.viewControllers lastObject];
-    //splitViewController.delegate = rightViewController;
+   // RightViewController *rightViewController = [splitViewController.viewControllers lastObject];
+   // splitViewController.delegate = rightViewController;
     
     //Grab a reference to the LeftViewController and get the first monster in the list.
     //UINavigationController *leftNavController = [splitViewController.viewControllers objectAtIndex:0];
@@ -69,7 +58,7 @@
     
     //Set the RightViewController as the left's delegate.
    // leftViewController.delegate = rightViewController;
-  //}
+  }
 
   
 #if 0
