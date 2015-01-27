@@ -11,6 +11,8 @@
 #import "AuthenticationModel.h"
 #import "RegionModel.h"
 #import "LocationModel.h"
+#import "RightViewController.h"
+#import "LeftViewController.h"
 
 @interface AppDelegate ()
 
@@ -31,6 +33,28 @@
     
     
     [[UIApplication sharedApplication] registerForRemoteNotifications];
+  }
+
+  
+  //Figure out that we're on an iPad.
+  if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+    //Grab a reference to the UISplitViewController
+    UISplitViewController *splitViewController = (UISplitViewController *)self.window.rootViewController;
+    
+    //Grab a reference to the RightViewController and set it as the SVC's delegate.
+    RightViewController *rightViewController = [splitViewController.viewControllers lastObject];
+    splitViewController.delegate = rightViewController;
+    
+    //Grab a reference to the LeftViewController and get the first monster in the list.
+    UINavigationController *leftNavController = [splitViewController.viewControllers objectAtIndex:0];
+    LeftViewController *leftViewController = (LeftViewController *)[leftNavController topViewController];
+    Monster *firstMonster = [[leftViewController monsters] objectAtIndex:0];
+    
+    //Set it as the RightViewController's monster.
+    [rightViewController setMonster:firstMonster];
+    
+    //Set the RightViewController as the left's delegate.
+   // leftViewController.delegate = rightViewController;
   }
 
   

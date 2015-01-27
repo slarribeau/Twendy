@@ -15,6 +15,7 @@
 		D6698A561A71A43700CBD338 /* LocationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D6698A551A71A43700CBD338 /* LocationModel.m */; };
 		D6698A5A1A77F46F00CBD338 /* LeftViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6698A591A77F46F00CBD338 /* LeftViewController.m */; };
 		D6698A5D1A77F4E900CBD338 /* Monster.m in Sources */ = {isa = PBXBuildFile; fileRef = D6698A5C1A77F4E900CBD338 /* Monster.m */; };
+		D6698A601A78064900CBD338 /* RightViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6698A5F1A78064900CBD338 /* RightViewController.m */; };
 		D6C4B3211A606247006F40DF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D6C4B3201A606247006F40DF /* main.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		D6C4B3241A606247006F40DF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D6C4B3231A606247006F40DF /* AppDelegate.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		D6C4B3271A606247006F40DF /* AuthenticationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6C4B3261A606247006F40DF /* AuthenticationViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -80,6 +81,8 @@
 		D6698A591A77F46F00CBD338 /* LeftViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftViewController.m; sourceTree = "<group>"; };
 		D6698A5B1A77F4E900CBD338 /* Monster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Monster.h; sourceTree = "<group>"; };
 		D6698A5C1A77F4E900CBD338 /* Monster.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Monster.m; sourceTree = "<group>"; };
+		D6698A5E1A78064900CBD338 /* RightViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RightViewController.h; sourceTree = "<group>"; };
+		D6698A5F1A78064900CBD338 /* RightViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RightViewController.m; sourceTree = "<group>"; };
 		D6C4B31B1A606247006F40DF /* twendy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = twendy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6C4B31F1A606247006F40DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D6C4B3201A606247006F40DF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -194,6 +197,8 @@
 				D6C4B3441A606A32006F40DF /* oauthconsumer-master */,
 				D6C4B36F1A606A32006F40DF /* JSON */,
 				D6C4B3281A606247006F40DF /* Main.storyboard */,
+				D6698A5E1A78064900CBD338 /* RightViewController.h */,
+				D6698A5F1A78064900CBD338 /* RightViewController.m */,
 				D6698A581A77F46F00CBD338 /* LeftViewController.h */,
 				D6698A591A77F46F00CBD338 /* LeftViewController.m */,
 				D6698A5B1A77F4E900CBD338 /* Monster.h */,
@@ -453,6 +458,7 @@
 				D6C4B37C1A606A32006F40DF /* NSString+URLEncoding.m in Sources */,
 				D6C4B3881A606A32006F40DF /* OAProblem.m in Sources */,
 				D6C4B38D1A606A32006F40DF /* OATokenManager.m in Sources */,
+				D6698A601A78064900CBD338 /* RightViewController.m in Sources */,
 				D6C4B3831A606A32006F40DF /* OAConsumer.m in Sources */,
 				D6C4B3901A606A32006F40DF /* NSString+SBJSON.m in Sources */,
 				D6C4B39C1A65BC97006F40DF /* RegionViewController.m in Sources */,
