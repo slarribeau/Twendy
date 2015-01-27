@@ -21,6 +21,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
+  UISplitViewController *splitViewController = (UISplitViewController *)self.window.rootViewController;
+  NSLog(@"SVC controllers = %@", splitViewController.viewControllers);
+
   [[AuthenticationModel alloc] init];
   [[RegionModel alloc] init];
   [[LocationModel alloc] init];
