@@ -36,10 +36,6 @@
   [self setWeaponImageView:nil];
 }
 
--(id)initWithCoder:(NSCoder *)aDecoder
-{
-  return self;
-}
 #pragma mark - Overridden setters
 -(void)setMonster:(Monster *)monster
 {
