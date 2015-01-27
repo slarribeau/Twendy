@@ -82,7 +82,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  [self performSegueWithIdentifier:@"foo" sender:self];
+  //[self performSegueWithIdentifier:@"foo" sender:self];
 
   Monster *selectedMonster = [_monsters objectAtIndex:indexPath.row];
  // if (_delegate) {

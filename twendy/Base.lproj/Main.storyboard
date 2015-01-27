@@ -140,10 +140,10 @@
             </objects>
             <point key="canvasLocation" x="2543" y="-341"/>
         </scene>
-        <!--Can you hear me?-->
+        <!--RightViewController-->
         <scene sceneID="Jw7-8L-X9o">
             <objects>
-                <viewController id="zz8-53-p5h" customClass="RightViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RightViewController" title="RightViewController" id="zz8-53-p5h" customClass="RightViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="reM-R8-Fn3"/>
                         <viewControllerLayoutGuide type="bottom" id="4WJ-yo-1fs"/>
@@ -151,6 +151,14 @@
                     <view key="view" contentMode="scaleToFill" id="m2m-65-Iza">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wfu-Nq-z2C">
+                                <rect key="frame" x="271" y="435" width="46" height="30"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Can you hear me?" id="K2s-fy-9vW"/>
@@ -159,10 +167,10 @@
             </objects>
             <point key="canvasLocation" x="1313" y="335"/>
         </scene>
-        <!--Select Region-->
+        <!--LeftViewController-->
         <scene sceneID="gEn-4y-olN">
             <objects>
-                <tableViewController title="Select Region" clearsSelectionOnViewWillAppear="NO" id="dJm-XC-Elq" customClass="LeftViewController" sceneMemberID="viewController">
+                <tableViewController title="LeftViewController" clearsSelectionOnViewWillAppear="NO" id="dJm-XC-Elq" customClass="LeftViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="vlg-Au-Qq2">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -189,18 +197,15 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Select Region" id="11N-a1-D2g"/>
-                    <connections>
-                        <segue destination="ePS-tb-ROo" kind="showDetail" identifier="foo" id="zAd-by-8x1"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dgf-8S-d0R" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1271" y="-464"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--MasterNC-->
         <scene sceneID="IsN-Iy-3UK">
             <objects>
-                <navigationController id="XVa-rb-eE4" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="MasterNC" title="MasterNC" id="XVa-rb-eE4" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="cnZ-yb-7GF">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -341,6 +346,6 @@
         <image name="sea-background" width="57" height="51"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="c3C-3t-3Ze"/>
+        <segue reference="1Ov-xJ-Rce"/>
     </inferredMetricsTieBreakers>
 </document>
