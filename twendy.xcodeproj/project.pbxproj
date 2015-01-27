@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D627E9BB1A7847A200ABC6BF /* RightViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D627E9BA1A7847A200ABC6BF /* RightViewController.m */; };
 		D660ED2E1A6704C9003A3A95 /* Region.m in Sources */ = {isa = PBXBuildFile; fileRef = D660ED2D1A6704C9003A3A95 /* Region.m */; };
 		D6698A4A1A707FAA00CBD338 /* AuthenticationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D6698A491A707FAA00CBD338 /* AuthenticationModel.m */; };
 		D6698A4D1A70ACC600CBD338 /* TwitterFetch.m in Sources */ = {isa = PBXBuildFile; fileRef = D6698A4C1A70ACC600CBD338 /* TwitterFetch.m */; };
@@ -63,6 +64,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D627E9B91A7847A200ABC6BF /* RightViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RightViewController.h; sourceTree = "<group>"; };
+		D627E9BA1A7847A200ABC6BF /* RightViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RightViewController.m; sourceTree = "<group>"; };
 		D660ED2C1A6704C9003A3A95 /* Region.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Region.h; sourceTree = "<group>"; };
 		D660ED2D1A6704C9003A3A95 /* Region.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Region.m; sourceTree = "<group>"; };
 		D6698A481A707FAA00CBD338 /* AuthenticationModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthenticationModel.h; sourceTree = "<group>"; };
@@ -196,6 +199,8 @@
 				D6C4B3281A606247006F40DF /* Main.storyboard */,
 				D6698A581A77F46F00CBD338 /* LeftViewController.h */,
 				D6698A591A77F46F00CBD338 /* LeftViewController.m */,
+				D627E9B91A7847A200ABC6BF /* RightViewController.h */,
+				D627E9BA1A7847A200ABC6BF /* RightViewController.m */,
 				D6698A5B1A77F4E900CBD338 /* Monster.h */,
 				D6698A5C1A77F4E900CBD338 /* Monster.m */,
 				D6C4B3231A606247006F40DF /* AppDelegate.m */,
@@ -453,6 +458,7 @@
 				D6C4B37C1A606A32006F40DF /* NSString+URLEncoding.m in Sources */,
 				D6C4B3881A606A32006F40DF /* OAProblem.m in Sources */,
 				D6C4B38D1A606A32006F40DF /* OATokenManager.m in Sources */,
+				D627E9BB1A7847A200ABC6BF /* RightViewController.m in Sources */,
 				D6C4B3831A606A32006F40DF /* OAConsumer.m in Sources */,
 				D6C4B3901A606A32006F40DF /* NSString+SBJSON.m in Sources */,
 				D6C4B39C1A65BC97006F40DF /* RegionViewController.m in Sources */,
