@@ -140,7 +140,7 @@
             </objects>
             <point key="canvasLocation" x="2543" y="-341"/>
         </scene>
-        <!--View Controller-->
+        <!--Can you hear me?-->
         <scene sceneID="Jw7-8L-X9o">
             <objects>
                 <viewController id="zz8-53-p5h" sceneMemberID="viewController">
@@ -153,7 +153,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="K2s-fy-9vW"/>
+                    <navigationItem key="navigationItem" title="Can you hear me?" id="K2s-fy-9vW"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4kF-02-nHx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -190,7 +190,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Select Region" id="11N-a1-D2g"/>
                     <connections>
-                        <segue destination="ePS-tb-ROo" kind="showDetail" id="zAd-by-8x1"/>
+                        <segue destination="ePS-tb-ROo" kind="showDetail" identifier="foo" id="zAd-by-8x1"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dgf-8S-d0R" userLabel="First Responder" sceneMemberID="firstResponder"/>
