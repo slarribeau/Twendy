@@ -37,4 +37,43 @@ persistify selections
 handle case where you no longer follow a region that was previously selected
 
 
-444
+UISplitViewController samples:
+------------------------------
+SPLITVIEWCONTROLLER.DEMO
+Master is a list of colors: Detail is a view of said color
+http://nshipster.com/uisplitviewcontroller/
+src/xcode/UISplitViewControllerDemo-master
+Storyboard
+Built for 8.1
+Swift
+ipad/iPhone
+
+NERD VIEW
+View master list of BNR books with webview detail
+iOS Programming: The big Nerd Ranch Guide
+Chapter 22
+/Users/macadamian/src/xcode/Solutions/22-UISplitViewController/Nerdfeed
+No nib
+no storyboard.
+Built for 7.0
+Objective C
+Ipad and Iphone.
+
+
+MATH MONSTERS
+Silly one.
+http://www.raywenderlich.com/29469/ipad-for-iphone-developers-101-in-ios-6-uisplitview-tutorial
+/Users/macadamian/src/xcode/MathMonsters
+Storyboard
+Build for 6.0
+Objective C
+Ipad only
+
+
+UISplitVIEWControllerDemo
+http://devmonologue.com/ios/tutorials/uisplitviewcontroller-tutorial/
+src/xcode/UISplitViewControllerDemo
+nibs
+objective C
+ipad and iphone
+Built for 5.0
