@@ -26,7 +26,7 @@
   NSLog(@"SVC controllers = %@", splitViewController.viewControllers);
   UIStoryboard *aStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
   RightViewController *rightViewController = [aStoryboard instantiateViewControllerWithIdentifier:@"RightViewController"];
-  splitViewController.delegate = rightViewController;
+  //splitViewController.delegate = rightViewController;
 
   
   
