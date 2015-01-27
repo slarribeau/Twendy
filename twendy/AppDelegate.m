@@ -11,6 +11,7 @@
 #import "AuthenticationModel.h"
 #import "RegionModel.h"
 #import "LocationModel.h"
+#import "RightViewController.h"
 
 @interface AppDelegate ()
 
@@ -23,7 +24,14 @@
 
   UISplitViewController *splitViewController = (UISplitViewController *)self.window.rootViewController;
   NSLog(@"SVC controllers = %@", splitViewController.viewControllers);
+  UIStoryboard *aStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+  RightViewController *rightViewController = [aStoryboard instantiateViewControllerWithIdentifier:@"RightViewController"];
+  splitViewController.delegate = rightViewController;
 
+  
+  
+  
+  
   [[AuthenticationModel alloc] init];
   [[RegionModel alloc] init];
   [[LocationModel alloc] init];
