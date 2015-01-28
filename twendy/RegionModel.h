@@ -14,5 +14,7 @@
 +(NSInteger)count;
 +(Region*)get:(NSUInteger)index;
 +(void)reset;
++(void)sort;
+
 
 @end

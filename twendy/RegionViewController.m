@@ -93,4 +93,11 @@
   [[NSNotificationCenter defaultCenter] postNotificationName:MenuHasChanged object:nil];
 
 }
+
+-(IBAction)sort:(id)sender
+{
+  [RegionModel sort];
+  [self.tblRegion reloadData];
+}
+
 @end

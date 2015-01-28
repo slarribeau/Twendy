@@ -10,4 +10,7 @@
 #import "OAuthConsumer.h"
 
 @interface RegionViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+
+-(IBAction)sort:(id)sender;
+
 @end

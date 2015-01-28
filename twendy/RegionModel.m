@@ -98,5 +98,18 @@ static NSMutableArray* regionDB;
   }
 }
 
++(void)sort
+{
+  NSSortDescriptor *sortDescriptor;
+  sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"country"
+                                               ascending:YES];
+  
+  NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+  [regionDB sortUsingDescriptors:sortDescriptors];
+
+  
+  //NSArray *sortedArray;
+  //sortedArray = [regionDB sortedArrayUsingDescriptors:sortDescriptors];
+}
 
 @end
