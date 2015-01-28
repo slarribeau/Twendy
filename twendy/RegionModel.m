@@ -82,7 +82,7 @@ static NSMutableArray* regionDB;
   NSArray *twitterRegions = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers       error:nil];
   
   for (NSDictionary *region in twitterRegions) {
-    Region *regionObj = [Region alloc];
+    Region *regionObj = [[Region alloc] init];
     
     regionObj.city = [region objectForKey:@"name"];
     regionObj.country = [region objectForKey:@"country"];
@@ -96,7 +96,6 @@ static NSMutableArray* regionDB;
     
     [regionDB addObject:regionObj];
   }
-  
 }
 
 

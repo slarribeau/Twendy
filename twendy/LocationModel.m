@@ -50,7 +50,7 @@ static float lattitude = 0;
 +(float)getCurrentLongitude
 {
   if (longtitude == 0) {
-    assert(0);
+    //assert(0);
     return -122.0419; //Default to cupertiono, CA, USA
     
   } else {
@@ -60,7 +60,7 @@ static float lattitude = 0;
 +(float)getCurrentLatitude
 {
   if (lattitude == 0) {
-    assert(0);
+    //assert(0);
     return 37.3175; //Default to cupertiono, CA, USA
   } else {
     return lattitude;
