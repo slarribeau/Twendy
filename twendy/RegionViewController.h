@@ -13,4 +13,11 @@
 
 -(IBAction)sort:(id)sender;
 
+-(IBAction)sortCountryAscend:(id)sender;
+-(IBAction)sortCountryDescend:(id)sender;
+-(IBAction)sortCityAscend:(id)sender;
+-(IBAction)sortCityDescend:(id)sender;
+-(IBAction)sortSelectedAscend:(id)sender;
+-(IBAction)sortSelectedDescend:(id)sender;
+
 @end

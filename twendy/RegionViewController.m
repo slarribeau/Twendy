@@ -94,10 +94,39 @@
 
 }
 
--(IBAction)sort:(id)sender
+-(IBAction)sortCountryAscend:(id)sender
 {
-  [RegionModel sort];
+  [RegionModel sortCountryAscend];
   [self.tblRegion reloadData];
 }
 
+-(IBAction)sortCountryDescend:(id)sender
+{
+  [RegionModel sortCountryDescend];
+  [self.tblRegion reloadData];
+}
+
+-(IBAction)sortCityAscend:(id)sender
+{
+  [RegionModel sortCityAscend];
+  [self.tblRegion reloadData];
+}
+
+-(IBAction)sortCityDescend:(id)sender
+{
+  [RegionModel sortCityDescend];
+  [self.tblRegion reloadData];
+}
+
+-(IBAction)sortSelectedAscend:(id)sender
+{
+  [RegionModel sortSelectedAscend];
+  [self.tblRegion reloadData];
+}
+
+-(IBAction)sortSelectedDescend:(id)sender
+{
+  [RegionModel sortSelectedDescend];
+  [self.tblRegion reloadData];
+}
 @end

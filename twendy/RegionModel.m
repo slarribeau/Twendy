@@ -96,20 +96,45 @@ static NSMutableArray* regionDB;
     
     [regionDB addObject:regionObj];
   }
+  
+  //Sort
+  [RegionModel sortCountryDescend];
 }
 
-+(void)sort
++(void)sortCountryAscend
 {
-  NSSortDescriptor *sortDescriptor;
-  sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"country"
-                                               ascending:YES];
+  [RegionModel sort:@"country" ascending:YES];
+}
++(void)sortCountryDescend
+{
+  [RegionModel sort:@"country" ascending:NO];
+}
+
++(void)sortCityAscend
+{
+  [RegionModel sort:@"city" ascending:YES];
+}
++(void)sortCityDescend
+{
+  [RegionModel sort:@"city" ascending:NO];
+}
+
++(void)sortSelectedAscend
+{
+  [RegionModel sort:@"selected" ascending:YES];
+}
++(void)sortSelectedDescend
+{
+  [RegionModel sort:@"selected" ascending:NO];
+}
+
++(void)sort:(NSString*)key ascending:(BOOL)ascending
+{
+  NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:key
+                                               ascending:ascending];
   
   NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
   [regionDB sortUsingDescriptors:sortDescriptors];
-
-  
-  //NSArray *sortedArray;
-  //sortedArray = [regionDB sortedArrayUsingDescriptors:sortDescriptors];
 }
 
 @end

@@ -14,7 +14,11 @@
 +(NSInteger)count;
 +(Region*)get:(NSUInteger)index;
 +(void)reset;
-+(void)sort;
-
++(void)sortCountryAscend;
++(void)sortCountryDescend;
++(void)sortCityAscend;
++(void)sortCityDescend;
++(void)sortSelectedAscend;
++(void)sortSelectedDescend;
 
 @end
