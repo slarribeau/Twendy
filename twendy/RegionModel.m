@@ -121,11 +121,13 @@ static NSMutableArray* regionDB;
 
 +(void)sortSelectedAscend
 {
-  [RegionModel sort:@"selected" ascending:YES];
+  //UI more intuitive if this is reversed
+  [RegionModel sort:@"selected" ascending:NO];
 }
 +(void)sortSelectedDescend
 {
-  [RegionModel sort:@"selected" ascending:NO];
+  //UI more intuitive if this is reversed
+  [RegionModel sort:@"selected" ascending:YES];
 }
 
 +(void)sort:(NSString*)key ascending:(BOOL)ascending

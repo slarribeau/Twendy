@@ -234,7 +234,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="sortSelectedAscend:" destination="ttg-oR-YZr" eventType="touchDragInside" id="pax-6d-Efi"/>
+                                    <action selector="sortSelectedAscend:" destination="ttg-oR-YZr" eventType="touchUpInside" id="AEy-Wp-VjR"/>
                                 </connections>
                             </button>
                         </subviews>
