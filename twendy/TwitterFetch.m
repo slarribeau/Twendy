@@ -33,7 +33,17 @@
     [requestTokenRequest setHTTPMethod:@"GET"];
     
     OADataFetcher* dataFetcher = [[OADataFetcher alloc] init];
-    
+
+#if 0
+    //Failed attempt to try a synchronous operation.
+    NSURLResponse * response = nil;
+    NSError * error = nil;
+    NSData * data = [NSURLConnection sendSynchronousRequest:requestTokenRequest
+                                          returningResponse:&response
+                                                      error:&error];
+    NSLog(@"%@", data);
+    NSArray *twitterRegions = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers       error:nil];
+#endif
     [dataFetcher fetchDataWithRequest:requestTokenRequest
                              delegate:delegate
                     didFinishSelector:finishSelector
