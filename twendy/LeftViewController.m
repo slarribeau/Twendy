@@ -16,12 +16,59 @@
 
 #import "LeftViewController.h"
 #import "Monster.h"
+#import "AuthenticationModel.h"
+
+//#import "ViewController.h"
+//#import "TrendViewController.h"
+//#import "RegionViewController.h"
+#import "RegionModel.h"
+//#import "Trend.h"
+//#import "AuthenticationModel.h"
+//#import "TwitterFetch.h"
+//#import "LocationModel.h"
+//#import "Notifications.h"
+//#import "RegionModel.h"
+
 
 @interface LeftViewController ()
 @property (nonatomic, strong) NSMutableArray *monsters;
 @end
 
 @implementation LeftViewController
+
+-(IBAction)login:(id)sender {
+  [self performSegueWithIdentifier:@"idSegueAuth2" sender:self];
+}
+
+
+-(void) viewWillAppear: (BOOL) animated {
+  if ([AuthenticationModel isLoggedIn] == YES) {
+   // [self.loginButton setTitle:@"Logout"];
+  } else {
+    //[self.loginButton setTitle:@"Login"];
+  }
+  
+  //if (self.trendDB.count == 0) {
+    //[self getTrendData:[LocationModel getWoeid]];
+ // } else {
+    // Reload the table view.
+  //  [self.tblPeople reloadData];
+  //  [self createScrollMenu];
+ // }
+}
+
+-(void)userLoggedOut:(NSNotification*)obj {
+  [RegionModel reset];
+  //self.trendDB = [[NSMutableArray alloc] init];
+  //[self.tblPeople reloadData];
+  //[self clearScrollMenu];
+}
+
+-(void)menuHasChanged:(NSNotification*)obj {
+  //[self createScrollMenu];
+}
+
+
 
 -(id)initWithCoder:(NSCoder *)aDecoder
 {
@@ -45,7 +92,18 @@
 {
   [super viewDidLoad];
   [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"Cell"];
-
+  
+  if ([AuthenticationModel isLoggedIn] == NO) {
+    [self login:nil];
+  } else {
+    // Reload the table view.
+   // [self.tblPeople reloadData];
+    
+    //[self createScrollMenu];
+  }
+  //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(menuHasChanged:) name:MenuHasChanged object:nil];
+  
+ // [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLoggedOut:) name:LogoutSucceed object:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -89,5 +147,12 @@
  //   [_delegate selectedMonster:selectedMonster];
   //}
 }
+
+- (void)dealloc
+{
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+
 
 @end
