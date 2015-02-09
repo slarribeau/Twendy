@@ -23,19 +23,19 @@
 #define IOS_VERSION [[[[[UIDevice currentDevice] systemVersion] componentsSeparatedByString:@"."] firstObject] intValue]
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-
+#if 0
   UISplitViewController *splitViewController = (UISplitViewController *)self.window.rootViewController;
   NSLog(@"SVC controllers = %@", splitViewController.viewControllers);
   UIStoryboard *aStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
   RightViewController *rightViewController = [aStoryboard instantiateViewControllerWithIdentifier:@"RightViewController"];
-  //splitViewController.delegate = rightViewController;
+ // splitViewController.delegate = rightViewController;
 
   
   LeftViewController *leftViewController = [aStoryboard instantiateViewControllerWithIdentifier:@"LeftViewController"];
 
   
   leftViewController.delegate = rightViewController;
-
+#endif
   [[AuthenticationModel alloc] init];
   [[RegionModel alloc] init];
   [[LocationModel alloc] init];
