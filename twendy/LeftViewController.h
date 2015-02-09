@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface LeftViewController : UITableViewController <UITableViewDelegate, UITableViewDataSource>
-
+@property (nonatomic, assign) id delegate;
 @end

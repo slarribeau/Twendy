@@ -12,6 +12,8 @@
 #import "RegionModel.h"
 #import "LocationModel.h"
 #import "RightViewController.h"
+#import "LeftViewController.h"
+
 
 @interface AppDelegate ()
 
@@ -29,9 +31,11 @@
   //splitViewController.delegate = rightViewController;
 
   
+  LeftViewController *leftViewController = [aStoryboard instantiateViewControllerWithIdentifier:@"LeftViewController"];
+
   
-  
-  
+  leftViewController.delegate = rightViewController;
+
   [[AuthenticationModel alloc] init];
   [[RegionModel alloc] init];
   [[LocationModel alloc] init];

@@ -48,6 +48,11 @@
 {
   [self.tblRegion reloadData];
 }
+-(void) viewDidAppear: (BOOL) animated {
+  [super viewDidAppear:animated];
+
+}
+
 -(void) viewWillAppear: (BOOL) animated {
   if ([AuthenticationModel isLoggedIn] == YES) {
    //[self.loginButton setTitle:@"Logout"];
@@ -64,6 +69,9 @@
   //  [self.tblPeople reloadData];
   //  [self createScrollMenu];
  // }
+  
+  [super viewWillAppear:animated];
+
 }
 
 -(void)userLoggedOut:(NSNotification*)obj {
@@ -219,14 +227,17 @@
   
   NSLog(@"configRegionDict after %@",configRegionDict);
   
- // [[NSNotificationCenter defaultCenter] postNotificationName:MenuHasChanged object:nil];
+ //[[NSNotificationCenter defaultCenter] postNotificationName:MenuHasChanged object:nil];
   
-  UIStoryboard *aStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+ UIStoryboard *aStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
 
-  RightViewController *rightViewController = [aStoryboard instantiateViewControllerWithIdentifier:@"RightViewController"];
+ RightViewController *rightViewController = [aStoryboard instantiateViewControllerWithIdentifier:@"RightViewController"];
 
   [rightViewController getWoeid:region.woeid];
   
+ // RightViewController *rightViewController2 = (RightViewController*)self.delegate;
+ // [rightViewController2 getWoeid:region.woeid];
+
 }
 
 

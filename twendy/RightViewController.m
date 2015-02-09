@@ -25,6 +25,11 @@
 @implementation RightViewController
 
 #pragma mark - View Lifecycle
+- (id)init
+{
+  return self;
+}
+
 - (void)viewDidLoad
 {
   [super viewDidLoad];
@@ -62,6 +67,10 @@
   [self refreshUI];
 }
 
+-(void)viewDidAppear:(BOOL)animated
+{
+  [super viewDidAppear:animated];
+}
 
 
 - (void)didReceiveMemoryWarning
