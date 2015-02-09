@@ -151,9 +151,35 @@
                     <view key="view" contentMode="scaleToFill" id="m2m-65-Iza">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d7H-ay-OwN">
+                                <rect key="frame" x="16" y="294" width="568" height="306"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="delegate" destination="zz8-53-p5h" id="mSH-DN-CX3"/>
+                                </connections>
+                            </webView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="QT7-qn-yRp">
+                                <rect key="frame" x="16" y="64" width="568" height="230"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="QT7-qn-yRp" firstAttribute="leading" secondItem="m2m-65-Iza" secondAttribute="leadingMargin" id="6Hl-KY-48r"/>
+                            <constraint firstItem="d7H-ay-OwN" firstAttribute="top" secondItem="QT7-qn-yRp" secondAttribute="bottom" id="DEM-wt-S9s"/>
+                            <constraint firstItem="d7H-ay-OwN" firstAttribute="top" secondItem="m2m-65-Iza" secondAttribute="topMargin" constant="294" id="L6e-T8-GdJ"/>
+                            <constraint firstItem="QT7-qn-yRp" firstAttribute="top" secondItem="reM-R8-Fn3" secondAttribute="bottom" id="Mje-un-nZK"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="QT7-qn-yRp" secondAttribute="trailing" id="iRz-5z-UF1"/>
+                            <constraint firstItem="4WJ-yo-1fs" firstAttribute="top" secondItem="d7H-ay-OwN" secondAttribute="bottom" id="mAY-Fk-Yqz"/>
+                            <constraint firstItem="d7H-ay-OwN" firstAttribute="leading" secondItem="m2m-65-Iza" secondAttribute="leadingMargin" id="nhZ-es-WUA"/>
+                            <constraint firstItem="d7H-ay-OwN" firstAttribute="trailing" secondItem="m2m-65-Iza" secondAttribute="trailingMargin" id="yt4-OU-wQd"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Can you hear me?" id="K2s-fy-9vW"/>
+                    <connections>
+                        <outlet property="view" destination="d7H-ay-OwN" id="SED-dw-pkQ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4kF-02-nHx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

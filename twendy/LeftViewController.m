@@ -15,6 +15,8 @@
 //
 
 #import "LeftViewController.h"
+#import "RightViewController.h"
+
 #import "Monster.h"
 #import "AuthenticationModel.h"
 
@@ -218,6 +220,12 @@
   NSLog(@"configRegionDict after %@",configRegionDict);
   
  // [[NSNotificationCenter defaultCenter] postNotificationName:MenuHasChanged object:nil];
+  
+  UIStoryboard *aStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+
+  RightViewController *rightViewController = [aStoryboard instantiateViewControllerWithIdentifier:@"RightViewController"];
+
+  [rightViewController getWoeid:region.woeid];
   
 }
 

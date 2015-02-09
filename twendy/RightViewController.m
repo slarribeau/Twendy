@@ -8,13 +8,50 @@
 
 #import "RightViewController.h"
 #import "Monster.h"
+#import "AuthenticationModel.h"
+#import "Notifications.h"
+#import "RegionModel.h"
+#import "Trend.h"
+#import "TwitterFetch.h"
 
+@interface RightViewController ()
+@property (nonatomic, weak) IBOutlet UIWebView *webview;
+@property (weak, nonatomic) IBOutlet UITableView *tblPeople; //FIX ME rename
+@property (nonatomic, strong) NSMutableArray *trendDB;
+@property (nonatomic) NSInteger recordIDToEdit;
+
+
+@end
 @implementation RightViewController
 
 #pragma mark - View Lifecycle
 - (void)viewDidLoad
 {
   [super viewDidLoad];
+  self.tblPeople.delegate = self;
+  self.tblPeople.dataSource = self;
+  
+  self.recordIDToEdit = -1;
+  
+  
+  if ([AuthenticationModel isLoggedIn] == NO) {
+    //[self login:nil];
+  } else {
+    // Reload the table view.
+    [self.tblPeople reloadData];
+    
+   // [self createScrollMenu];
+  }
+  //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(menuHasChanged:) name:MenuHasChanged object:nil];
+  
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLoggedOut:) name:LogoutSucceed object:nil];
+
+}
+
+-(void)userLoggedOut:(NSNotification*)obj {
+  [RegionModel reset];
+  self.trendDB = [[NSMutableArray alloc] init];
+  [self.tblPeople reloadData];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -24,6 +61,8 @@
   //Update the UI to reflect the monster set on initial load.
   [self refreshUI];
 }
+
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -36,16 +75,35 @@
   [self setWeaponImageView:nil];
 }
 
-#pragma mark - Overridden setters
--(void)setMonster:(Monster *)monster
+#pragma mark - UITableView Delegates
+- (NSInteger)tableView:(UITableView *)tableView
+ numberOfRowsInSection:(NSInteger)section
 {
-  //Make sure we're not setting up the same monster.
-  if (_monster != monster) {
-    _monster = monster;
-    
-    //Update the UI to reflect the new monster selected from the list.
-    [self refreshUI];
-  }
+  return self.trendDB.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView
+         cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"idCellRecord" forIndexPath:indexPath];
+  
+  Trend *trendObj = self.trendDB[indexPath.row];
+  cell.textLabel.text = trendObj.name;
+  //cell.detailTextLabel.text = @"text";
+  return cell;
+}
+
+-(void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath{
+  
+  Trend *trendObj = self.trendDB[self.recordIDToEdit];
+  [self.webview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:trendObj.url]]];
+}
+
+#pragma mark - Overridden setters
+-(void)getWoeid:(NSInteger)monster
+{
+  [self getTrendData:monster];
+  //[self.webview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:monster]]];
 }
 
 #pragma mark - New Methods
@@ -67,6 +125,61 @@
     // [_popover dismissPopoverAnimated:YES];
   }
 }
+
+
+-(void)notifyUser
+{
+  UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Reminder"
+                                                  message:@"You need to login before using this app."
+                                                 delegate:self cancelButtonTitle:@"OK"
+                                        otherButtonTitles:nil];
+  [alert show];
+  
+}
+
+-(void)getTrendData:(NSInteger)location {
+  
+  NSLog(@"self = %@", self);
+  if (location == 0) { //There are some race conditions where we don't yet have home woeid at start
+    return;
+  }
+  
+  if ([AuthenticationModel isLoggedIn] == NO) {
+    [self notifyUser];
+    return;
+  }
+  
+  NSString *url = [NSString stringWithFormat:@"https://api.twitter.com/1.1/trends/place.json?id=%@", [NSString stringWithFormat:@"%ld",(long)location]];
+  
+  [TwitterFetch fetch:self url:url didFinishSelector:@selector(didReceiveuserdata2:data:) didFailSelector:@selector(didFailOauth:error:)];
+  
+}
+
+- (void)didReceiveuserdata2:(OAServiceTicket*)ticket data:(NSData*)data {
+  //NSString* httpBody = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+  //NSLog(@"didReceive user data %@", httpBody);
+  
+  NSArray *twitterTrends   = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers       error:nil];
+  NSArray *trendArray  = [[twitterTrends objectAtIndex:0] objectForKey:@"trends"];
+  
+  self.trendDB = [[NSMutableArray alloc] init];
+  
+  for (NSDictionary *trend in trendArray) {
+    Trend *trendObj = [Trend alloc];
+    trendObj.name = [trend objectForKey:@"name"];
+    trendObj.url = [trend objectForKey:@"url"];
+    [self.trendDB addObject:trendObj];
+  }
+  
+  // Reload the table view.
+  [self.tblPeople reloadData];
+}
+
+- (void)didFailOauth:(OAServiceTicket*)ticket error:(NSError*)error {
+  NSLog(@"OauthFail %@", error);
+}
+
+
 
 //Enter portrait mode
 #pragma mark - UISplitViewDelegate methods
