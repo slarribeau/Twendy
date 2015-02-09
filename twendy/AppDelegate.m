@@ -11,6 +11,9 @@
 #import "AuthenticationModel.h"
 #import "RegionModel.h"
 #import "LocationModel.h"
+#import "Trend.h"
+#import "TwitterFetch.h"
+
 
 @interface AppDelegate ()
 
@@ -27,9 +30,63 @@
   [UIApplication sharedApplication].applicationIconBadgeNumber++;
   
   
-  //Tell the system that you ar done.
-  completionHandler(UIBackgroundFetchResultNewData);
+  if ([AuthenticationModel isLoggedIn] == NO) {
+    //[self notifyUser];
+    completionHandler(UIBackgroundFetchResultNewData);
+
+    return;
+  }
   
+  
+  NSString *url = [NSString stringWithFormat:@"https://api.twitter.com/1.1/trends/place.json?id=%@", [NSString stringWithFormat:@"%ld",(long)[LocationModel getWoeid]]];
+  
+  [TwitterFetch fetch:self url:url didFinishSelector:@selector(didReceiveuserdata:data:) didFailSelector:@selector(didFailOauth:error:)];
+
+  
+  //Tell the system that you ar done.
+  //completionHandler(UIBackgroundFetchResultNewData);
+  
+}
+
+- (void)didReceiveuserdata:(OAServiceTicket*)ticket data:(NSData*)data {
+  //NSString* httpBody = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+  //NSLog(@"didReceive user data %@", httpBody);
+  
+  NSArray *twitterTrends   = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers       error:nil];
+  NSArray *trendArray  = [[twitterTrends objectAtIndex:0] objectForKey:@"trends"];
+  
+  NSMutableArray *trendDB = [[NSMutableArray alloc] init];
+  
+  for (NSDictionary *trend in trendArray) {
+    Trend *trendObj = [Trend alloc];
+    trendObj.name = [trend objectForKey:@"name"];
+    trendObj.url = [trend objectForKey:@"url"];
+    [trendDB addObject:trendObj];
+  }
+  
+  NSDateFormatter *DateFormatter=[[NSDateFormatter alloc] init];
+  [DateFormatter setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
+  NSString *timeStamp = [DateFormatter stringFromDate:[NSDate date]];
+
+  UILocalNotification *notification = [[UILocalNotification alloc] init];
+  notification.fireDate = [NSDate dateWithTimeIntervalSinceNow:1];
+  notification.alertBody = @"This is local notification!";
+  notification.timeZone = [NSTimeZone defaultTimeZone];
+  notification.soundName = UILocalNotificationDefaultSoundName;
+  //notification.applicationIconBadgeNumber = 10;
+  
+  [[UIApplication sharedApplication] scheduleLocalNotification:notification];
+
+  UIAlertView *alert = [[UIAlertView alloc] initWithTitle:timeStamp
+                                                  message:@"You need to login before using this app."
+                                                 delegate:self cancelButtonTitle:@"OK"
+                                        otherButtonTitles:nil];
+  [alert show];
+
+}
+
+- (void)didFailOauth:(OAServiceTicket*)ticket error:(NSError*)error {
+  NSLog(@"OauthFail %@", error);
 }
 
 
