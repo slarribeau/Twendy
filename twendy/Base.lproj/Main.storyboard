@@ -217,7 +217,6 @@
                     <navigationItem key="navigationItem" title="Select Region" id="11N-a1-D2g"/>
                     <connections>
                         <outlet property="tblRegion" destination="vlg-Au-Qq2" id="yAJ-PN-29b"/>
-                        <segue destination="ePS-tb-ROo" kind="showDetail" identifier="foo" id="zAd-by-8x1"/>
                         <segue destination="vXZ-lx-hvc" kind="show" identifier="idSegueAuth2" id="Vne-Gc-RB3"/>
                     </connections>
                 </tableViewController>
@@ -369,6 +368,5 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Vne-Gc-RB3"/>
-        <segue reference="zAd-by-8x1"/>
     </inferredMetricsTieBreakers>
 </document>

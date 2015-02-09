@@ -118,9 +118,9 @@
 #pragma mark - New Methods
 -(void)refreshUI
 {
-  _nameLabel.text = _monster.name;
-  _iconImageView.image = [UIImage imageNamed:_monster.iconName];
-  _descriptionLabel.text = _monster.description;
+  //_nameLabel.text = _monster.name;
+ // _iconImageView.image = [UIImage imageNamed:_monster.iconName];
+ // _descriptionLabel.text = _monster.description;
   //_weaponImageView.image = [_monster weaponImage];
 }
 

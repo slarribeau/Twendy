@@ -48,6 +48,7 @@
 {
   [self.tblRegion reloadData];
 }
+#if 1
 -(void) viewDidAppear: (BOOL) animated {
   [super viewDidAppear:animated];
 
@@ -56,10 +57,13 @@
 -(void) viewWillAppear: (BOOL) animated {
   if ([AuthenticationModel isLoggedIn] == YES) {
    //[self.loginButton setTitle:@"Logout"];
+    
     [self.tblRegion reloadData];
 
   } else {
    //[self.loginButton setTitle:@"Login"];
+      [self login:nil];
+
   }
   
   //if (self.trendDB.count == 0) {
@@ -73,6 +77,7 @@
   [super viewWillAppear:animated];
 
 }
+#endif
 
 -(void)userLoggedOut:(NSNotification*)obj {
   [RegionModel reset];
@@ -116,7 +121,7 @@
   //[self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"Cell"];
   
   if ([AuthenticationModel isLoggedIn] == NO) {
-    [self login:nil];
+    //[self login:nil];
   } else {
     // Reload the table view.
  // [self.tblRegion reloadData];
