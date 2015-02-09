@@ -168,7 +168,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="Cell" textLabel="zOG-p6-nMS" style="IBUITableViewCellStyleDefault" id="pyo-Bh-N8h">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="idRegionCellRecord" textLabel="zOG-p6-nMS" style="IBUITableViewCellStyleDefault" id="pyo-Bh-N8h">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pyo-Bh-N8h" id="03O-ri-OU5">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -190,6 +190,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Select Region" id="11N-a1-D2g"/>
                     <connections>
+                        <outlet property="tblRegion" destination="vlg-Au-Qq2" id="yAJ-PN-29b"/>
                         <segue destination="ePS-tb-ROo" kind="showDetail" identifier="foo" id="zAd-by-8x1"/>
                         <segue destination="vXZ-lx-hvc" kind="show" identifier="idSegueAuth2" id="Vne-Gc-RB3"/>
                     </connections>

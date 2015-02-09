@@ -11,4 +11,6 @@
 #define MenuHasChanged @"MenuHasChanged"
 #define LoginSucceed @"LoginSucceed"
 #define LogoutSucceed @"LogoutSucceed"
+#define RegionsRetrieved @"RegionsRetrieved"
+
 #endif

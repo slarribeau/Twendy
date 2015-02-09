@@ -96,7 +96,7 @@ static NSMutableArray* regionDB;
     
     [regionDB addObject:regionObj];
   }
-  
+  [[NSNotificationCenter defaultCenter] postNotificationName:RegionsRetrieved object:nil];
 }
 
 
