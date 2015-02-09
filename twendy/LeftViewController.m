@@ -132,15 +132,15 @@
   [[NSUserDefaults standardUserDefaults] synchronize];
   
   NSLog(@"configRegionDict after %@",configRegionDict);
-  
+#if 0
  UIStoryboard *aStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
 
  RightViewController *rightViewController = [aStoryboard instantiateViewControllerWithIdentifier:@"RightViewController"];
 
   [rightViewController getWoeid:region.woeid];
-  
- // RightViewController *rightViewController2 = (RightViewController*)self.delegate;
- // [rightViewController2 getWoeid:region.woeid];
+#endif
+ RightViewController *rightViewController2 = (RightViewController*)self.delegate;
+ [rightViewController2 getWoeid:region.woeid];
 
 }
 

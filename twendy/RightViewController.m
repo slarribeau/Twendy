@@ -94,12 +94,17 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"idCellRecord" forIndexPath:indexPath];
+  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"idCellRecord2" forIndexPath:indexPath];
   
   Trend *trendObj = self.trendDB[indexPath.row];
   cell.textLabel.text = trendObj.name;
   //cell.detailTextLabel.text = @"text";
   return cell;
+}
+
+-(void)setUrl:(NSString *)url
+{
+  [self.webview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.google.com"]]];
 }
 
 -(void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath{

@@ -23,6 +23,26 @@
 #define IOS_VERSION [[[[[UIDevice currentDevice] systemVersion] componentsSeparatedByString:@"."] firstObject] intValue]
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+  
+  
+  UISplitViewController *splitViewController = (UISplitViewController *)self.window.rootViewController;
+  
+  //Grab a reference to the RightViewController and set it as the SVC's delegate.
+  RightViewController *rightViewController = [splitViewController.viewControllers lastObject];
+  splitViewController.delegate = rightViewController;
+
+  //Grab a reference to the LeftViewController and get the first monster in the list.
+  UINavigationController *leftNavController = [splitViewController.viewControllers objectAtIndex:0];
+  LeftViewController *leftViewController = (LeftViewController *)[leftNavController topViewController];
+  
+  //Set it as the RightViewController's monster.
+  [rightViewController setUrl:@"http://www.google.com"];
+
+  //Set the RightViewController as the left's delegate.
+  leftViewController.delegate = rightViewController;
+
+  
+  
 #if 0
   UISplitViewController *splitViewController = (UISplitViewController *)self.window.rootViewController;
   NSLog(@"SVC controllers = %@", splitViewController.viewControllers);
