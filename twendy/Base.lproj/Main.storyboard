@@ -200,7 +200,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aJ1-Hd-gyx">
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aJ1-Hd-gyx">
                                 <rect key="frame" x="16" y="86" width="551" height="514"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
@@ -209,6 +209,12 @@
                             </webView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="aJ1-Hd-gyx" secondAttribute="trailing" constant="17" id="MMQ-yR-nFg"/>
+                            <constraint firstItem="aJ1-Hd-gyx" firstAttribute="top" secondItem="uX7-P0-LOx" secondAttribute="bottom" constant="22" id="h4l-Es-HUk"/>
+                            <constraint firstItem="aJ1-Hd-gyx" firstAttribute="leading" secondItem="Qim-6e-ij7" secondAttribute="leadingMargin" id="sXA-a0-VcM"/>
+                            <constraint firstItem="Yzq-Kd-9nH" firstAttribute="top" secondItem="aJ1-Hd-gyx" secondAttribute="bottom" id="yDi-Zq-hJn"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="y7G-hL-cy0"/>
                     <connections>
