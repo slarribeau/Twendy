@@ -13,13 +13,11 @@
 #import "RegionModel.h"
 #import "Trend.h"
 #import "TwitterFetch.h"
-#import "TrendViewController.h"
 
 @interface RightViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *tblPeople; //FIX ME rename
 @property (nonatomic, strong) NSMutableArray *trendDB;
 @property (nonatomic) NSInteger recordIDToEdit;
-
 
 @end
 @implementation RightViewController
@@ -106,16 +104,32 @@
 #pragma mark - Table view delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  self.recordIDToEdit = indexPath.row;
+  //Trend *trendObj = self.trendDB[indexPath.row];
+
+ // self.trendViewController.trendUrl = trendObj.url;
+
+ // [self performSegueWithIdentifier:@"idSequeWebView" sender:self];
+
 }
 
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+
+  UINavigationController *nc =
+  (UINavigationController *)segue.destinationViewController;
   
-    TrendViewController *trendViewController = [segue destinationViewController];
-    Trend *trendObj = self.trendDB[self.recordIDToEdit];
+  TrendViewController *trendViewController =
+  (TrendViewController *)[nc topViewController];
+  
+  NSIndexPath *selectedIndexPath = [self.tblPeople indexPathForSelectedRow];
+  self.recordIDToEdit = selectedIndexPath.row;
+  
+  Trend *trendObj = self.trendDB[self.recordIDToEdit];
     
-    trendViewController.trendUrl = trendObj.url;
+  trendViewController.trendUrl = trendObj.url;
 }
+
 
 #pragma mark - Overridden setters
 -(void)getWoeid:(NSInteger)monster

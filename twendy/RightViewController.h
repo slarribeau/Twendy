@@ -10,6 +10,7 @@
 
 @class Monster;
 //#import "MonsterSelectionDelegate.h"
+#import "TrendViewController.h"
 
 @interface RightViewController : UIViewController <UISplitViewControllerDelegate, UITableViewDelegate, UITableViewDataSource>
 
@@ -20,6 +21,7 @@
 @property (nonatomic, weak) IBOutlet UIImageView *weaponImageView;
 @property (nonatomic, weak) IBOutlet UINavigationItem *navBarItem;
 @property (nonatomic, strong) UIPopoverController *popover;
+@property (weak, nonatomic) TrendViewController *trendViewController;
 
 -(void)getWoeid:(NSInteger)monster;
 
