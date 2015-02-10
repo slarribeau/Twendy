@@ -46,9 +46,6 @@
   
   LeftViewController *leftViewController = (LeftViewController *)[leftNavController topViewController];
   
-  //Set it as the RightViewController's monster.
-  [rightViewController setUrl:@"http://www.google.com"];
-
   //Set the RightViewController as the left's delegate.
   leftViewController.delegate = rightViewController;
 

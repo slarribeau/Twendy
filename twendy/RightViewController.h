@@ -22,6 +22,5 @@
 @property (nonatomic, strong) UIPopoverController *popover;
 
 -(void)getWoeid:(NSInteger)monster;
--(void)setUrl:(NSString *)url;
 
 @end

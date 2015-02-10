@@ -15,7 +15,6 @@
 #import "TwitterFetch.h"
 
 @interface RightViewController ()
-@property (nonatomic, weak) IBOutlet UIWebView *webview;
 @property (weak, nonatomic) IBOutlet UITableView *tblPeople; //FIX ME rename
 @property (nonatomic, strong) NSMutableArray *trendDB;
 @property (nonatomic) NSInteger recordIDToEdit;
@@ -102,16 +101,11 @@
   return cell;
 }
 
--(void)setUrl:(NSString *)url
-{
-  [self.webview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.google.com"]]];
-}
 
 #pragma mark - Table view delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
   Trend *trendObj = self.trendDB[indexPath.row];
-  [self.webview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:trendObj.url]]];
 }
 
 #pragma mark - Overridden setters
