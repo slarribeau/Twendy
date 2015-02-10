@@ -13,6 +13,7 @@
 #import "RegionModel.h"
 #import "Trend.h"
 #import "TwitterFetch.h"
+#import "TrendViewController.h"
 
 @interface RightViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *tblPeople; //FIX ME rename
@@ -105,7 +106,15 @@
 #pragma mark - Table view delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  Trend *trendObj = self.trendDB[indexPath.row];
+  self.recordIDToEdit = indexPath.row;
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+  
+    TrendViewController *trendViewController = [segue destinationViewController];
+    Trend *trendObj = self.trendDB[self.recordIDToEdit];
+    
+    trendViewController.trendUrl = trendObj.url;
 }
 
 #pragma mark - Overridden setters
