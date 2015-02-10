@@ -30,6 +30,12 @@
   //Grab a reference to the RightViewController and set it as the SVC's delegate.
   UINavigationController *rightNavController = [splitViewController.viewControllers lastObject];
 
+  rightNavController.topViewController.navigationItem.leftBarButtonItem =
+  splitViewController.displayModeButtonItem;
+  
+  rightNavController.topViewController.navigationItem.leftItemsSupplementBackButton = true;
+
+
   RightViewController *rightViewController = (RightViewController *)[rightNavController topViewController];
   splitViewController.delegate = rightViewController;
   
