@@ -152,12 +152,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="inE-I3-o4X">
-                                <rect key="frame" x="16" y="64" width="568" height="44"/>
-                                <items>
-                                    <navigationItem id="TH3-CT-wkU"/>
-                                </items>
-                            </navigationBar>
                             <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d7H-ay-OwN">
                                 <rect key="frame" x="16" y="294" width="568" height="306"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -166,7 +160,7 @@
                                 </connections>
                             </webView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="QT7-qn-yRp">
-                                <rect key="frame" x="16" y="108" width="568" height="186"/>
+                                <rect key="frame" x="16" y="75" width="568" height="219"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="idCellRecord2" id="cwx-yv-pZE">
@@ -183,27 +177,23 @@
                         <constraints>
                             <constraint firstItem="QT7-qn-yRp" firstAttribute="leading" secondItem="m2m-65-Iza" secondAttribute="leadingMargin" id="6Hl-KY-48r"/>
                             <constraint firstItem="d7H-ay-OwN" firstAttribute="top" secondItem="QT7-qn-yRp" secondAttribute="bottom" id="DEM-wt-S9s"/>
-                            <constraint firstItem="QT7-qn-yRp" firstAttribute="top" secondItem="inE-I3-o4X" secondAttribute="bottom" id="HL5-62-Fnl"/>
                             <constraint firstItem="d7H-ay-OwN" firstAttribute="top" secondItem="m2m-65-Iza" secondAttribute="topMargin" constant="294" id="L6e-T8-GdJ"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="inE-I3-o4X" secondAttribute="trailing" id="Q81-Nw-MeL"/>
-                            <constraint firstItem="inE-I3-o4X" firstAttribute="leading" secondItem="m2m-65-Iza" secondAttribute="leadingMargin" id="aCs-am-K97"/>
+                            <constraint firstItem="QT7-qn-yRp" firstAttribute="top" secondItem="m2m-65-Iza" secondAttribute="topMargin" constant="75" id="ebc-Gb-GG8"/>
                             <constraint firstAttribute="trailingMargin" secondItem="QT7-qn-yRp" secondAttribute="trailing" id="iRz-5z-UF1"/>
                             <constraint firstItem="4WJ-yo-1fs" firstAttribute="top" secondItem="d7H-ay-OwN" secondAttribute="bottom" id="mAY-Fk-Yqz"/>
                             <constraint firstItem="d7H-ay-OwN" firstAttribute="leading" secondItem="m2m-65-Iza" secondAttribute="leadingMargin" id="nhZ-es-WUA"/>
-                            <constraint firstItem="inE-I3-o4X" firstAttribute="top" secondItem="reM-R8-Fn3" secondAttribute="bottom" id="tAo-AY-3HE"/>
                             <constraint firstItem="d7H-ay-OwN" firstAttribute="trailing" secondItem="m2m-65-Iza" secondAttribute="trailingMargin" id="yt4-OU-wQd"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="vPd-MG-HmI"/>
                     <connections>
-                        <outlet property="navBarItem" destination="TH3-CT-wkU" id="CRs-TR-YRf"/>
                         <outlet property="tblPeople" destination="QT7-qn-yRp" id="Ddh-gl-xoH"/>
                         <outlet property="webview" destination="d7H-ay-OwN" id="VsR-xt-z8J"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4kF-02-nHx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1313" y="335"/>
+            <point key="canvasLocation" x="1313" y="324"/>
         </scene>
         <!--Select Region-->
         <scene sceneID="gEn-4y-olN">
