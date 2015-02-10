@@ -244,10 +244,10 @@
             </objects>
             <point key="canvasLocation" x="1271" y="-464"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Select Region-->
         <scene sceneID="IsN-Iy-3UK">
             <objects>
-                <navigationController id="XVa-rb-eE4" sceneMemberID="viewController">
+                <navigationController title="Select Region" id="XVa-rb-eE4" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="cnZ-yb-7GF">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -387,6 +387,6 @@
         <image name="sea-background" width="57" height="51"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="e7d-nY-GC9"/>
+        <segue reference="Vne-Gc-RB3"/>
     </inferredMetricsTieBreakers>
 </document>
