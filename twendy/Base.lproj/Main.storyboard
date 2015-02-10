@@ -227,6 +227,9 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="Q1J-me-cRu" kind="showDetail" id="l1P-Zf-CRj"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -387,6 +390,7 @@
         <image name="sea-background" width="57" height="51"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="e7d-nY-GC9"/>
+        <segue reference="Vne-Gc-RB3"/>
+        <segue reference="l1P-Zf-CRj"/>
     </inferredMetricsTieBreakers>
 </document>
