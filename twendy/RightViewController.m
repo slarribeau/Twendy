@@ -118,7 +118,9 @@
 -(void)getWoeid:(NSInteger)monster
 {
   [self getTrendData:monster];
-  //[self.webview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:monster]]];
+  if (_popover != nil) {
+    [_popover dismissPopoverAnimated:YES];
+  }
 }
 
 #pragma mark - New Methods
