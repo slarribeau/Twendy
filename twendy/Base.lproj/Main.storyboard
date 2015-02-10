@@ -140,7 +140,7 @@
             </objects>
             <point key="canvasLocation" x="2543" y="-341"/>
         </scene>
-        <!--Can you hear me?-->
+        <!--Right View Controller-->
         <scene sceneID="Jw7-8L-X9o">
             <objects>
                 <viewController storyboardIdentifier="RightViewController" id="zz8-53-p5h" customClass="RightViewController" sceneMemberID="viewController">
@@ -152,6 +152,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="inE-I3-o4X">
+                                <rect key="frame" x="16" y="20" width="568" height="44"/>
+                                <items>
+                                    <navigationItem id="TH3-CT-wkU"/>
+                                </items>
+                            </navigationBar>
                             <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d7H-ay-OwN">
                                 <rect key="frame" x="16" y="294" width="568" height="306"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -159,7 +165,7 @@
                                     <outlet property="delegate" destination="zz8-53-p5h" id="mSH-DN-CX3"/>
                                 </connections>
                             </webView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="QT7-qn-yRp">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="QT7-qn-yRp">
                                 <rect key="frame" x="16" y="64" width="568" height="230"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -177,18 +183,21 @@
                         <constraints>
                             <constraint firstItem="QT7-qn-yRp" firstAttribute="leading" secondItem="m2m-65-Iza" secondAttribute="leadingMargin" id="6Hl-KY-48r"/>
                             <constraint firstItem="d7H-ay-OwN" firstAttribute="top" secondItem="QT7-qn-yRp" secondAttribute="bottom" id="DEM-wt-S9s"/>
+                            <constraint firstItem="QT7-qn-yRp" firstAttribute="top" secondItem="inE-I3-o4X" secondAttribute="bottom" id="HL5-62-Fnl"/>
                             <constraint firstItem="d7H-ay-OwN" firstAttribute="top" secondItem="m2m-65-Iza" secondAttribute="topMargin" constant="294" id="L6e-T8-GdJ"/>
-                            <constraint firstItem="QT7-qn-yRp" firstAttribute="top" secondItem="reM-R8-Fn3" secondAttribute="bottom" id="Mje-un-nZK"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="inE-I3-o4X" secondAttribute="trailing" id="Q81-Nw-MeL"/>
+                            <constraint firstItem="inE-I3-o4X" firstAttribute="leading" secondItem="m2m-65-Iza" secondAttribute="leadingMargin" id="aCs-am-K97"/>
                             <constraint firstAttribute="trailingMargin" secondItem="QT7-qn-yRp" secondAttribute="trailing" id="iRz-5z-UF1"/>
                             <constraint firstItem="4WJ-yo-1fs" firstAttribute="top" secondItem="d7H-ay-OwN" secondAttribute="bottom" id="mAY-Fk-Yqz"/>
                             <constraint firstItem="d7H-ay-OwN" firstAttribute="leading" secondItem="m2m-65-Iza" secondAttribute="leadingMargin" id="nhZ-es-WUA"/>
+                            <constraint firstItem="inE-I3-o4X" firstAttribute="top" secondItem="reM-R8-Fn3" secondAttribute="bottom" id="tAo-AY-3HE"/>
                             <constraint firstItem="d7H-ay-OwN" firstAttribute="trailing" secondItem="m2m-65-Iza" secondAttribute="trailingMargin" id="yt4-OU-wQd"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Can you hear me?" id="K2s-fy-9vW"/>
                     <connections>
+                        <outlet property="navBarItem" destination="TH3-CT-wkU" id="CRs-TR-YRf"/>
                         <outlet property="tblPeople" destination="QT7-qn-yRp" id="Ddh-gl-xoH"/>
-                        <outlet property="view" destination="d7H-ay-OwN" id="SED-dw-pkQ"/>
+                        <outlet property="webview" destination="d7H-ay-OwN" id="VsR-xt-z8J"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4kF-02-nHx" userLabel="First Responder" sceneMemberID="firstResponder"/>

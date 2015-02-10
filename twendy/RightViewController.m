@@ -107,9 +107,10 @@
   [self.webview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.google.com"]]];
 }
 
--(void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath{
-  
-  Trend *trendObj = self.trendDB[self.recordIDToEdit];
+#pragma mark - Table view delegate
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  Trend *trendObj = self.trendDB[indexPath.row];
   [self.webview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:trendObj.url]]];
 }
 
@@ -213,7 +214,6 @@
 -(void)splitViewController:(UISplitViewController *)svc willShowViewController:(UIViewController *)aViewController invalidatingBarButtonItem:(UIBarButtonItem *)barButtonItem
 {
   //Remove the barButtonItem.
-  //[_navBarItem setLeftBarButtonItem:nil animated:YES];
   [_navBarItem setLeftBarButtonItem:barButtonItem animated:YES];
   
   //Nil out the pointer to the popover.
