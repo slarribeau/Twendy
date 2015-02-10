@@ -28,11 +28,16 @@
   UISplitViewController *splitViewController = (UISplitViewController *)self.window.rootViewController;
   
   //Grab a reference to the RightViewController and set it as the SVC's delegate.
-  RightViewController *rightViewController = [splitViewController.viewControllers lastObject];
+  UINavigationController *rightNavController = [splitViewController.viewControllers lastObject];
+
+  RightViewController *rightViewController = (RightViewController *)[rightNavController topViewController];
   splitViewController.delegate = rightViewController;
+  
+  
 
   //Grab a reference to the LeftViewController and get the first monster in the list.
   UINavigationController *leftNavController = [splitViewController.viewControllers objectAtIndex:0];
+  
   LeftViewController *leftViewController = (LeftViewController *)[leftNavController topViewController];
   
   //Set it as the RightViewController's monster.
