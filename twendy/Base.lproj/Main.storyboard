@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6249" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="SLX-Xi-B9T">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6243"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -152,12 +151,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="inE-I3-o4X">
-                                <rect key="frame" x="16" y="20" width="568" height="44"/>
-                                <items>
-                                    <navigationItem id="TH3-CT-wkU"/>
-                                </items>
-                            </navigationBar>
                             <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d7H-ay-OwN">
                                 <rect key="frame" x="16" y="294" width="568" height="306"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -166,7 +159,7 @@
                                 </connections>
                             </webView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="QT7-qn-yRp">
-                                <rect key="frame" x="16" y="64" width="568" height="230"/>
+                                <rect key="frame" x="16" y="75" width="568" height="219"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="idCellRecord2" id="cwx-yv-pZE">
@@ -183,26 +176,24 @@
                         <constraints>
                             <constraint firstItem="QT7-qn-yRp" firstAttribute="leading" secondItem="m2m-65-Iza" secondAttribute="leadingMargin" id="6Hl-KY-48r"/>
                             <constraint firstItem="d7H-ay-OwN" firstAttribute="top" secondItem="QT7-qn-yRp" secondAttribute="bottom" id="DEM-wt-S9s"/>
-                            <constraint firstItem="QT7-qn-yRp" firstAttribute="top" secondItem="inE-I3-o4X" secondAttribute="bottom" id="HL5-62-Fnl"/>
                             <constraint firstItem="d7H-ay-OwN" firstAttribute="top" secondItem="m2m-65-Iza" secondAttribute="topMargin" constant="294" id="L6e-T8-GdJ"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="inE-I3-o4X" secondAttribute="trailing" id="Q81-Nw-MeL"/>
-                            <constraint firstItem="inE-I3-o4X" firstAttribute="leading" secondItem="m2m-65-Iza" secondAttribute="leadingMargin" id="aCs-am-K97"/>
+                            <constraint firstItem="QT7-qn-yRp" firstAttribute="top" secondItem="m2m-65-Iza" secondAttribute="topMargin" constant="75" id="ebc-Gb-GG8"/>
                             <constraint firstAttribute="trailingMargin" secondItem="QT7-qn-yRp" secondAttribute="trailing" id="iRz-5z-UF1"/>
                             <constraint firstItem="4WJ-yo-1fs" firstAttribute="top" secondItem="d7H-ay-OwN" secondAttribute="bottom" id="mAY-Fk-Yqz"/>
                             <constraint firstItem="d7H-ay-OwN" firstAttribute="leading" secondItem="m2m-65-Iza" secondAttribute="leadingMargin" id="nhZ-es-WUA"/>
-                            <constraint firstItem="inE-I3-o4X" firstAttribute="top" secondItem="reM-R8-Fn3" secondAttribute="bottom" id="tAo-AY-3HE"/>
                             <constraint firstItem="d7H-ay-OwN" firstAttribute="trailing" secondItem="m2m-65-Iza" secondAttribute="trailingMargin" id="yt4-OU-wQd"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="vPd-MG-HmI"/>
                     <connections>
-                        <outlet property="navBarItem" destination="TH3-CT-wkU" id="CRs-TR-YRf"/>
+                        <outlet property="navBarItem" destination="vPd-MG-HmI" id="Stz-pu-UwG"/>
                         <outlet property="tblPeople" destination="QT7-qn-yRp" id="Ddh-gl-xoH"/>
                         <outlet property="webview" destination="d7H-ay-OwN" id="VsR-xt-z8J"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4kF-02-nHx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1313" y="335"/>
+            <point key="canvasLocation" x="1313" y="324"/>
         </scene>
         <!--Select Region-->
         <scene sceneID="gEn-4y-olN">
@@ -243,10 +234,10 @@
             </objects>
             <point key="canvasLocation" x="1271" y="-464"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Select Region-->
         <scene sceneID="IsN-Iy-3UK">
             <objects>
-                <navigationController id="XVa-rb-eE4" sceneMemberID="viewController">
+                <navigationController title="Select Region" id="XVa-rb-eE4" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="cnZ-yb-7GF">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -259,13 +250,29 @@
             </objects>
             <point key="canvasLocation" x="37" y="-475"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="oP6-mc-MEt">
+            <objects>
+                <navigationController id="Q1J-me-cRu" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="dG5-tM-8KP">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="zz8-53-p5h" kind="relationship" relationship="rootViewController" id="0GT-or-H4J"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fPa-hT-EEf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-49" y="730"/>
+        </scene>
         <!--Split View Controller-->
         <scene sceneID="wYe-Sj-Awp">
             <objects>
                 <splitViewController id="SLX-Xi-B9T" sceneMemberID="viewController">
                     <connections>
                         <segue destination="XVa-rb-eE4" kind="relationship" relationship="masterViewController" id="sdf-9c-XEj"/>
-                        <segue destination="zz8-53-p5h" kind="relationship" relationship="detailViewController" id="ILJ-K8-qFU"/>
+                        <segue destination="Q1J-me-cRu" kind="relationship" relationship="detailViewController" id="Tea-eE-Ah1"/>
                     </connections>
                 </splitViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NHz-FF-ekH" userLabel="First Responder" sceneMemberID="firstResponder"/>

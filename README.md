@@ -3,7 +3,10 @@ iOS App for monitoring Twitter Trends
 
 
 iPAD TODO LIST:
-
+default to home when you first login.
+Monstors and Select Region conflict when you return to portrait mode from landscape.
+Fix nav bar on right view
+Always scroll back to right view first entry when you select a region 
 a) Put region in nav bar once selected
 b) make sure table entries are highlighted
 c) Fix issue when you aren't logged in and you hit cancel
