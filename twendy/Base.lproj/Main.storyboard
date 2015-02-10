@@ -69,6 +69,9 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cwx-yv-pZE" id="zSE-5H-Eb4">
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="CqE-xK-ieV" kind="show" id="jU8-0a-KSL"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -95,6 +98,22 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4kF-02-nHx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1385" y="756"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="fYS-js-HGX">
+            <objects>
+                <navigationController id="CqE-xK-ieV" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="C9a-nj-ulj">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="3yu-43-obO" kind="relationship" relationship="rootViewController" id="e27-1U-4XP"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LH2-Iw-ZLC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2311" y="765"/>
         </scene>
         <!--Select Region-->
         <scene sceneID="gEn-4y-olN">
@@ -209,7 +228,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NGW-it-jdv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2564" y="33"/>
+            <point key="canvasLocation" x="3200" y="742"/>
         </scene>
     </scenes>
 </document>
