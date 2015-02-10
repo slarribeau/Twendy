@@ -152,7 +152,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="inE-I3-o4X">
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="inE-I3-o4X">
                                 <rect key="frame" x="16" y="20" width="568" height="44"/>
                                 <items>
                                     <navigationItem id="TH3-CT-wkU"/>
@@ -165,7 +165,7 @@
                                     <outlet property="delegate" destination="zz8-53-p5h" id="mSH-DN-CX3"/>
                                 </connections>
                             </webView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="QT7-qn-yRp">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="QT7-qn-yRp">
                                 <rect key="frame" x="16" y="64" width="568" height="230"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -194,7 +194,6 @@
                             <constraint firstItem="d7H-ay-OwN" firstAttribute="trailing" secondItem="m2m-65-Iza" secondAttribute="trailingMargin" id="yt4-OU-wQd"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="vPd-MG-HmI"/>
                     <connections>
                         <outlet property="navBarItem" destination="TH3-CT-wkU" id="CRs-TR-YRf"/>
                         <outlet property="tblPeople" destination="QT7-qn-yRp" id="Ddh-gl-xoH"/>
@@ -227,9 +226,6 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
-                                <connections>
-                                    <segue destination="Q1J-me-cRu" kind="showDetail" id="l1P-Zf-CRj"/>
-                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -263,29 +259,13 @@
             </objects>
             <point key="canvasLocation" x="37" y="-475"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="oP6-mc-MEt">
-            <objects>
-                <navigationController id="Q1J-me-cRu" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="dG5-tM-8KP">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="zz8-53-p5h" kind="relationship" relationship="rootViewController" id="0GT-or-H4J"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="fPa-hT-EEf" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-49" y="730"/>
-        </scene>
         <!--Split View Controller-->
         <scene sceneID="wYe-Sj-Awp">
             <objects>
                 <splitViewController id="SLX-Xi-B9T" sceneMemberID="viewController">
                     <connections>
                         <segue destination="XVa-rb-eE4" kind="relationship" relationship="masterViewController" id="sdf-9c-XEj"/>
-                        <segue destination="Q1J-me-cRu" kind="relationship" relationship="detailViewController" id="Tea-eE-Ah1"/>
+                        <segue destination="zz8-53-p5h" kind="relationship" relationship="detailViewController" id="ILJ-K8-qFU"/>
                     </connections>
                 </splitViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NHz-FF-ekH" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -391,6 +371,5 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Vne-Gc-RB3"/>
-        <segue reference="l1P-Zf-CRj"/>
     </inferredMetricsTieBreakers>
 </document>
