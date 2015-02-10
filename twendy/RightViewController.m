@@ -216,10 +216,10 @@
 -(void)splitViewController:(UISplitViewController *)svc willShowViewController:(UIViewController *)aViewController invalidatingBarButtonItem:(UIBarButtonItem *)barButtonItem
 {
   //Remove the barButtonItem.
-  [_navBarItem setLeftBarButtonItem:barButtonItem animated:YES];
+  //[_navBarItem setLeftBarButtonItem:barButtonItem animated:YES];
   
   //Nil out the pointer to the popover.
-  _popover = nil;
+  //_popover = nil;
 }
 
 - (BOOL)splitViewController:(UISplitViewController *)splitViewController
