@@ -187,6 +187,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="vPd-MG-HmI"/>
                     <connections>
+                        <outlet property="navBarItem" destination="vPd-MG-HmI" id="Stz-pu-UwG"/>
                         <outlet property="tblPeople" destination="QT7-qn-yRp" id="Ddh-gl-xoH"/>
                         <outlet property="webview" destination="d7H-ay-OwN" id="VsR-xt-z8J"/>
                     </connections>
