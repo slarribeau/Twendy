@@ -222,5 +222,12 @@
   _popover = nil;
 }
 
+- (BOOL)splitViewController:(UISplitViewController *)splitViewController
+collapseSecondaryViewController:(UIViewController *)secondaryViewController
+  ontoPrimaryViewController:(UIViewController *)primaryViewController
+{
+  //Note, this does not get called on ipad. It may only be for iphone 6 (?)
+  return YES; //Default Value
+}
 @end
 
