@@ -1,6 +1,20 @@
 # twendy
 iOS App for monitoring Twitter Trends
 
+
+iPAD TODO LIST:
+
+a) Put region in nav bar once selected
+b) make sure table entries are highlighted
+c) Fix issue when you aren't logged in and you hit cancel
+d) Startup in landscape mode is erie. (try math monster as well)
+e) Start up when not logged in is bleak -> Jazz it up
+f) Should cancel say "Cancel Login"
+g) Should Monster say "Show Regions"
+h) Login button in right controller at startup
+i) make empty table look better at startup!
+j) Make web take up whole screen!
+
 BUGS:
 Can you stack region strings?
 
