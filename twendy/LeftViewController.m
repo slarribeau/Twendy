@@ -53,7 +53,7 @@
 }
 
 -(IBAction)login:(id)sender {
-  //[self performSegueWithIdentifier:@"idSegueAuth2" sender:self];
+  [self performSegueWithIdentifier:@"idSegueAuth2" sender:self];
 }
 
 -(void)regionsWereRetrieved:(NSNotification*)obj
