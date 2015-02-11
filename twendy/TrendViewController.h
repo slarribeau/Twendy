@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TrendViewController : UIViewController
+@interface TrendViewController : UIViewController <UIWebViewDelegate>
 @property (retain, nonatomic) NSString *trendUrl;
 @end
 
