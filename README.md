@@ -6,6 +6,8 @@ iPAD TODO LIST:
 default to home when you first login.
 Monstors and Select Region conflict when you return to portrait mode from landscape.
 Fix nav bar on right view
+need a 'back key' for browser.
+Need to remove some of extra space at top of browser.
 Always scroll back to right view first entry when you select a region 
 a) Put region in nav bar once selected
 b) make sure table entries are highlighted

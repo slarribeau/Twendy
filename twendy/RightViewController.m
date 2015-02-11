@@ -220,7 +220,7 @@
 -(void)splitViewController:(UISplitViewController *)svc willHideViewController:(UIViewController *)aViewController withBarButtonItem:(UIBarButtonItem *)barButtonItem forPopoverController:(UIPopoverController *)pc
 {
   //Grab a reference to the popover
-  //self.popover = pc;
+  self.popover = pc;
   
   //Set the title of the bar button item
  //barButtonItem.title = @"Monsters";
@@ -236,7 +236,7 @@
   //[_navBarItem setLeftBarButtonItem:barButtonItem animated:YES];
   
   //Nil out the pointer to the popover.
-  //_popover = nil;
+  _popover = nil;
 }
 
 - (BOOL)splitViewController:(UISplitViewController *)splitViewController
