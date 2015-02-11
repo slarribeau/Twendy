@@ -280,7 +280,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aJ1-Hd-gyx">
-                                <rect key="frame" x="16" y="0.0" width="568" height="600"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="delegate" destination="3yu-43-obO" id="BGc-Rl-D6R"/>
@@ -290,9 +290,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="aJ1-Hd-gyx" firstAttribute="bottom" secondItem="Qim-6e-ij7" secondAttribute="bottomMargin" id="Aoi-ly-mvr"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="aJ1-Hd-gyx" secondAttribute="trailing" id="aM0-5I-shg"/>
+                            <constraint firstAttribute="trailing" secondItem="aJ1-Hd-gyx" secondAttribute="trailing" id="aM0-5I-shg"/>
                             <constraint firstItem="aJ1-Hd-gyx" firstAttribute="top" secondItem="Qim-6e-ij7" secondAttribute="topMargin" id="kKE-4X-20w"/>
-                            <constraint firstItem="aJ1-Hd-gyx" firstAttribute="leading" secondItem="Qim-6e-ij7" secondAttribute="leadingMargin" id="lGS-yN-dIn"/>
+                            <constraint firstItem="aJ1-Hd-gyx" firstAttribute="leading" secondItem="Qim-6e-ij7" secondAttribute="leading" id="lGS-yN-dIn"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="y7G-hL-cy0"/>
