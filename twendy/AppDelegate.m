@@ -28,10 +28,35 @@
   
   //Increase Badge Number
   [UIApplication sharedApplication].applicationIconBadgeNumber++;
+  NSDateFormatter *DateFormatter=[[NSDateFormatter alloc] init];
+  [DateFormatter setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
+  NSString *timeStamp = [DateFormatter stringFromDate:[NSDate date]];
   
+  UILocalNotification *notification = [[UILocalNotification alloc] init];
+  notification.fireDate = [NSDate dateWithTimeIntervalSinceNow:1];
+  notification.alertBody = @"twendy awakes!";
+  notification.timeZone = [NSTimeZone defaultTimeZone];
+  notification.soundName = UILocalNotificationDefaultSoundName;
+  //notification.applicationIconBadgeNumber = 10;
+  
+  [[UIApplication sharedApplication] scheduleLocalNotification:notification];
+  
+  UIAlertView *alert = [[UIAlertView alloc] initWithTitle:timeStamp
+                                                  message:@"Cool!!!"
+                                                 delegate:self cancelButtonTitle:@"OK"
+                                        otherButtonTitles:nil];
+  [alert show];
+
   
   if ([AuthenticationModel isLoggedIn] == NO) {
     //[self notifyUser];
+    UILocalNotification *notification = [[UILocalNotification alloc] init];
+    notification.fireDate = [NSDate dateWithTimeIntervalSinceNow:1];
+    notification.alertBody = @"Twitter access fail: notloggedin";
+    notification.timeZone = [NSTimeZone defaultTimeZone];
+    notification.soundName = UILocalNotificationDefaultSoundName;
+    [[UIApplication sharedApplication] scheduleLocalNotification:notification];
+
     completionHandler(UIBackgroundFetchResultNewData);
 
     return;
@@ -70,15 +95,13 @@
 
   UILocalNotification *notification = [[UILocalNotification alloc] init];
   notification.fireDate = [NSDate dateWithTimeIntervalSinceNow:1];
-  notification.alertBody = @"This is local notification!";
+  notification.alertBody = @"Received Response From Twitter";
   notification.timeZone = [NSTimeZone defaultTimeZone];
   notification.soundName = UILocalNotificationDefaultSoundName;
-  //notification.applicationIconBadgeNumber = 10;
-  
   [[UIApplication sharedApplication] scheduleLocalNotification:notification];
 
   UIAlertView *alert = [[UIAlertView alloc] initWithTitle:timeStamp
-                                                  message:@"You need to login before using this app."
+                                                  message:@"Alert: Received response twitter."
                                                  delegate:self cancelButtonTitle:@"OK"
                                         otherButtonTitles:nil];
   [alert show];
@@ -87,6 +110,13 @@
 
 - (void)didFailOauth:(OAServiceTicket*)ticket error:(NSError*)error {
   NSLog(@"OauthFail %@", error);
+  UILocalNotification *notification = [[UILocalNotification alloc] init];
+  notification.fireDate = [NSDate dateWithTimeIntervalSinceNow:1];
+  notification.alertBody = @"Twitter returned error!";
+  notification.timeZone = [NSTimeZone defaultTimeZone];
+  notification.soundName = UILocalNotificationDefaultSoundName;
+  [[UIApplication sharedApplication] scheduleLocalNotification:notification];
+
 }
 
 
