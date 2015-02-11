@@ -129,7 +129,10 @@ static int const kButtonWidth = 100;
   return cell;
 }
 
--(void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath{
+//-(void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+
+{
   // Get the record ID of the selected name and set it to the recordIDToEdit property.
   self.recordIDToEdit = indexPath.row;
   
