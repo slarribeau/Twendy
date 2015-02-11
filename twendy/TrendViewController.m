@@ -17,6 +17,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
   NSLog(@"Here is me URL %@", self.trendUrl);
+  self.view.backgroundColor = [UIColor redColor];
 
   [self.webview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.trendUrl]]];
   
