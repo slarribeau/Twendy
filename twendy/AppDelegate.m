@@ -89,6 +89,14 @@
     [trendDB addObject:trendObj];
   }
   
+  NSLog(@"in BG mode, just fetched: %@", trendDB);
+  
+  for (id trend in trendDB) {
+    Trend *trendObj = trend;
+    NSLog(@"name=%@ url=%@", trendObj.name, trendObj.url);
+  }
+
+  
   NSDateFormatter *DateFormatter=[[NSDateFormatter alloc] init];
   [DateFormatter setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
   NSString *timeStamp = [DateFormatter stringFromDate:[NSDate date]];
