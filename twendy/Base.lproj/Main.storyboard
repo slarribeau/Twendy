@@ -130,11 +130,6 @@
                                 <action selector="login:" destination="rs3-nG-qjp" id="W5o-EP-oEp"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Get Rate Limit" id="lmB-mu-g1h">
-                            <connections>
-                                <action selector="getRateLimit:" destination="rs3-nG-qjp" id="ma7-Xo-F34"/>
-                            </connections>
-                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="loginButton" destination="611-zP-EEw" id="QGB-W6-oLR"/>

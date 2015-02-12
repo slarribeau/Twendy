@@ -81,7 +81,7 @@ static int const kButtonWidth = 100;
     [self.tblPeople reloadData];
     [self createScrollMenu];
   }
-  
+
   
 }
 -(IBAction)login:(id)sender {
@@ -166,14 +166,21 @@ static int const kButtonWidth = 100;
   NSLog(@"selectedConfigRegion after %ld",(long)selectedConfigRegionWoeid);
 }
 
+-(void)setNavigationItemTitle:(NSString *)title
+{
+  //strip first chracter.
+  self.navigationItem.title = [title substringWithRange:NSMakeRange(1, [title length]-1)];
+}
 -(void)setMenuSelection:(UIButton*)button
 {
+  [self setNavigationItemTitle:[button currentTitle]];
   NSLog(@"Before set: [%@]", [button currentTitle]);
 
   [button setTitle: [[button currentTitle] stringByReplacingCharactersInRange:NSMakeRange(0, 1) withString:kMenuSelectionMark] forState:UIControlStateNormal];
 
   NSLog(@"After set: [%@]", [button currentTitle]);
   [self saveMenuSelection:button.tag];
+  [self setNavigationItemTitle:[button currentTitle]];
 }
 
 -(void)removeMenuSelection
