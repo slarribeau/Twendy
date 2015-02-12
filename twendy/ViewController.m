@@ -23,6 +23,7 @@
 //This is an extension not a category.
 @property (nonatomic, strong) NSMutableArray *trendDB;
 @property (nonatomic) NSInteger recordIDToEdit;
+@property (nonatomic) NSInteger selected;
 @property (nonatomic, weak) IBOutlet UIBarButtonItem *loginButton;
 
 @end
@@ -41,6 +42,8 @@ static int const kButtonWidth = 100;
   self.tblPeople.dataSource = self;
 
   self.recordIDToEdit = -1;
+  self.selected = -1;
+
 
   
   if ([AuthenticationModel isLoggedIn] == NO) {
@@ -82,7 +85,11 @@ static int const kButtonWidth = 100;
     [self createScrollMenu];
   }
 
-  
+  if (self.selected >= 0) {
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.selected inSection:0] ;
+
+    [self.tblPeople selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionMiddle];
+  }
 }
 -(IBAction)login:(id)sender {
   [self performSegueWithIdentifier:@"idSegueAuth" sender:self];
@@ -134,6 +141,7 @@ static int const kButtonWidth = 100;
 {
   // Get the record ID of the selected name and set it to the recordIDToEdit property.
   self.recordIDToEdit = indexPath.row;
+  self.selected = indexPath.row;
   
   // Perform the segue.
   [self performSegueWithIdentifier:@"idSegueTrend" sender:self];
