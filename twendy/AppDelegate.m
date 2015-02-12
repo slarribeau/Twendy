@@ -128,9 +128,11 @@
   
   NSMutableArray *newTrendArray = [self extractNewTrends:(NSMutableArray*)trendHistoryArray current:(NSMutableArray*)trendCurrentArray];
   
+  NSLog(@"New Trends! %@", newTrendArray);
+
   if ([newTrendArray count] > 0) {
     
-    [[NSUserDefaults standardUserDefaults] setObject:newTrendArray forKey:@"trendHistory"];
+    [[NSUserDefaults standardUserDefaults] setObject:trendCurrentArray forKey:@"trendHistory"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 
   NSString *resultString = @"";
