@@ -73,6 +73,29 @@
   
 }
 
+- (BOOL)stringArrayContainsString:(NSMutableArray*)array string:(NSString*)string
+{
+  for (NSString *memberString in array){
+    if ([memberString isEqualToString:string]) {
+      return YES;
+    }
+  }
+  return NO;
+}
+
+
+- (NSMutableArray*)extractNewTrends:(NSMutableArray*)old current:(NSMutableArray*)current
+{
+  NSMutableArray *trendNewArray = [[NSMutableArray alloc] init];
+  
+  for (NSString *currentMemberString in current) {
+    if ([self stringArrayContainsString:old string:currentMemberString] == NO) {
+       [trendNewArray addObject:currentMemberString];
+    }
+  }
+  return trendNewArray;
+}
+
 - (void)didReceiveuserdata:(OAServiceTicket*)ticket data:(NSData*)data {
   //NSString* httpBody = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
   //NSLog(@"didReceive user data %@", httpBody);
@@ -80,22 +103,40 @@
   NSArray *twitterTrends   = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers       error:nil];
   NSArray *trendArray  = [[twitterTrends objectAtIndex:0] objectForKey:@"trends"];
   
-  NSMutableArray *trendDB = [[NSMutableArray alloc] init];
+  //Put current data in structure
+  NSMutableArray *trendCurrentArray = [[NSMutableArray alloc] init];
   
   for (NSDictionary *trend in trendArray) {
-    Trend *trendObj = [Trend alloc];
-    trendObj.name = [trend objectForKey:@"name"];
-    trendObj.url = [trend objectForKey:@"url"];
-    [trendDB addObject:trendObj];
+    [trendCurrentArray addObject:[trend objectForKey:@"name"]];
   }
   
-  NSLog(@"in BG mode, just fetched: %@", trendDB);
+  NSLog(@"in BG mode, just fetched: %@", trendCurrentArray);
   
-  for (id trend in trendDB) {
-    Trend *trendObj = trend;
-    NSLog(@"name=%@ url=%@", trendObj.name, trendObj.url);
+  
+  //Get old data
+  id tmp = [[[NSUserDefaults standardUserDefaults] objectForKey:@"trendHistory"] mutableCopy];
+  NSMutableArray* trendHistoryArray;
+  if (tmp == nil) {
+    //There is no history, so make some
+    [[NSUserDefaults standardUserDefaults] setObject:trendCurrentArray forKey:@"trendHistory"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    return;
+  }else {
+    trendHistoryArray = tmp;
   }
 
+  NSMutableArray *newTrendArray = [self extractNewTrends:(NSMutableArray*)trendHistoryArray current:(NSMutableArray*)trendCurrentArray];
+  
+  if ([newTrendArray count] > 0) {
+    
+    [[NSUserDefaults standardUserDefaults] setObject:newTrendArray forKey:@"trendHistory"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+
+  NSString *resultString = @"";
+  for (NSString *name in newTrendArray) {
+    resultString = [resultString stringByAppendingString:[NSString stringWithFormat:@"%@ ", name]];
+
+  }
   
   NSDateFormatter *DateFormatter=[[NSDateFormatter alloc] init];
   [DateFormatter setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
@@ -103,7 +144,8 @@
 
   UILocalNotification *notification = [[UILocalNotification alloc] init];
   notification.fireDate = [NSDate dateWithTimeIntervalSinceNow:1];
-  notification.alertBody = @"Received Response From Twitter";
+  //notification.alertBody = @"Received Response From Twitter";
+  notification.alertBody = resultString;
   notification.timeZone = [NSTimeZone defaultTimeZone];
   notification.soundName = UILocalNotificationDefaultSoundName;
   [[UIApplication sharedApplication] scheduleLocalNotification:notification];
@@ -113,7 +155,7 @@
                                                  delegate:self cancelButtonTitle:@"OK"
                                         otherButtonTitles:nil];
   [alert show];
-
+  }
 }
 
 - (void)didFailOauth:(OAServiceTicket*)ticket error:(NSError*)error {
