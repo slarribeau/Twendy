@@ -124,7 +124,8 @@
   }else {
     trendHistoryArray = tmp;
   }
-
+  NSLog(@"retrieved from disk: %@", trendHistoryArray);
+  
   NSMutableArray *newTrendArray = [self extractNewTrends:(NSMutableArray*)trendHistoryArray current:(NSMutableArray*)trendCurrentArray];
   
   if ([newTrendArray count] > 0) {
@@ -134,7 +135,7 @@
 
   NSString *resultString = @"";
   for (NSString *name in newTrendArray) {
-    resultString = [resultString stringByAppendingString:[NSString stringWithFormat:@"%@ ", name]];
+    resultString = [resultString stringByAppendingString:[NSString stringWithFormat:@"[%@] ", name]];
 
   }
   
