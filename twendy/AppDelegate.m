@@ -28,6 +28,7 @@
   
   //Increase Badge Number
   [UIApplication sharedApplication].applicationIconBadgeNumber++;
+  
   NSDateFormatter *DateFormatter=[[NSDateFormatter alloc] init];
   [DateFormatter setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
   NSString *timeStamp = [DateFormatter stringFromDate:[NSDate date]];
@@ -37,9 +38,11 @@
   notification.alertBody = @"twendy awakes!";
   notification.timeZone = [NSTimeZone defaultTimeZone];
   notification.soundName = UILocalNotificationDefaultSoundName;
-  //notification.applicationIconBadgeNumber = 10;
   
   [[UIApplication sharedApplication] scheduleLocalNotification:notification];
+  
+  completionHandler(UIBackgroundFetchResultNewData);
+  return;
   
   UIAlertView *alert = [[UIAlertView alloc] initWithTitle:timeStamp
                                                   message:@"Cool!!!"
