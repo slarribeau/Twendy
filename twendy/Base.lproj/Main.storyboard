@@ -18,8 +18,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="400" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tHe-gB-qlG">
-                                <rect key="frame" x="100" y="85" width="222" height="443"/>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tHe-gB-qlG">
+                                <rect key="frame" x="0.0" y="64" width="400" height="492"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="delegate" destination="vXZ-lx-hvc" id="xJ1-bd-fDI"/>
@@ -27,6 +27,12 @@
                             </webView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="tHe-gB-qlG" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="Oap-G0-K2m"/>
+                            <constraint firstItem="tHe-gB-qlG" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" id="VyY-xU-PBk"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="tHe-gB-qlG" secondAttribute="bottom" id="Y6P-Jk-3Sb"/>
+                            <constraint firstAttribute="trailing" secondItem="tHe-gB-qlG" secondAttribute="trailing" id="dMG-MP-7CH"/>
+                        </constraints>
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="MTf-2C-vcG"/>
