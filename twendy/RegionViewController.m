@@ -42,8 +42,12 @@
 }
 
 - (void)handleSearchForTerm:(NSString *)searchTerm {
-  NSMutableArray *sectionsToRemove = [[NSMutableArray alloc] init];
-  [self resetSearch];
+  
+  [RegionModel startSearch:searchTerm];
+  [self.tblRegion reloadData];
+
+  //NSMutableArray *sectionsToRemove = [[NSMutableArray alloc] init];
+  //[self resetSearch];
   
   for (NSString *key in self.keys) {
   //  NSMutableArray *array = [names valueForKey:key];
@@ -179,7 +183,7 @@
 #pragma mark Search Bar Delegate Methods
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
   NSString *searchTerm = [searchBar text];
-  //[self handleSearchForTerm:searchTerm];
+  [self handleSearchForTerm:searchTerm];
 }
 
 - (void)searchBar:(UISearchBar *)searchBar
@@ -189,7 +193,7 @@
     //[table reloadData];
     return;
   }
-  //[self handleSearchForTerm:searchTerm];
+  [self handleSearchForTerm:searchTerm];
 }
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
@@ -197,7 +201,10 @@
   self.search.text = @"";
 //[self resetSearch];
  // [table reloadData];
+  [RegionModel endSearch];
   [searchBar resignFirstResponder];
+  [self.tblRegion reloadData];
+
 }
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
