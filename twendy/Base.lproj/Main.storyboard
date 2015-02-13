@@ -173,7 +173,7 @@
                                                 <outlet property="delegate" destination="ttg-oR-YZr" id="gvQ-sN-xDz"/>
                                             </connections>
                                         </searchBar>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tmL-J2-H4i">
+                                        <button opaque="NO" contentMode="scaleToFill" highlighted="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tmL-J2-H4i">
                                             <rect key="frame" x="520" y="16" width="48" height="20"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="20" id="TW6-4u-aQc"/>
@@ -302,6 +302,7 @@
                     <navigationItem key="navigationItem" title="Title" id="BxW-7u-LLc"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="cancelButton" destination="tmL-J2-H4i" id="vrL-W4-Dml"/>
                         <outlet property="search" destination="nSo-ng-u4p" id="Jzs-Kc-hmz"/>
                         <outlet property="tblRegion" destination="z3U-oh-AlE" id="0bE-mY-aLi"/>
                     </connections>

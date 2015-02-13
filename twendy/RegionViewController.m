@@ -18,6 +18,7 @@
 @property (assign, nonatomic) BOOL isSearching;
 @property (strong, nonatomic) NSMutableDictionary *names;
 @property (strong, nonatomic) NSMutableArray *keys;
+@property (weak, nonatomic) IBOutlet UIButton *cancelButton;
 
 -(IBAction)cancelSearchButton:(id)sender;
 -(IBAction)sortSelectedDescend:(id)sender;
@@ -196,6 +197,7 @@
   if ([searchTerm length] == 0) {
     [RegionModel endSearch];
     [self.tblRegion reloadData];
+    [self.cancelButton setHighlighted:YES];
     return;
   }
   [self handleSearchForTerm:searchTerm];
@@ -210,6 +212,7 @@
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
   self.isSearching = YES;
+  [self.cancelButton setHighlighted:NO];
  // [table reloadData];
 }
 
