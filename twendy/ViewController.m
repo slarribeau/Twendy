@@ -216,7 +216,7 @@ static int const kButtonWidth = 150;
 -(void)addScrollButton:(int)offset name:(NSString *)name action:(SEL)action tag:(NSInteger)tag
 {
   int x = kButtonWidth * offset;
-  UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(x, 0, kButtonWidth, 100)];
+  UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(x, 0, kButtonWidth, 50)];
   [button setTitle:name forState:UIControlStateNormal];
   
   if (offset % 2)
