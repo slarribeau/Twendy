@@ -207,7 +207,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aJ1-Hd-gyx">
-                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="delegate" destination="3yu-43-obO" id="BGc-Rl-D6R"/>
@@ -217,8 +217,8 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="aJ1-Hd-gyx" secondAttribute="trailing" id="MMQ-yR-nFg"/>
-                            <constraint firstItem="aJ1-Hd-gyx" firstAttribute="top" secondItem="uX7-P0-LOx" secondAttribute="bottom" id="h4l-Es-HUk"/>
                             <constraint firstItem="aJ1-Hd-gyx" firstAttribute="leading" secondItem="Qim-6e-ij7" secondAttribute="leading" id="sXA-a0-VcM"/>
+                            <constraint firstItem="aJ1-Hd-gyx" firstAttribute="top" secondItem="Qim-6e-ij7" secondAttribute="top" id="uQ2-1m-cYD"/>
                             <constraint firstItem="Yzq-Kd-9nH" firstAttribute="top" secondItem="aJ1-Hd-gyx" secondAttribute="bottom" id="yDi-Zq-hJn"/>
                         </constraints>
                     </view>
