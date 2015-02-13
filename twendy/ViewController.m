@@ -34,6 +34,8 @@ static NSString * const kMenuSelectionMark = @"*";
 static NSString * const kMenuUnSelectionMark = @" ";
 
 static int const kButtonWidth = 150;
+static int const kButtonHeight = 50;
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -216,7 +218,7 @@ static int const kButtonWidth = 150;
 -(void)addScrollButton:(int)offset name:(NSString *)name action:(SEL)action tag:(NSInteger)tag
 {
   int x = kButtonWidth * offset;
-  UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(x, 0, kButtonWidth, 50)];
+  UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(x, 0, kButtonWidth, kButtonHeight)];
   [button setTitle:name forState:UIControlStateNormal];
   
   if (offset % 2)

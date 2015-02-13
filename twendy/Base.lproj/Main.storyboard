@@ -86,7 +86,7 @@
                                 </connections>
                             </button>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pEy-wM-SsP">
-                                <rect key="frame" x="0.0" y="65" width="600" height="106"/>
+                                <rect key="frame" x="0.0" y="65" width="600" height="50"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4d0-M2-pxp">
                                         <rect key="frame" x="263" y="38" width="46" height="30"/>
@@ -96,11 +96,11 @@
                                     </button>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="106" id="Gau-h6-ck2"/>
+                                    <constraint firstAttribute="height" constant="50" id="Gau-h6-ck2"/>
                                 </constraints>
                             </scrollView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="c7n-fL-aiT">
-                                <rect key="frame" x="0.0" y="171" width="600" height="429"/>
+                                <rect key="frame" x="0.0" y="115" width="600" height="485"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="idCellRecord" id="eqE-jV-syx">
