@@ -118,6 +118,16 @@ static NSMutableArray* regionDBSearch;
   [RegionModel sortCountryDescend];
 }
 
++(void)startSearch:(NSString*)searchString
+{
+  NSLog(@"searchString = %@", searchString);
+  isSearching = YES;
+}
+
++(void)endSearch
+{
+  isSearching = NO;
+}
 +(void)sortCountryAscend
 {
   [RegionModel sort:@"country" ascending:YES];
