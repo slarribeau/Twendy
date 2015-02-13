@@ -7,7 +7,6 @@
 //
 
 #import "RightViewController.h"
-#import "Monster.h"
 #import "AuthenticationModel.h"
 #import "Notifications.h"
 #import "RegionModel.h"
@@ -149,17 +148,6 @@
   //_weaponImageView.image = [_monster weaponImage];
 }
 
-#pragma mark - Monster Selection Delegate
--(void)selectedMonster:(Monster *)newMonster
-{
-  [self setMonster:newMonster];
-  
-  //Dismisses the popover if it's showing.
-  if (_popover != nil) {
-    // [_popover dismissPopoverAnimated:YES];
-  }
-}
-
 
 -(void)notifyUser
 {
@@ -223,7 +211,7 @@
   self.popover = pc;
   
   //Set the title of the bar button item
- //barButtonItem.title = @"Monsters";
+ //barButtonItem.title = @"Regions";
   
   //Set the bar button item as the Nav Bar's leftBarButtonItem
 //[_navBarItem setLeftBarButtonItem:barButtonItem animated:YES];

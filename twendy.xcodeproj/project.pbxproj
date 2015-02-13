@@ -15,7 +15,6 @@
 		D6698A531A719BBA00CBD338 /* Trend.m in Sources */ = {isa = PBXBuildFile; fileRef = D6698A521A719BBA00CBD338 /* Trend.m */; };
 		D6698A561A71A43700CBD338 /* LocationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D6698A551A71A43700CBD338 /* LocationModel.m */; };
 		D6698A5A1A77F46F00CBD338 /* LeftViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6698A591A77F46F00CBD338 /* LeftViewController.m */; };
-		D6698A5D1A77F4E900CBD338 /* Monster.m in Sources */ = {isa = PBXBuildFile; fileRef = D6698A5C1A77F4E900CBD338 /* Monster.m */; };
 		D6C4B3211A606247006F40DF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D6C4B3201A606247006F40DF /* main.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		D6C4B3241A606247006F40DF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D6C4B3231A606247006F40DF /* AppDelegate.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		D6C4B3271A606247006F40DF /* AuthenticationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6C4B3261A606247006F40DF /* AuthenticationViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -79,8 +78,6 @@
 		D6698A571A72EB0500CBD338 /* Notifications.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Notifications.h; sourceTree = "<group>"; };
 		D6698A581A77F46F00CBD338 /* LeftViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftViewController.h; sourceTree = "<group>"; };
 		D6698A591A77F46F00CBD338 /* LeftViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftViewController.m; sourceTree = "<group>"; };
-		D6698A5B1A77F4E900CBD338 /* Monster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Monster.h; sourceTree = "<group>"; };
-		D6698A5C1A77F4E900CBD338 /* Monster.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Monster.m; sourceTree = "<group>"; };
 		D6C4B31B1A606247006F40DF /* twendy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = twendy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6C4B31F1A606247006F40DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D6C4B3201A606247006F40DF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -195,8 +192,6 @@
 				D6698A591A77F46F00CBD338 /* LeftViewController.m */,
 				D627E9B91A7847A200ABC6BF /* RightViewController.h */,
 				D627E9BA1A7847A200ABC6BF /* RightViewController.m */,
-				D6698A5B1A77F4E900CBD338 /* Monster.h */,
-				D6698A5C1A77F4E900CBD338 /* Monster.m */,
 				D6C4B3231A606247006F40DF /* AppDelegate.m */,
 				D6C4B3221A606247006F40DF /* AppDelegate.h */,
 				D6698A481A707FAA00CBD338 /* AuthenticationModel.h */,
@@ -435,7 +430,6 @@
 			files = (
 				D6C4B3991A60C004006F40DF /* TrendViewController.m in Sources */,
 				D6C4B37F1A606A32006F40DF /* hmac.c in Sources */,
-				D6698A5D1A77F4E900CBD338 /* Monster.m in Sources */,
 				D6C4B3931A606A32006F40DF /* SBJsonWriter.m in Sources */,
 				D6698A4A1A707FAA00CBD338 /* AuthenticationModel.m in Sources */,
 				D6C4B3911A606A32006F40DF /* SBJsonBase.m in Sources */,
