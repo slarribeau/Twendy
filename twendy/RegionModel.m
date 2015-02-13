@@ -130,7 +130,11 @@ static NSMutableArray* regionDBSearch;
   {
     if ([region.city rangeOfString:searchString
                            options:NSCaseInsensitiveSearch].location == NSNotFound) {
+      if ([region.country rangeOfString:searchString
+                             options:NSCaseInsensitiveSearch].location == NSNotFound) {
+
       [toRemove addObject:region];
+      }
     }
       
   }
