@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "OAuthConsumer.h"
 
-@interface RegionViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+@interface RegionViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
 
 -(IBAction)sort:(id)sender;
 

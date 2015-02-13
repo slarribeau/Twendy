@@ -14,7 +14,11 @@
 
 @implementation RegionModel
 static BOOL initialized = NO;
+static BOOL isSearching = NO;
+
 static NSMutableArray* regionDB;
+static NSMutableArray* regionDBSearch;
+
 
 +(void)initialize
 {
@@ -22,6 +26,8 @@ static NSMutableArray* regionDB;
   {
     initialized = YES;
     regionDB = [[NSMutableArray alloc] init ];
+    regionDBSearch = [[NSMutableArray alloc] init ];
+
   }
 }
 
@@ -37,23 +43,34 @@ static NSMutableArray* regionDB;
   [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
++(NSMutableArray*)getDBBasedOnSearchMode:(BOOL)search
+{
+  if (search == NO) {
+    return regionDB;
+  } else {
+    return regionDBSearch;
+  }
+}
 +(NSInteger)count
 {
-  return regionDB.count;
+  return [self getDBBasedOnSearchMode:isSearching].count;
 }
 
 +(Region*)get:(NSUInteger)index
 {
-  if (index >= regionDB.count || regionDB.count ==0) {
+  NSMutableArray* currentDB = [self getDBBasedOnSearchMode:isSearching];
+  
+  if (index >= currentDB.count || currentDB.count ==0) {
     return nil;
   } else {
-    return regionDB[index];
+    return currentDB[index];
   }
 }
 +(void)reset
 {
   //Clear out DB
   regionDB = [[NSMutableArray alloc] init ];
+  regionDBSearch = [[NSMutableArray alloc] init ];
 }
 
 -(void)reload:(NSNotification *)notification

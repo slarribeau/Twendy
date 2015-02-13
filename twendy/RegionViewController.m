@@ -14,6 +14,11 @@
 
 @interface RegionViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *tblRegion;
+@property (strong, nonatomic) IBOutlet UISearchBar *search;
+@property (assign, nonatomic) BOOL isSearching;
+@property (strong, nonatomic) NSMutableDictionary *names;
+@property (strong, nonatomic) NSMutableArray *keys;
+
 @end
 
 @implementation RegionViewController
@@ -26,6 +31,37 @@
  
   [self.tblRegion reloadData];
 }
+
+- (void)resetSearch {
+  //self.names = [self.allNames mutableDeepCopy];
+  NSMutableArray *keyArray = [[NSMutableArray alloc] init];
+  [keyArray addObject:UITableViewIndexSearch];
+  //[keyArray addObjectsFromArray:[[self.allNames allKeys]
+   //                              sortedArrayUsingSelector:@selector(compare:)]];
+  //self.keys = keyArray;
+}
+
+- (void)handleSearchForTerm:(NSString *)searchTerm {
+  NSMutableArray *sectionsToRemove = [[NSMutableArray alloc] init];
+  [self resetSearch];
+  
+  for (NSString *key in self.keys) {
+  //  NSMutableArray *array = [names valueForKey:key];
+    NSMutableArray *toRemove = [[NSMutableArray alloc] init];
+   // for (NSString *name in array) {
+    //  if ([name rangeOfString:searchTerm
+    //                  options:NSCaseInsensitiveSearch].location == NSNotFound)
+     //   [toRemove addObject:name];
+    }
+    //if ([array count] == [toRemove count])
+    //  [sectionsToRemove addObject:key];
+    
+    //[array removeObjectsInArray:toRemove];
+ // }
+  //[self.keys removeObjectsInArray:sectionsToRemove];
+  //[table reloadData];
+}
+
 
 - (NSInteger)tableView:(UITableView *)tableView
  numberOfRowsInSection:(NSInteger)section
@@ -94,6 +130,16 @@
 
 }
 
+- (NSIndexPath *)tableView:(UITableView *)tableView
+  willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+  [self.search resignFirstResponder];
+  self.isSearching = NO;
+  self.search.text = @"";
+  [tableView reloadData];
+  return indexPath;
+}
+
+
 -(IBAction)sortCountryAscend:(id)sender
 {
   [RegionModel sortCountryAscend];
@@ -129,4 +175,44 @@
   [RegionModel sortSelectedDescend];
   [self.tblRegion reloadData];
 }
+
+#pragma mark Search Bar Delegate Methods
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+  NSString *searchTerm = [searchBar text];
+  //[self handleSearchForTerm:searchTerm];
+}
+
+- (void)searchBar:(UISearchBar *)searchBar
+    textDidChange:(NSString *)searchTerm {
+  if ([searchTerm length] == 0) {
+    //[self resetSearch];
+    //[table reloadData];
+    return;
+  }
+  //[self handleSearchForTerm:searchTerm];
+}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+  self.isSearching = NO;
+  self.search.text = @"";
+//[self resetSearch];
+ // [table reloadData];
+  [searchBar resignFirstResponder];
+}
+
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
+  self.isSearching = YES;
+ // [table reloadData];
+}
+
+- (NSInteger)tableView:(UITableView *)tableView
+sectionForSectionIndexTitle:(NSString *)title
+               atIndex:(NSInteger)index {
+  //NSString *key = [keys objectAtIndex:index];
+  //if (key == UITableViewIndexSearch) {
+    [tableView setContentOffset:CGPointZero animated:NO];
+    return NSNotFound;
+  //} else return index;
+}
+
 @end
