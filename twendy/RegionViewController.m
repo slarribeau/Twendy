@@ -137,6 +137,10 @@
   NSLog(@"configRegionDict after %@",configRegionDict);
 
   [[NSNotificationCenter defaultCenter] postNotificationName:MenuHasChanged object:nil];
+  
+  [RegionModel endSearch];
+  [self.tblRegion reloadData];
+
 
 }
 
