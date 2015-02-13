@@ -161,7 +161,6 @@
 
 -(void)getTrendData:(NSInteger)location {
   
-  NSLog(@"self = %@", self);
   if (location == 0) { //There are some race conditions where we don't yet have home woeid at start
     return;
   }

@@ -71,7 +71,6 @@
 																  data:responseData
 															didSucceed:[(NSHTTPURLResponse *)response statusCode] < 400];
   
-  NSLog(@"YYYYYYYY %d", [(NSHTTPURLResponse *)response statusCode]);
   
   if (![delegate respondsToSelector:didFinishSelector]) {
     assert(0);
