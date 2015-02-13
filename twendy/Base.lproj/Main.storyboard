@@ -164,17 +164,17 @@
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="nSo-ng-u4p">
-                                            <rect key="frame" x="0.0" y="8" width="250" height="36"/>
+                                            <rect key="frame" x="0.0" y="8" width="230" height="36"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="250" id="PSC-lW-P4A"/>
+                                                <constraint firstAttribute="width" constant="230" id="PSC-lW-P4A"/>
                                             </constraints>
                                             <textInputTraits key="textInputTraits"/>
                                             <connections>
                                                 <outlet property="delegate" destination="ttg-oR-YZr" id="gvQ-sN-xDz"/>
                                             </connections>
                                         </searchBar>
-                                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tmL-J2-H4i">
-                                            <rect key="frame" x="478" y="16" width="70" height="20"/>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tmL-J2-H4i">
+                                            <rect key="frame" x="520" y="16" width="48" height="20"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="20" id="TW6-4u-aQc"/>
                                             </constraints>
@@ -191,7 +191,7 @@
                                         <constraint firstAttribute="bottom" secondItem="nSo-ng-u4p" secondAttribute="bottom" id="DCa-Bd-cmX"/>
                                         <constraint firstItem="nSo-ng-u4p" firstAttribute="leading" secondItem="UsE-hu-tmY" secondAttribute="leading" id="HiC-ae-qQF"/>
                                         <constraint firstAttribute="bottom" secondItem="tmL-J2-H4i" secondAttribute="bottom" constant="8" id="a6r-bP-efq"/>
-                                        <constraint firstAttribute="trailing" secondItem="tmL-J2-H4i" secondAttribute="trailing" constant="20" symbolic="YES" id="flR-MV-GLX"/>
+                                        <constraint firstAttribute="trailing" secondItem="tmL-J2-H4i" secondAttribute="trailing" id="flR-MV-GLX"/>
                                         <constraint firstItem="nSo-ng-u4p" firstAttribute="top" secondItem="UsE-hu-tmY" secondAttribute="top" constant="8" id="rc9-vo-MBQ"/>
                                     </constraints>
                                 </view>
