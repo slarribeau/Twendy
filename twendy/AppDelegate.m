@@ -126,7 +126,9 @@
     for (NSString *name in newTrendArray) {
        resultString = [resultString stringByAppendingString:[NSString stringWithFormat:@"[%@] ", name]];
     }
-    [self notify:[NSString stringWithFormat:@"twendy: new trends: %@", resultString]];
+    [self notify:[NSString stringWithFormat:@"%@", resultString]];
+    //[self notify:[NSString stringWithFormat:@"twendy: new trends: %@", resultString]];
+
   }
 
 exitMethod:
