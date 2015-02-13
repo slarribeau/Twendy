@@ -219,6 +219,12 @@ static int const kButtonWidth = 150;
   UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(x, 0, kButtonWidth, 100)];
   [button setTitle:name forState:UIControlStateNormal];
   
+  if (offset % 2)
+    button.backgroundColor = [UIColor greenColor];
+  else
+    button.backgroundColor = [UIColor blueColor];
+
+  
   [button addTarget:self action:action forControlEvents:UIControlEventTouchDown];
   [self.scrollMenu addSubview:button];
   button.tag = tag;
