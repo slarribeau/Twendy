@@ -139,7 +139,10 @@ static NSMutableArray* regionDBSearch;
 
 +(void)resetSearch
 {
-  regionDBSearch = [[NSMutableArray alloc] initWithArray:regionDB copyItems:YES] ;
+  //Shallow copy
+  regionDBSearch = [[NSMutableArray alloc] initWithArray:regionDB];
+  //Deep copy
+  //regionDBSearch = [[NSMutableArray alloc] initWithArray:regionDB copyItems:YES] ;
 }
 +(void)endSearch
 {
