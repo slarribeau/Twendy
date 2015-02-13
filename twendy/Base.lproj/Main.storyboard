@@ -270,7 +270,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Brs-bQ-SOB">
                                 <rect key="frame" x="220" y="555" width="73" height="30"/>
-                                <state key="normal" title="Seleted⬆️">
+                                <state key="normal" title="Selected⬆️">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>

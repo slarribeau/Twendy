@@ -11,8 +11,6 @@
 
 @interface RegionViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
 
--(IBAction)sort:(id)sender;
-
 -(IBAction)sortCountryAscend:(id)sender;
 -(IBAction)sortCountryDescend:(id)sender;
 -(IBAction)sortCityAscend:(id)sender;

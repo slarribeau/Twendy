@@ -39,37 +39,14 @@
 }
 
 - (void)resetSearch {
-  //self.names = [self.allNames mutableDeepCopy];
   NSMutableArray *keyArray = [[NSMutableArray alloc] init];
   [keyArray addObject:UITableViewIndexSearch];
-  //[keyArray addObjectsFromArray:[[self.allNames allKeys]
-   //                              sortedArrayUsingSelector:@selector(compare:)]];
-  //self.keys = keyArray;
 }
 
 - (void)handleSearchForTerm:(NSString *)searchTerm {
   
   [RegionModel startSearch:searchTerm];
   [self.tblRegion reloadData];
-
-  //NSMutableArray *sectionsToRemove = [[NSMutableArray alloc] init];
-  //[self resetSearch];
-  
-  for (NSString *key in self.keys) {
-  //  NSMutableArray *array = [names valueForKey:key];
-    NSMutableArray *toRemove = [[NSMutableArray alloc] init];
-   // for (NSString *name in array) {
-    //  if ([name rangeOfString:searchTerm
-    //                  options:NSCaseInsensitiveSearch].location == NSNotFound)
-     //   [toRemove addObject:name];
-    }
-    //if ([array count] == [toRemove count])
-    //  [sectionsToRemove addObject:key];
-    
-    //[array removeObjectsInArray:toRemove];
- // }
-  //[self.keys removeObjectsInArray:sectionsToRemove];
-  //[table reloadData];
 }
 
 
@@ -99,10 +76,6 @@
   
 
   return cell;
-}
-
--(void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath{
-  NSLog(@"Hullo?");
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -147,9 +120,7 @@
 - (NSIndexPath *)tableView:(UITableView *)tableView
   willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   [self.search resignFirstResponder];
-  self.isSearching = NO;
   self.search.text = @"";
-  [tableView reloadData];
   return indexPath;
 }
 
@@ -215,19 +186,8 @@
 }
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
-  self.isSearching = YES;
   [self.cancelButton setHighlighted:NO];
- // [table reloadData];
 }
 
-- (NSInteger)tableView:(UITableView *)tableView
-sectionForSectionIndexTitle:(NSString *)title
-               atIndex:(NSInteger)index {
-  //NSString *key = [keys objectAtIndex:index];
-  //if (key == UITableViewIndexSearch) {
-    [tableView setContentOffset:CGPointZero animated:NO];
-    return NSNotFound;
-  //} else return index;
-}
 
 @end
