@@ -87,17 +87,6 @@
   Region *region = [RegionModel get:indexPath.row];
   cell.textLabel.text = [NSString stringWithFormat:@"%@: %@", region.country, region.city];
   
-  NSLog(@"table view region = %ld", (long)region.woeid);
-  cell.detailTextLabel.text = [NSString stringWithFormat:@"%ld", (long)region.woeid];
-  
-  
-  if (region.selected == YES) {
-    cell.accessoryType = UITableViewCellAccessoryCheckmark;
-  } else {
-    cell.accessoryType = UITableViewCellAccessoryNone;
-  }
-  
-  
   return cell;
 }
 
@@ -107,39 +96,7 @@
   UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
   Region *region = [RegionModel get:indexPath.row];
   
-  NSLog(@"region = %ld", (long)region.woeid);
-  id tmp = [[[NSUserDefaults standardUserDefaults] objectForKey:@"configRegion"] mutableCopy];
-  
-  NSMutableDictionary* configRegionDict;
-  if (tmp == nil) {
-    configRegionDict = [[NSMutableDictionary alloc]init];
-  }else {
-    configRegionDict = tmp;
-  }
-  
-  NSLog(@"configRegionDict before %@",configRegionDict);
-  
-  if (cell.accessoryType == UITableViewCellAccessoryCheckmark) {
-    cell.accessoryType = UITableViewCellAccessoryNone;
-    region.selected = NO;
-    [configRegionDict removeObjectForKey:region.city];
-  } else {
-    cell.accessoryType = UITableViewCellAccessoryCheckmark;
-    region.selected = YES;
-    [configRegionDict setObject:[NSNumber numberWithInteger:region.woeid] forKey:region.city];
-  }
-  [[NSUserDefaults standardUserDefaults] setObject:configRegionDict forKey:@"configRegion"];
-  [[NSUserDefaults standardUserDefaults] synchronize];
-  
-  NSLog(@"configRegionDict after %@",configRegionDict);
-#if 0
- UIStoryboard *aStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
-
- RightViewController *rightViewController = [aStoryboard instantiateViewControllerWithIdentifier:@"RightViewController"];
-
-  [rightViewController getWoeid:region.woeid];
-#endif
- RightViewController *rightViewController2 = (RightViewController*)self.delegate;
+  RightViewController *rightViewController2 = (RightViewController*)self.delegate;
  [rightViewController2 getWoeid:region.woeid];
 
 }
