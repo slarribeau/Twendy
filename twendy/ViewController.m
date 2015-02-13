@@ -71,6 +71,7 @@ static int const kButtonWidth = 100;
 
 
 -(void) viewWillAppear: (BOOL) animated {
+  NSLog(@"ViewController:viewWillAppear enter");
   if ([AuthenticationModel isLoggedIn] == YES) {
     [self.loginButton setTitle:@"Logout"];
   } else {
@@ -90,6 +91,8 @@ static int const kButtonWidth = 100;
 
     [self.tblPeople selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionMiddle];
   }
+  NSLog(@"ViewController:viewWillAppear exit");
+
 }
 -(IBAction)login:(id)sender {
   [self performSegueWithIdentifier:@"idSegueAuth" sender:self];
