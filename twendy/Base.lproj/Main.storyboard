@@ -196,7 +196,7 @@
                                     </constraints>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="idRegionCellRecord" textLabel="V9o-WJ-2Ll" detailTextLabel="GLN-F3-qgc" style="IBUITableViewCellStyleSubtitle" id="baQ-dG-ksd">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="idRegionCellRecord" textLabel="V9o-WJ-2Ll" style="IBUITableViewCellStyleDefault" id="baQ-dG-ksd">
                                         <rect key="frame" x="0.0" y="0.0" width="235" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="baQ-dG-ksd" id="bvN-G1-Rxj">
@@ -205,12 +205,6 @@
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="V9o-WJ-2Ll">
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="GLN-F3-qgc">
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -280,22 +274,22 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Brs-bQ-SOB" firstAttribute="leading" secondItem="aBu-EO-wxl" secondAttribute="trailing" constant="5" id="99s-3a-G5D"/>
+                            <constraint firstItem="Brs-bQ-SOB" firstAttribute="leading" secondItem="aBu-EO-wxl" secondAttribute="trailing" constant="3" id="99s-3a-G5D"/>
                             <constraint firstItem="11H-tt-iqo" firstAttribute="top" secondItem="fn1-fe-iE5" secondAttribute="bottom" constant="15" id="Dye-dn-jk3"/>
                             <constraint firstItem="11H-tt-iqo" firstAttribute="top" secondItem="5jV-cJ-6ih" secondAttribute="bottom" constant="15" id="Fjc-kc-fFv"/>
                             <constraint firstAttribute="trailingMargin" secondItem="z3U-oh-AlE" secondAttribute="trailing" id="GW4-RO-a3Y"/>
-                            <constraint firstItem="ZRy-Qg-ggI" firstAttribute="leading" secondItem="Brs-bQ-SOB" secondAttribute="trailing" constant="5" id="ILI-a5-wvd"/>
+                            <constraint firstItem="ZRy-Qg-ggI" firstAttribute="leading" secondItem="Brs-bQ-SOB" secondAttribute="trailing" constant="3" id="ILI-a5-wvd"/>
                             <constraint firstItem="z3U-oh-AlE" firstAttribute="leading" secondItem="U1M-v0-1g3" secondAttribute="leadingMargin" id="IZU-EU-pZ7"/>
                             <constraint firstItem="11H-tt-iqo" firstAttribute="top" secondItem="aBu-EO-wxl" secondAttribute="bottom" constant="15" id="KM2-6E-Bh1"/>
                             <constraint firstItem="z3U-oh-AlE" firstAttribute="top" secondItem="na8-AK-i2g" secondAttribute="bottom" id="Lo4-om-ZNO"/>
-                            <constraint firstItem="aBu-EO-wxl" firstAttribute="leading" secondItem="Bjj-eo-qCp" secondAttribute="trailing" constant="5" id="LxE-fY-E71"/>
-                            <constraint firstItem="5jV-cJ-6ih" firstAttribute="leading" secondItem="U1M-v0-1g3" secondAttribute="leadingMargin" id="T8F-G8-dG6"/>
+                            <constraint firstItem="aBu-EO-wxl" firstAttribute="leading" secondItem="Bjj-eo-qCp" secondAttribute="trailing" constant="3" id="LxE-fY-E71"/>
+                            <constraint firstItem="5jV-cJ-6ih" firstAttribute="leading" secondItem="U1M-v0-1g3" secondAttribute="leading" constant="5" id="T8F-G8-dG6"/>
                             <constraint firstItem="11H-tt-iqo" firstAttribute="top" secondItem="ZRy-Qg-ggI" secondAttribute="bottom" constant="15" id="TVy-Mh-ywC"/>
                             <constraint firstItem="11H-tt-iqo" firstAttribute="top" secondItem="Bjj-eo-qCp" secondAttribute="bottom" constant="15" id="TYl-Y3-mj1"/>
                             <constraint firstItem="11H-tt-iqo" firstAttribute="top" secondItem="z3U-oh-AlE" secondAttribute="bottom" constant="60" id="Z7u-yy-QtU"/>
-                            <constraint firstItem="fn1-fe-iE5" firstAttribute="leading" secondItem="5jV-cJ-6ih" secondAttribute="trailing" constant="5" id="eSg-Cx-UGF"/>
+                            <constraint firstItem="fn1-fe-iE5" firstAttribute="leading" secondItem="5jV-cJ-6ih" secondAttribute="trailing" constant="3" id="eSg-Cx-UGF"/>
                             <constraint firstItem="11H-tt-iqo" firstAttribute="top" secondItem="Brs-bQ-SOB" secondAttribute="bottom" constant="15" id="inn-vf-iz9"/>
-                            <constraint firstItem="Bjj-eo-qCp" firstAttribute="leading" secondItem="fn1-fe-iE5" secondAttribute="trailing" constant="5" id="ujh-Iq-crI"/>
+                            <constraint firstItem="Bjj-eo-qCp" firstAttribute="leading" secondItem="fn1-fe-iE5" secondAttribute="trailing" constant="3" id="ujh-Iq-crI"/>
                         </constraints>
                     </view>
                     <toolbarItems/>
