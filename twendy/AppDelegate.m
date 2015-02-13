@@ -16,49 +16,37 @@
 
 
 @interface AppDelegate ()
-
+@property (nonatomic, copy) void (^backgroundCompletionHandler)(UIBackgroundFetchResult fetchResult);
 @end
 
 @implementation AppDelegate
 #define IOS_VERSION [[[[[UIDevice currentDevice] systemVersion] componentsSeparatedByString:@"."] firstObject] intValue]
 
+-(void)notify:(NSString*)text
+{
+  UILocalNotification *notification = [[UILocalNotification alloc] init];
+  notification.fireDate = [NSDate dateWithTimeIntervalSinceNow:1];
+  notification.alertBody = text;
+  notification.timeZone = [NSTimeZone defaultTimeZone];
+  notification.soundName = UILocalNotificationDefaultSoundName;
+  
+  [[UIApplication sharedApplication] scheduleLocalNotification:notification];
+}
 -(void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
 {
   NSLog(@"########### Received Backgroudn Fetch ###########");
   
   //Increase Badge Number
   [UIApplication sharedApplication].applicationIconBadgeNumber++;
-  NSDateFormatter *DateFormatter=[[NSDateFormatter alloc] init];
-  [DateFormatter setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
-  NSString *timeStamp = [DateFormatter stringFromDate:[NSDate date]];
   
-  UILocalNotification *notification = [[UILocalNotification alloc] init];
-  notification.fireDate = [NSDate dateWithTimeIntervalSinceNow:1];
-  notification.alertBody = @"twendy awakes!";
-  notification.timeZone = [NSTimeZone defaultTimeZone];
-  notification.soundName = UILocalNotificationDefaultSoundName;
-  //notification.applicationIconBadgeNumber = 10;
   
-  [[UIApplication sharedApplication] scheduleLocalNotification:notification];
-  
-  UIAlertView *alert = [[UIAlertView alloc] initWithTitle:timeStamp
-                                                  message:@"Cool!!!"
-                                                 delegate:self cancelButtonTitle:@"OK"
-                                        otherButtonTitles:nil];
-  [alert show];
+  //Store completionHandler
+  self.backgroundCompletionHandler = completionHandler;
 
   
   if ([AuthenticationModel isLoggedIn] == NO) {
-    //[self notifyUser];
-    UILocalNotification *notification = [[UILocalNotification alloc] init];
-    notification.fireDate = [NSDate dateWithTimeIntervalSinceNow:1];
-    notification.alertBody = @"Twitter access fail: notloggedin";
-    notification.timeZone = [NSTimeZone defaultTimeZone];
-    notification.soundName = UILocalNotificationDefaultSoundName;
-    [[UIApplication sharedApplication] scheduleLocalNotification:notification];
-
-    completionHandler(UIBackgroundFetchResultNewData);
-
+    [self notify:@"twendy:not logged in"];
+    completionHandler(UIBackgroundFetchResultFailed);
     return;
   }
   
@@ -66,10 +54,6 @@
   NSString *url = [NSString stringWithFormat:@"https://api.twitter.com/1.1/trends/place.json?id=%@", [NSString stringWithFormat:@"%ld",(long)[LocationModel getWoeid]]];
   
   [TwitterFetch fetch:self url:url didFinishSelector:@selector(didReceiveuserdata:data:) didFailSelector:@selector(didFailOauth:error:)];
-
-  
-  //Tell the system that you ar done.
-  //completionHandler(UIBackgroundFetchResultNewData);
   
 }
 
@@ -120,7 +104,8 @@
     //There is no history, so make some
     [[NSUserDefaults standardUserDefaults] setObject:trendCurrentArray forKey:@"trendHistory"];
     [[NSUserDefaults standardUserDefaults] synchronize];
-    return;
+    [self notify:@"twendy:init history db"];
+    goto exitMethod;
   }else {
     trendHistoryArray = tmp;
   }
@@ -130,46 +115,32 @@
   
   NSLog(@"New Trends! %@", newTrendArray);
 
-  if ([newTrendArray count] > 0) {
-    
+  if ([newTrendArray count] == 0) {
+    [self notify:@"twendy:no delta"];
+  } else {
+  
     [[NSUserDefaults standardUserDefaults] setObject:trendCurrentArray forKey:@"trendHistory"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 
-  NSString *resultString = @"";
-  for (NSString *name in newTrendArray) {
-    resultString = [resultString stringByAppendingString:[NSString stringWithFormat:@"[%@] ", name]];
-
+    NSString *resultString = @"";
+    for (NSString *name in newTrendArray) {
+       resultString = [resultString stringByAppendingString:[NSString stringWithFormat:@"[%@] ", name]];
+    }
+    [self notify:[NSString stringWithFormat:@"twendy: new trends: %@", resultString]];
   }
-  
-  NSDateFormatter *DateFormatter=[[NSDateFormatter alloc] init];
-  [DateFormatter setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
-  NSString *timeStamp = [DateFormatter stringFromDate:[NSDate date]];
 
-  UILocalNotification *notification = [[UILocalNotification alloc] init];
-  notification.fireDate = [NSDate dateWithTimeIntervalSinceNow:1];
-  //notification.alertBody = @"Received Response From Twitter";
-  notification.alertBody = resultString;
-  notification.timeZone = [NSTimeZone defaultTimeZone];
-  notification.soundName = UILocalNotificationDefaultSoundName;
-  [[UIApplication sharedApplication] scheduleLocalNotification:notification];
-
-  UIAlertView *alert = [[UIAlertView alloc] initWithTitle:timeStamp
-                                                  message:@"Alert: Received response twitter."
-                                                 delegate:self cancelButtonTitle:@"OK"
-                                        otherButtonTitles:nil];
-  [alert show];
+exitMethod:
+  if (self.backgroundCompletionHandler) {
+    self.backgroundCompletionHandler(UIBackgroundFetchResultNewData);
   }
 }
 
 - (void)didFailOauth:(OAServiceTicket*)ticket error:(NSError*)error {
   NSLog(@"OauthFail %@", error);
-  UILocalNotification *notification = [[UILocalNotification alloc] init];
-  notification.fireDate = [NSDate dateWithTimeIntervalSinceNow:1];
-  notification.alertBody = @"Twitter returned error!";
-  notification.timeZone = [NSTimeZone defaultTimeZone];
-  notification.soundName = UILocalNotificationDefaultSoundName;
-  [[UIApplication sharedApplication] scheduleLocalNotification:notification];
-
+  [self notify:@"twendy:twitter returns error"];
+  if (self.backgroundCompletionHandler) {
+    self.backgroundCompletionHandler(UIBackgroundFetchResultNoData);
+  }
 }
 
 
