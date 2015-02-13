@@ -19,6 +19,11 @@
 @property (strong, nonatomic) NSMutableDictionary *names;
 @property (strong, nonatomic) NSMutableArray *keys;
 
+-(IBAction)cancelSearchButton:(id)sender;
+-(IBAction)sortSelectedDescend:(id)sender;
+
+
+
 @end
 
 @implementation RegionViewController
@@ -189,22 +194,18 @@
 - (void)searchBar:(UISearchBar *)searchBar
     textDidChange:(NSString *)searchTerm {
   if ([searchTerm length] == 0) {
-    //[self resetSearch];
-    //[table reloadData];
+    [RegionModel endSearch];
+    [self.tblRegion reloadData];
     return;
   }
   [self handleSearchForTerm:searchTerm];
 }
 
-- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
-  self.isSearching = NO;
+- (IBAction)cancelSearchButton:(id)sender {
   self.search.text = @"";
-//[self resetSearch];
- // [table reloadData];
   [RegionModel endSearch];
-  [searchBar resignFirstResponder];
   [self.tblRegion reloadData];
-
+  [self.search resignFirstResponder];
 }
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
