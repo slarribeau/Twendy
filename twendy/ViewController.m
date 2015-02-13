@@ -33,7 +33,7 @@
 static NSString * const kMenuSelectionMark = @"*";
 static NSString * const kMenuUnSelectionMark = @" ";
 
-static int const kButtonWidth = 100;
+static int const kButtonWidth = 150;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
