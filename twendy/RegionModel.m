@@ -116,14 +116,31 @@ static NSMutableArray* regionDBSearch;
   
   //Sort
   [RegionModel sortCountryDescend];
+  
 }
 
 +(void)startSearch:(NSString*)searchString
 {
   NSLog(@"searchString = %@", searchString);
   isSearching = YES;
+  [self resetSearch];
+  NSMutableArray *toRemove = [[NSMutableArray alloc] init];
+
+  for (Region *region in regionDBSearch)
+  {
+    if ([region.city rangeOfString:searchString
+                           options:NSCaseInsensitiveSearch].location == NSNotFound) {
+      [toRemove addObject:region];
+    }
+      
+  }
+  [regionDBSearch removeObjectsInArray:toRemove];
 }
 
++(void)resetSearch
+{
+  regionDBSearch = [[NSMutableArray alloc] initWithArray:regionDB copyItems:YES] ;
+}
 +(void)endSearch
 {
   isSearching = NO;

@@ -14,6 +14,7 @@
 +(NSInteger)count;
 +(Region*)get:(NSUInteger)index;
 +(void)reset;
++(void)resetSearch;
 +(void)startSearch:(NSString*)searchString;
 +(void)endSearch;
 +(void)sortCountryAscend;
