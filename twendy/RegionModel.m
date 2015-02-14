@@ -56,6 +56,21 @@ static NSMutableArray* regionDB;
   regionDB = [[NSMutableArray alloc] init ];
 }
 
++(NSInteger)findWoeidOffset:(NSInteger)woeid
+{
+  for(NSInteger index = 0; index<regionDB.count; index++)
+  {
+    Region *region = regionDB[index];
+    if (region.woeid == woeid) {
+      NSLog(@"Region woeid index = %d", index);
+      return index;
+    }
+  }
+  //If we got here, no match found, return -1 to signify 'error'
+  return -1;
+}
+
+
 -(void)reload:(NSNotification *)notification
 {
   if (regionDB.count == 0) {

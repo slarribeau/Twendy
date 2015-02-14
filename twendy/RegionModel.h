@@ -14,5 +14,5 @@
 +(NSInteger)count;
 +(Region*)get:(NSUInteger)index;
 +(void)reset;
-
++(NSInteger)findWoeidOffset:(NSInteger)woeid;
 @end

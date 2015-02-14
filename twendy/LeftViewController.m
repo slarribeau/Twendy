@@ -19,9 +19,12 @@
 #import "AuthenticationModel.h"
 #import "RegionModel.h"
 #import "Notifications.h"
+#import "LocationModel.h"
+
 
 @interface LeftViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *tblRegion;
+@property (assign, nonatomic) NSInteger selectedRegion;
 @end
 
 @implementation LeftViewController
@@ -34,11 +37,30 @@
   
   [self.tblRegion reloadData];
   
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(regionsWereRetrieved:) name:RegionsRetrieved object:nil];
-  
+  self.selectedRegion = -1;
 }
 
 -(void) viewDidAppear: (BOOL) animated {
+  if (self.selectedRegion == -1) {
+     if ([RegionModel count] > 0) {
+       [self.tblRegion reloadData];
+
+       NSLog(@"region model count = %d", [RegionModel count]);
+       NSInteger woeidOffset = [RegionModel findWoeidOffset:[LocationModel getWoeid]];
+
+       NSIndexPath *indexPath = [NSIndexPath indexPathForRow:woeidOffset inSection:0] ;
+    
+       [self.tblRegion selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionMiddle];
+       
+       Region *region = [RegionModel get:indexPath.row];
+       
+       RightViewController *rightViewController2 = (RightViewController*)self.delegate;
+       [rightViewController2 setWoeid:region.woeid city:region.city];
+
+    
+     }
+  }
+
   [super viewDidAppear:animated];
 
 }
