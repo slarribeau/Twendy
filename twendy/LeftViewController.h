@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LeftViewController : UITableViewController <UITableViewDelegate, UITableViewDataSource>
+@interface LeftViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, assign) id delegate;
 @end
