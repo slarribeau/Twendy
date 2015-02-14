@@ -50,7 +50,7 @@
         <!--Right View Controller-->
         <scene sceneID="Jw7-8L-X9o">
             <objects>
-                <viewController storyboardIdentifier="RightViewController" id="zz8-53-p5h" customClass="RightViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RightViewController" automaticallyAdjustsScrollViewInsets="NO" id="zz8-53-p5h" customClass="RightViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="reM-R8-Fn3"/>
                         <viewControllerLayoutGuide type="bottom" id="4WJ-yo-1fs"/>
