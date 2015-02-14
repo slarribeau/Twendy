@@ -25,6 +25,8 @@
 @interface LeftViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *tblRegion;
 @property (assign, nonatomic) NSInteger selectedRegion;
+//@property (assign, nonatomic) NSInteger selectedRegion;
+
 @end
 
 @implementation LeftViewController
@@ -37,12 +39,16 @@
   
   [self.tblRegion reloadData];
   
-  self.selectedRegion = -1;
+  self.selectedRegion = -2;
 }
 
 -(void) viewDidAppear: (BOOL) animated {
-  if (self.selectedRegion == -1) {
+  if (self.selectedRegion == -2) {
      if ([RegionModel count] > 0) {
+       
+       self.selectedRegion = -1;
+
+       
        [self.tblRegion reloadData];
 
        NSLog(@"region model count = %d", [RegionModel count]);
@@ -59,10 +65,12 @@
 
     
      }
+  } else if (self.selectedRegion >= 0) {
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.selectedRegion inSection:0] ;
+
+    [self.tblRegion selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
   }
-
   [super viewDidAppear:animated];
-
 }
 
 -(void) viewWillAppear: (BOOL) animated {
