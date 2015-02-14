@@ -120,7 +120,9 @@
   Region *region = [RegionModel get:indexPath.row];
   
   RightViewController *rightViewController2 = (RightViewController*)self.delegate;
-  [rightViewController2 setWoeid:region.woeid city:region.city];  
+  [rightViewController2 setWoeid:region.woeid city:region.city];
+  
+  self.selectedRegion = indexPath.row;
 }
 
 
