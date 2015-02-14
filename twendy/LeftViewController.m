@@ -67,6 +67,8 @@
   [self.tblRegion reloadData];
 }
 
+
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -93,12 +95,10 @@
 #pragma mark - Table view delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
   Region *region = [RegionModel get:indexPath.row];
   
   RightViewController *rightViewController2 = (RightViewController*)self.delegate;
- [rightViewController2 getWoeid:region.woeid];
-
+  [rightViewController2 setWoeid:region.woeid city:region.city];  
 }
 
 

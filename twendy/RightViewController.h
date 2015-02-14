@@ -23,6 +23,6 @@
 @property (nonatomic, strong) UIPopoverController *popover;
 @property (weak, nonatomic) TrendViewController *trendViewController;
 
--(void)getWoeid:(NSInteger)monster;
+-(void)setWoeid:(NSInteger)monster city:(NSString*)city;
 
 @end

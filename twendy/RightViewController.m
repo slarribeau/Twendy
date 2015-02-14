@@ -131,12 +131,22 @@
 
 
 #pragma mark - Overridden setters
--(void)getWoeid:(NSInteger)monster
+
+-(void)setNavigationItemTitle:(NSString *)title
+{
+  //strip first chracter.
+  self.navigationItem.title = title;
+}
+
+-(void)setWoeid:(NSInteger)monster city:(NSString*)city
 {
   [self getTrendData:monster];
   if (_popover != nil) {
     [_popover dismissPopoverAnimated:YES];
   }
+  
+  [self setNavigationItemTitle:city];
+
 }
 
 #pragma mark - New Methods
