@@ -102,6 +102,22 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="c7n-fL-aiT">
                                 <rect key="frame" x="0.0" y="115" width="600" height="485"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <view key="tableHeaderView" contentMode="scaleToFill" id="fSO-gr-koP">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <searchBar contentMode="redraw" placeholder="Search Twitter" translatesAutoresizingMaskIntoConstraints="NO" id="kgH-UX-hjq">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                        </searchBar>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstItem="kgH-UX-hjq" firstAttribute="top" secondItem="fSO-gr-koP" secondAttribute="top" id="5vs-b4-C3Q"/>
+                                        <constraint firstItem="kgH-UX-hjq" firstAttribute="leading" secondItem="fSO-gr-koP" secondAttribute="leading" id="6FW-Cb-ja0"/>
+                                        <constraint firstAttribute="trailing" secondItem="kgH-UX-hjq" secondAttribute="trailing" id="Rh0-VP-xqR"/>
+                                    </constraints>
+                                </view>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="idCellRecord" id="eqE-jV-syx">
                                         <rect key="frame" x="0.0" y="0.0" width="235" height="44"/>
@@ -357,6 +373,23 @@
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W1E-5E-EQp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="cuB-km-SiU">
+            <objects>
+                <viewController id="IBF-wG-Sbb" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="uCD-Lp-7z4"/>
+                        <viewControllerLayoutGuide type="bottom" id="TPu-TT-lR2"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="HeG-pU-ddR">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PGv-FC-Mj4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
         </scene>
     </scenes>
