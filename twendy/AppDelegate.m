@@ -13,7 +13,7 @@
 #import "LocationModel.h"
 #import "Trend.h"
 #import "TwitterFetch.h"
-
+#import "Notifications.h"
 
 @interface AppDelegate ()
 @property (nonatomic, copy) void (^backgroundCompletionHandler)(UIBackgroundFetchResult fetchResult);
@@ -270,6 +270,8 @@ exitMethod:
 - (void)applicationDidBecomeActive:(UIApplication *)application {
   // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
   NSLog(@"+++++++++++++++: %@", NSStringFromSelector(_cmd));
+  [[NSNotificationCenter defaultCenter] postNotificationName:DidBecomeActive object:nil];
+
 
 }
 

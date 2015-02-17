@@ -59,7 +59,8 @@ static int const kButtonHeight = 50;
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(menuHasChanged:) name:MenuHasChanged object:nil];
   
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLoggedOut:) name:LogoutSucceed object:nil];
-
+  
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidBecomeActiveNotification:) name:DidBecomeActive object:nil];
 }
 
 - (void)dealloc
@@ -117,6 +118,11 @@ static int const kButtonHeight = 50;
   self.trendDB = [[NSMutableArray alloc] init];
   [self.tblPeople reloadData];
   [self clearScrollMenu];
+}
+
+-(void)applicationDidBecomeActiveNotification:(NSNotification*)obj
+{
+  [self viewWillAppear:YES];
 }
 
 -(void)menuHasChanged:(NSNotification*)obj {
