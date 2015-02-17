@@ -58,8 +58,6 @@ static int const kButtonHeight = 50;
     [self createScrollMenu];
   }
   
-  [self.search setReturnKeyType:UIReturnKeyDone];
-
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(menuHasChanged:) name:MenuHasChanged object:nil];
   
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLoggedOut:) name:LogoutSucceed object:nil];
@@ -443,6 +441,13 @@ static int const kButtonHeight = 50;
 - (void)searchBar:(UISearchBar *)searchBar
     textDidChange:(NSString *)searchTerm {
   if ([searchTerm length] == 0) {
+    //[self.search resignFirstResponder];
+    
+    [self.search performSelector: @selector(resignFirstResponder)
+                    withObject: nil
+                    afterDelay: 0.1];
+  
+
     //[RegionModel endSearch];
     //[self.tblRegion reloadData];
     //[self.cancelButton setHighlighted:YES];
@@ -459,6 +464,5 @@ static int const kButtonHeight = 50;
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
   //[self.cancelButton setHighlighted:NO];
 }
-
 
 @end

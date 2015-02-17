@@ -20,7 +20,7 @@
 @end
 #endif
 
-@interface ViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
+@interface ViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UITextFieldDelegate>
 //@property (nonatomic, weak) id <TrendingListViewControllerDelegate> delegate;
 @property (weak, nonatomic) IBOutlet UITableView *tblPeople; //FIX ME rename
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollMenu;
