@@ -57,6 +57,9 @@ static int const kButtonHeight = 50;
     
     [self createScrollMenu];
   }
+  
+  [self.search setReturnKeyType:UIReturnKeyDone];
+
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(menuHasChanged:) name:MenuHasChanged object:nil];
   
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLoggedOut:) name:LogoutSucceed object:nil];
@@ -72,7 +75,7 @@ static int const kButtonHeight = 50;
 -(void) viewWillAppear: (BOOL) animated {
   [super viewWillAppear:animated];
 
-  NSLog(@"ViewController:viewWillAppear enter");
+  NSLog(@"ViewController:viewWillAppear enter ");
   if ([AuthenticationModel isLoggedIn] == YES) {
     [self.loginButton setTitle:@"Logout"];
   } else {
@@ -94,7 +97,7 @@ static int const kButtonHeight = 50;
     [self.tblPeople setContentOffset:CGPointMake(0.0, 44.0) animated:NO];
 
   }
-  NSLog(@"ViewController:viewWillAppear exit");
+  NSLog(@"ViewController:viewWillAppear exit ");
 
 }
 
@@ -120,11 +123,18 @@ static int const kButtonHeight = 50;
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
 
+  if ([[segue destinationViewController] isKindOfClass:[TrendViewController class]]) {
+    
+  
   TrendViewController *trendViewController = [segue destinationViewController];
 
-  if (self.recordIDToEdit == 0) {
+  if (self.recordIDToEdit < 0) {
     //trendViewController.trendUrl = @"http://www.google.com";
-    trendViewController.trendUrl = @"http://twitter.com/search?q=google";
+    //trendViewController.trendUrl = @"http://twitter.com/search?q=google";
+    NSString *urlString = [self.search.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+
+    trendViewController.trendUrl = [NSString stringWithFormat: @"http://twitter.com/search?q=%@", urlString];
+
   } else {
      if (self.recordIDToEdit >= 0) {
        Trend *trendObj = self.trendDB[self.recordIDToEdit];
@@ -133,6 +143,7 @@ static int const kButtonHeight = 50;
        self.recordIDToEdit = -1;
      }
   }
+  }
 }
 
 -(void)userLoggedOut:(NSNotification*)obj {
@@ -140,6 +151,7 @@ static int const kButtonHeight = 50;
   self.trendDB = [[NSMutableArray alloc] init];
   [self.tblPeople reloadData];
   [self clearScrollMenu];
+  self.selected = -1;
 }
 
 -(void)applicationDidBecomeActiveNotification:(NSNotification*)obj
@@ -413,5 +425,40 @@ static int const kButtonHeight = 50;
   [self.tblPeople reloadData];
   [self createScrollMenu];
 }
+
+- (void)handleSearchForTerm:(NSString *)searchTerm {
+  // Perform the segue.
+  [self performSegueWithIdentifier:@"idSegueTrend" sender:self];
+}
+
+
+#pragma mark Search Bar Delegate Methods
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+  NSString *searchTerm = [searchBar text];
+  [self handleSearchForTerm:searchTerm];
+  [self.search resignFirstResponder];
+
+}
+
+- (void)searchBar:(UISearchBar *)searchBar
+    textDidChange:(NSString *)searchTerm {
+  if ([searchTerm length] == 0) {
+    //[RegionModel endSearch];
+    //[self.tblRegion reloadData];
+    //[self.cancelButton setHighlighted:YES];
+    return;
+  }
+ // [self handleSearchForTerm:searchTerm];
+}
+
+- (IBAction)cancelSearchButton:(id)sender {
+  self.search.text = @"";
+  [self.search resignFirstResponder];
+}
+
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
+  //[self.cancelButton setHighlighted:NO];
+}
+
 
 @end
