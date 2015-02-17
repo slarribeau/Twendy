@@ -68,12 +68,9 @@ static int const kButtonHeight = 50;
   [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
--(void) viewDidAppear: (BOOL) animated {
-  //[self.tableView reloadData];
-}
-
-
 -(void) viewWillAppear: (BOOL) animated {
+  [super viewWillAppear:animated];
+
   NSLog(@"ViewController:viewWillAppear enter");
   if ([AuthenticationModel isLoggedIn] == YES) {
     [self.loginButton setTitle:@"Logout"];

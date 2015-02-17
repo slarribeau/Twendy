@@ -51,14 +51,6 @@
                     didFailSelector:@selector(didNotReceiveRequestToken:error:)];
 }
 
--(void) viewWillAppear: (BOOL) animated {
-  //[self.tableView reloadData];
-}
-
--(void) viewDidAppear: (BOOL) animated {
-  //[self.tableView reloadData];
-}
-
 - (void)didReceiveRequestToken:(OAServiceTicket*)ticket data:(NSData*)data {
   NSString* httpBody = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
   OAToken *requestToken = [[OAToken alloc] initWithHTTPResponseBody:httpBody];
