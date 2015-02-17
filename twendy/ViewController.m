@@ -25,6 +25,7 @@
 @property (nonatomic) NSInteger recordIDToEdit;
 @property (nonatomic) NSInteger selected;
 @property (nonatomic, weak) IBOutlet UIBarButtonItem *loginButton;
+@property (strong, nonatomic) IBOutlet UISearchBar *search;
 
 @end
 
@@ -93,6 +94,19 @@ static int const kButtonHeight = 50;
   }
   NSLog(@"ViewController:viewWillAppear exit");
 
+}
+
+-(void) viewDidAppear: (BOOL) animated
+{
+  [super viewDidAppear:animated];
+
+  NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:0] ;
+
+  [self.tblPeople selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionTop];
+  
+  if ([AuthenticationModel isLoggedIn] == YES) {
+     [self.search setHidden:NO];
+  }
 }
 -(IBAction)login:(id)sender {
   [self performSegueWithIdentifier:@"idSegueAuth" sender:self];
