@@ -106,9 +106,9 @@
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
-                                        <searchBar hidden="YES" contentMode="redraw" placeholder="Search Twitter" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kgH-UX-hjq">
+                                        <searchBar hidden="YES" contentMode="redraw" placeholder="Search Twitter" translatesAutoresizingMaskIntoConstraints="NO" id="kgH-UX-hjq">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
-                                            <textInputTraits key="textInputTraits"/>
+                                            <textInputTraits key="textInputTraits" returnKeyType="next"/>
                                             <scopeButtonTitles>
                                                 <string>Title</string>
                                                 <string>Title</string>
@@ -399,6 +399,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PGv-FC-Mj4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="-364" y="0.0"/>
         </scene>
     </scenes>
 </document>

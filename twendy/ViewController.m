@@ -438,6 +438,9 @@ static int const kButtonHeight = 50;
 
 }
 
+- (void)searchBarCancelledButtonClicked:(UISearchBar *)searchBar {
+}
+
 - (void)searchBar:(UISearchBar *)searchBar
     textDidChange:(NSString *)searchTerm {
   if ([searchTerm length] == 0) {
