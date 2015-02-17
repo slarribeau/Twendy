@@ -91,6 +91,8 @@ static int const kButtonHeight = 50;
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.selected inSection:0] ;
 
     [self.tblPeople selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionMiddle];
+    [self.tblPeople setContentOffset:CGPointMake(0.0, 44.0) animated:NO];
+
   }
   NSLog(@"ViewController:viewWillAppear exit");
 
@@ -100,9 +102,12 @@ static int const kButtonHeight = 50;
 {
   [super viewDidAppear:animated];
 
-  NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:0] ;
-
-  [self.tblPeople selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionTop];
+ // NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:0] ;
+ // [self.tblPeople selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionTop];
+  
+  if (self.selected < 0) {
+     [self.tblPeople setContentOffset:CGPointMake(0.0, 44.0) animated:NO];
+  }
   
   if ([AuthenticationModel isLoggedIn] == YES) {
      [self.search setHidden:NO];
