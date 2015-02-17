@@ -100,13 +100,19 @@ static int const kButtonHeight = 50;
 
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-  
-  if (self.recordIDToEdit >= 0) {
-    TrendViewController *trendViewController = [segue destinationViewController];
-    Trend *trendObj = self.trendDB[self.recordIDToEdit];
 
-    trendViewController.trendUrl = trendObj.url;
-    self.recordIDToEdit = -1;
+  TrendViewController *trendViewController = [segue destinationViewController];
+
+  if (self.recordIDToEdit == 0) {
+    //trendViewController.trendUrl = @"http://www.google.com";
+    trendViewController.trendUrl = @"http://twitter.com/search?q=google";
+  } else {
+     if (self.recordIDToEdit >= 0) {
+       Trend *trendObj = self.trendDB[self.recordIDToEdit];
+
+       trendViewController.trendUrl = trendObj.url;
+       self.recordIDToEdit = -1;
+     }
   }
 }
 
