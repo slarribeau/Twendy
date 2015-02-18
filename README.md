@@ -39,3 +39,4 @@ handle case where you no longer follow a region that was previously selected
 
 555
 dummy text
+dummy
