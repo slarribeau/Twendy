@@ -179,13 +179,38 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="vlg-Au-Qq2">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="570"/>
+                                <rect key="frame" x="0.0" y="64" width="600" height="506"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <searchBar key="tableHeaderView" contentMode="redraw" id="x50-nr-NPU">
+                                <view key="tableHeaderView" contentMode="scaleToFill" id="fuQ-vi-PN6">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                    <textInputTraits key="textInputTraits"/>
-                                </searchBar>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="sNG-nx-atk">
+                                            <rect key="frame" x="0.0" y="0.0" width="260" height="44"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="260" id="lc8-j6-VQO"/>
+                                            </constraints>
+                                            <textInputTraits key="textInputTraits"/>
+                                        </searchBar>
+                                        <button opaque="NO" contentMode="scaleToFill" highlighted="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AYk-yQ-XPY">
+                                            <rect key="frame" x="544" y="16" width="48" height="20"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="20" id="bx8-Pu-7oO"/>
+                                            </constraints>
+                                            <state key="normal" title="Cancel">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                        </button>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstItem="sNG-nx-atk" firstAttribute="leading" secondItem="fuQ-vi-PN6" secondAttribute="leading" id="5X6-1v-KDV"/>
+                                        <constraint firstAttribute="bottom" secondItem="AYk-yQ-XPY" secondAttribute="bottom" constant="8" id="UJq-6O-UQc"/>
+                                        <constraint firstItem="sNG-nx-atk" firstAttribute="top" secondItem="fuQ-vi-PN6" secondAttribute="top" id="ckA-NL-Ssa"/>
+                                        <constraint firstItem="sNG-nx-atk" firstAttribute="bottom" secondItem="fuQ-vi-PN6" secondAttribute="bottom" id="wgZ-Ga-1hL"/>
+                                        <constraint firstAttribute="trailing" secondItem="AYk-yQ-XPY" secondAttribute="trailing" constant="8" id="yCj-DI-oXf"/>
+                                    </constraints>
+                                </view>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="idRegionCellRecord" textLabel="zOG-p6-nMS" style="IBUITableViewCellStyleDefault" id="pyo-Bh-N8h">
                                         <autoresizingMask key="autoresizingMask"/>
@@ -210,12 +235,12 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="vlg-Au-Qq2" firstAttribute="top" secondItem="btc-tg-8aq" secondAttribute="top" id="ETm-pf-093"/>
                             <constraint firstItem="cFr-Vz-qer" firstAttribute="leading" secondItem="btc-tg-8aq" secondAttribute="leading" id="HP8-1k-0hW"/>
                             <constraint firstItem="vlg-Au-Qq2" firstAttribute="leading" secondItem="btc-tg-8aq" secondAttribute="leading" id="Jm9-Hc-NVn"/>
                             <constraint firstItem="cFr-Vz-qer" firstAttribute="top" secondItem="vlg-Au-Qq2" secondAttribute="bottom" id="LvH-MH-fJK"/>
                             <constraint firstAttribute="trailing" secondItem="vlg-Au-Qq2" secondAttribute="trailing" id="MwW-dU-Y23"/>
                             <constraint firstAttribute="trailing" secondItem="cFr-Vz-qer" secondAttribute="trailing" id="ai8-rB-6TE"/>
+                            <constraint firstItem="vlg-Au-Qq2" firstAttribute="top" secondItem="5Gn-OG-8B0" secondAttribute="bottom" id="bt7-Cp-9A4"/>
                             <constraint firstItem="W3A-3h-00P" firstAttribute="top" secondItem="cFr-Vz-qer" secondAttribute="bottom" id="iFQ-Lr-8xv"/>
                         </constraints>
                     </view>

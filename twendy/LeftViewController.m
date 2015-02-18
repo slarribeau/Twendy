@@ -26,6 +26,15 @@
 @property (weak, nonatomic) IBOutlet UITableView *tblRegion;
 @property (assign, nonatomic) NSInteger selectedRegion;
 //@property (assign, nonatomic) NSInteger selectedRegion;
+@property (strong, nonatomic) IBOutlet UISearchBar *search;
+@property (weak, nonatomic) IBOutlet UIButton *cancelButton;
+
+-(IBAction)sortCountryAscend:(id)sender;
+-(IBAction)sortCountryDescend:(id)sender;
+-(IBAction)sortCityAscend:(id)sender;
+-(IBAction)sortCityDescend:(id)sender;
+-(IBAction)sortSelectedAscend:(id)sender;
+-(IBAction)sortSelectedDescend:(id)sender;
 
 @end
 
@@ -131,6 +140,91 @@
   [rightViewController2 setWoeid:region.woeid city:region.city];
   
   self.selectedRegion = indexPath.row;
+}
+
+#pragma mark - Search and sort
+
+- (void)resetSearch {
+  NSMutableArray *keyArray = [[NSMutableArray alloc] init];
+  [keyArray addObject:UITableViewIndexSearch];
+}
+
+- (void)handleSearchForTerm:(NSString *)searchTerm {
+  
+  [RegionModel startSearch:searchTerm];
+  [self.tblRegion reloadData];
+}
+
+- (NSIndexPath *)tableView:(UITableView *)tableView
+  willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+  [self.search resignFirstResponder];
+  self.search.text = @"";
+  return indexPath;
+}
+
+
+-(IBAction)sortCountryAscend:(id)sender
+{
+  [RegionModel sortCountryAscend];
+  [self.tblRegion reloadData];
+}
+
+-(IBAction)sortCountryDescend:(id)sender
+{
+  [RegionModel sortCountryDescend];
+  [self.tblRegion reloadData];
+}
+
+-(IBAction)sortCityAscend:(id)sender
+{
+  [RegionModel sortCityAscend];
+  [self.tblRegion reloadData];
+}
+
+-(IBAction)sortCityDescend:(id)sender
+{
+  [RegionModel sortCityDescend];
+  [self.tblRegion reloadData];
+}
+
+-(IBAction)sortSelectedAscend:(id)sender
+{
+  [RegionModel sortSelectedAscend];
+  [self.tblRegion reloadData];
+}
+
+-(IBAction)sortSelectedDescend:(id)sender
+{
+  [RegionModel sortSelectedDescend];
+  [self.tblRegion reloadData];
+}
+
+#pragma mark Search Bar Delegate Methods
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+  NSString *searchTerm = [searchBar text];
+  [self handleSearchForTerm:searchTerm];
+}
+
+- (void)searchBar:(UISearchBar *)searchBar
+    textDidChange:(NSString *)searchTerm {
+  if ([searchTerm length] == 0) {
+    [RegionModel endSearch];
+    [self.tblRegion reloadData];
+    [self.cancelButton setHighlighted:YES];
+    return;
+  }
+  [self handleSearchForTerm:searchTerm];
+}
+
+- (IBAction)cancelSearchButton:(id)sender {
+  self.search.text = @"";
+  [RegionModel endSearch];
+  [self.tblRegion reloadData];
+  [self.search resignFirstResponder];
+}
+
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
+  [self.cancelButton setHighlighted:NO];
 }
 
 

@@ -14,7 +14,10 @@
 
 @implementation RegionModel
 static BOOL initialized = NO;
+static BOOL isSearching = NO;
+
 static NSMutableArray* regionDB;
+static NSMutableArray* regionDBSearch;
 
 +(void)initialize
 {
@@ -37,24 +40,6 @@ static NSMutableArray* regionDB;
   [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-+(NSInteger)count
-{
-  return regionDB.count;
-}
-
-+(Region*)get:(NSUInteger)index
-{
-  if (index >= regionDB.count || regionDB.count ==0) {
-    return nil;
-  } else {
-    return regionDB[index];
-  }
-}
-+(void)reset
-{
-  //Clear out DB
-  regionDB = [[NSMutableArray alloc] init ];
-}
 
 +(NSInteger)findWoeidOffset:(NSInteger)woeid
 {
@@ -83,6 +68,7 @@ static NSMutableArray* regionDB;
   NSLog(@"Failed User Data Fetch %@", error);
 }
 
+
 - (void)didReceiveRegion:(OAServiceTicket*)ticket data:(NSData*)data {
   //NSString* httpBody = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
   //NSLog(@"didReceiveRegion%@", httpBody);
@@ -97,7 +83,7 @@ static NSMutableArray* regionDB;
   NSArray *twitterRegions = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers       error:nil];
   
   for (NSDictionary *region in twitterRegions) {
-    Region *regionObj = [Region alloc];
+    Region *regionObj = [[Region alloc] init];
     
     regionObj.city = [region objectForKey:@"name"];
     regionObj.country = [region objectForKey:@"country"];
@@ -111,8 +97,115 @@ static NSMutableArray* regionDB;
     
     [regionDB addObject:regionObj];
   }
-  [[NSNotificationCenter defaultCenter] postNotificationName:RegionsRetrieved object:nil];
+  
+  //Sort
+  [RegionModel sortCountryDescend];
+  
 }
 
+
+
++(NSMutableArray*)getDBBasedOnSearchMode:(BOOL)search
+{
+  if (search == NO) {
+    return regionDB;
+  } else {
+    return regionDBSearch;
+  }
+}
++(NSInteger)count
+{
+  return [self getDBBasedOnSearchMode:isSearching].count;
+}
+
++(Region*)get:(NSUInteger)index
+{
+  NSMutableArray* currentDB = [self getDBBasedOnSearchMode:isSearching];
+  
+  if (index >= currentDB.count || currentDB.count ==0) {
+    return nil;
+  } else {
+    return currentDB[index];
+  }
+}
++(void)reset
+{
+  //Clear out DB
+  regionDB = [[NSMutableArray alloc] init ];
+  regionDBSearch = [[NSMutableArray alloc] init ];
+}
+
+
+
++(void)startSearch:(NSString*)searchString
+{
+  NSLog(@"searchString = %@", searchString);
+  isSearching = YES;
+  [self resetSearch];
+  NSMutableArray *toRemove = [[NSMutableArray alloc] init];
+  
+  for (Region *region in regionDBSearch)
+  {
+    if ([region.city rangeOfString:searchString
+                           options:NSCaseInsensitiveSearch].location == NSNotFound) {
+      if ([region.country rangeOfString:searchString
+                                options:NSCaseInsensitiveSearch].location == NSNotFound) {
+        
+        [toRemove addObject:region];
+      }
+    }
+    
+  }
+  [regionDBSearch removeObjectsInArray:toRemove];
+}
+
++(void)resetSearch
+{
+  //Shallow copy
+  regionDBSearch = [[NSMutableArray alloc] initWithArray:regionDB];
+  //Deep copy
+  //regionDBSearch = [[NSMutableArray alloc] initWithArray:regionDB copyItems:YES] ;
+}
++(void)endSearch
+{
+  isSearching = NO;
+}
++(void)sortCountryAscend
+{
+  [RegionModel sort:@"country" ascending:YES];
+}
++(void)sortCountryDescend
+{
+  [RegionModel sort:@"country" ascending:NO];
+}
+
++(void)sortCityAscend
+{
+  [RegionModel sort:@"city" ascending:YES];
+}
++(void)sortCityDescend
+{
+  [RegionModel sort:@"city" ascending:NO];
+}
+
++(void)sortSelectedAscend
+{
+  //UI more intuitive if this is reversed
+  [RegionModel sort:@"selected" ascending:NO];
+}
++(void)sortSelectedDescend
+{
+  //UI more intuitive if this is reversed
+  [RegionModel sort:@"selected" ascending:YES];
+}
+
++(void)sort:(NSString*)key ascending:(BOOL)ascending
+{
+  NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:key
+                                                                 ascending:ascending];
+  
+  NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+  [regionDB sortUsingDescriptors:sortDescriptors];
+}
 
 @end

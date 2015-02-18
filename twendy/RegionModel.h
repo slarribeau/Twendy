@@ -15,4 +15,14 @@
 +(Region*)get:(NSUInteger)index;
 +(void)reset;
 +(NSInteger)findWoeidOffset:(NSInteger)woeid;
++(void)resetSearch;
++(void)startSearch:(NSString*)searchString;
++(void)endSearch;
++(void)sortCountryAscend;
++(void)sortCountryDescend;
++(void)sortCityAscend;
++(void)sortCityDescend;
++(void)sortSelectedAscend;
++(void)sortSelectedDescend;
+
 @end
