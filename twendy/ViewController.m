@@ -450,5 +450,4 @@ static int const kButtonHeight = 50;
   }
 }
 
-
 @end
