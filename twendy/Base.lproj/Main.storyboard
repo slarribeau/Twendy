@@ -124,42 +124,60 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cFr-Vz-qer" userLabel="Button View">
                                 <rect key="frame" x="0.0" y="570" width="600" height="30"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cfi-J1-IO0">
-                                        <rect key="frame" x="61" y="8" width="46" height="30"/>
-                                        <state key="normal" title="Button">
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="752" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KQR-Fb-9b7">
+                                        <rect key="frame" x="5" y="-5" width="76" height="30"/>
+                                        <state key="normal" title="Country⬆️">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="peO-Fa-ewS">
-                                        <rect key="frame" x="392" y="-8" width="46" height="30"/>
-                                        <state key="normal" title="Button">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Lf-n9-XAo">
+                                        <rect key="frame" x="84" y="-5" width="30" height="30"/>
+                                        <state key="normal" title="⬇️">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KY7-bH-zgn">
-                                        <rect key="frame" x="327" y="2" width="46" height="30"/>
-                                        <state key="normal" title="Button">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kF7-f2-mOa">
+                                        <rect key="frame" x="117" y="-5" width="48" height="30"/>
+                                        <state key="normal" title="City⬆️">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mjZ-mN-rXA">
-                                        <rect key="frame" x="158" y="0.0" width="46" height="30"/>
-                                        <state key="normal" title="Button">
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vmE-0s-jFX">
+                                        <rect key="frame" x="168" y="-5" width="30" height="30"/>
+                                        <state key="normal" title="⬇️">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lxL-iA-VeA">
+                                        <rect key="frame" x="286" y="-5" width="30" height="30"/>
+                                        <state key="normal" title="⬇️">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cIj-sp-inw">
+                                        <rect key="frame" x="201" y="-5" width="82" height="30"/>
+                                        <state key="normal" title="Selected⬆️">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="kF7-f2-mOa" secondAttribute="bottom" constant="5" id="37T-VG-sTv"/>
+                                    <constraint firstItem="cIj-sp-inw" firstAttribute="leading" secondItem="vmE-0s-jFX" secondAttribute="trailing" constant="3" id="Gzl-Nk-bgg"/>
+                                    <constraint firstAttribute="bottom" secondItem="KQR-Fb-9b7" secondAttribute="bottom" constant="5" id="Ia4-0m-f6x"/>
+                                    <constraint firstItem="kF7-f2-mOa" firstAttribute="leading" secondItem="7Lf-n9-XAo" secondAttribute="trailing" constant="3" id="P3f-WG-7uv"/>
+                                    <constraint firstAttribute="bottom" secondItem="cIj-sp-inw" secondAttribute="bottom" constant="5" id="Pd1-iv-kYd"/>
                                     <constraint firstAttribute="height" constant="30" id="UEV-bx-CuF"/>
+                                    <constraint firstItem="vmE-0s-jFX" firstAttribute="leading" secondItem="kF7-f2-mOa" secondAttribute="trailing" constant="3" id="clr-W6-TlK"/>
+                                    <constraint firstAttribute="bottom" secondItem="lxL-iA-VeA" secondAttribute="bottom" constant="5" id="hjL-he-0Bo"/>
+                                    <constraint firstAttribute="bottom" secondItem="7Lf-n9-XAo" secondAttribute="bottom" constant="5" id="paE-cJ-uma"/>
+                                    <constraint firstItem="KQR-Fb-9b7" firstAttribute="leading" secondItem="cFr-Vz-qer" secondAttribute="leading" constant="5" id="q4P-li-cVB"/>
+                                    <constraint firstItem="7Lf-n9-XAo" firstAttribute="leading" secondItem="KQR-Fb-9b7" secondAttribute="trailing" constant="3" id="qMD-ZG-9tJ"/>
+                                    <constraint firstItem="lxL-iA-VeA" firstAttribute="leading" secondItem="cIj-sp-inw" secondAttribute="trailing" constant="3" id="sQf-bm-D19"/>
+                                    <constraint firstAttribute="bottom" secondItem="vmE-0s-jFX" secondAttribute="bottom" constant="5" id="tPM-Ck-hYc"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ibA-Wi-dPY">
-                                <rect key="frame" x="10" y="580" width="46" height="30"/>
-                                <state key="normal" title="Button">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="vlg-Au-Qq2">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="570"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -189,12 +207,6 @@
                                     <outlet property="delegate" destination="bRe-yo-0q3" id="Fy5-YM-07U"/>
                                 </connections>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hbb-Jq-Ufe">
-                                <rect key="frame" x="485" y="562" width="46" height="30"/>
-                                <state key="normal" title="Button">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
