@@ -425,7 +425,7 @@ static int const kButtonHeight = 50;
 }
 
 - (void)handleSearchForTerm:(NSString *)searchTerm {
-  // Perform the segue.
+  // Defer the search to twitter, just perform a segue.
   [self performSegueWithIdentifier:@"idSegueTrend" sender:self];
 }
 
@@ -435,7 +435,6 @@ static int const kButtonHeight = 50;
   NSString *searchTerm = [searchBar text];
   [self handleSearchForTerm:searchTerm];
   [self.search resignFirstResponder];
-
 }
 
 - (void)searchBarCancelledButtonClicked:(UISearchBar *)searchBar {
@@ -444,28 +443,12 @@ static int const kButtonHeight = 50;
 - (void)searchBar:(UISearchBar *)searchBar
     textDidChange:(NSString *)searchTerm {
   if ([searchTerm length] == 0) {
-    //[self.search resignFirstResponder];
     //http://stackoverflow.com/questions/4190459/dismissing-keyboard-from-uisearchbar-when-the-x-button-is-tapped
     [self.search performSelector: @selector(resignFirstResponder)
                     withObject: nil
                     afterDelay: 0.1];
-  
-
-    //[RegionModel endSearch];
-    //[self.tblRegion reloadData];
-    //[self.cancelButton setHighlighted:YES];
-    return;
   }
- // [self handleSearchForTerm:searchTerm];
 }
 
-- (IBAction)cancelSearchButton:(id)sender {
-  self.search.text = @"";
-  [self.search resignFirstResponder];
-}
-
-- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
-  //[self.cancelButton setHighlighted:NO];
-}
 
 @end
