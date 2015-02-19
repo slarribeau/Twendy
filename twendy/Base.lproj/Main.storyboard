@@ -109,7 +109,7 @@
             </objects>
             <point key="canvasLocation" x="2311" y="765"/>
         </scene>
-        <!--Select Region-->
+        <!--Region-->
         <scene sceneID="DMv-ok-2Xd">
             <objects>
                 <viewController automaticallyAdjustsScrollViewInsets="NO" id="bRe-yo-0q3" customClass="LeftViewController" sceneMemberID="viewController">
@@ -249,7 +249,7 @@
                             <constraint firstItem="W3A-3h-00P" firstAttribute="top" secondItem="cFr-Vz-qer" secondAttribute="bottom" id="iFQ-Lr-8xv"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Select Region" id="ZeB-Zz-DBM"/>
+                    <navigationItem key="navigationItem" title="Region" id="ZeB-Zz-DBM"/>
                     <connections>
                         <outlet property="cancelButton" destination="AYk-yQ-XPY" id="aS5-WM-zlt"/>
                         <outlet property="search" destination="sNG-nx-atk" id="Bd0-VI-8xI"/>

@@ -26,7 +26,6 @@
 @interface LeftViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *tblRegion;
 @property (assign, nonatomic) NSInteger selectedRegion;
-//@property (assign, nonatomic) NSInteger selectedRegion;
 @property (strong, nonatomic) IBOutlet UISearchBar *search;
 @property (weak, nonatomic) IBOutlet UIButton *cancelButton;
 
@@ -135,12 +134,7 @@
 #pragma mark - Table view delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
- // Region *region = [RegionModel get:indexPath.row];
-  
- // RightViewController *rightViewController2 = (RightViewController*)self.delegate2;
- // [rightViewController2 setWoeid:region.woeid city:region.city];
-  
-  //self.selectedRegion = indexPath.row;
+  //Use storyboards and prepareForSeque instead
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender

@@ -36,16 +36,10 @@
   self.recordIDToEdit = -1;
   
   
-  if ([AuthenticationModel isLoggedIn] == NO) {
-    //[self login:nil];
-  } else {
+  if ([AuthenticationModel isLoggedIn] == YES) {
     // Reload the table view.
     [self.tblPeople reloadData];
-    
-   // [self createScrollMenu];
   }
-  //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(menuHasChanged:) name:MenuHasChanged object:nil];
-  
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLoggedOut:) name:LogoutSucceed object:nil];
 
 }
@@ -56,30 +50,6 @@
   [self.tblPeople reloadData];
 }
 
--(void)viewWillAppear:(BOOL)animated
-{
-  [super viewWillAppear:animated];
-  
-  //Update the UI to reflect the monster set on initial load.
-  [self refreshUI];
-}
-
--(void)viewDidAppear:(BOOL)animated
-{
-  [super viewDidAppear:animated];
-}
-
-
-- (void)didReceiveMemoryWarning
-{
-  [super didReceiveMemoryWarning];
-  
-  // Dispose of any resources that can be recreated, in this case the IBOutlets.
-  [self setNameLabel:nil];
-  [self setDescriptionLabel:nil];
-  [self setIconImageView:nil];
-  [self setWeaponImageView:nil];
-}
 
 #pragma mark - UITableView Delegates
 - (NSInteger)tableView:(UITableView *)tableView
@@ -103,12 +73,7 @@
 #pragma mark - Table view delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  //Trend *trendObj = self.trendDB[indexPath.row];
-
- // self.trendViewController.trendUrl = trendObj.url;
-
- // [self performSegueWithIdentifier:@"idSequeWebView" sender:self];
-
+   //Use storyboards and prepareForSeque instead of this method
 }
 
 
@@ -150,14 +115,6 @@
 }
 
 #pragma mark - New Methods
--(void)refreshUI
-{
-  //_nameLabel.text = _monster.name;
- // _iconImageView.image = [UIImage imageNamed:_monster.iconName];
- // _descriptionLabel.text = _monster.description;
-  //_weaponImageView.image = [_monster weaponImage];
-}
-
 
 -(void)notifyUser
 {
