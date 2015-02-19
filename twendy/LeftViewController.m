@@ -17,6 +17,7 @@
 #import "LeftViewController.h"
 #import "RightViewController.h"
 #import "AuthenticationModel.h"
+#import "AuthenticationViewController.h"
 #import "RegionModel.h"
 #import "Notifications.h"
 #import "LocationModel.h"
@@ -69,7 +70,7 @@
        
        Region *region = [RegionModel get:indexPath.row];
        
-       RightViewController *rightViewController2 = (RightViewController*)self.delegate;
+       RightViewController *rightViewController2 = (RightViewController*)self.delegate2;
        [rightViewController2 setWoeid:region.woeid city:region.city];
 
     
@@ -134,13 +135,34 @@
 #pragma mark - Table view delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  Region *region = [RegionModel get:indexPath.row];
+ // Region *region = [RegionModel get:indexPath.row];
   
-  RightViewController *rightViewController2 = (RightViewController*)self.delegate;
-  [rightViewController2 setWoeid:region.woeid city:region.city];
+ // RightViewController *rightViewController2 = (RightViewController*)self.delegate2;
+ // [rightViewController2 setWoeid:region.woeid city:region.city];
   
-  self.selectedRegion = indexPath.row;
+  //self.selectedRegion = indexPath.row;
 }
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+  if ([[segue destinationViewController] isKindOfClass:[AuthenticationViewController class]]) {
+    return;
+  } else {
+  UINavigationController *nc =
+  (UINavigationController *)segue.destinationViewController;
+  
+  RightViewController *rightViewController =
+  (RightViewController *)[nc topViewController];
+  
+  NSIndexPath *selectedIndexPath = [self.tblRegion indexPathForSelectedRow];
+  self.selectedRegion = selectedIndexPath.row;
+  
+  Region *region = [RegionModel get:self.selectedRegion];
+  
+  [rightViewController setWoeid:region.woeid city:region.city];
+  }
+}
+
 
 #pragma mark - Search and sort
 

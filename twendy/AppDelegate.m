@@ -24,7 +24,10 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
   
-  
+  //Currently using split view controller for both iphone and ipad. On iphone, having the SVC,
+  //we start up in left controller instead of right controller which is a bit better looking for usr.
+  /* if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) */{
+
   UISplitViewController *splitViewController = (UISplitViewController *)self.window.rootViewController;
   
   //Grab a reference to the RightViewController and set it as the SVC's delegate.
@@ -47,8 +50,8 @@
   LeftViewController *leftViewController = (LeftViewController *)[leftNavController topViewController];
   
   //Set the RightViewController as the left's delegate.
-  leftViewController.delegate = rightViewController;
-
+  leftViewController.delegate2 = rightViewController;
+  }
   
   
 #if 0

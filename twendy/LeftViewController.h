@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface LeftViewController : UIViewController <UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource>
-@property (nonatomic, assign) id delegate;
+@property (nonatomic, assign) id delegate2;
 
 @end
