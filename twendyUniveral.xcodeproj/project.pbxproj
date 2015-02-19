@@ -78,7 +78,7 @@
 		D6698A571A72EB0500CBD338 /* Notifications.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Notifications.h; sourceTree = "<group>"; };
 		D6698A581A77F46F00CBD338 /* LeftViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftViewController.h; sourceTree = "<group>"; };
 		D6698A591A77F46F00CBD338 /* LeftViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftViewController.m; sourceTree = "<group>"; };
-		D6C4B31B1A606247006F40DF /* twendy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = twendy.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D6C4B31B1A606247006F40DF /* twendyUniveral.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = twendyUniveral.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6C4B31F1A606247006F40DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D6C4B3201A606247006F40DF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D6C4B3221A606247006F40DF /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -88,7 +88,7 @@
 		D6C4B3291A606247006F40DF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D6C4B32B1A606247006F40DF /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		D6C4B32E1A606247006F40DF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		D6C4B3341A606247006F40DF /* twendyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = twendyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D6C4B3341A606247006F40DF /* twendyUniveralTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = twendyUniveralTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6C4B3391A606248006F40DF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D6C4B33A1A606248006F40DF /* twendyTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = twendyTests.m; sourceTree = "<group>"; };
 		D6C4B3461A606A32006F40DF /* NSMutableURLRequest+Parameters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableURLRequest+Parameters.h"; sourceTree = "<group>"; };
@@ -176,8 +176,8 @@
 		D6C4B31C1A606247006F40DF /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D6C4B31B1A606247006F40DF /* twendy.app */,
-				D6C4B3341A606247006F40DF /* twendyTests.xctest */,
+				D6C4B31B1A606247006F40DF /* twendyUniveral.app */,
+				D6C4B3341A606247006F40DF /* twendyUniveralTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -328,9 +328,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		D6C4B31A1A606247006F40DF /* twendy */ = {
+		D6C4B31A1A606247006F40DF /* twendyUniveral */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D6C4B33E1A606248006F40DF /* Build configuration list for PBXNativeTarget "twendy" */;
+			buildConfigurationList = D6C4B33E1A606248006F40DF /* Build configuration list for PBXNativeTarget "twendyUniveral" */;
 			buildPhases = (
 				D6C4B3171A606247006F40DF /* Sources */,
 				D6C4B3181A606247006F40DF /* Frameworks */,
@@ -340,14 +340,14 @@
 			);
 			dependencies = (
 			);
-			name = twendy;
+			name = twendyUniveral;
 			productName = twendy;
-			productReference = D6C4B31B1A606247006F40DF /* twendy.app */;
+			productReference = D6C4B31B1A606247006F40DF /* twendyUniveral.app */;
 			productType = "com.apple.product-type.application";
 		};
-		D6C4B3331A606247006F40DF /* twendyTests */ = {
+		D6C4B3331A606247006F40DF /* twendyUniveralTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D6C4B3411A606248006F40DF /* Build configuration list for PBXNativeTarget "twendyTests" */;
+			buildConfigurationList = D6C4B3411A606248006F40DF /* Build configuration list for PBXNativeTarget "twendyUniveralTests" */;
 			buildPhases = (
 				D6C4B3301A606247006F40DF /* Sources */,
 				D6C4B3311A606247006F40DF /* Frameworks */,
@@ -358,9 +358,9 @@
 			dependencies = (
 				D6C4B3361A606248006F40DF /* PBXTargetDependency */,
 			);
-			name = twendyTests;
+			name = twendyUniveralTests;
 			productName = twendyTests;
-			productReference = D6C4B3341A606247006F40DF /* twendyTests.xctest */;
+			productReference = D6C4B3341A606247006F40DF /* twendyUniveralTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -370,7 +370,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0610;
-				ORGANIZATIONNAME = Larribeau;
+				ORGANIZATIONNAME = Demo;
 				TargetAttributes = {
 					D6C4B31A1A606247006F40DF = {
 						CreatedOnToolsVersion = 6.1;
@@ -382,7 +382,7 @@
 					};
 				};
 			};
-			buildConfigurationList = D6C4B3161A606247006F40DF /* Build configuration list for PBXProject "twendy" */;
+			buildConfigurationList = D6C4B3161A606247006F40DF /* Build configuration list for PBXProject "twendyUniveral" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -395,8 +395,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D6C4B31A1A606247006F40DF /* twendy */,
-				D6C4B3331A606247006F40DF /* twendyTests */,
+				D6C4B31A1A606247006F40DF /* twendyUniveral */,
+				D6C4B3331A606247006F40DF /* twendyUniveralTests */,
 			);
 		};
 /* End PBXProject section */
@@ -479,7 +479,7 @@
 /* Begin PBXTargetDependency section */
 		D6C4B3361A606248006F40DF /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = D6C4B31A1A606247006F40DF /* twendy */;
+			target = D6C4B31A1A606247006F40DF /* twendyUniveral */;
 			targetProxy = D6C4B3351A606248006F40DF /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -589,7 +589,7 @@
 				INFOPLIST_FILE = twendy/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = twendyUniveral;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -604,7 +604,7 @@
 				INFOPLIST_FILE = twendy/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = twendyUniveral;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -624,7 +624,7 @@
 				);
 				INFOPLIST_FILE = twendyTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = twendyUniveralTests;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/twendy.app/twendy";
 			};
 			name = Debug;
@@ -639,7 +639,7 @@
 				);
 				INFOPLIST_FILE = twendyTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = twendyUniveralTests;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/twendy.app/twendy";
 			};
 			name = Release;
@@ -647,7 +647,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		D6C4B3161A606247006F40DF /* Build configuration list for PBXProject "twendy" */ = {
+		D6C4B3161A606247006F40DF /* Build configuration list for PBXProject "twendyUniveral" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D6C4B33C1A606248006F40DF /* Debug */,
@@ -656,7 +656,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D6C4B33E1A606248006F40DF /* Build configuration list for PBXNativeTarget "twendy" */ = {
+		D6C4B33E1A606248006F40DF /* Build configuration list for PBXNativeTarget "twendyUniveral" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D6C4B33F1A606248006F40DF /* Debug */,
@@ -665,7 +665,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D6C4B3411A606248006F40DF /* Build configuration list for PBXNativeTarget "twendyTests" */ = {
+		D6C4B3411A606248006F40DF /* Build configuration list for PBXNativeTarget "twendyUniveralTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D6C4B3421A606248006F40DF /* Debug */,

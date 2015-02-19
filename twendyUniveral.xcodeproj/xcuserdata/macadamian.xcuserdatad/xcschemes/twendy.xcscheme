@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "D6C4B31A1A606247006F40DF"
-               BuildableName = "twendy.app"
-               BlueprintName = "twendy"
-               ReferencedContainer = "container:twendy.xcodeproj">
+               BuildableName = "twendyUniveral.app"
+               BlueprintName = "twendyUniveral"
+               ReferencedContainer = "container:twendyUniveral.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -29,9 +29,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "D6C4B3331A606247006F40DF"
-               BuildableName = "twendyTests.xctest"
-               BlueprintName = "twendyTests"
-               ReferencedContainer = "container:twendy.xcodeproj">
+               BuildableName = "twendyUniveralTests.xctest"
+               BlueprintName = "twendyUniveralTests"
+               ReferencedContainer = "container:twendyUniveral.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -47,9 +47,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "D6C4B3331A606247006F40DF"
-               BuildableName = "twendyTests.xctest"
-               BlueprintName = "twendyTests"
-               ReferencedContainer = "container:twendy.xcodeproj">
+               BuildableName = "twendyUniveralTests.xctest"
+               BlueprintName = "twendyUniveralTests"
+               ReferencedContainer = "container:twendyUniveral.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -57,9 +57,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D6C4B31A1A606247006F40DF"
-            BuildableName = "twendy.app"
-            BlueprintName = "twendy"
-            ReferencedContainer = "container:twendy.xcodeproj">
+            BuildableName = "twendyUniveral.app"
+            BlueprintName = "twendyUniveral"
+            ReferencedContainer = "container:twendyUniveral.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -76,9 +76,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D6C4B31A1A606247006F40DF"
-            BuildableName = "twendy.app"
-            BlueprintName = "twendy"
-            ReferencedContainer = "container:twendy.xcodeproj">
+            BuildableName = "twendyUniveral.app"
+            BlueprintName = "twendyUniveral"
+            ReferencedContainer = "container:twendyUniveral.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -94,9 +94,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D6C4B31A1A606247006F40DF"
-            BuildableName = "twendy.app"
-            BlueprintName = "twendy"
-            ReferencedContainer = "container:twendy.xcodeproj">
+            BuildableName = "twendyUniveral.app"
+            BlueprintName = "twendyUniveral"
+            ReferencedContainer = "container:twendyUniveral.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
