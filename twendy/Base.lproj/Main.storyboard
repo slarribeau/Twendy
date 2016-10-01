@@ -1,9 +1,10 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6249" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Oeb-mm-FOe">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Oeb-mm-FOe">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6243"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Authentication VC Scene-->
@@ -19,14 +20,13 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tHe-gB-qlG">
-                                <rect key="frame" x="0.0" y="64" width="400" height="492"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <outlet property="delegate" destination="vXZ-lx-hvc" id="xJ1-bd-fDI"/>
                                 </connections>
                             </webView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="tHe-gB-qlG" secondAttribute="bottom" id="2Jh-tu-ucU"/>
                             <constraint firstItem="tHe-gB-qlG" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="RC0-0x-eS6"/>
@@ -73,25 +73,27 @@
                         <viewControllerLayoutGuide type="bottom" id="zUC-sI-46r"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="1GH-Pb-hTu">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Je2-Es-VlB">
-                                <rect key="frame" x="282" y="72" width="46" height="30"/>
+                                <frame key="frameInset" minX="282" minY="72" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title=" ">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="getLATrendDataButton:" destination="rs3-nG-qjp" eventType="touchUpInside" id="Lni-if-fKa"/>
                                 </connections>
                             </button>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pEy-wM-SsP">
-                                <rect key="frame" x="0.0" y="65" width="600" height="50"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pEy-wM-SsP">
+                                <frame key="frameInset" minY="65" width="600" height="50"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4d0-M2-pxp">
                                         <rect key="frame" x="263" y="38" width="46" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                     </button>
                                 </subviews>
@@ -99,15 +101,14 @@
                                     <constraint firstAttribute="height" constant="50" id="Gau-h6-ck2"/>
                                 </constraints>
                             </scrollView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="c7n-fL-aiT">
-                                <rect key="frame" x="0.0" y="115" width="600" height="485"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="c7n-fL-aiT">
+                                <frame key="frameInset" minY="115" width="600" height="485"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="fSO-gr-koP">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <searchBar hidden="YES" contentMode="redraw" placeholder="Search Twitter" translatesAutoresizingMaskIntoConstraints="NO" id="kgH-UX-hjq">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                             <textInputTraits key="textInputTraits" returnKeyType="next"/>
                                             <scopeButtonTitles>
                                                 <string>Title</string>
@@ -118,7 +119,7 @@
                                             </connections>
                                         </searchBar>
                                     </subviews>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstItem="kgH-UX-hjq" firstAttribute="top" secondItem="fSO-gr-koP" secondAttribute="top" id="5vs-b4-C3Q"/>
                                         <constraint firstItem="kgH-UX-hjq" firstAttribute="leading" secondItem="fSO-gr-koP" secondAttribute="leading" id="6FW-Cb-ja0"/>
@@ -127,16 +128,17 @@
                                 </view>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="idCellRecord" id="eqE-jV-syx">
-                                        <rect key="frame" x="0.0" y="0.0" width="235" height="44"/>
+                                        <rect key="frame" x="0.0" y="66" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eqE-jV-syx" id="0du-fe-WTa">
+                                            <frame key="frameInset" width="567" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="c7n-fL-aiT" firstAttribute="top" secondItem="pEy-wM-SsP" secondAttribute="bottom" id="2N4-M5-xBN"/>
                             <constraint firstItem="pEy-wM-SsP" firstAttribute="leading" secondItem="1GH-Pb-hTu" secondAttribute="leading" id="8eK-qK-9UX"/>
@@ -177,18 +179,17 @@
                         <viewControllerLayoutGuide type="bottom" id="11H-tt-iqo"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="U1M-v0-1g3">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" bounces="NO" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="z3U-oh-AlE">
-                                <rect key="frame" x="16" y="64" width="568" height="476"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <frame key="frameInset" minX="16" minY="64" width="568" height="476"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="UsE-hu-tmY">
                                     <rect key="frame" x="0.0" y="0.0" width="568" height="44"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="nSo-ng-u4p">
-                                            <rect key="frame" x="0.0" y="8" width="230" height="36"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="230" id="PSC-lW-P4A"/>
                                             </constraints>
@@ -198,19 +199,18 @@
                                             </connections>
                                         </searchBar>
                                         <button opaque="NO" contentMode="scaleToFill" highlighted="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tmL-J2-H4i">
-                                            <rect key="frame" x="520" y="16" width="48" height="20"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="20" id="TW6-4u-aQc"/>
                                             </constraints>
                                             <state key="normal" title="Cancel">
-                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </state>
                                             <connections>
                                                 <action selector="cancelSearchButton:" destination="ttg-oR-YZr" eventType="touchUpInside" id="baC-7K-ewM"/>
                                             </connections>
                                         </button>
                                     </subviews>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="bottom" secondItem="nSo-ng-u4p" secondAttribute="bottom" id="DCa-Bd-cmX"/>
                                         <constraint firstItem="nSo-ng-u4p" firstAttribute="leading" secondItem="UsE-hu-tmY" secondAttribute="leading" id="HiC-ae-qQF"/>
@@ -221,12 +221,14 @@
                                 </view>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="idRegionCellRecord" textLabel="V9o-WJ-2Ll" style="IBUITableViewCellStyleDefault" id="baQ-dG-ksd">
-                                        <rect key="frame" x="0.0" y="0.0" width="235" height="44"/>
+                                        <rect key="frame" x="0.0" y="66" width="568" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="baQ-dG-ksd" id="bvN-G1-Rxj">
+                                            <frame key="frameInset" width="568" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="V9o-WJ-2Ll">
+                                                    <frame key="frameInset" minX="15" width="538" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -242,61 +244,61 @@
                                 </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="752" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5jV-cJ-6ih">
-                                <rect key="frame" x="16" y="555" width="76" height="30"/>
+                                <frame key="frameInset" minX="16" minY="555" width="76" height="30"/>
                                 <state key="normal" title="Country⬆️">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="sortCountryAscend:" destination="ttg-oR-YZr" eventType="touchUpInside" id="5ME-v6-cen"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fn1-fe-iE5">
-                                <rect key="frame" x="97" y="555" width="30" height="30"/>
+                                <frame key="frameInset" minX="97" minY="555" width="30" height="30"/>
                                 <state key="normal" title="⬇️">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="sortCountryDescend:" destination="ttg-oR-YZr" eventType="touchUpInside" id="eei-Pc-MJ4"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bjj-eo-qCp">
-                                <rect key="frame" x="132" y="555" width="48" height="30"/>
+                                <frame key="frameInset" minX="132" minY="555" width="48" height="30"/>
                                 <state key="normal" title="City⬆️">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="sortCityAscend:" destination="ttg-oR-YZr" eventType="touchUpInside" id="qJo-ha-1mh"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="751" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aBu-EO-wxl">
-                                <rect key="frame" x="185" y="555" width="30" height="30"/>
+                                <frame key="frameInset" minX="185" minY="555" width="30" height="30"/>
                                 <state key="normal" title="⬇️">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="sortCityDescend:" destination="ttg-oR-YZr" eventType="touchUpInside" id="bdk-o9-1Km"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZRy-Qg-ggI">
-                                <rect key="frame" x="298" y="555" width="30" height="30"/>
+                                <frame key="frameInset" minX="298" minY="555" width="30" height="30"/>
                                 <state key="normal" title="⬇️">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="sortSelectedDescend:" destination="ttg-oR-YZr" eventType="touchUpInside" id="Q9r-EK-mdI"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Brs-bQ-SOB">
-                                <rect key="frame" x="220" y="555" width="73" height="30"/>
+                                <frame key="frameInset" minX="220" minY="555" width="73" height="30"/>
                                 <state key="normal" title="Selected⬆️">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="sortSelectedAscend:" destination="ttg-oR-YZr" eventType="touchUpInside" id="AEy-Wp-VjR"/>
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Brs-bQ-SOB" firstAttribute="leading" secondItem="aBu-EO-wxl" secondAttribute="trailing" constant="3" id="99s-3a-G5D"/>
                             <constraint firstItem="11H-tt-iqo" firstAttribute="top" secondItem="fn1-fe-iE5" secondAttribute="bottom" constant="15" id="Dye-dn-jk3"/>
@@ -338,18 +340,18 @@
                         <viewControllerLayoutGuide type="bottom" id="Yzq-Kd-9nH"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Qim-6e-ij7">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aJ1-Hd-gyx">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <webView contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aJ1-Hd-gyx">
+                                <frame key="frameInset" width="600" height="600"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <outlet property="delegate" destination="3yu-43-obO" id="BGc-Rl-D6R"/>
                                 </connections>
                             </webView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="aJ1-Hd-gyx" firstAttribute="bottom" secondItem="Qim-6e-ij7" secondAttribute="bottomMargin" id="Aoi-ly-mvr"/>
                             <constraint firstAttribute="trailing" secondItem="aJ1-Hd-gyx" secondAttribute="trailing" id="aM0-5I-shg"/>
@@ -375,9 +377,9 @@
                         <viewControllerLayoutGuide type="bottom" id="074-N2-atQ"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="O9K-x8-mEC">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W1E-5E-EQp" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -392,9 +394,9 @@
                         <viewControllerLayoutGuide type="bottom" id="TPu-TT-lR2"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="HeG-pU-ddR">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PGv-FC-Mj4" userLabel="First Responder" sceneMemberID="firstResponder"/>
